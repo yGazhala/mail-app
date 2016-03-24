@@ -1,0 +1,19 @@
+<!-- Здесь еще не применял валидацию, не успел. Валидация форм есть в contacts компоненте -->
+<section class="newMessage__display" ng-if="$ctrl.isNewMessageDisplayOpened">
+    <button class="backwardButton" ng-click="$ctrl.onToggleNewMessageDisplay()">&#8592;</button>
+    <form name="newMessageForm" ng-submit="$ctrl.onMoveNewMessageToSentMail({newMessage: newMessage})">
+        <h2>New message</h2>
+        <section>
+            <label>To</label>
+            <input type="text" name="email" ng-model="newMessage.email" placeholder="email" autofocus>
+        </section>
+        <section>
+            <label>Subject</label>
+            <input type="text" name="subject" ng-model="newMessage.subject">
+        </section>
+        <section>
+            <textarea name="content" ng-model="newMessage.content" rows="10" cols="45"></textarea>
+        </section>
+        <input type="submit" value="Send">
+    </form>
+</section>
