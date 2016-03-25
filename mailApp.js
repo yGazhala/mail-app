@@ -1,33 +1,54 @@
 'use strict';
-let app = angular.module('mailApp',['ngMessages']);
+let app = angular.module('mailApp', ['ngMessages']);
 
 
 app.service('MailDataService', function($http) {
-    this.url = 'https://gazhala.firebaseio.com/mail-data';
 
-    this.getAll = function() {
+    this.getInbox = function() {
+        let url = 'https://gazhala.firebaseio.com/inbox.json';
 
-        return $http.get(this.url + '.json')
+        return $http.get(url)
                 // In response, the firebase returns an object instead of
                 // a string, therefore we do not need to use JSON.parse(),
                 // but just take content of response.data
                 .then((response) => normalizeToArray(response.data))
                 .catch((error) => {
-                    console.log('Failed to load data from: ' + url + '.json' + ', error: '
+                    console.log('Failed to load data from: ' + url + ', error: '
                         + error.status + ' - ' + error.statusText);
                 });
     };
 
+    this.getSentMail = function() {
+        let url = 'https://gazhala.firebaseio.com/sent-mail.json';
+
+        return $http.get(url)
+            .then((response) => normalizeToArray(response.data))
+            .catch((error) => {
+                console.log('Failed to load data from: ' + url + ', error: '
+                    + error.status + ' - ' + error.statusText);
+            });
+    };
+
     this.add = function(message) {
+        let url = 'https://gazhala.firebaseio.com/sent-mail.json';
+        message.boxId = 'sentMail';
+        message.date = new Date().getTime(); // save date in milliseconds
 
-        return $http.post(this.url + '/1/mailBoxData' + '.json', message)
+        return $http.post(url, message)
                 .then((response) => {
-
-                    // message.id не записывает на Firebase
+                    // When we remove or update an object at FireBase, we need
+                    // a key to identify this object. This key is automatically created
+                    // by FireBase when we add the object at the first time.
+                    // So, we save the key in "id" property of the object.
                     message.id = response.data.name;
 
                     return message;
-                });
+                })
+                // message.id does not store at firebase, therefore we need additional PUT method
+                .then((message) => {
+                    return $http.put('https://gazhala.firebaseio.com/sent-mail/' + message.id + '.json', message)
+                })
+                .then((response) => response.data);
                 // .catch method will be here someday
     };
 
@@ -39,9 +60,13 @@ app.component('mailApp', {
 
     controller: function(MailDataService) {
 
-        MailDataService.getAll().then((mailBoxes) => {
-            this.mailBoxes = mailBoxes;
-            this.mailBoxSelected = this.mailBoxes[0]; // select "Inbox" as a default
+        MailDataService.getInbox().then((mailBox) => {
+            this.inbox = mailBox;
+            this.mailBoxSelected = this.inbox; // select "Inbox" as a default
+        });
+
+        MailDataService.getSentMail().then((mailBox) => {
+            this.sentMail = mailBox;
         });
 
         // there are helper flags for determining status of the main display component
@@ -59,7 +84,6 @@ app.component('mailApp', {
             this.isContactsShowed = false;
             this.isMailBoxShowed = true;
             this.mailBoxSelected = mailBox;
-
         };
 
         this.showContacts = function() {
@@ -80,9 +104,7 @@ app.component('mailApp', {
             this.toggleNewMessageDisplay();
             MailDataService.add(newMessage)
                 .then((NewMessage) => {
-                    console.log(this.mailBoxes);
-                    // здесь проблема, потому что mailBoxData - это объект а не массив
-                    this.mailBoxes[1].mailBoxData.push(NewMessage);
+                    this.sentMail.push(NewMessage);
                 })
         };
 
@@ -108,6 +130,8 @@ app.component('mailApp', {
 
     templateUrl: 'mail-app.html'
 });
+
+
 
 app.component('mainDisplay', {
     bindings: {
@@ -253,21 +277,10 @@ app.component('newMessage', {
 });
 
 
-/*
- Как перезаписать функцию normalizeToArray, чтобы она нормализовала
- вложенные объекты в массив?
- */
 function normalizeToArray(object) {
     if(!object) return [];
 
     return Object.keys(object).map(key => {
-
-        // Если ключ mailBoxData и это не массив,
-        // преобразуйся к массиву
-        if ( key === 'mailBoxData' && !Array.isArray(object[key])) {
-            normalizeToArray(object[key])
-        }
-
         let normalizedObject = object[key];
         normalizedObject.id = key;
 

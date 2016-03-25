@@ -1,5 +1,5 @@
 <ul class="mailBox__messageList" ng-if="$ctrl.isMailBoxShowed">
-    <li ng-repeat="message in $ctrl.mailBoxSelected.mailBoxData" ng-click="$ctrl.onShowMessage({message: message})">
+    <li ng-repeat="message in $ctrl.mailBoxSelected" ng-click="$ctrl.onShowMessage({message: message})">
         <div class="mailAddress">{{message.email}}</div>
         <div class="messageSubject">{{message.subject}}</div>
         <div class="messagePreview">{{message.content.slice(0, 21) + ' ...'}}</div>

@@ -7,13 +7,15 @@
 </section>
 
 <section class="mailApp__contentWrapper">
-    <div class="mailApp__menu" mail-boxes="$ctrl.mailBoxes">
+    <div class="mailApp__menu">
         <button class="openNewMessageDisplayButton" ng-click="$ctrl.toggleNewMessageDisplay()">Compose</button>
         <ul>
-            <li ng-repeat="box in $ctrl.mailBoxes"  ng-click="$ctrl.showMailBox(box)"
-                ng-class="{selected: $ctrl.mailBoxSelected === box}">
-                {{$ctrl.mailBoxes[$index].mailBoxTitle}}
-            </li>
+            <li ng-click="$ctrl.showMailBox($ctrl.inbox)"
+                ng-class="{selected: $ctrl.mailBoxSelected === $ctrl.inbox}"
+                    >Inbox</li>
+            <li ng-click="$ctrl.showMailBox($ctrl.sentMail)"
+                ng-class="{selected: $ctrl.mailBoxSelected === $ctrl.sentMail}"
+                    >Sent mail</li>
             <li ng-click="$ctrl.showContacts()" ng-class="{selected: $ctrl.isContactsShowed}">Contacts</li>
         </ul>
     </div>
