@@ -1,5 +1,5 @@
 'use strict';
-let app = angular.module('mailApp', ['ngMessages']);
+let app = angular.module('mailApp', ['ngMessages', 'ui.router']);
 
 
 app.service('MailDataService', function($http) {
@@ -53,6 +53,23 @@ app.service('MailDataService', function($http) {
     };
 
 });
+
+app.config(function ($stateProvider) {
+    $stateProvider
+        .state('inbox', {
+            url: '/inbox', // open in browser as /#/inbox
+            template: ''
+        })
+        .state('sent-mail', {
+            url: '/sent-mail',
+            template: ''
+        })
+        .state('contacts', {
+            url: '/contacts',
+            template: ''
+        })
+});
+
 
 
 app.component('mailApp', {
