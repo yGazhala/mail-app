@@ -160,7 +160,6 @@ body {
 .backwardButton {
     padding: 0 15px;
     font-size: 1.3em;
-    cursor: pointer;
 }
 
 /* end message -------------*/
@@ -385,7 +384,11 @@ body {
 /* end newMessage ------------*/
 
 /* =pageMask -----------------*/
+.pageMaskWrapper {
+    display: block;
+}
 .mailApp__pageMask {
+
     position: fixed;
     z-index: 2;
     top: 0;

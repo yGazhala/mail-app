@@ -1,0 +1,23 @@
+
+<ui-view>
+    <!-- when state will be: "contacts-list.user-card" -
+        user-card.html template will be here instead of following content -->
+    <section class="contacts__list">
+        <button class="openAddUserFormButton" ui-sref="add-user"
+                ng-click="$ctrl.togglePageMask()"
+                    >Add contact</button>
+        <ul>
+            <li ng-repeat="user in $ctrl.contacts"
+                ng-click="$ctrl.selectUser(user)"
+                ui-sref="user-card({userId: user.id})"
+                    >
+                <div class="userAvatar"><img src={{user.avatarUrl}} alt="Avatar"></div>
+                <div class="userName">{{user.fullName}}</div>
+                <div class="userEmail">{{user.email}}</div>
+                <button class="removeUserButton" ng-click="$ctrl.removeUser(user); $event.stopPropagation();">x</button>
+            </li>
+        </ul>
+    </section>
+    <add-user-form add-new-user="$ctrl.addNewUser(user)"
+            toggle-page-mask="$ctrl.togglePageMask()"></add-user-form>
+</ui-view>

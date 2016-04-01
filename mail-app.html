@@ -1,5 +1,4 @@
-<!-- A component will be here someday -->
-<div class="mailApp__pageMask" ng-class="{open: $ctrl.isPageMaskOpened}"></div>
+<page-mask class="pageMaskWrapper"></page-mask>
 
 <!-- A component will be here someday -->
 <section class="mailApp__statusBarWrapper">
@@ -16,20 +15,28 @@
             <li ng-click="$ctrl.showMailBox($ctrl.sentMail)"
                 ng-class="{selected: $ctrl.mailBoxSelected === $ctrl.sentMail}"
                     >Sent mail</li>
-            <li ng-click="$ctrl.showContacts()" ng-class="{selected: $ctrl.isContactsShowed}">Contacts</li>
+            <li><a ui-sref="contacts-list">Contacts</a></li>
         </ul>
     </div>
 
+    <div class="mailApp__mainDisplay">
+        <ui-view></ui-view>
+    </div>
+
+    <!--
     <main-display class="mailApp__mainDisplay" mail-box-selected="$ctrl.mailBoxSelected"
                   is-mail-box-showed="$ctrl.isMailBoxShowed" on-show-mail-box="$ctrl.showMailBox(mailBox)"
                   message-selected="$ctrl.messageSelected" on-show-message="$ctrl.showMessage(message)"
                   is-contacts-showed="$ctrl.isContactsShowed" on-open-page-mask="$ctrl.openPageMask()"
                   on-close-page-mask="$ctrl.closePageMask()" on-toggle-page-mask="$ctrl.togglePageMask()">
     </main-display>
+    -->
 </section>
 
+<!--
 <new-message class="mailApp__newMessage"
              is-new-message-display-opened="$ctrl.isNewMessageDisplayOpened"
              on-toggle-new-message-display="$ctrl.toggleNewMessageDisplay()"
              on-move-new-message-to-sent-mail="$ctrl.moveNewMessageToSentMail(newMessage)"
                 ></new-message>
+-->

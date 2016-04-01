@@ -1,78 +1,8 @@
 'use strict';
-let app = angular.module('mailApp', ['ngMessages', 'ui.router']);
+angular
+    .module('mailApp', ['ngMessages', 'ui.router'])
 
-
-app.service('MailDataService', function($http) {
-
-    this.getInbox = function() {
-        let url = 'https://gazhala.firebaseio.com/inbox.json';
-
-        return $http.get(url)
-                // In response, the firebase returns an object instead of
-                // a string, therefore we do not need to use JSON.parse(),
-                // but just take content of response.data
-                .then((response) => normalizeToArray(response.data))
-                .catch((error) => {
-                    console.log('Failed to load data from: ' + url + ', error: '
-                        + error.status + ' - ' + error.statusText);
-                });
-    };
-
-    this.getSentMail = function() {
-        let url = 'https://gazhala.firebaseio.com/sent-mail.json';
-
-        return $http.get(url)
-            .then((response) => normalizeToArray(response.data))
-            .catch((error) => {
-                console.log('Failed to load data from: ' + url + ', error: '
-                    + error.status + ' - ' + error.statusText);
-            });
-    };
-
-    this.add = function(message) {
-        let url = 'https://gazhala.firebaseio.com/sent-mail.json';
-        message.boxId = 'sentMail';
-        message.date = new Date().getTime(); // save date in milliseconds
-
-        return $http.post(url, message)
-                .then((response) => {
-                    // When we remove or update an object at FireBase, we need
-                    // a key to identify this object. This key is automatically created
-                    // by FireBase when we add the object at the first time.
-                    // So, we save the key in "id" property of the object.
-                    message.id = response.data.name;
-
-                    return message;
-                })
-                // message.id does not store at firebase, therefore we need additional PUT method
-                .then((message) => {
-                    return $http.put('https://gazhala.firebaseio.com/sent-mail/' + message.id + '.json', message)
-                })
-                .then((response) => response.data);
-                // .catch method will be here someday
-    };
-
-});
-
-app.config(function ($stateProvider) {
-    $stateProvider
-        .state('inbox', {
-            url: '/inbox', // open in browser as /#/inbox
-            template: ''
-        })
-        .state('sent-mail', {
-            url: '/sent-mail',
-            template: ''
-        })
-        .state('contacts', {
-            url: '/contacts',
-            template: ''
-        })
-});
-
-
-
-app.component('mailApp', {
+.component('mailApp', {
     bindings: {},
 
     controller: function(MailDataService) {
@@ -146,10 +76,76 @@ app.component('mailApp', {
     },
 
     templateUrl: 'mail-app.html'
+})
+
+.service('MailDataService', function($http) {
+
+    this.getInbox = function() {
+        let url = 'https://gazhala.firebaseio.com/inbox.json';
+
+        return $http.get(url)
+                // In response, the firebase returns an object instead of
+                // a string, therefore we do not need to use JSON.parse(),
+                // but just take content of response.data
+                .then((response) => normalizeToArray(response.data))
+                .catch((error) => {
+                    console.log('Failed to load data from: ' + url + ', error: '
+                        + error.status + ' - ' + error.statusText);
+                });
+    };
+
+    this.getSentMail = function() {
+        let url = 'https://gazhala.firebaseio.com/sent-mail.json';
+
+        return $http.get(url)
+            .then((response) => normalizeToArray(response.data))
+            .catch((error) => {
+                console.log('Failed to load data from: ' + url + ', error: '
+                    + error.status + ' - ' + error.statusText);
+            });
+    };
+
+    this.add = function(message) {
+        let url = 'https://gazhala.firebaseio.com/sent-mail.json';
+        message.boxId = 'sentMail';
+        message.date = new Date().getTime(); // save date in milliseconds
+
+        return $http.post(url, message)
+                .then((response) => {
+                    // When we remove or update an object at FireBase, we need
+                    // a key to identify this object. This key is automatically created
+                    // by FireBase when we add the object at the first time.
+                    // So, we save the key in "id" property of the object.
+                    message.id = response.data.name;
+
+                    return message;
+                })
+                // message.id does not store at firebase, therefore we need additional PUT method
+                .then((message) => {
+                    return $http.put('https://gazhala.firebaseio.com/sent-mail/' + message.id + '.json', message)
+                })
+                .then((response) => response.data);
+                // .catch method will be here someday
+    };
 });
 
+function normalizeToArray(object) {
+    if(!object) return [];
+
+    return Object.keys(object).map(key => {
+        let normalizedObject = object[key];
+        normalizedObject.id = key;
+
+        return normalizedObject;
+    });
+}
 
 
+
+
+
+
+/*
 app.component('mainDisplay', {
     bindings: {
         // bound with mailApp component
@@ -170,119 +166,7 @@ app.component('mainDisplay', {
 });
 
 
-app.component('contacts', {
-    bindings: {
-        onOpenPageMask: '&',
-        onClosePageMask: '&',
-        onTogglePageMask: '&'
-    },
 
-    controller: function(ContactsService) {
-        ContactsService.getAll().then((contacts) =>
-            this.contacts = contacts);
-
-        this.userCard = null;
-        this.isUserSelected = false;
-        this.isAddUserFormOpened = false;
-
-        this.showUserCard = function(userCard) {
-            this.isUserSelected = true;
-            this.userCard = userCard;
-        };
-
-        this.backToContacts = function() {
-            this.onClosePageMask();
-            this.userCard = null;
-            this.isUserSelected = false;
-            this.isAddUserFormOpened = false;
-        };
-
-        this.openAddUserForm = function() {
-            this.onOpenPageMask();
-            this.isAddUserFormOpened = true;
-        };
-
-        this.newUserCard = null;
-
-        this.addNewUser = function(newUser) {
-            this.onClosePageMask();
-            this.isAddUserFormOpened = false;
-
-            this.newUserCard = newUser;
-
-            if (this.newUserCard) {
-                ContactsService.addUser(this.newUserCard)
-                    .then((newUserCard) => {
-                        this.contacts.push(newUserCard);
-                        this.newUserCard = null;
-                    })
-            }
-        };
-
-        this.removeUser = function (user) {
-            ContactsService.removeUser(user)
-                .then(() => {
-                    this.contacts.splice(this.contacts.indexOf(user), 1);
-                });
-        };
-
-        this.isUserEditFormOpened = false;
-
-        this.toggleUserEditForm = function() {
-            this.onTogglePageMask();
-            this.isUserEditFormOpened = !this.isUserEditFormOpened;
-        };
-
-        this.updateUser = function(user) {
-            ContactsService.updateUser(user);
-        }
-    },
-
-    templateUrl: 'contacts.html'
-});
-
-app.service('ContactsService', function($http) {
-    this.url = 'https://gazhala.firebaseio.com/contacts';
-
-    this.getAll = function() {
-
-        return $http.get(this.url + '.json')
-            .then((response) => normalizeToArray(response.data))
-            .catch((error) => {
-                console.log('Failed to load data from: ' + this.url +'.json' + ', error: '
-                    + error.status + ' - ' + error.statusText);
-            });
-    };
-
-    this.addUser = function(newUser) {
-
-        return $http.post(this.url + '.json', newUser)
-            .then((response) => {
-                // When we remove or update an object at FireBase, we need
-                // a key to identify this object. This key is automatically created
-                // by FireBase when we add the object at the first time.
-                // So, we save the key in "id" property of the object.
-                newUser.id = response.data.name;
-
-                return newUser;
-            });
-            // catch method will be here someday
-    };
-
-    this.removeUser = function(user) {
-
-        return $http.delete(this.url + '/' + user.id + '.json')
-            .then((response) => response.data);
-            // catch method will be here someday
-    };
-
-    this.updateUser = function(user) {
-
-        return $http.put(this.url + '/' + user.id + '.json', user)
-            .then((response) => response.data);
-            // catch method will be here someday
-    };
-});
 
 app.component('newMessage', {
     bindings: {
@@ -292,15 +176,5 @@ app.component('newMessage', {
     },
     templateUrl: 'new-message.html'
 });
+*/
 
-
-function normalizeToArray(object) {
-    if(!object) return [];
-
-    return Object.keys(object).map(key => {
-        let normalizedObject = object[key];
-        normalizedObject.id = key;
-
-        return normalizedObject;
-    });
-}

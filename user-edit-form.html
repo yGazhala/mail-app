@@ -1,0 +1,63 @@
+<form class="contacts__userEditForm" name="userEditForm">
+    <button class="backwardButton" ui-sref="user-card({userId: $ctrl.selectedUser.id})"
+            ng-click="$ctrl.togglePageMask()">&#8592;</button>
+    <fieldset>
+        <section>
+            <label>Full name:</label>
+            <input type="text" ng-model="$ctrl.selectedUser.fullName" name="fullName"
+                   ng-change="$ctrl.updateUser({user: $ctrl.selectedUser})"
+                   ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"
+                   required minlength="4" autofocus
+                    >
+            <div ng-messages="userEditForm['fullName'].$error" ng-if="userEditForm['fullName'].$dirty" role="alert">
+                <div ng-message="required">Please, enter a value for this field.</div>
+                <div ng-message="minlength">This field can be at at least 4 characters long.</div>
+            </div>
+        </section>
+        <section>
+            <label>Date of birth:</label>
+            <input type="text" name="birthDate" ng-model="$ctrl.selectedUser.birthdate"
+                   ng-change="$ctrl.updateUser({user: $ctrl.selectedUser})"
+                   ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"
+                   required pattern="\d{4}-\d\d-\d\d"
+                    >
+            <div ng-messages="userEditForm['birthDate'].$error" ng-if="userEditForm['birthDate'].$dirty" role="alert">
+                <div ng-message="required">Please, enter a value for this field.</div>
+                <div ng-message="pattern">The date must be in YYYY-MM-DD format</div>
+            </div>
+        </section>
+        <section>
+            <label>Gender:</label>
+            <input type="radio" name="gender" ng-model="$ctrl.selectedUser.gender"
+                   ng-checked="$ctrl.selectedUser.gender === 'male'" value="male"
+                   ng-change="$ctrl.updateUser({user: $ctrl.selectedUser})"
+                    >male
+            <input type="radio" name="gender" ng-model="$ctrl.selectedUser.gender"
+                   ng-checked="$ctrl.selectedUser.gender === 'female'" value="female"
+                   ng-change="$ctrl.updateUser({user: $ctrl.selectedUser})"
+                    >female
+        </section>
+        <section>
+            <label>Address:</label>
+            <input type="text" name="address" ng-model="$ctrl.selectedUser.address"
+                   ng-change="$ctrl.updateUser({user: $ctrl.selectedUser})"
+                   ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"
+                   required minlength="10">
+            <div ng-messages="userEditForm['address'].$error" ng-if="userEditForm['address'].$dirty" role="alert">
+                <div ng-message="required">Please, enter a value for this field.</div>
+                <div ng-message="minlength">This field can be at at least 10 characters long.</div>
+            </div>
+        </section>
+        <section>
+            <label>Email:</label>
+            <input type="email" name="email" ng-model="$ctrl.selectedUser.email"
+                   ng-change="$ctrl.updateUser({user: $ctrl.selectedUser})"
+                   ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }"
+                   required>
+            <div ng-messages="userEditForm['email'].$error" ng-if="userEditForm['email'].$dirty" role="alert">
+                <div ng-message="required">Please, enter a value for this field.</div>
+                <div ng-message="email">The value must be a correct email</div>
+            </div>
+        </section>
+    </fieldset>
+</form>
