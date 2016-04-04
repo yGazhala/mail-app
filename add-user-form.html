@@ -1,7 +1,6 @@
 <form class="contacts__addUserForm" name="addUserForm"
-      ng-submit="$ctrl.addNewUser({user: user})">
-    <button class="backwardButton" ui-sref="contacts-list"
-            ng-click="$ctrl.togglePageMask()">&#8592;</button>
+      ng-submit="$ctrl.addNewUser(user)">
+    <button class="backwardButton" ui-sref="contacts-list">&#8592;</button>
     <fieldset>
         <section>
             <label>Full name:</label>

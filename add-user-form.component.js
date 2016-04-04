@@ -4,13 +4,9 @@ angular
     .module('mailApp')
     .component('addUserForm', {
         bindings: {
-            addNewUser: '&',
-            togglePageMask: '&'
+            addNewUser: '&'
         },
-        template: `<ui-view>
-                       <!-- when state will be: "contacts-list.add-user" -
-                       add-user-form.html template will be here -->
-                   </ui-view>`
+        template: '<add-user-form add-new-user="$ctrl.addNewUser(user)"></add-user-form>'
     })
 
     .config(function($stateProvider) {
@@ -18,6 +14,9 @@ angular
             .state('add-user', {
                 parent: 'contacts-list',
                 url: '/add-user',
-                templateUrl: 'add-user-form.html'
+                templateUrl: 'add-user-form.html',
+                controller: function(PageMaskService) {
+                    PageMaskService.open();
+                }
             })
     });

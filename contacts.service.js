@@ -6,6 +6,11 @@ angular
 function ContactsService($http, NormalizeToArrayFactory) {
     this.url = 'https://gazhala.firebaseio.com/contacts';
 
+    this.getOne = function(user) {
+        return $http.get(this.url + '/' + user.id + '.json')
+            .then(response => response.data);
+    };
+
     this.getAll = function() {
 
         return $http.get(this.url + '.json')

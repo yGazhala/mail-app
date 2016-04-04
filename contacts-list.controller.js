@@ -1,13 +1,13 @@
 "use strict";
 
-function ContactsListController(ContactsService, PageMaskService) {
+function ContactsListController(ContactsService, PageMaskService, $state) {
 
     ContactsService.getAll().then((contacts) => {
         this.contacts = contacts;
     });
 
-    this.togglePageMask = function() {
-        PageMaskService.toggle();
+    this.isContactsListAllowed = function() {
+        return $state.is('contacts-list') || $state.is('add-user');
     };
 
     this.selectedUser = null;
@@ -15,31 +15,10 @@ function ContactsListController(ContactsService, PageMaskService) {
         this.selectedUser = user;
     };
 
-    this.userCard = null;
-    this.isUserSelected = false;
-    this.isAddUserFormOpened = false;
-
-    this.showUserCard = function(userCard) {
-        this.isUserSelected = true;
-        this.userCard = userCard;
-    };
-
-    this.backToContacts = function() {
-        this.onClosePageMask();
-        this.userCard = null;
-        this.isUserSelected = false;
-        this.isAddUserFormOpened = false;
-    };
-
-    this.openAddUserForm = function() {
-        this.onOpenPageMask();
-        this.isAddUserFormOpened = true;
-    };
-
+    // Зачем нам это свойство?
     this.newUserCard = null;
 
     this.addNewUser = function(newUser) {
-
         this.newUserCard = newUser;
 
         if (this.newUserCard) {
@@ -47,6 +26,8 @@ function ContactsListController(ContactsService, PageMaskService) {
                 .then((newUserCard) => {
                     this.contacts.push(newUserCard);
                     this.newUserCard = null;
+                    PageMaskService.close();
+                    $state.go('contacts-list');
                 })
         }
     };
@@ -56,13 +37,6 @@ function ContactsListController(ContactsService, PageMaskService) {
             .then(() => {
                 this.contacts.splice(this.contacts.indexOf(user), 1);
             });
-    };
-
-    this.isUserEditFormOpened = false;
-
-    this.toggleUserEditForm = function() {
-        this.onTogglePageMask();
-        this.isUserEditFormOpened = !this.isUserEditFormOpened;
     };
 
     this.updateUser = function(user) {
