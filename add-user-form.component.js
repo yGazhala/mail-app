@@ -6,7 +6,8 @@ angular
         bindings: {
             addNewUser: '&'
         },
-        template: '<add-user-form add-new-user="$ctrl.addNewUser(user)"></add-user-form>'
+        templateUrl: 'add-user-form.html',
+        controller: AddUserFormController
     })
 
     .config(function($stateProvider) {
@@ -14,9 +15,16 @@ angular
             .state('add-user', {
                 parent: 'contacts-list',
                 url: '/add-user',
-                templateUrl: 'add-user-form.html',
+                template: `<add-user-form
+                               add-new-user="$ctrl.addNewUser(user)"></add-user-form>`,
                 controller: function(PageMaskService) {
                     PageMaskService.open();
                 }
             })
     });
+
+function AddUserFormController(PageMaskService) {
+    this.closePageMask = function() {
+        PageMaskService.close();
+    }
+}

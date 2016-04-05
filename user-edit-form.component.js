@@ -4,14 +4,9 @@ angular
     .component('userEditForm', {
         bindings: {
             selectedUser: '<',
-            updateUser: '&',
-            togglePageMask: '&'
+            updateUser: '&'
         },
-
-        template: `<user-edit-form selected-user="$ctrl.selectedUser"
-                        update-user="$ctrl.updateUser(user)"
-                        toogle-page-mask="$ctrl.togglePageMask()"
-                        ></user-edit-form>`
+        templateUrl: 'user-edit-form.html'
     })
 
     .config(function($stateProvider) {
@@ -19,6 +14,8 @@ angular
             .state('edit-form', {
                 parent: 'user-card',
                 url: '/edit-form',
-                templateUrl: 'user-edit-form.html'
+                template: `<user-edit-form selected-user="$ctrl.selectedUser"
+                                update-user="$ctrl.updateUser({user: user})"
+                                    ></user-edit-form>`
             })
     });

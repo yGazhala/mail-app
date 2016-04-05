@@ -304,6 +304,7 @@ body {
 
 /* =userEditForm --------------*/
 .contacts__userEditForm {
+    /*
     position: absolute;
     top: 30%;
     left: 30%;
@@ -313,6 +314,7 @@ body {
 
     background-color: aliceblue;
     border-radius: 5px;
+    */
 }
 
 .contacts__userEditForm fieldset {
@@ -325,7 +327,7 @@ body {
 
 .contacts__userEditForm label {
     display: inline-block;
-    width: 35%;
+    width: 15%;
     vertical-align: top;
     text-align: right;
     margin-right: 10px;

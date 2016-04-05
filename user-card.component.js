@@ -1,17 +1,12 @@
 'use strict';
 angular
     .module('mailApp')
-    .component('user-card', {
+    .component('userCard', {
         bindings: {
-            selectedUser: '<',
-            updateUser: '&',
-            togglePageMask: '&'
+            updateUser: '&'
         },
-
-        template: `<user-card selected-user="$ctrl.selectedUser"
-                       update-user="$ctrl.updateUser(user)"
-                       toggle-page-mask="$ctrl.togglePageMask()"
-                       ></user-card>`
+        templateUrl: 'user-card.html',
+        controller: UserCardController
     })
 
     .config(function($stateProvider) {
@@ -19,6 +14,15 @@ angular
             .state('user-card', {
                 parent: 'contacts-list',
                 url: '/:userId',
-                templateUrl: 'user-card.html'
+                template: '<user-card update-user="$ctrl.updateUser(user)"></user-card>'
             })
     });
+
+function UserCardController($stateParams, ContactsService, $state) {
+    ContactsService.getOne($stateParams.userId)
+        .then((user) => this.selectedUser = user);
+
+    this.isUserCardAllowed = function() {
+        return $state.is('user-card');
+    }
+}
