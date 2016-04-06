@@ -112,8 +112,8 @@ angular
 
         return $http.post(url, message)
                 .then((response) => {
-                    // When we remove or update an object at FireBase, we need
-                    // a key to identify this object. This key is automatically created
+                    // When we add the new object to FireBase, we need
+                    // a key to identify this object in future. This key is automatically created
                     // by FireBase when we add the object at the first time.
                     // So, we save the key in "id" property of the object.
                     message.id = response.data.name;

@@ -32,7 +32,12 @@ function ContactsService($http, NormalizeToArrayFactory) {
                 newUser.id = response.data.name;
 
                 return newUser;
-            });
+            })
+            // newUser.id does not store at FireBase, therefore we need an additional PUT method
+            .then(() => {
+                return $http.put(this.url + '/' + newUser.id + '.json', newUser)
+            })
+            .then((response) => response.data);
         // catch method will be here someday
     };
 

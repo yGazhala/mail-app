@@ -28,20 +28,15 @@ function ContactsListController(ContactsService, PageMaskService, $state) {
         return $state.is('contacts-list') || $state.is('add-user');
     };
 
-    this.newUserCard = null; // Зачем нам это свойство?
-
     this.addNewUser = function(newUser) {
-        this.newUserCard = newUser;
+        ContactsService.addUser(newUser)
+            .then((newUser) => {
+                // update contacts list
+                this.contacts.push(newUser);
+                PageMaskService.close(); // костыль
+                $state.go('contacts-list');
+            });
 
-        if (this.newUserCard) {
-            ContactsService.addUser(this.newUserCard)
-                .then((newUserCard) => {
-                    this.contacts.push(newUserCard);
-                    this.newUserCard = null;
-                    PageMaskService.close(); // костыль
-                    $state.go('contacts-list');
-                })
-        }
     };
 
     this.removeUser = function (user) {
@@ -53,12 +48,15 @@ function ContactsListController(ContactsService, PageMaskService, $state) {
 
     this.updateUser = function(user) {
         ContactsService.updateUser(user)
-            // reloading contacts list
-            .then(() => {
-                ContactsService.getAll()
-                    .then((contacts) => {
-                        this.contacts = contacts;
-                    });
-            })
+            // update contacts list
+            .then(()=> {
+                let max = this.contacts.length;
+                for(let i = 0; i < max; i++) {
+                   if (this.contacts[i].id === user.id) {
+                       this.contacts[i] = user;
+                       return;
+                   }
+                }
+            });
     }
 }
