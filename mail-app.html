@@ -15,7 +15,7 @@
             <li ng-click="$ctrl.showMailBox($ctrl.sentMail)"
                 ng-class="{selected: $ctrl.mailBoxSelected === $ctrl.sentMail}"
                     >Sent mail</li>
-            <li><a ui-sref="contacts-list">Contacts</a></li>
+            <li ui-sref="contacts-list" ui-sref-active="active"><a href>Contacts</a></li>
         </ul>
     </div>
 

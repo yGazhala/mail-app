@@ -93,7 +93,7 @@ body {
 
 }
 
-.mailApp__menu li.selected {
+.mailApp__menu li.active {
     background-color: aliceblue;
 }
 

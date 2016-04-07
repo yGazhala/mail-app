@@ -3,7 +3,8 @@ angular
     .module('mailApp')
     .component('userCard', {
         bindings: {
-            updateUser: '&'
+            updateUser: '&', // callback to parent contacts-list component
+            selectedUser: '<' // get data from UserCardStateController
         },
         templateUrl: 'user-card.html',
         controller: UserCardController
@@ -14,15 +15,28 @@ angular
             .state('user-card', {
                 parent: 'contacts-list',
                 url: '/:userId',
-                template: '<user-card update-user="$ctrl.updateUser(user)"></user-card>'
+                template: `<user-card selected-user="stateCtrl.selectedUser"
+                               update-user="$ctrl.updateUser(user)"></user-card>`,
+                resolve: {
+                    // download user data before rendering the state
+                    userData: function($stateParams, ContactsService) {
+                        return ContactsService.getOne($stateParams.userId);
+                    }
+                },
+                controller: UserCardStateController,
+                controllerAs: 'stateCtrl'
             })
     });
 
-function UserCardController($stateParams, ContactsService, $state) {
-    ContactsService.getOne($stateParams.userId)
-        .then((user) => this.selectedUser = user);
-
+function UserCardController($state) {
+    // Helper method for determining when to show the user card.
+    // When state will be "user-card", it will allow "ng-if" directive
+    // at the template to show the user card.
     this.isUserCardAllowed = function() {
         return $state.is('user-card');
     }
+}
+
+function UserCardStateController(userData) {
+    this.selectedUser = userData;
 }
