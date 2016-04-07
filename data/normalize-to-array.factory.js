@@ -1,6 +1,6 @@
 "use strict";
 angular
-    .module('mailApp')
+    .module('services')
     .factory('NormalizeToArrayFactory', NormalizeToArrayFactory);
 
 function NormalizeToArrayFactory() {

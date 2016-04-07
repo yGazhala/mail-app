@@ -1,6 +1,11 @@
 'use strict';
 angular
-    .module('mailApp', ['ngMessages', 'ui.router'])
+    .module('mailApp', [
+        'ngMessages',
+        'ui.router',
+        'services',
+        'contacts'
+    ])
 
 .component('mailApp', {
     bindings: {},

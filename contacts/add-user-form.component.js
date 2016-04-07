@@ -1,12 +1,12 @@
 'use strict';
 
 angular
-    .module('mailApp')
+    .module('contacts')
     .component('addUserForm', {
         bindings: {
             addNewUser: '&'
         },
-        templateUrl: 'add-user-form.html',
+        templateUrl: 'contacts/add-user-form.html',
         controller: AddUserFormController
     })
 

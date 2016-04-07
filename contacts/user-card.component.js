@@ -1,12 +1,12 @@
 'use strict';
 angular
-    .module('mailApp')
+    .module('contacts')
     .component('userCard', {
         bindings: {
             updateUser: '&', // callback to parent contacts-list component
             selectedUser: '<' // get data from UserCardStateController
         },
-        templateUrl: 'user-card.html',
+        templateUrl: 'contacts/user-card.html',
         controller: UserCardController
     })
 

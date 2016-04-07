@@ -1,9 +1,9 @@
 "use strict";
 angular
-    .module('mailApp')
+    .module('contacts')
     .component('contactsList', {
         bindings: {},
-        templateUrl: 'contacts-list.html',
+        templateUrl: 'contacts/contacts-list.html',
         controller: ContactsListController
     })
 

@@ -1,12 +1,12 @@
 'use strict';
 angular
-    .module('mailApp')
+    .module('contacts')
     .component('userEditForm', {
         bindings: {
             selectedUser: '<',
             updateUser: '&'
         },
-        templateUrl: 'user-edit-form.html'
+        templateUrl: 'contacts/user-edit-form.html'
     })
 
     .config(function($stateProvider) {

@@ -1,6 +1,6 @@
 "use strict";
 angular
-    .module('mailApp')
+    .module('services')
     .service('ContactsService', ContactsService);
 
 function ContactsService($http, NormalizeToArrayFactory) {
