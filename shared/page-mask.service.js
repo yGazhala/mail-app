@@ -1,6 +1,6 @@
 'use strict';
 angular
-    .module('mailApp')
+    .module('shared')
     .service('PageMaskService', PageMaskService);
 
 function PageMaskService() {

@@ -1,6 +1,6 @@
 'use strict';
 angular
-    .module('mailApp')
+    .module('shared')
     .component('pageMask', {
         bindings: {},
 

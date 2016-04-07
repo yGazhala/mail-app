@@ -25,6 +25,7 @@ function ContactsListController(ContactsService, PageMaskService, $state) {
     });
 
     this.isContactsListAllowed = function() {
+
         return $state.is('contacts-list') || $state.is('add-user');
     };
 

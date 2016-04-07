@@ -9,23 +9,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-messages.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 
-    <script src="data/services.module.js"></script>
+    <script src="data/services.module.js" defer></script>
     <script src="data/normalize-to-array.factory.js" defer></script>
     <script src="data/contacts.service.js" defer></script>
 
-    <script src="mailApp.js" defer></script>
-    <script src="page-mask.service.js" defer></script>
-    <script src="page-mask.component.js" defer></script>
+    <script src="shared/shared.module.js" defer></script>
+    <script src="shared/page-mask.service.js" defer></script>
+    <script src="shared/page-mask.component.js" defer></script>
+    <script src="shared/layout.component.js" defer></script>
 
     <script src="contacts/contacts.module.js" defer></script>
     <script src="contacts/contacts-list.component.js" defer></script>
     <script src="contacts/add-user-form.component.js" defer></script>
     <script src="contacts/user-card.component.js" defer></script>
     <script src="contacts/user-edit-form.component.js" defer></script>
-</head>
-<body ng-app="mailApp">
 
-<mail-app></mail-app>
+    <script src="mail-box/mail-box.module.js" defer></script>
+    <script src="mail-box/mail-data.service.js" defer></script>
+    <script src="mail-box/mail-boxes.component.js" defer></script>
+    <script src="mail-box/message-list.component.js" defer></script>
+
+    <script src="core.module.js" defer></script>
+</head>
+<body ng-app="core">
+
+<layout></layout>
 
 </body>
 </html>
