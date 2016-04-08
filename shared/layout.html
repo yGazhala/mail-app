@@ -7,7 +7,8 @@
 
 <section class="mailApp__contentWrapper">
     <div class="mailApp__menu">
-        <button class="openNewMessageDisplayButton">Compose</button>
+        <button
+                ui-sref="compose">Compose</button>
         <ul>
             <li ui-sref="message-list({boxId: 'inbox'})" ui-sref-active="active">Inbox</li>
             <li ui-sref="message-list({boxId: 'sent-mail'})" ui-sref-active="active">Sent mail</li>
@@ -19,11 +20,3 @@
         <ui-view></ui-view>
     </div>
 </section>
-
-<!--
-<new-message class="mailApp__newMessage"
-             is-new-message-display-opened="$ctrl.isNewMessageDisplayOpened"
-             on-toggle-new-message-display="$ctrl.toggleNewMessageDisplay()"
-             on-move-new-message-to-sent-mail="$ctrl.moveNewMessageToSentMail(newMessage)"
-                ></new-message>
--->

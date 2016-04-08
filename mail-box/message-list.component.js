@@ -10,11 +10,11 @@ angular
     })
 
     .config(function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('mail-box/inbox');
+        $urlRouterProvider.otherwise('mail-box/list/inbox');
         $stateProvider
             .state('message-list', {
                 parent: 'mail-box',
-                url: '/:boxId',
+                url: '/list/:boxId',
                 template: `<message-list messages="stateCtrl.currentBox"></message-list>`,
 
                 resolve: { // download data before rendering the state

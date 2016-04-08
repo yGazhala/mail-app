@@ -359,29 +359,44 @@ body {
 /* end mainDisplay -------------*/
 
 /* =newMessage ---------------*/
+
 .mailApp__newMessage {
     display: block;
 }
 
 .newMessage__display {
-    position: absolute;
-    top: 20%;
-    left: 20%;
-    z-index: 3;
-    min-width: 480px;
     padding: 15px;
     background-color: whitesmoke;
 }
+.newMessage__display h2 {
+    padding-bottom: 15px;
+    font-size: 1.2em;
+}
+
 .newMessage__display form {
     margin-top: 20px;
 }
 
-.newMessage__display h2 {
-
+.newMessage__display section {
+    padding-bottom: 15px;
 }
 
-.contacts__userEditForm section {
-    padding-bottom: 15px;
+.newMessage__display input[type="text"] {
+    width: 100%;
+    font-size: 1.2em;
+}
+.newMessage__display textarea {
+    width: 100%;
+    font-size: 1.1em;
+    height: 200px;
+}
+
+.newMessage__display div[ng-message=required] {
+    color: red;
+}
+
+.newMessage__display input[type="submit"] {
+    font-size: 1.2em;
 }
 /* end newMessage ------------*/
 

@@ -5,18 +5,17 @@ angular
 
 
 function MailDataService($http, NormalizeToArrayFactory) {
+    this.url = 'https://gazhala.firebaseio.com/';
 
     this.getBox = function(boxId) {
-        let url = 'https://gazhala.firebaseio.com/';
 
-        return $http.get(url + boxId + '.json')
+        return $http.get(this.url + boxId + '.json')
             .then((response) => NormalizeToArrayFactory(response.data));
     };
     
     this.getMessage = function(boxId, messageId) {
-        let url = 'https://gazhala.firebaseio.com/';
 
-        return $http.get(url + boxId + '/' + messageId + '.json')
+        return $http.get(this.url + boxId + '/' + messageId + '.json')
             .then((response) => response.data);
     };
 
@@ -42,24 +41,25 @@ function MailDataService($http, NormalizeToArrayFactory) {
             });
     };
 
-    this.add = function(message) {
-        let url = 'https://gazhala.firebaseio.com/sent-mail.json';
+    this.addNewMessageToSentMail = function(message) {
         message.boxId = 'sent-mail';
         message.date = new Date().getTime(); // save date in milliseconds
 
-        return $http.post(url, message)
+        return $http.post(this.url + 'sent-mail.json', message)
             .then((response) => {
                 // When we add the new object to FireBase, we need
-                // a key to identify this object in future. This key is automatically created
-                // by FireBase when we add the object at the first time.
-                // So, we save the key in "id" property of the object.
+                // a key to identify this object in future.
+                // This key was automatically created by FireBase
+                // when we added the object at the first time.
+                // All we need - is to save the key in "id" property of the object.
                 message.id = response.data.name;
 
                 return message;
             })
-            // message.id does not store at firebase, therefore we need additional PUT method
+            // Now, we have the id, but it does not stored at the FireBase,
+            // therefore we implement additional PUT method
             .then(() => { // message
-                return $http.put('https://gazhala.firebaseio.com/sent-mail/' + message.id + '.json', message)
+                return $http.put(this.url + 'sent-mail/' + message.id + '.json', message)
             })
             .then((response) => response.data);
             // .catch method will be here someday

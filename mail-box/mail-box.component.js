@@ -4,7 +4,7 @@ angular
 
     .component('mailBox', {
         bindings: {},
-        template: '',
+        template: '<ui-view></ui-view>',
         controller: MailBoxController
     })
 
@@ -14,32 +14,11 @@ angular
             .state('mail-box', {
                 abstract: true,
                 url: '/mail-box',
-                template: '<ui-view></ui-view>'
+                template: '<mail-box></mail-box>'
             })
     });
 
-function MailBoxController(MailDataService) {
-    //MailDataService.getInbox().then((mailBox) => {
-    //    this.inbox = mailBox;
-    //});
-
-    //MailDataService.getSentMail().then((mailBox) => {
-    //    this.sentMail = mailBox;
-    //});
+function MailBoxController() {
 
 
-    this.isNewMessageDisplayOpened = false;
-
-    this.toggleNewMessageDisplay = function() {
-        this.isNewMessageDisplayOpened = !this.isNewMessageDisplayOpened;
-        this.togglePageMask();
-    };
-
-    this.moveNewMessageToSentMail = function(newMessage) {
-        this.toggleNewMessageDisplay();
-        MailDataService.add(newMessage)
-            .then((message) => {
-                this.sentMail.push(message);
-            })
-    };
 }
