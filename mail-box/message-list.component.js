@@ -5,11 +5,12 @@ angular
         bindings: {
             messages: '<'
         },
-        templateUrl: 'mail-box/message-list.html'
+        templateUrl: 'mail-box/message-list.html',
+        controller: MessageListController
     })
 
     .config(function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('inbox');
+        $urlRouterProvider.otherwise('mail-box/inbox');
         $stateProvider
             .state('message-list', {
                 parent: 'mail-box',
@@ -29,4 +30,10 @@ angular
 
 function MessageListStateController(currentBoxPromise) {
     this.currentBox = currentBoxPromise;
+}
+
+function MessageListController($state) {
+    this.isMessageListAllowed = function() {
+        return $state.is('message-list');
+    }
 }

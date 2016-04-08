@@ -2,21 +2,23 @@
 angular
     .module('mailBox')
 
-    .component('mailBoxes', {
+    .component('mailBox', {
         bindings: {},
-        template: '', // может здесь тоже глюк
-        controller: MailBoxesController
+        template: '',
+        controller: MailBoxController
     })
+
 
     .config(function($stateProvider){
         $stateProvider
             .state('mail-box', {
                 abstract: true,
-                template: '<ui-view></ui-view>' // глюк здесь
+                url: '/mail-box',
+                template: '<ui-view></ui-view>'
             })
     });
 
-function MailBoxesController(MailDataService) {
+function MailBoxController(MailDataService) {
     //MailDataService.getInbox().then((mailBox) => {
     //    this.inbox = mailBox;
     //});

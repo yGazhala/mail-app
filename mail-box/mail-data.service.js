@@ -12,6 +12,13 @@ function MailDataService($http, NormalizeToArrayFactory) {
         return $http.get(url + boxId + '.json')
             .then((response) => NormalizeToArrayFactory(response.data));
     };
+    
+    this.getMessage = function(boxId, messageId) {
+        let url = 'https://gazhala.firebaseio.com/';
+
+        return $http.get(url + boxId + '/' + messageId + '.json')
+            .then((response) => response.data);
+    };
 
     this.getInbox = function() {
         let url = 'https://gazhala.firebaseio.com/inbox.json';
@@ -37,7 +44,7 @@ function MailDataService($http, NormalizeToArrayFactory) {
 
     this.add = function(message) {
         let url = 'https://gazhala.firebaseio.com/sent-mail.json';
-        message.boxId = 'sentMail';
+        message.boxId = 'sent-mail';
         message.date = new Date().getTime(); // save date in milliseconds
 
         return $http.post(url, message)

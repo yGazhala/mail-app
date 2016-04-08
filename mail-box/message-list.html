@@ -1,15 +1,11 @@
-<ul class="mailBox__messageList">
-    <li ng-repeat="message in $ctrl.messages">
+<ul class="mailBox__messageList" ng-if="$ctrl.isMessageListAllowed()">
+    <li ng-repeat="message in $ctrl.messages" ui-sref="message({id: message.id})">
         <div class="mailAddress">{{message.email}}</div>
         <div class="messageSubject">{{message.subject}}</div>
         <div class="messagePreview">{{message.content.slice(0, 21) + ' ...'}}</div>
     </li>
 </ul>
 
-<!--
-<section class="mailBox__message" ng-if="!$ctrl.isMailBoxShowed && !$ctrl.isContactsShowed">
-    <button class="backwardButton" ng-click="$ctrl.onShowMailBox({mailBox: $ctrl.mailBoxSelected})">&#8592;</button>
-    <div class="messageContent">{{$ctrl.messageSelected.content}}</div>
-</section>
--->
+<ui-view></ui-view>
+
 

@@ -34,7 +34,7 @@ var inboxJson = `[
 var sentMailJson = `[
     {
         "id": 0,
-        "boxId": "sentMail",
+        "boxId": "sent-mail",
         "date": 1457606478800,
         "email": "sidorov@yandex.ru",
         "subject": "Бавария - Вердер: 5:0",
@@ -42,7 +42,7 @@ var sentMailJson = `[
     },
     {
         "id": 1,
-        "boxId": "sentMail",
+        "boxId": "sent-mail",
         "date": 1457606479000,
         "email": "joe-springfield@gmail.com",
         "subject": "Leo DiCaprio wins his first oscar",
@@ -50,7 +50,7 @@ var sentMailJson = `[
     },
     {
         "id": 2,
-        "boxId": "sentMail",
+        "boxId": "sent-mail",
         "date": 1457606499000,
         "email": "semen@mail.ru",
         "subject": "Новый iPhone 7",
