@@ -44,7 +44,7 @@ function ContactsService($http, NormalizeToArrayFactory) {
     this.removeUser = function(user) {
 
         return $http.delete(this.url + '/' + user.id + '.json')
-            .then((response) => response.data);
+            .then((response) => response.data); // response.data === null
         // catch method will be here someday
     };
 

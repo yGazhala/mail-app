@@ -3,7 +3,8 @@ angular
     .module('mailBox')
     .component('messageList', {
         bindings: {
-            messages: '<'
+            messages: '<', // get data from stateCtrl
+            moveMessageToTrash: '&' //callback to parent mail-box component
         },
         templateUrl: 'mail-box/message-list.html',
         controller: MessageListController
@@ -15,7 +16,9 @@ angular
             .state('message-list', {
                 parent: 'mail-box',
                 url: '/list/:boxId',
-                template: `<message-list messages="stateCtrl.currentBox"></message-list>`,
+                template: `<message-list messages="stateCtrl.currentBox"
+                                move-message-to-trash="$ctrl.moveMessageToTrash(message)"
+                                    ></message-list>`,
 
                 resolve: { // download data before rendering the state
                     currentBoxPromise: function(MailDataService, $stateParams) {

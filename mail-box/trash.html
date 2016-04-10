@@ -1,4 +1,4 @@
-<ul class="mailBox__messageList" ng-if="$ctrl.isMessageListAllowed()">
+<ul class="mailBox__messageList">
     <li ng-repeat="message in $ctrl.messages | orderBy: '-date'"
         ui-sref="message({id: message.id})"
             >
@@ -6,12 +6,5 @@
         <div class="messageSubject">{{message.subject.slice(0, 21)}}</div>
         <div class="messagePreview">{{message.content.slice(0, 21)}}</div>
         <div class="messageDate">{{message.date|date:'MMM d'}}</div>
-        <button class="removeMessageButton"
-            ng-click="$ctrl.moveMessageToTrash({message: message});
-            $event.stopPropagation()">x</button>
     </li>
 </ul>
-
-<ui-view></ui-view>
-
-

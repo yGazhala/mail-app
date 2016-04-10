@@ -1,7 +1,7 @@
 <section class="contacts__list" ng-if="$ctrl.isContactsListAllowed()">
     <button class="openAddUserFormButton" ui-sref="add-user">Add contact</button>
     <ul>
-        <li ng-repeat="user in $ctrl.contacts"
+        <li ng-repeat="user in $ctrl.contacts | orderBy: 'fullName'"
             ui-sref="user-card({userId: user.id})"
                 >
             <div class="userAvatar"><img src={{user.avatarUrl}} alt="Avatar"></div>

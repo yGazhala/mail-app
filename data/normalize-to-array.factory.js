@@ -1,8 +1,8 @@
 "use strict";
-// There is some strange behavior in FireBase REST api.
-// If we will add the new object to array stored at FireBase,
-// FireBase will return response.data with object instead of array.
-// That's why, we need this factory.
+// The application data were saved at the FireBase as array of objects.
+// But there is some strange behavior in the FireBase REST API:
+// if we will add the new object to the array, the array
+// will be converted to the object. That's why, we need this factory.
 
 angular
     .module('services')

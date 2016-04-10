@@ -58,10 +58,32 @@ function MailDataService($http, NormalizeToArrayFactory) {
             })
             // Now, we have the id, but it does not stored at the FireBase,
             // therefore we implement additional PUT method
-            .then(() => { // message
+            .then(() => {
                 return $http.put(this.url + 'sent-mail/' + message.id + '.json', message)
             })
             .then((response) => response.data);
             // .catch method will be here someday
+
     };
+
+    this.addMessageToTrash = function(message) {
+
+        return $http.post(this.url + 'trash.json', message)
+            .then((response) => {
+                message.id = response.data.name; // rewrite id
+
+                return message;
+            })
+            .then(() => {
+                return $http.put(this.url + 'trash/' + message.id + '.json', message)
+            })
+            .then((response) => response.data);
+            // .catch method will be here someday
+    };
+
+    this.removeMessage = function(message) {
+
+        return $http.delete(this.url + message.boxId + '/' + message.id + '.json')
+            .then((response) => response.data); // response.data === null
+    }
 }
