@@ -7,8 +7,8 @@
         <div class="messagePreview">{{message.content.slice(0, 21)}}</div>
         <div class="messageDate">{{message.date|date:'MMM d'}}</div>
         <button class="removeMessageButton"
-            ng-click="$ctrl.moveMessageToTrash({message: message});
-            $event.stopPropagation()">x</button>
+            ng-click="$ctrl.removeMessage(message);
+                $event.stopPropagation()">x</button>
     </li>
 </ul>
 

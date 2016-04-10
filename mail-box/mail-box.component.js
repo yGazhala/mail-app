@@ -18,12 +18,12 @@ angular
             })
     });
 
-function MailBoxController(MailDataService, $state) {
+function MailBoxController(MailDataService) {
 
     this.moveMessageToTrash = function(message) {
-        MailDataService.removeMessage(message)
-        .then(() => MailDataService.addMessageToTrash(message))
-        .then(() => $state.reload('message-list', {boxId: message.boxId}));
+
+        return MailDataService.removeMessage(message)
+            .then(() => MailDataService.addMessageToTrash(message));
     }
 
 }

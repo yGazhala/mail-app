@@ -185,6 +185,25 @@ body {
 
 /* end message -------------*/
 
+/* =trash ------------------*/
+.messageBoxId__inbox, .messageBoxId__sent {
+    display: inline-block;
+    margin-right: 10px;
+    color: red;
+}
+
+.messageBoxId__sent {
+    color: green;
+}
+
+.restoreMessageButton {
+    position: absolute;
+    right: 0;
+    border-radius: 10px;
+}
+
+/* end trash ---------------*/
+
 /* =contacts ---------------*/
 .mailApp__contacts {
     display: block;

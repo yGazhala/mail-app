@@ -51,6 +51,7 @@ function ContactsListController(ContactsService, PageMaskService, $state) {
         ContactsService.updateUser(user)
             // update contacts list
             .then(()=> {
+                // это можно переписать методом сплайс и индексОф
                 let max = this.contacts.length;
                 for(let i = 0; i < max; i++) {
                    if (this.contacts[i].id === user.id) {

@@ -1,0 +1,15 @@
+<ul class="mailBox__messageList" ng-if="$ctrl.isTrashListAllowed()">
+    <li ng-repeat="message in $ctrl.messages | orderBy: '-date'"
+        ui-sref="trash-details({id: message.id})"
+            >
+        <div class="messageBoxId__inbox" ng-if="message.boxId === 'inbox'">&#8659;</div>
+        <div class="messageBoxId__sent" ng-if="message.boxId === 'sent-mail'">&#8657;</div>
+        <div class="mailAddress">{{message.email}}</div>
+        <div class="messageSubject">{{message.subject.slice(0, 21)}}</div>
+        <div class="messagePreview">{{message.content.slice(0, 21)}}</div>
+        <div class="messageDate">{{message.date|date:'MMM d'}}</div>
+        <button class="restoreMessageButton" ng-click="$event.stopPropagation()">&#8629</button>
+    </li>
+</ul>
+
+<ui-view></ui-view>

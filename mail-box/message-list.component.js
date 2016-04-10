@@ -36,7 +36,16 @@ function MessageListStateController(currentBoxPromise) {
 }
 
 function MessageListController($state) {
+
     this.isMessageListAllowed = function() {
         return $state.is('message-list');
+    };
+
+    this.removeMessage = function(message) {
+        // callback to parent mail-box component
+        this.moveMessageToTrash({message: message}).then(() => {
+            // remove the message from current list
+            this.messages.splice(this.messages.indexOf(message), 1);
+        });
     }
 }
