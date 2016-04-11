@@ -26,13 +26,4 @@ function TrashDetailsController($stateParams) {
             }
         }
     })();
-
-    /*
-    for (let i = 0; i < this.messages.length; i++) {
-        if (this.messages[i].id === $stateParams.id) {
-            this.currentMessage = this.messages[i];
-            break;
-        }
-    }
-    */
 }

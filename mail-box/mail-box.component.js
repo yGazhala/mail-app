@@ -24,6 +24,12 @@ function MailBoxController(MailDataService) {
 
         return MailDataService.removeMessage(message)
             .then(() => MailDataService.addMessageToTrash(message));
+    };
+
+    this.moveMessageToOriginalBox = function(message) {
+
+        return MailDataService.removeMessageFromTrash(message)
+            .then(() => MailDataService.addMessage(message));
     }
 
 }

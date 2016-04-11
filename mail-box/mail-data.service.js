@@ -19,6 +19,7 @@ function MailDataService($http, NormalizeToArrayFactory) {
             .then((response) => response.data);
     };
 
+    /*
     this.getInbox = function() {
         let url = 'https://gazhala.firebaseio.com/inbox.json';
 
@@ -40,7 +41,7 @@ function MailDataService($http, NormalizeToArrayFactory) {
                     + error.status + ' - ' + error.statusText);
             });
     };
-
+    */
     this.addNewMessageToSentMail = function(message) {
         message.boxId = 'sent-mail';
         message.date = new Date().getTime(); // save date in milliseconds
@@ -81,9 +82,30 @@ function MailDataService($http, NormalizeToArrayFactory) {
             // .catch method will be here someday
     };
 
+    this.addMessage = function(message) {
+
+        return $http.post(this.url + message.boxId + '.json', message)
+            .then((response) => {
+                message.id = response.data.name; // rewrite id
+
+                return message;
+            })
+            .then(() => {
+                return $http.put(this.url + message.boxId + '/' + message.id + '.json', message)
+            })
+            .then((response) => response.data);
+            // .catch method will be here someday
+    };
+
     this.removeMessage = function(message) {
 
         return $http.delete(this.url + message.boxId + '/' + message.id + '.json')
+            .then((response) => response.data); // response.data === null
+    };
+
+    this.removeMessageFromTrash = function(message) {
+
+        return $http.delete(this.url + 'trash/' + message.id + '.json')
             .then((response) => response.data); // response.data === null
     }
 }
