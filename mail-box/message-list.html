@@ -1,5 +1,7 @@
 <ul class="mailBox__messageList" ng-if="$ctrl.isMessageListAllowed()">
-    <li ng-repeat="message in $ctrl.messages | orderBy: '-date'"
+    <input type="text" ng-model="searchText"><label>&#128269;</label>
+
+    <li ng-repeat="message in $ctrl.messages | orderBy: '-date' | filter:searchText"
         ui-sref="message({id: message.id})"
             >
         <div class="mailAddress">{{message.email}}</div>

@@ -1,5 +1,7 @@
 <ul class="mailBox__messageList" ng-if="$ctrl.isTrashListAllowed()">
-    <li ng-repeat="message in $ctrl.messages | orderBy: '-date'"
+    <input type="text" ng-model="searchText"><label>&#128269;</label>
+
+    <li ng-repeat="message in $ctrl.messages | orderBy: '-date' | filter:searchText"
         ui-sref="trash-details({id: message.id})"
             >
         <div class="messageBoxId__inbox" ng-if="message.boxId === 'inbox'">&#8659;</div>
