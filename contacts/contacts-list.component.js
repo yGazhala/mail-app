@@ -10,6 +10,7 @@ angular
     .config(function ($stateProvider) {
         $stateProvider
             .state('contacts-list', {
+                parent: 'account',
                 url: '/contacts-list',
                 template: '<contacts-list></contacts-list>',
                 controller: function(PageMaskService) {

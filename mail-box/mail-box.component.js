@@ -13,6 +13,7 @@ angular
         $stateProvider
             .state('mail-box', {
                 abstract: true,
+                parent: 'account',
                 url: '/mail-box',
                 template: '<mail-box></mail-box>'
             })

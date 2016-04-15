@@ -8,6 +8,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-messages.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+
+    <script src="auth/auth.module.js" defer></script>
 
     <script src="data/services.module.js" defer></script>
     <script src="data/normalize-to-array.factory.js" defer></script>
@@ -34,10 +38,11 @@
     <script src="mail-box/trash-details.component.js" defer></script>
 
     <script src="core.module.js" defer></script>
+    <script src="login.component.js" defer></script>
 </head>
 <body ng-app="core">
 
-<layout></layout>
+<ui-view></ui-view>
 
 </body>
 </html>

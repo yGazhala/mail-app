@@ -1,0 +1,9 @@
+<form class="form-signin" name="checkUser" ng-submit="stateCtrl.checkUser(user)">
+    <h2>Please sign in</h2>
+    <label for="inputLogin">Email address</label>
+    <input type="email" id="inputLogin" name="login" ng-model="user.login" placeholder="4bz@ukr.net" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" ng-model="user.password" id="inputPassword" placeholder="test" required>
+
+    <button type="submit">Sign in</button>
+</form>

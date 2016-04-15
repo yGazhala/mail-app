@@ -11,7 +11,7 @@ angular
     })
 
     .config(function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('mail-box/list/inbox');
+        $urlRouterProvider.otherwise('account/mail-box/list/inbox');
         $stateProvider
             .state('message-list', {
                 parent: 'mail-box',
