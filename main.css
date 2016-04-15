@@ -55,10 +55,16 @@ body {
 }
 
 .mailApp__statusBar {
-    max-width: 960px;
+    position: relative;
+    /*max-width: 960px;*/
     padding-top: 10px;
     padding-bottom: 10px;
     margin-left: 30%;
+}
+
+.logoutButton {
+    position: absolute;
+    right: 5%;
 }
 
 .mailApp__contentWrapper {

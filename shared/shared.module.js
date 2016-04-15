@@ -1,4 +1,4 @@
 'use strict';
 
 angular
-    .module('shared', ['ui.router']);
+    .module('shared', ['ui.router', 'auth']);
