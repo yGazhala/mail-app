@@ -3,11 +3,9 @@
 angular
     .module('auth')
     .component('login', {
-        bindings: {
-            checkUser: '&',
-            isInvalidLoginOrPassword: '<'
-        },
-        templateUrl: 'auth/login.html'
+        bindings: {},
+        templateUrl: 'auth/login.html',
+        controller: LoginController
     })
 
     .run(function($rootScope, $state) {
@@ -24,34 +22,32 @@ angular
         $stateProvider
             .state('login', {
                 url: '/login',
-                template: `<login check-user="$ctrl.checkUser(user)"
-                                is-invalid-login-or-password = "$ctrl.isInvalidLoginOrPassword"
-                                    ></login>`,
-                controller: LoginStateController,
-                controllerAs: '$ctrl',
+                template: `<login></login>`,
                 resolve: {
                     // controller will not be loaded until $waitForAuth resolves
-                    currentAuth: function(AuthService) {
-                        return AuthService.authObj.$waitForAuth();
-
+                    currentAuth: function(AuthService, $state) {
+                        return AuthService.authObj.$waitForAuth()
+                            .then((authData) => {
+                                // If user has been authenticated already, redirect to inbox
+                                if(authData !== null) {
+                                    $state.go('message-list', {boxId: 'inbox'});
+                                }
+                            })
                     }
                 }
             })
     });
 
 
-function LoginStateController(currentAuth, AuthService, $state) {
-    console.log(currentAuth);
+function LoginController(AuthService, $state) {
 
     // helper flag for the ng-if directive at the login.html
     this.isInvalidLoginOrPassword = false;
 
     this.checkUser = function(user) {
 
-        // This method will return authData or null, if authentication fails
         AuthService.authObj.$authWithPassword(user)
-            .then((authData) => {
-                console.log(authData);
+            .then(() => {
                 this.isInvalidLoginOrPassword = false;
                 $state.go('message-list', {boxId: 'inbox'});
             })

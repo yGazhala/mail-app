@@ -1,6 +1,6 @@
 'use strict';
 angular
-    .module('auth')
+    .module('services')
     .service('AuthService', AuthService);
 
 function AuthService($firebaseAuth) {
@@ -12,5 +12,4 @@ function AuthService($firebaseAuth) {
     // For more information, please, follow to:
     // https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-users-and-authentication
     this.authObj = $firebaseAuth(ref);
-
 }

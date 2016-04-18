@@ -1,4 +1,4 @@
 'use strict';
 
 angular
-    .module('auth', ['firebase', 'ui.router']);
+    .module('auth', ['ui.router', 'services']);
