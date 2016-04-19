@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+    <title>Mail app</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-messages.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+
+    <script src="data/services.module.js" defer></script>
+    <script src="data/normalize-to-array.factory.js" defer></script>
+    <script src="data/auth.service.js" defer></script>
+    <script src="data/contacts.service.js" defer></script>
+    <script src="data/mail-data.service.js" defer></script>
+
+    <script src="auth/auth.module.js" defer></script>
+    <script src="auth/login.component.js" defer></script>
+
+    <script src="shared/shared.module.js" defer></script>
+    <script src="shared/page-mask.service.js" defer></script>
+    <script src="shared/page-mask.component.js" defer></script>
+    <script src="shared/layout.component.js" defer></script>
+
+    <script src="contacts/contacts.module.js" defer></script>
+    <script src="contacts/contacts-list.component.js" defer></script>
+    <script src="contacts/add-user-form.component.js" defer></script>
+    <script src="contacts/user-card.component.js" defer></script>
+    <script src="contacts/user-edit-form.component.js" defer></script>
+
+    <script src="mail-box/mail-box.module.js" defer></script>
+    <script src="mail-box/mail-box.component.js" defer></script>
+    <script src="mail-box/message-list.component.js" defer></script>
+    <script src="mail-box/message.component.js" defer></script>
+    <script src="mail-box/compose.component.js" defer></script>
+    <script src="mail-box/trash-list.component.js" defer></script>
+    <script src="mail-box/trash-details.component.js" defer></script>
+
+    <script src="core.module.js" defer></script>
+
+</head>
+<body ng-app="core">
+
+<ui-view></ui-view>
+
+</body>
+</html>

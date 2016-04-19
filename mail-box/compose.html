@@ -1,0 +1,25 @@
+<section class="newMessage__display">
+    <button class="backwardButton" ui-sref="message-list({boxId: 'inbox'})">&#8592;</button>
+    <form name="newMessageForm" ng-submit="$ctrl.addNewMessageToSentMail(newMessage)">
+        <h2>New message</h2>
+        <section>
+            <input type="text" name="email" ng-model="newMessage.email" placeholder="To" autofocus required>
+            <div ng-messages="newMessageForm['email'].$error" ng-if="newMessageForm['email'].$dirty" role="alert">
+                <div ng-message="required">Please, enter a value for this field.</div>
+            </div>
+        </section>
+        <section>
+            <input type="text" name="subject" ng-model="newMessage.subject" placeholder="Subject" required>
+            <div ng-messages="newMessageForm['subject'].$error" ng-if="newMessageForm['subject'].$dirty" role="alert">
+                <div ng-message="required">Please, enter a value for this field.</div>
+            </div>
+        </section>
+        <section>
+            <textarea name="content" ng-model="newMessage.content" required></textarea>
+            <div ng-messages="newMessageForm['content'].$error" ng-if="newMessageForm['content'].$dirty" role="alert">
+                <div ng-message="required">Please, enter a value for this field.</div>
+            </div>
+        </section>
+        <input type="submit" value="Send" ng-disabled="$ctrl.isSubmitEnabled === false">
+    </form>
+</section>

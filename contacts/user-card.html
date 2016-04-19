@@ -1,0 +1,27 @@
+<section class="contacts__userCard" ng-if="$ctrl.isUserCardAllowed()">
+    <button class="backwardButton" ui-sref="contacts-list">&#8592;</button>
+    <button class="contacts__openUserEditFormButton" ui-sref="edit-form">Edit</button>
+
+    <h3>{{$ctrl.selectedUser.fullName}}</h3>
+    <table>
+        <tbody>
+        <tr>
+            <td class="label">Date of birth:</td><td>{{$ctrl.selectedUser.birthdate}}</td>
+        </tr>
+        <tr>
+            <td class="label">Gender</td><td>{{$ctrl.selectedUser.gender}}</td>
+        </tr>
+        <tr>
+            <td class="label">Address</td><td>{{$ctrl.selectedUser.address}}</td>
+        </tr>
+        <tr>
+            <td class="label">Email</td><td>{{$ctrl.selectedUser.email}}</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<ui-view>
+    <!-- when .state will be: "contacts-list.user-card.edit-form" -
+        user-edit-form.html template will be here -->
+</ui-view>
