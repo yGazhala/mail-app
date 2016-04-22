@@ -1,9 +1,6 @@
 "use strict";
-angular
-    .module('services')
-    .service('ContactsService', ContactsService);
 
-function ContactsService($http, NormalizeToArrayFactory) {
+export default function ContactsService($http, NormalizeToArrayFactory) {
     this.url = 'https://gazhala.firebaseio.com/contacts';
     this.secret = '?auth=8EkruGOhqgy8x3V8Zyma3abWFaz70EnPjhTeX2KU';
 

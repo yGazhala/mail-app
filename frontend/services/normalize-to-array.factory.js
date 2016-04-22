@@ -6,11 +6,7 @@
 // Then in response.data we will receive this object instead of the array.
 // To continue working with an array we will use this factory.
 
-angular
-    .module('services')
-    .factory('NormalizeToArrayFactory', NormalizeToArrayFactory);
-
-function NormalizeToArrayFactory() {
+export default function NormalizeToArrayFactory() {
 
     return function(object) {
         if(!object) return [];

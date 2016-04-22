@@ -1,9 +1,6 @@
 'use strict';
-angular
-    .module('shared')
-    .service('PageMaskService', PageMaskService);
 
-function PageMaskService() {
+export default function PageMaskService() {
     this.isOpened = false;
 
     this.toggle = function() {

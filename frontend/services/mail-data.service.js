@@ -1,10 +1,6 @@
 'use strict';
-angular
-    .module('services')
-    .service('MailDataService', MailDataService);
 
-
-function MailDataService($http, NormalizeToArrayFactory) {
+export default function MailDataService($http, NormalizeToArrayFactory) {
     this.url = 'https://gazhala.firebaseio.com/';
     this.secret = '?auth=8EkruGOhqgy8x3V8Zyma3abWFaz70EnPjhTeX2KU';
 

@@ -1,10 +1,7 @@
 'use strict';
-angular
-    .module('services')
-    .service('AuthService', AuthService);
 
-function AuthService($firebaseAuth) {
-    var ref = new Firebase('https://gazhala.firebaseio.com');
+export default function AuthService($firebaseAuth) {
+    let ref = new Firebase('https://gazhala.firebaseio.com');
 
     // This authObj returned by $firebaseAuth contains several methods
     // for authenticating users, responding to changes in authentication state,
