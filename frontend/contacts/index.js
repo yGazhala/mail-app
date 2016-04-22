@@ -20,4 +20,5 @@ export default angular
     .component('addUserForm', addUserFormComponent)
     .component('userCard', userCardComponent)
     .component('userEditForm', userEditFormComponent)
-    .config(routingConfig);
+    .config(routingConfig)
+    .name;

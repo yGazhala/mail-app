@@ -3,7 +3,7 @@ import template from './contacts-list.html';
 
 let contactsListComponent = {
     bindings: {},
-    template: template,
+    template,
     controller: ContactsListController
 };
 

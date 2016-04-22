@@ -3,7 +3,7 @@ import template from './compose.html';
 
 let composeComponent = {
         bindings: {},
-        template: template,
+        template,
         controller: ComposeController
 };
 

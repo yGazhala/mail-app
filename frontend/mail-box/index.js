@@ -23,4 +23,5 @@ export default angular
     .component('message', messageComponent)
     .component('trashList', trashListComponent)
     .component('trashDetails', trashDetailsComponent)
-    .config(routingConfig);
+    .config(routingConfig)
+    .name;

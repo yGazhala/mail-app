@@ -5,7 +5,7 @@ let trashDetailsComponent = {
     bindings: {
         messages: '<' // get data from parent trash-list component
     },
-    template: template,
+    template,
     controller: TrashDetailsController
 };
 

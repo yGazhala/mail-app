@@ -6,7 +6,7 @@ let userEditFormComponent = {
         selectedUser: '<', // get data from parent user-card component
         updateUser: '&' // callback to contacts-list component
     },
-    template: template
+    template
 };
 
 export default userEditFormComponent;

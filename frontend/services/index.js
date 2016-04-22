@@ -14,4 +14,5 @@ export default angular
     .factory('NormalizeToArrayFactory', NormalizeToArrayFactory)
     .service('AuthService', AuthService)
     .service('ContactsService', ContactsService)
-    .service('MailDataService', MailDataService);
+    .service('MailDataService', MailDataService)
+    .name;

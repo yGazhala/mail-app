@@ -3,7 +3,7 @@ import template from './login.html';
 
 let loginComponent = {
     bindings: {},
-    template: template,
+    template,
     controller: LoginController
 };
 

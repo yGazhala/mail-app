@@ -6,7 +6,7 @@ let messageListComponent = {
             messages: '<', // get data from stateCtrl
             moveMessageToTrash: '&' //callback to parent mail-box component
         },
-        template: template,
+        template,
         controller: MessageListController
 };
 

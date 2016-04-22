@@ -5,7 +5,7 @@ let messageComponent = {
     bindings: {
         message: '<' // get data from state controller
     },
-    template: template
+    template
 };
 
 export default messageComponent;

@@ -21,4 +21,5 @@ export default angular
                 $state.go('login');
             }
         });
-    });
+    })
+    .name;

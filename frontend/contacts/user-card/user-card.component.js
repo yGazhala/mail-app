@@ -6,7 +6,7 @@ let userCardComponent = {
         updateUser: '&', // callback to parent contacts-list component
         selectedUser: '<' // get data from state controller
     },
-    template: template,
+    template,
     controller: UserCardController
 };
 

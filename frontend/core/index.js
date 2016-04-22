@@ -10,8 +10,8 @@ import contacts from '../contacts';
 
 export default angular
     .module('core', [
-        shared,
-        auth,
-        mailBox,
-        contacts
+        shared.name,
+        auth.name,
+        mailBox.name,
+        contacts.name
     ]);

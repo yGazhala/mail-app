@@ -14,4 +14,5 @@ export default angular
     .service('PageMaskService', PageMaskService)
     .component('pageMask', pageMaskComponent)
     .component('layout', layoutComponent)
-    .config(routingConfig);
+    .config(routingConfig)
+    .name;

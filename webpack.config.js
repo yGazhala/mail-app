@@ -49,7 +49,8 @@ module.exports = {
                 query: {presets: ['es2015']}
             }, {
                 test: /\.html$/,
-                loader: 'raw'
+                exclude: /node_modules/,
+                loader: 'html'
             }/*, {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
                 exclude: /node_modules/,

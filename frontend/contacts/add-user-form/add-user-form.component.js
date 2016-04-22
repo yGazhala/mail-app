@@ -5,7 +5,7 @@ let addUserFormComponent = {
     bindings: {
         addNewUser: '&' // callback to parent contacts-list component
     },
-    template: template,
+    template,
     controller: AddUserFormController
 };
 
