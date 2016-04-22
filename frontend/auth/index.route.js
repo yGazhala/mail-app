@@ -1,6 +1,6 @@
 'use strict';
 
-export default function authRoute($stateProvider) {
+export default function routingConfig($stateProvider) {
     $stateProvider
         .state('login', {
             url: '/login',

@@ -1,6 +1,6 @@
 'use strict';
 
-export default function sharedRoute($stateProvider) {
+export default function routingConfig($stateProvider) {
     $stateProvider
         .state('account', {
             abstract: true,

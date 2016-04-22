@@ -1,9 +1,9 @@
 'use strict';
-import template from 'layout.html';
+import template from './layout.html';
 
 let layoutComponent = {
     bindings: {},
-    template,
+    template: template,
     controller: LayoutController
 };
 

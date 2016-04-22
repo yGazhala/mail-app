@@ -1,4 +1,6 @@
 'use strict';
+// This service implements user's authentication, provided by $firebaseAuth.
+// This service is used by auth module and mail-box module.
 
 export default function AuthService($firebaseAuth) {
     let ref = new Firebase('https://gazhala.firebaseio.com');

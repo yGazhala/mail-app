@@ -7,7 +7,7 @@
 
 module.exports = {
 
-    entry: __dirname + '/frontend/test.js',
+    entry: __dirname + '/frontend/core',
 
     output: {
         path: __dirname + '/',
@@ -49,33 +49,20 @@ module.exports = {
                 query: {presets: ['es2015']}
             }, {
                 test: /\.html$/,
-                exclude: /node_modules/,
                 loader: 'raw'
             }/*, {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                include: __dirname + '/src',
+                exclude: /node_modules/,
                 loader: 'file?name=[path][name].[ext]'
             }, {
                 test: /\.css$/,
-                include: __dirname + '/src',
+                exclude: /node_modules/,
                 loader: 'style!css!autoprefixer?browsers=last 2 versions'
             }*/
         ],
 
         noParse: wrapRegexp(/\/node_modules\/(angular\/angular|angular-messages\/angular-messages|angular-ui-router\/release\/angular-ui-router|angularfire\/dist\/angularfire|firebase\/lib\/firebase-node)/, 'noParse')
 
-
-        /*
-        noParse: [
-            /angular\/angular\.js/,
-            /angular-ui-router\.js/,
-            /angular-ui-router\.min\.js/,
-            /firebase-node\.js/,
-            /firebase-web\.js/,
-            /angularfire\.js/,
-            /angularfire\.min\.js/
-        ]
-        */
     }
 };
 

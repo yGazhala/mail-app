@@ -1,21 +1,13 @@
 'use strict';
-angular
-    .module('mailBox')
-    .component('compose', {
-        bindings: {},
-        templateUrl: 'mail-box/compose.html',
-        controller: ComposeController
-    })
-    .config(function($stateProvider) {
-        $stateProvider
-            .state('compose', {
-                parent: 'mail-box',
-                url: '/compose',
-                template: `<compose></compose>`
-            })
-    });
+import template from './compose.html';
 
-function ComposeController(MailDataService, $state) { // contacts service
+let composeComponent = {
+        bindings: {},
+        template: template,
+        controller: ComposeController
+};
+
+function ComposeController(MailDataService, $state) {
     this.isSubmitEnabled = true;
 
     this.enableSubmit = function() {
@@ -39,3 +31,5 @@ function ComposeController(MailDataService, $state) { // contacts service
             );
     };
 }
+
+export default composeComponent;

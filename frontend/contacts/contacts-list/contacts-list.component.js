@@ -1,23 +1,11 @@
 "use strict";
-angular
-    .module('contacts')
-    .component('contactsList', {
-        bindings: {},
-        templateUrl: 'contacts/contacts-list.html',
-        controller: ContactsListController
-    })
+import template from './contacts-list.html';
 
-    .config(function ($stateProvider) {
-        $stateProvider
-            .state('contacts-list', {
-                parent: 'account',
-                url: '/contacts-list',
-                template: '<contacts-list></contacts-list>',
-                controller: function(PageMaskService) {
-                    PageMaskService.close(); // не срабатывает при возврате с адд юзер форм
-                }
-            })
-    });
+let contactsListComponent = {
+    bindings: {},
+    template: template,
+    controller: ContactsListController
+};
 
 function ContactsListController(ContactsService, PageMaskService, $state) {
 
@@ -52,7 +40,6 @@ function ContactsListController(ContactsService, PageMaskService, $state) {
         ContactsService.updateUser(user)
             // update contacts list
             .then(()=> {
-                // это можно переписать методом сплайс и индексОф
                 let max = this.contacts.length;
                 for(let i = 0; i < max; i++) {
                    if (this.contacts[i].id === user.id) {
@@ -63,3 +50,5 @@ function ContactsListController(ContactsService, PageMaskService, $state) {
             });
     }
 }
+
+export default contactsListComponent;
