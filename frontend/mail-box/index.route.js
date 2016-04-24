@@ -1,8 +1,6 @@
 'use strict';
 
 export default function routingConfig($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('account/mail-box/list/inbox');
-
     $stateProvider
         .state('mail-box', {
             abstract: true,
@@ -71,5 +69,7 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
             parent: 'trash-list',
             url: '/:id',
             template: '<trash-details messages="$ctrl.messages"></trash-details>'
-        })
+        });
+
+    $urlRouterProvider.otherwise('account/mail-box/list/inbox');
 }

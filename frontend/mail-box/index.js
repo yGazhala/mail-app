@@ -16,12 +16,11 @@ import trashDetailsComponent from './trash-details/trash-details.component.js';
 import routingConfig from './index.route.js';
 
 export default angular
-    .module('mailBox', [ngMessages, uiRouter, services])
+    .module('mailBox', [ngMessages, uiRouter, services.name])
     .component('mailBox', mailBoxComponent)
     .component('compose', composeComponent)
     .component('messageList', messageListComponent)
     .component('message', messageComponent)
     .component('trashList', trashListComponent)
     .component('trashDetails', trashDetailsComponent)
-    .config(routingConfig)
-    .name;
+    .config(routingConfig);

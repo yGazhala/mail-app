@@ -10,7 +10,7 @@ import loginComponent from './login/login.component.js';
 import routingConfig from './index.route.js';
 
 export default angular
-    .module('auth', [uiRouter, services])
+    .module('auth', [uiRouter, services.name])
     .component('login', loginComponent)
     .config(routingConfig)
     .run(function($rootScope, $state) {
@@ -21,5 +21,4 @@ export default angular
                 $state.go('login');
             }
         });
-    })
-    .name;
+    });
