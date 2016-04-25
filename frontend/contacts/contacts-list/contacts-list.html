@@ -1,0 +1,19 @@
+<section class="contacts__list" ng-if="$ctrl.isContactsListAllowed()">
+    <button class="openAddUserFormButton" ui-sref="add-user">Add contact</button>
+    <input type="text" ng-model="searchText"><label>&#128269;</label>
+    <ul>
+        <li ng-repeat="user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText"
+            ui-sref="user-card({userId: user.id})"
+                >
+            <div class="userAvatar"><img src={{user.avatarUrl}} alt="Avatar"></div>
+            <div class="userName">{{user.fullName}}</div>
+            <div class="userEmail">{{user.email}}</div>
+            <button class="removeUserButton" ng-click="$ctrl.removeUser(user); $event.stopPropagation();">x</button>
+        </li>
+    </ul>
+</section>
+
+
+<ui-view>
+    <!-- when state will be: "contacts-list.child" - child template will be here -->
+</ui-view>

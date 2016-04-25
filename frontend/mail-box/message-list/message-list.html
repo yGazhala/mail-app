@@ -1,0 +1,19 @@
+<ul class="mailBox__messageList" ng-if="$ctrl.isMessageListAllowed()">
+    <input type="text" ng-model="searchText"><label>&#128269;</label>
+
+    <li ng-repeat="message in $ctrl.messages | orderBy: '-date' | filter:searchText"
+        ui-sref="message({id: message.id})"
+            >
+        <div class="mailAddress">{{message.email}}</div>
+        <div class="messageSubject">{{message.subject.slice(0, 21)}}</div>
+        <div class="messagePreview">{{message.content.slice(0, 21)}}</div>
+        <div class="messageDate">{{message.date|date:'MMM d'}}</div>
+        <button class="removeMessageButton"
+            ng-click="$ctrl.removeMessage(message);
+                $event.stopPropagation()">x</button>
+    </li>
+</ul>
+
+<ui-view></ui-view>
+
+

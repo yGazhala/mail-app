@@ -1,0 +1,477 @@
+/* reset browser styles */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
+figure, figcaption, footer, header, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1.2;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+ol {
+    padding-left: 1.4em;
+    list-style: decimal;
+}
+ul {
+    padding-left: 1.4em;
+    list-style: square;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+/* end reset browser styles */
+
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; /*include padding and margin within the container*/
+}
+
+body {
+    font: 14px arial;
+    /*overflow: hidden;*/
+}
+
+.mailApp__statusBarWrapper {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background-color: whitesmoke;
+}
+
+.mailApp__statusBar {
+    position: relative;
+    /*max-width: 960px;*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 30%;
+}
+
+.logoutButton {
+    position: absolute;
+    right: 5%;
+}
+
+.mailApp__contentWrapper {
+    padding-top: 40px;
+    max-width: 1024px;
+}
+
+
+
+/* =menu -------------------*/
+.mailApp__menu {
+    /*display: block;*/
+    position: fixed;
+    height: 100%;
+    width: 150px;
+    z-index: 1;
+    border-right: 1px solid lightsteelblue;
+}
+
+.mailApp__menu ul {
+    padding-left: 0;
+}
+
+.mailApp__menu li {
+    padding: 10px;
+    border-bottom: 1px solid lightsteelblue;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.mailApp__menu li:first-child {
+
+}
+
+.mailApp__menu li.active {
+    background-color: aliceblue;
+}
+
+/* end menu ----------------*/
+
+/* =mainDisplay ------------*/
+.mailApp__mainDisplay {
+    display: block;
+
+    margin-left: 150px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* =messageList ------------*/
+.mailBox__messageList {
+    padding-left: 0;
+}
+
+.mailBox__messageList li {
+    position: relative;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+    list-style-type: none;
+    border-bottom: 1px solid lightsteelblue;
+}
+
+.mailBox__messageList li:first-child {
+    padding-top: 0;
+}
+
+.mailBox__messageList li:hover {
+    background-color: aliceblue;
+}
+
+.mailAddress, .messageSubject, .messagePreview {
+    display: inline-block;
+    width: 25%;
+    vertical-align: middle;
+}
+
+.messageDate {
+    display: inline-block;
+    position: absolute;
+    right: 5%;
+    vertical-align: middle;
+}
+
+.mailAddress {
+    font-style: oblique;
+}
+
+.messagePreview {
+    color: grey;
+}
+
+@media screen and (max-width: 600px) {
+    .mailAddress, .messageSubject, .messagePreview {
+        display: block;
+        width: 100%;
+    }
+
+    .messageDate {
+        display: block;
+        position: static;
+        width: 100%;
+    }
+}
+
+.removeMessageButton {
+    position: absolute;
+    right: 0;
+    border-radius: 10px;
+}
+
+/* end messageList -----------*/
+
+/* =message ----------------*/
+.messageContent {
+    margin-top: 10px;
+    padding-top: 5px;
+    border-top: 1px solid lightsteelblue;
+}
+
+.backwardButton {
+    padding: 0 15px;
+    font-size: 1.3em;
+}
+
+/* end message -------------*/
+
+/* =trash ------------------*/
+.messageBoxId__inbox, .messageBoxId__sent {
+    display: inline-block;
+    margin-right: 10px;
+    color: red;
+}
+
+.messageBoxId__sent {
+    color: green;
+}
+
+.restoreMessageButton {
+    position: absolute;
+    right: 0;
+    border-radius: 10px;
+}
+
+/* end trash ---------------*/
+
+/* =contacts ---------------*/
+.mailApp__contacts {
+    display: block;
+}
+
+.openAddUserFormButton {
+
+}
+
+/* =contactsList -----------*/
+.contacts__list ul {
+    padding-left: 0;
+    padding-top: 50px;
+}
+
+
+.contacts__list li {
+    position: relative;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+    list-style-type: none;
+    border-bottom: 1px solid lightsteelblue;
+
+}
+
+.contacts__list .removeUserButton {
+    position: absolute;
+    top: 25%;
+    left: 95%;
+}
+
+.contacts__list li:first-child {
+    border-top: 1px solid lightsteelblue;
+}
+
+.contacts__list li:hover {
+    background-color: aliceblue;
+}
+
+.userAvatar, .userName, .userEmail {
+    width: 25%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.userAvatar {
+    width: 20%;
+}
+
+.userAvatar img {
+    width: 48px;
+    border-radius: 25px;
+}
+
+@media screen and (max-width: 480px) {
+    .userAvatar, .userName, .userEmail {
+        display: block;
+        width: 100%;
+    }
+}
+/* end contactsList -----------*/
+
+/* =userCard ------------------*/
+.contacts__openUserEditFormButton {
+    margin-left: 20px;
+    padding: 4px 15px;
+}
+
+.contacts__userCard h3 {
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    border-top: 1px solid lightsteelblue;
+
+}
+.contacts__userCard table td {
+    padding-bottom: 10px;
+}
+
+.contacts__userCard table .label {
+    padding-right: 10px;
+    color: rgb(70,130,180);
+    font-weight: bold;
+}
+/* end userCard ---------------*/
+
+/* =addUserForm ---------------*/
+.contacts__addUserForm {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    z-index: 3;
+    min-width: 320px;
+    padding: 15px;
+
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+.contacts__addUserForm fieldset {
+    margin-top: 20px;
+}
+
+.contacts__addUserForm section {
+    padding-bottom: 15px;
+}
+
+.contacts__addUserForm label {
+    display: inline-block;
+    width: 35%;
+    vertical-align: top;
+    text-align: right;
+    margin-right: 10px;
+    color: rgb(70,130,180);
+    font-weight: bold;
+}
+
+.contacts__addUserForm input[type=text],
+.contacts__addUserForm input[type=email]{
+    width: 60%;
+}
+
+.contacts__addUserForm input[type=submit] {
+    margin-top: 10px;
+    margin-left: 85%;
+}
+
+.contacts__addUserForm div[ng-message=required],
+.contacts__addUserForm div[ng-message=minlength],
+.contacts__addUserForm div[ng-message=pattern],
+.contacts__addUserForm div[ng-message=email] {
+    color: red;
+    text-align: right;
+}
+
+/* end addUserForm ------------*/
+
+/* =userEditForm --------------*/
+.contacts__userEditForm {
+    /*
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    z-index: 3;
+    min-width: 320px;
+    padding: 15px;
+
+    background-color: aliceblue;
+    border-radius: 5px;
+    */
+}
+
+.contacts__userEditForm fieldset {
+    margin-top: 20px;
+}
+
+.contacts__userEditForm section {
+    padding-bottom: 15px;
+}
+
+.contacts__userEditForm label {
+    display: inline-block;
+    width: 15%;
+    vertical-align: top;
+    text-align: right;
+    margin-right: 10px;
+    color: rgb(70,130,180);
+    font-weight: bold;
+}
+
+.contacts__userEditForm input[type=text],
+.contacts__userEditForm input[type=email]{
+    width: 60%;
+}
+
+.contacts__userEditForm input[type=submit] {
+    margin-top: 10px;
+    margin-left: 85%;
+}
+
+.contacts__userEditForm div[ng-message=required],
+.contacts__userEditForm div[ng-message=minlength],
+.contacts__userEditForm div[ng-message=pattern],
+.contacts__userEditForm div[ng-message=email] {
+    color: red;
+    text-align: right;
+}
+/* end userEditForm -----------*/
+
+/* end contacts ------------*/
+
+/* end mainDisplay -------------*/
+
+/* =newMessage ---------------*/
+
+.mailApp__newMessage {
+    display: block;
+}
+
+.newMessage__display {
+    padding: 15px;
+    background-color: whitesmoke;
+}
+.newMessage__display h2 {
+    padding-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.newMessage__display form {
+    margin-top: 20px;
+}
+
+.newMessage__display section {
+    padding-bottom: 15px;
+}
+
+.newMessage__display input[type="text"] {
+    width: 100%;
+    font-size: 1.2em;
+}
+.newMessage__display textarea {
+    width: 100%;
+    font-size: 1.1em;
+    height: 200px;
+}
+
+.newMessage__display div[ng-message=required] {
+    color: red;
+}
+
+.newMessage__display input[type="submit"] {
+    font-size: 1.2em;
+}
+/* end newMessage ------------*/
+
+/* =pageMask -----------------*/
+.pageMaskWrapper {
+    display: block;
+}
+.mailApp__pageMask {
+
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    background-color: black;
+    opacity: 0;
+
+    -webkit-transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+    -moz-transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+    -o-transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+    transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s; /* property, duration, delay */
+}
+
+.mailApp__pageMask.open {
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+/* end pageMask --------------*/
