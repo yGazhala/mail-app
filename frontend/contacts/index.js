@@ -15,9 +15,10 @@ import userEditFormComponent from './user-edit-form/user-edit-form.component.js'
 import routingConfig from './index.route.js';
 
 export default angular
-    .module('contacts', [ngMessages, uiRouter, services.name, shared.name])
+    .module('contacts', [ngMessages, uiRouter, services, shared])
     .component('contactsList', contactsListComponent)
     .component('addUserForm', addUserFormComponent)
     .component('userCard', userCardComponent)
     .component('userEditForm', userEditFormComponent)
-    .config(routingConfig);
+    .config(routingConfig)
+    .name;

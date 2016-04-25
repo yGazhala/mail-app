@@ -1,6 +1,11 @@
 'use strict';
 // This module provides data services for the entire application
 import angular from 'angular';
+
+// The AngularFire library needs the additional Firebase library, therefore,
+// we import it to the scope of AngularFire. Keep in mind,
+// that we must not inject the Firebase to the angular module itself.
+// We have to inject only AngularFire to the module.
 import Firebase from 'firebase';
 import AngularFire from 'angularfire';
 
@@ -14,4 +19,5 @@ export default angular
     .factory('NormalizeToArrayFactory', NormalizeToArrayFactory)
     .service('AuthService', AuthService)
     .service('ContactsService', ContactsService)
-    .service('MailDataService', MailDataService);
+    .service('MailDataService', MailDataService)
+    .name;

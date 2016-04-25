@@ -10,8 +10,9 @@ import layoutComponent from './layout/layout.component.js';
 import routingConfig from './index.route.js';
 
 export default angular
-    .module('shared', [uiRouter, services.name])
+    .module('shared', [uiRouter, services])
     .service('PageMaskService', PageMaskService)
     .component('pageMask', pageMaskComponent)
     .component('layout', layoutComponent)
-    .config(routingConfig);
+    .config(routingConfig)
+    .name;

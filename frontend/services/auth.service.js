@@ -11,4 +11,12 @@ export default function AuthService($firebaseAuth) {
     // For more information, please, follow to:
     // https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-users-and-authentication
     this.authObj = $firebaseAuth(ref);
+
+    this.authWithPassword = function(user) {
+        return this.authObj.$authWithPassword(user);
+    };
+
+    this.unauth = function() {
+        return this.authObj.$unauth();
+    }
 }

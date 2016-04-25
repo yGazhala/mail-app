@@ -9,7 +9,7 @@ let layoutComponent = {
 
 function LayoutController(AuthService, $state) {
     this.logout = function() {
-        AuthService.authObj.$unauth();
+        AuthService.unauth();
         $state.go('login');
     }
 }

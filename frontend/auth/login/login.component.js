@@ -14,7 +14,8 @@ function LoginController(AuthService, $state) {
 
     this.checkUser = function(user) {
 
-        AuthService.authObj.$authWithPassword(user)
+        //AuthService.authObj.$authWithPassword(user)
+        AuthService.authWithPassword(user)
             .then(() => {
                 this.isInvalidLoginOrPassword = false;
                 $state.go('message-list', {boxId: 'inbox'});
