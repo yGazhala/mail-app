@@ -13,7 +13,7 @@ import messageComponent from './message/message.component.js';
 import trashListComponent from './trash-list/trash-list.component.js';
 import trashDetailsComponent from './trash-details/trash-details.component.js';
 
-import routingConfig from './index.route.js';
+import routingConfig from './route.js';
 
 export default angular
     .module('mailBox', [ngMessages, uiRouter, services])

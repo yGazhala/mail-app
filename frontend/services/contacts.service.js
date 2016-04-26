@@ -1,27 +1,30 @@
 "use strict";
 
-export default function ContactsService($http, NormalizeToArrayFactory) {
-    this.url = 'https://gazhala.firebaseio.com/contacts';
-    this.secret = '?auth=8EkruGOhqgy8x3V8Zyma3abWFaz70EnPjhTeX2KU';
+export default function ContactsService($http, NormalizeToArrayFactory, FIREBASE_URI, FIREBASE_SECRET) {
+    let uri = FIREBASE_URI + '/contacts';
 
     this.getOne = function(userId) {
-        return $http.get(this.url + '/' + userId + '.json' + this.secret)
-            .then(response => response.data);
+        return $http.get(uri + '/' + userId + '.json' + FIREBASE_SECRET)
+            .then(response => response.data)
+            .catch((error) => {
+                console.error('Failed to load data from: ' + uri + '/' + userId + '.json' + FIREBASE_SECRET
+                    + ', error: ' + error.status + ' - ' + error.statusText);
+            });
     };
 
     this.getAll = function() {
 
-        return $http.get(this.url + '.json' + this.secret)
+        return $http.get(uri + '.json' + FIREBASE_SECRET)
             .then((response) => NormalizeToArrayFactory(response.data))
             .catch((error) => {
-                console.error('Failed to load data from: ' + this.url +'.json' + this.secret
+                console.error('Failed to load data from: ' + uri +'.json' + FIREBASE_SECRET
                     + ', error: ' + error.status + ' - ' + error.statusText);
             });
     };
 
     this.addUser = function(newUser) {
 
-        return $http.post(this.url + '.json' + this.secret, newUser)
+        return $http.post(uri + '.json' + FIREBASE_SECRET, newUser)
             .then((response) => {
                 // When we add the new object to FireBase, we need
                 // a key to identify this object in future.
@@ -35,23 +38,32 @@ export default function ContactsService($http, NormalizeToArrayFactory) {
             // Now, we have the id, but it does not stored at the FireBase,
             // therefore we implement an additional PUT method
             .then(() => {
-                return $http.put(this.url + '/' + newUser.id + '.json' + this.secret, newUser)
+                return $http.put(uri + '/' + newUser.id + '.json' + FIREBASE_SECRET, newUser)
             })
-            .then((response) => response.data);
-            // catch method will be here someday
+            .then((response) => response.data)
+            .catch((error) => {
+                console.error('Failed to load data from: ' + uri + '.json' + FIREBASE_SECRET
+                    + ', error: ' + error.status + ' - ' + error.statusText);
+            });
     };
 
     this.removeUser = function(user) {
 
-        return $http.delete(this.url + '/' + user.id + '.json' + this.secret)
-            .then((response) => response.data); // response.data === null
-            // catch method will be here someday
+        return $http.delete(uri + '/' + user.id + '.json' + FIREBASE_SECRET)
+            .then((response) => response.data) // response.data === null
+            .catch((error) => {
+                console.error('Failed to load data from: ' + uri + '/' + user.id + '.json' + FIREBASE_SECRET
+                    + ', error: ' + error.status + ' - ' + error.statusText);
+            });
     };
 
     this.updateUser = function(user) {
 
-        return $http.put(this.url + '/' + user.id + '.json' + this.secret, user)
-            .then((response) => response.data);
-            // catch method will be here someday
+        return $http.put(uri + '/' + user.id + '.json' + FIREBASE_SECRET, user)
+            .then((response) => response.data)
+            .catch((error) => {
+                console.error('Failed to load data from: ' + uri + '/' + user.id + '.json' + FIREBASE_SECRET
+                    + ', error: ' + error.status + ' - ' + error.statusText);
+            });
     };
 }

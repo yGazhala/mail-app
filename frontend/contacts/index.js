@@ -12,7 +12,7 @@ import addUserFormComponent from './add-user-form/add-user-form.component.js';
 import userCardComponent from './user-card/user-card.component.js';
 import userEditFormComponent from './user-edit-form/user-edit-form.component.js';
 
-import routingConfig from './index.route.js';
+import routingConfig from './route.js';
 
 export default angular
     .module('contacts', [ngMessages, uiRouter, services, shared])

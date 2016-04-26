@@ -1,22 +1,21 @@
 'use strict';
 
-export default function MailDataService($http, NormalizeToArrayFactory) {
-    this.url = 'https://gazhala.firebaseio.com/';
-    this.secret = '?auth=8EkruGOhqgy8x3V8Zyma3abWFaz70EnPjhTeX2KU';
+export default function MailDataService($http, NormalizeToArrayFactory, FIREBASE_URI, FIREBASE_SECRET) {
+    let uri = FIREBASE_URI + '/';
 
     this.getBox = function(boxId) {
 
-        return $http.get(this.url + boxId + '.json' + this.secret)
+        return $http.get(uri + boxId + '.json' + FIREBASE_SECRET)
             .then((response) => NormalizeToArrayFactory(response.data))
             .catch((error) => {
-                console.error('Failed to load data from: ' + this.url + boxId + '.json' + this.secret
+                console.error('Failed to load data from: ' + uri + boxId + '.json' + FIREBASE_SECRET
                     + ', error: ' + error.status + ' - ' + error.statusText);
             });
     };
     
     this.getMessage = function(boxId, messageId) {
 
-        return $http.get(this.url + boxId + '/' + messageId + '.json' + this.secret)
+        return $http.get(uri + boxId + '/' + messageId + '.json' + FIREBASE_SECRET)
             .then((response) => response.data);
     };
 
@@ -24,7 +23,7 @@ export default function MailDataService($http, NormalizeToArrayFactory) {
         message.boxId = 'sent-mail';
         message.date = new Date().getTime(); // save date in milliseconds
 
-        return $http.post(this.url + 'sent-mail.json' + this.secret, message)
+        return $http.post(uri + 'sent-mail.json' + FIREBASE_SECRET, message)
             .then((response) => {
                 // When we add the new object to FireBase, we need
                 // a key to identify this object in future.
@@ -38,7 +37,7 @@ export default function MailDataService($http, NormalizeToArrayFactory) {
             // Now, we have the id, but it does not stored at the FireBase,
             // therefore we implement an additional PUT method
             .then(() => {
-                return $http.put(this.url + 'sent-mail/' + message.id + '.json' + this.secret, message)
+                return $http.put(uri + 'sent-mail/' + message.id + '.json' + FIREBASE_SECRET, message)
             })
             .then((response) => response.data);
             // .catch method will be here someday
@@ -47,14 +46,14 @@ export default function MailDataService($http, NormalizeToArrayFactory) {
 
     this.addMessageToTrash = function(message) {
 
-        return $http.post(this.url + 'trash.json' + this.secret, message)
+        return $http.post(uri + 'trash.json' + FIREBASE_SECRET, message)
             .then((response) => {
                 message.id = response.data.name; // rewrite id
 
                 return message;
             })
             .then(() => {
-                return $http.put(this.url + 'trash/' + message.id + '.json' + this.secret, message)
+                return $http.put(uri + 'trash/' + message.id + '.json' + FIREBASE_SECRET, message)
             })
             .then((response) => response.data);
             // .catch method will be here someday
@@ -62,14 +61,14 @@ export default function MailDataService($http, NormalizeToArrayFactory) {
 
     this.addMessage = function(message) {
 
-        return $http.post(this.url + message.boxId + '.json' + this.secret, message)
+        return $http.post(uri + message.boxId + '.json' + FIREBASE_SECRET, message)
             .then((response) => {
                 message.id = response.data.name; // rewrite id
 
                 return message;
             })
             .then(() => {
-                return $http.put(this.url + message.boxId + '/' + message.id + '.json' + this.secret, message)
+                return $http.put(uri + message.boxId + '/' + message.id + '.json' + FIREBASE_SECRET, message)
             })
             .then((response) => response.data);
             // .catch method will be here someday
@@ -77,13 +76,13 @@ export default function MailDataService($http, NormalizeToArrayFactory) {
 
     this.removeMessage = function(message) {
 
-        return $http.delete(this.url + message.boxId + '/' + message.id + '.json' + this.secret)
+        return $http.delete(uri + message.boxId + '/' + message.id + '.json' + FIREBASE_SECRET)
             .then((response) => response.data); // response.data === null
     };
 
     this.removeMessageFromTrash = function(message) {
 
-        return $http.delete(this.url + 'trash/' + message.id + '.json' + this.secret)
+        return $http.delete(uri + 'trash/' + message.id + '.json' + FIREBASE_SECRET)
             .then((response) => response.data); // response.data === null
     }
 }

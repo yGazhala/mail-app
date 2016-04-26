@@ -39,12 +39,14 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                //exclude: /node_modules/,
+                include: /frontend/,
                 loader: 'babel',
                 query: {presets: ['es2015']}
             }, {
                 test: /\.html$/,
-                exclude: /node_modules/,
+                //exclude: /node_modules/,
+                include: /frontend/,
                 loader: 'html'
             }/*, {
                 These settings will be useful, when we include CSS styles into components

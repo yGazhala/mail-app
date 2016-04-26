@@ -20,4 +20,6 @@ export default angular
     .service('AuthService', AuthService)
     .service('ContactsService', ContactsService)
     .service('MailDataService', MailDataService)
+    .constant('FIREBASE_URI', 'https://gazhala.firebaseio.com')
+    .constant('FIREBASE_SECRET', '?auth=8EkruGOhqgy8x3V8Zyma3abWFaz70EnPjhTeX2KU')
     .name;

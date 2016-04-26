@@ -8,10 +8,11 @@ export default function routingConfig($stateProvider) {
             template: '<layout></layout>',
             resolve: {
                 currentAuth: function(AuthService) {
-                    // $requireAuth returns a promise so the resolve waits for it to complete.
+                    // requireAuth returns a promise so the resolve waits for it to complete.
                     // If the promise is rejected, it will throw a $stateChangeError,
-                    // and user will be redirected to the login page
-                    return AuthService.authObj.$requireAuth();
+                    // and user will be redirected to the login page.
+                    // See dependencies at the auth/index.js and at the auth/route.js
+                    return AuthService.requireAuth();
                 }
             }
         })

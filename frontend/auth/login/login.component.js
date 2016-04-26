@@ -14,7 +14,6 @@ function LoginController(AuthService, $state) {
 
     this.checkUser = function(user) {
 
-        //AuthService.authObj.$authWithPassword(user)
         AuthService.authWithPassword(user)
             .then(() => {
                 this.isInvalidLoginOrPassword = false;

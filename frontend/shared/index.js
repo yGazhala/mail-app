@@ -7,7 +7,7 @@ import services from '../services';
 import PageMaskService from './page-mask/page-mask.service.js';
 import pageMaskComponent from './page-mask/page-mask.component.js';
 import layoutComponent from './layout/layout.component.js';
-import routingConfig from './index.route.js';
+import routingConfig from './route.js';
 
 export default angular
     .module('shared', [uiRouter, services])

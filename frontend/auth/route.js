@@ -6,9 +6,9 @@ export default function routingConfig($stateProvider) {
             url: '/login',
             template: '<login></login>',
             resolve: {
-                // controller will not be loaded until $waitForAuth resolves
+                // controller will not be loaded until waitForAuth resolves
                 currentAuth: function(AuthService, $state) {
-                    return AuthService.authObj.$waitForAuth()
+                    return AuthService.waitForAuth()
                         .then((authData) => {
                             // If user has been authenticated already, redirect to inbox
                             if(authData !== null) {

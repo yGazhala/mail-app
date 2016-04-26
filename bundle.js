@@ -442,13 +442,13 @@ var mailApp =
 	
 	var _layoutComponent2 = _interopRequireDefault(_layoutComponent);
 	
-	var _indexRoute = __webpack_require__(17);
+	var _route = __webpack_require__(17);
 	
-	var _indexRoute2 = _interopRequireDefault(_indexRoute);
+	var _route2 = _interopRequireDefault(_route);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).config(_indexRoute2.default).name;
+	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).config(_route2.default).name;
 
 /***/ },
 /* 4 */
@@ -5039,7 +5039,7 @@ var mailApp =
 	// we import it to the scope of AngularFire. Keep in mind,
 	// that we must not inject the Firebase to the angular module itself.
 	// We have to inject only AngularFire to the module.
-	exports.default = _angular2.default.module('services', [_angularfire2.default]).factory('NormalizeToArrayFactory', _normalizeToArrayFactory2.default).service('AuthService', _authService2.default).service('ContactsService', _contactsService2.default).service('MailDataService', _mailDataService2.default).name;
+	exports.default = _angular2.default.module('services', [_angularfire2.default]).factory('NormalizeToArrayFactory', _normalizeToArrayFactory2.default).service('AuthService', _authService2.default).service('ContactsService', _contactsService2.default).service('MailDataService', _mailDataService2.default).constant('FIREBASE_URI', 'https://gazhala.firebaseio.com').constant('FIREBASE_SECRET', '?auth=8EkruGOhqgy8x3V8Zyma3abWFaz70EnPjhTeX2KU').name;
 
 /***/ },
 /* 6 */
@@ -5388,28 +5388,41 @@ var mailApp =
 
 	'use strict';
 	// This service implements user's authentication, provided by $firebaseAuth.
-	// This service is used by auth module and mail-box module.
+	// This service is used by:
+	// - auth/index.js;
+	// - auth/route.js;
+	// - auth/login/login.component.js;
+	// - shared/route.js;
+	// - shared/layout/layout.component.js.
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	exports.default = AuthService;
-	function AuthService($firebaseAuth) {
-	    var ref = new Firebase('https://gazhala.firebaseio.com');
+	function AuthService($firebaseAuth, FIREBASE_URI) {
+	    var ref = new Firebase(FIREBASE_URI);
 	
 	    // This authObj returned by $firebaseAuth contains several methods
 	    // for authenticating users, responding to changes in authentication state,
 	    // and managing user accounts for email / password users.
 	    // For more information, please, follow to:
 	    // https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-users-and-authentication
-	    this.authObj = $firebaseAuth(ref);
+	    this._authObj = $firebaseAuth(ref);
 	
 	    this.authWithPassword = function (user) {
-	        return this.authObj.$authWithPassword(user);
+	        return this._authObj.$authWithPassword(user);
 	    };
 	
-	    this.unauth = function () {
-	        return this.authObj.$unauth();
+	    this.logout = function () {
+	        return this._authObj.$unauth();
+	    };
+	
+	    this.requireAuth = function () {
+	        return this._authObj.$requireAuth();
+	    };
+	
+	    this.waitForAuth = function () {
+	        return this._authObj.$waitForAuth();
 	    };
 	}
 
@@ -5423,30 +5436,29 @@ var mailApp =
 	    value: true
 	});
 	exports.default = ContactsService;
-	function ContactsService($http, NormalizeToArrayFactory) {
-	    this.url = 'https://gazhala.firebaseio.com/contacts';
-	    this.secret = '?auth=8EkruGOhqgy8x3V8Zyma3abWFaz70EnPjhTeX2KU';
+	function ContactsService($http, NormalizeToArrayFactory, FIREBASE_URI, FIREBASE_SECRET) {
+	    var uri = FIREBASE_URI + '/contacts';
 	
 	    this.getOne = function (userId) {
-	        return $http.get(this.url + '/' + userId + '.json' + this.secret).then(function (response) {
+	        return $http.get(uri + '/' + userId + '.json' + FIREBASE_SECRET).then(function (response) {
 	            return response.data;
+	        }).catch(function (error) {
+	            console.error('Failed to load data from: ' + uri + '/' + userId + '.json' + FIREBASE_SECRET + ', error: ' + error.status + ' - ' + error.statusText);
 	        });
 	    };
 	
 	    this.getAll = function () {
-	        var _this = this;
 	
-	        return $http.get(this.url + '.json' + this.secret).then(function (response) {
+	        return $http.get(uri + '.json' + FIREBASE_SECRET).then(function (response) {
 	            return NormalizeToArrayFactory(response.data);
 	        }).catch(function (error) {
-	            console.error('Failed to load data from: ' + _this.url + '.json' + _this.secret + ', error: ' + error.status + ' - ' + error.statusText);
+	            console.error('Failed to load data from: ' + uri + '.json' + FIREBASE_SECRET + ', error: ' + error.status + ' - ' + error.statusText);
 	        });
 	    };
 	
 	    this.addUser = function (newUser) {
-	        var _this2 = this;
 	
-	        return $http.post(this.url + '.json' + this.secret, newUser).then(function (response) {
+	        return $http.post(uri + '.json' + FIREBASE_SECRET, newUser).then(function (response) {
 	            // When we add the new object to FireBase, we need
 	            // a key to identify this object in future.
 	            // This key was automatically created by FireBase
@@ -5459,27 +5471,31 @@ var mailApp =
 	        // Now, we have the id, but it does not stored at the FireBase,
 	        // therefore we implement an additional PUT method
 	        .then(function () {
-	            return $http.put(_this2.url + '/' + newUser.id + '.json' + _this2.secret, newUser);
+	            return $http.put(uri + '/' + newUser.id + '.json' + FIREBASE_SECRET, newUser);
 	        }).then(function (response) {
 	            return response.data;
+	        }).catch(function (error) {
+	            console.error('Failed to load data from: ' + uri + '.json' + FIREBASE_SECRET + ', error: ' + error.status + ' - ' + error.statusText);
 	        });
-	        // catch method will be here someday
 	    };
 	
 	    this.removeUser = function (user) {
 	
-	        return $http.delete(this.url + '/' + user.id + '.json' + this.secret).then(function (response) {
+	        return $http.delete(uri + '/' + user.id + '.json' + FIREBASE_SECRET).then(function (response) {
 	            return response.data;
-	        }); // response.data === null
-	        // catch method will be here someday
+	        }) // response.data === null
+	        .catch(function (error) {
+	            console.error('Failed to load data from: ' + uri + '/' + user.id + '.json' + FIREBASE_SECRET + ', error: ' + error.status + ' - ' + error.statusText);
+	        });
 	    };
 	
 	    this.updateUser = function (user) {
 	
-	        return $http.put(this.url + '/' + user.id + '.json' + this.secret, user).then(function (response) {
+	        return $http.put(uri + '/' + user.id + '.json' + FIREBASE_SECRET, user).then(function (response) {
 	            return response.data;
+	        }).catch(function (error) {
+	            console.error('Failed to load data from: ' + uri + '/' + user.id + '.json' + FIREBASE_SECRET + ', error: ' + error.status + ' - ' + error.statusText);
 	        });
-	        // catch method will be here someday
 	    };
 	}
 
@@ -5493,34 +5509,30 @@ var mailApp =
 	    value: true
 	});
 	exports.default = MailDataService;
-	function MailDataService($http, NormalizeToArrayFactory) {
-	    this.url = 'https://gazhala.firebaseio.com/';
-	    this.secret = '?auth=8EkruGOhqgy8x3V8Zyma3abWFaz70EnPjhTeX2KU';
+	function MailDataService($http, NormalizeToArrayFactory, FIREBASE_URI, FIREBASE_SECRET) {
+	    var uri = FIREBASE_URI + '/';
 	
 	    this.getBox = function (boxId) {
-	        var _this = this;
 	
-	        return $http.get(this.url + boxId + '.json' + this.secret).then(function (response) {
+	        return $http.get(uri + boxId + '.json' + FIREBASE_SECRET).then(function (response) {
 	            return NormalizeToArrayFactory(response.data);
 	        }).catch(function (error) {
-	            console.error('Failed to load data from: ' + _this.url + boxId + '.json' + _this.secret + ', error: ' + error.status + ' - ' + error.statusText);
+	            console.error('Failed to load data from: ' + uri + boxId + '.json' + FIREBASE_SECRET + ', error: ' + error.status + ' - ' + error.statusText);
 	        });
 	    };
 	
 	    this.getMessage = function (boxId, messageId) {
 	
-	        return $http.get(this.url + boxId + '/' + messageId + '.json' + this.secret).then(function (response) {
+	        return $http.get(uri + boxId + '/' + messageId + '.json' + FIREBASE_SECRET).then(function (response) {
 	            return response.data;
 	        });
 	    };
 	
 	    this.addNewMessageToSentMail = function (message) {
-	        var _this2 = this;
-	
 	        message.boxId = 'sent-mail';
 	        message.date = new Date().getTime(); // save date in milliseconds
 	
-	        return $http.post(this.url + 'sent-mail.json' + this.secret, message).then(function (response) {
+	        return $http.post(uri + 'sent-mail.json' + FIREBASE_SECRET, message).then(function (response) {
 	            // When we add the new object to FireBase, we need
 	            // a key to identify this object in future.
 	            // This key was automatically created by FireBase
@@ -5533,7 +5545,7 @@ var mailApp =
 	        // Now, we have the id, but it does not stored at the FireBase,
 	        // therefore we implement an additional PUT method
 	        .then(function () {
-	            return $http.put(_this2.url + 'sent-mail/' + message.id + '.json' + _this2.secret, message);
+	            return $http.put(uri + 'sent-mail/' + message.id + '.json' + FIREBASE_SECRET, message);
 	        }).then(function (response) {
 	            return response.data;
 	        });
@@ -5541,14 +5553,13 @@ var mailApp =
 	    };
 	
 	    this.addMessageToTrash = function (message) {
-	        var _this3 = this;
 	
-	        return $http.post(this.url + 'trash.json' + this.secret, message).then(function (response) {
+	        return $http.post(uri + 'trash.json' + FIREBASE_SECRET, message).then(function (response) {
 	            message.id = response.data.name; // rewrite id
 	
 	            return message;
 	        }).then(function () {
-	            return $http.put(_this3.url + 'trash/' + message.id + '.json' + _this3.secret, message);
+	            return $http.put(uri + 'trash/' + message.id + '.json' + FIREBASE_SECRET, message);
 	        }).then(function (response) {
 	            return response.data;
 	        });
@@ -5556,14 +5567,13 @@ var mailApp =
 	    };
 	
 	    this.addMessage = function (message) {
-	        var _this4 = this;
 	
-	        return $http.post(this.url + message.boxId + '.json' + this.secret, message).then(function (response) {
+	        return $http.post(uri + message.boxId + '.json' + FIREBASE_SECRET, message).then(function (response) {
 	            message.id = response.data.name; // rewrite id
 	
 	            return message;
 	        }).then(function () {
-	            return $http.put(_this4.url + message.boxId + '/' + message.id + '.json' + _this4.secret, message);
+	            return $http.put(uri + message.boxId + '/' + message.id + '.json' + FIREBASE_SECRET, message);
 	        }).then(function (response) {
 	            return response.data;
 	        });
@@ -5572,14 +5582,14 @@ var mailApp =
 	
 	    this.removeMessage = function (message) {
 	
-	        return $http.delete(this.url + message.boxId + '/' + message.id + '.json' + this.secret).then(function (response) {
+	        return $http.delete(uri + message.boxId + '/' + message.id + '.json' + FIREBASE_SECRET).then(function (response) {
 	            return response.data;
 	        }); // response.data === null
 	    };
 	
 	    this.removeMessageFromTrash = function (message) {
 	
-	        return $http.delete(this.url + 'trash/' + message.id + '.json' + this.secret).then(function (response) {
+	        return $http.delete(uri + 'trash/' + message.id + '.json' + FIREBASE_SECRET).then(function (response) {
 	            return response.data;
 	        }); // response.data === null
 	    };
@@ -5661,7 +5671,7 @@ var mailApp =
 	
 	function LayoutController(AuthService, $state) {
 	    this.logout = function () {
-	        AuthService.unauth();
+	        AuthService.logout();
 	        $state.go('login');
 	    };
 	}
@@ -5691,10 +5701,11 @@ var mailApp =
 	        template: '<layout></layout>',
 	        resolve: {
 	            currentAuth: function currentAuth(AuthService) {
-	                // $requireAuth returns a promise so the resolve waits for it to complete.
+	                // requireAuth returns a promise so the resolve waits for it to complete.
 	                // If the promise is rejected, it will throw a $stateChangeError,
-	                // and user will be redirected to the login page
-	                return AuthService.authObj.$requireAuth();
+	                // and user will be redirected to the login page.
+	                // See dependencies at the auth/index.js and at the auth/route.js
+	                return AuthService.requireAuth();
 	            }
 	        }
 	    });
@@ -5706,6 +5717,12 @@ var mailApp =
 
 	'use strict';
 	// This module describes user's login/password authentication provided by $firebaseAuth service
+	// You can also see dependencies at:
+	// - services/auth.service.js
+	// - auth/route.js;
+	// - auth/login/login.component.js;
+	// - shared/route.js;
+	// - shared/layout/layout.component.js.
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -5727,16 +5744,16 @@ var mailApp =
 	
 	var _loginComponent2 = _interopRequireDefault(_loginComponent);
 	
-	var _indexRoute = __webpack_require__(21);
+	var _route = __webpack_require__(21);
 	
-	var _indexRoute2 = _interopRequireDefault(_indexRoute);
+	var _route2 = _interopRequireDefault(_route);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('auth', [_angularUiRouter2.default, _services2.default]).component('login', _loginComponent2.default).config(_indexRoute2.default).run(function ($rootScope, $state) {
+	exports.default = _angular2.default.module('auth', [_angularUiRouter2.default, _services2.default]).component('login', _loginComponent2.default).config(_route2.default).run(function ($rootScope, $state) {
 	    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
 	        // We can catch the error thrown when the $requireAuth promise is rejected
-	        // and redirect the user back to the login page
+	        // and redirect the user back to the login page.
 	        if (error === 'AUTH_REQUIRED') {
 	            $state.go('login');
 	        }
@@ -5773,7 +5790,6 @@ var mailApp =
 	    this.checkUser = function (user) {
 	        var _this = this;
 	
-	        //AuthService.authObj.$authWithPassword(user)
 	        AuthService.authWithPassword(user).then(function () {
 	            _this.isInvalidLoginOrPassword = false;
 	            $state.go('message-list', { boxId: 'inbox' });
@@ -5807,9 +5823,9 @@ var mailApp =
 	        url: '/login',
 	        template: '<login></login>',
 	        resolve: {
-	            // controller will not be loaded until $waitForAuth resolves
+	            // controller will not be loaded until waitForAuth resolves
 	            currentAuth: function currentAuth(AuthService, $state) {
-	                return AuthService.authObj.$waitForAuth().then(function (authData) {
+	                return AuthService.waitForAuth().then(function (authData) {
 	                    // If user has been authenticated already, redirect to inbox
 	                    if (authData !== null) {
 	                        $state.go('message-list', { boxId: 'inbox' });
@@ -5870,13 +5886,13 @@ var mailApp =
 	
 	var _trashDetailsComponent2 = _interopRequireDefault(_trashDetailsComponent);
 	
-	var _indexRoute = __webpack_require__(36);
+	var _route = __webpack_require__(36);
 	
-	var _indexRoute2 = _interopRequireDefault(_indexRoute);
+	var _route2 = _interopRequireDefault(_route);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('mailBox', [_angularMessages2.default, _angularUiRouter2.default, _services2.default]).component('mailBox', _mailBoxComponent2.default).component('compose', _composeComponent2.default).component('messageList', _messageListComponent2.default).component('message', _messageComponent2.default).component('trashList', _trashListComponent2.default).component('trashDetails', _trashDetailsComponent2.default).config(_indexRoute2.default).name;
+	exports.default = _angular2.default.module('mailBox', [_angularMessages2.default, _angularUiRouter2.default, _services2.default]).component('mailBox', _mailBoxComponent2.default).component('compose', _composeComponent2.default).component('messageList', _messageListComponent2.default).component('message', _messageComponent2.default).component('trashList', _trashListComponent2.default).component('trashDetails', _trashDetailsComponent2.default).config(_route2.default).name;
 
 /***/ },
 /* 23 */
@@ -6280,13 +6296,13 @@ var mailApp =
 	
 	var _userEditFormComponent2 = _interopRequireDefault(_userEditFormComponent);
 	
-	var _indexRoute = __webpack_require__(46);
+	var _route = __webpack_require__(46);
 	
-	var _indexRoute2 = _interopRequireDefault(_indexRoute);
+	var _route2 = _interopRequireDefault(_route);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('contacts', [_angularMessages2.default, _angularUiRouter2.default, _services2.default, _shared2.default]).component('contactsList', _contactsListComponent2.default).component('addUserForm', _addUserFormComponent2.default).component('userCard', _userCardComponent2.default).component('userEditForm', _userEditFormComponent2.default).config(_indexRoute2.default).name;
+	exports.default = _angular2.default.module('contacts', [_angularMessages2.default, _angularUiRouter2.default, _services2.default, _shared2.default]).component('contactsList', _contactsListComponent2.default).component('addUserForm', _addUserFormComponent2.default).component('userCard', _userCardComponent2.default).component('userEditForm', _userEditFormComponent2.default).config(_route2.default).name;
 
 /***/ },
 /* 38 */
