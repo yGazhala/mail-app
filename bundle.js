@@ -6156,18 +6156,19 @@ var mailApp =
 	
 	var trashDetailsComponent = {
 	    bindings: {
-	        messages: '<' // get data from parent trash-list component
+	        messages: '<', // get data from parent trash-list component
+	        currentMessageId: '<' // get data from state controller
 	    },
 	    template: _trashDetails2.default,
 	    controller: TrashDetailsController
 	};
 	
-	function TrashDetailsController($stateParams) {
+	function TrashDetailsController() {
 	    var _this = this;
 	
 	    this.currentMessage = function () {
 	        for (var i = 0; i < _this.messages.length; i++) {
-	            if (_this.messages[i].id === $stateParams.id) {
+	            if (_this.messages[i].id === _this.currentMessageId) {
 	                return _this.messages[i];
 	            }
 	        }
@@ -6244,7 +6245,16 @@ var mailApp =
 	    }).state('trash-details', {
 	        parent: 'trash-list',
 	        url: '/:id',
-	        template: '<trash-details messages="$ctrl.messages"></trash-details>'
+	        template: '<trash-details messages="$ctrl.messages"\n                            current-message-id="stateCtrl.currentMessageId"></trash-details>',
+	        resolve: {
+	            currentMessageId: function currentMessageId($stateParams) {
+	                return $stateParams.id;
+	            }
+	        },
+	        controller: function controller(currentMessageId) {
+	            this.currentMessageId = currentMessageId;
+	        },
+	        controllerAs: 'stateCtrl'
 	    });
 	
 	    $urlRouterProvider.otherwise('account/mail-box/list/inbox');

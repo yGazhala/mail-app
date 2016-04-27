@@ -22,13 +22,10 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
                            move-message-to-trash="$ctrl.moveMessageToTrash(message)"
                                ></message-list>`,
             resolve: { // download data before rendering the state
-                currentBoxPromise: function(MailDataService, $stateParams) {
-                    return MailDataService.getBox($stateParams.boxId);
-                }
+                currentBoxPromise: (MailDataService, $stateParams) =>
+                    MailDataService.getBox($stateParams.boxId)
             },
-            controller: function(currentBoxPromise) {
-                this.currentBox = currentBoxPromise;
-            },
+            controller: function(currentBoxPromise) { this.currentBox = currentBoxPromise; },
             controllerAs: 'stateCtrl'
         })
 
@@ -37,13 +34,10 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
             url: '/:id',
             template: '<message message="stateCtrl.message"></message>',
             resolve: {
-                currentMessagePromise: function($stateParams, MailDataService) {
-                    return MailDataService.getMessage($stateParams.boxId, $stateParams.id)
-                }
+                currentMessagePromise: ($stateParams, MailDataService) =>
+                    MailDataService.getMessage($stateParams.boxId, $stateParams.id)
             },
-            controller: function(currentMessagePromise) {
-                this.message = currentMessagePromise;
-            },
+            controller: function(currentMessagePromise) { this.message = currentMessagePromise; },
             controllerAs: 'stateCtrl'
         })
 
@@ -51,24 +45,26 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
             parent: 'mail-box',
             url: '/trash-list',
             resolve: {
-                messagesPromise: function(MailDataService) {
-                    return MailDataService.getBox('trash');
-                }
+                messagesPromise: (MailDataService) => MailDataService.getBox('trash')
             },
             template: `<trash-list messages="stateCtrl.messages"
                                 move-message-to-original-box=
                                     "$ctrl.moveMessageToOriginalBox(message)"
                                         ></trash-list>`,
-            controller: function (messagesPromise) {
-                this.messages = messagesPromise;
-            },
+            controller: function (messagesPromise) { this.messages = messagesPromise; },
             controllerAs: 'stateCtrl'
         })
 
         .state('trash-details', {
             parent: 'trash-list',
             url: '/:id',
-            template: '<trash-details messages="$ctrl.messages"></trash-details>'
+            template: `<trash-details messages="$ctrl.messages"
+                            current-message-id="stateCtrl.currentMessageId"></trash-details>`,
+            resolve: {
+                currentMessageId: ($stateParams) => $stateParams.id
+            },
+            controller: function (currentMessageId) { this.currentMessageId = currentMessageId; },
+            controllerAs: 'stateCtrl'
         });
 
     $urlRouterProvider.otherwise('account/mail-box/list/inbox');
