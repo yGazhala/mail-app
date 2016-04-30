@@ -27,8 +27,14 @@
     "firebase": "^2.4.2"
   },
   "devDependencies": {
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
     "firebase": "^2.4.2",
     "html-loader": "^0.4.3",
+    "node-sass": "^3.6.0",
+    "resolve-url-loader": "^1.4.3",
+    "sass-loader": "^3.2.0",
     "webpack": "^1.13.0"
   }
 }

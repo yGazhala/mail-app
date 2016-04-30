@@ -1,12 +1,18 @@
 'use strict';
 
-module.exports = {
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-    entry: __dirname + '/frontend/core.js',
+module.exports = {
+    context: __dirname + '/frontend',
+
+    entry: {
+        bundle: './js/core.js',
+        styles: './styles/core.scss'
+    },
 
     output: {
         path: __dirname + '/',
-        filename: 'bundle.js',
+        filename: '[name].js',
         library: 'mailApp'
     },
 
@@ -39,32 +45,31 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                //exclude: /node_modules/,
                 include: /frontend/,
                 loader: 'babel',
                 query: {presets: ['es2015']}
             }, {
                 test: /\.html$/,
-                //exclude: /node_modules/,
                 include: /frontend/,
                 loader: 'html'
-            }/*, {
-                These settings will be useful, when we include CSS styles into components
-
+            }, {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                exclude: /node_modules/,
+                include: /frontend/,
                 loader: 'file?name=[path][name].[ext]'
             }, {
-                test: /\.css$/,
-                exclude: /node_modules/,
-                loader: 'style!css!autoprefixer?browsers=last 2 versions'
-            }*/
+                test: /\.scss$/,
+                include: /frontend/,
+                loader: ExtractTextPlugin.extract('css!resolve-url!sass?sourceMap')
+            }
         ],
 
         // Loaders must not parse next libraries and frameworks
         noParse: wrapRegexp(/\/node_modules\/(angular\/angular|angular-messages\/angular-messages|angular-ui-router\/release\/angular-ui-router|angularfire\/dist\/angularfire|firebase\/lib\/firebase-node)/, 'noParse')
+    },
 
-    }
+    plugins: [
+        new ExtractTextPlugin('styles.css', {allChunks: true})
+    ]
 };
 
 // This helper function writes into console, which files have not been parsing
