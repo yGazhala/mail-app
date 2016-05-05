@@ -58,7 +58,8 @@ module.exports = {
             }, {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
                 exclude: /node_modules/,
-                loader: 'file?name=[path][name].[ext]'
+                // if file size less than 10kb - use the url loader, else - the file loader
+                loader: 'url?name=[path][name].[ext]&limit=10000'
             }, {
                 test: /\.scss$/,
                 exclude: /node_modules/,
