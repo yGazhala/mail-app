@@ -1,9 +1,10 @@
 'use strict';
 
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
+//let path = require('path');
 
 module.exports = {
-    context: __dirname + '/frontend',
+    context: __dirname + '/frontend', // здесь прикол
 
     entry: {
         bundle: './js/core.js',
@@ -12,8 +13,10 @@ module.exports = {
 
     output: {
         path: __dirname + '/',
+        //path: path.resolve(__dirname, "/"),
         filename: '[name].js',
-        library: 'mailApp'
+        //publicPath: '/assets/',
+        library: '[name]'
     },
 
     watch: true,
@@ -50,15 +53,15 @@ module.exports = {
                 query: {presets: ['es2015']}
             }, {
                 test: /\.html$/,
-                include: /frontend/,
+                exclude: /node_modules/,
                 loader: 'html'
             }, {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                include: /frontend/,
+                exclude: /node_modules/,
                 loader: 'file?name=[path][name].[ext]'
             }, {
                 test: /\.scss$/,
-                include: /frontend/,
+                exclude: /node_modules/,
                 loader: ExtractTextPlugin.extract('css!resolve-url!sass?sourceMap')
             }
         ],

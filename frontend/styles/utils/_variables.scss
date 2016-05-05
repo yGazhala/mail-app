@@ -1,0 +1,27 @@
+
+$fonts: (
+  'base-family': 'Arial',
+  'base-size': 14px
+);
+
+$type-scale: (
+  '-1': 0.75rem,  // small text
+  '0': 1rem,      // base text
+  '1': 1.333rem,  // large text
+  '2': 1.777rem,  // base heading
+  '3': 2.369rem   // large heading
+);
+
+$colors: (
+  'primary': rgb(247, 247, 247), // 241, 241, 241
+  'border': rgb(209, 209, 209),
+  'border-light': rgb(229, 229, 229),
+  'secondary': rgb(265, 165, 0),
+  'accent': rgb(209, 72, 54), // 197, 55, 39
+  'accent-alternative': rgb(77, 144, 254),
+  'background': rgb(255, 255, 255),
+  'base-text': rgb(34, 34, 34),
+  'heading-text': rgb(85, 85, 85),
+  'secondary-text': rgb(102, 102, 102),
+  'alternative-text': rgb(255, 255, 255)
+);

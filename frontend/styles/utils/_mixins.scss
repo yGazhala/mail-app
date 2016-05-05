@@ -1,0 +1,25 @@
+@mixin submit {
+  padding-top: map-get($type-scale, '-1');
+  padding-bottom: map-get($type-scale, '-1');
+
+  font: {
+    size: map-get($type-scale, '0');
+    weight: normal;
+  }
+
+  color: map-get($colors, alternative-text);
+  background-color: map-get($colors, accent-alternative);
+
+  border: 1px solid map-get($colors, accent-alternative);
+  border-radius: 2px;
+
+  &:hover {
+    background-color: mix(black, map-get($colors, accent-alternative), 10%);
+    border-color: mix(black, map-get($colors, accent-alternative), 10%);
+  }
+
+  &:active {
+    outline: none;
+    background-color: mix(white, map-get($colors, accent-alternative), 10%);
+  }
+}

@@ -1,9 +1,21 @@
-<form class="form-signin" name="checkUser" ng-submit="$ctrl.checkUser(user)">
-    <h2>Please sign in</h2>
-    <label for="inputEmail">Email address</label>
-    <input type="email" id="inputEmail" name="email" ng-model="user.email" placeholder="4bz@ukr.net" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" ng-model="user.password" id="inputPassword" placeholder="test" required>
-    <div ng-if="$ctrl.isInvalidLoginOrPassword">Invalid login or password</div>
-    <input type="submit" value="Sign in">
-</form>
+<section class="login_pageContainer">
+    <div class="login_container">
+        <h1>mailApp</h1>
+        <h2>Please, sign in</h2>
+        <form class="login_form" name="checkUser" ng-submit="$ctrl.checkUser(user)">
+            <div class="login_userIcon"><img src="../../../images/user-icon.png" alt="avatar"></div>
+            <p>
+                <label for="inputEmail">Email</label>
+                <input type="email" id="inputEmail" name="email"
+                       ng-model="user.email" placeholder="4bz@ukr.net" required>
+            </p>
+            <p>
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" ng-model="user.password"
+                       id="inputPassword" placeholder="test" required>
+            </p>
+            <p class="login_errorMessage" ng-if="$ctrl.isInvalidLoginOrPassword">Invalid login or password</p>
+            <p><input class="login_submit" type="submit" value="Sign in"></p>
+        </form>
+    </div>
+</section>
