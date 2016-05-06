@@ -3,8 +3,8 @@
   box-sizing: border-box; /*include padding and margin within the container*/
 }
 
-body {
+html {
   font-family: map-get($fonts, base-family);
-  font-size: map-get($fonts, base-size);
+  font-size: map-get($fonts, base-size) * 1px;
   color: map_get($colors, base-text);
 }

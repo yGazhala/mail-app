@@ -6,12 +6,12 @@
             <div class="login_userIcon"><img src="../../../images/user-icon.png" alt="avatar"></div>
             <p>
                 <label for="inputEmail">Email</label>
-                <input type="email" id="inputEmail" name="email"
+                <input class="login_input" type="email" id="inputEmail" name="email"
                        ng-model="user.email" placeholder="4bz@ukr.net" required>
             </p>
             <p>
                 <label for="inputPassword">Password</label>
-                <input type="password" name="password" ng-model="user.password"
+                <input class="login_input" type="password" name="password" ng-model="user.password"
                        id="inputPassword" placeholder="test" required>
             </p>
             <p class="login_errorMessage" ng-if="$ctrl.isInvalidLoginOrPassword">Invalid login or password</p>

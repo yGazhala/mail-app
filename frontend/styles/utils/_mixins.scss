@@ -1,11 +1,10 @@
 @mixin submit {
-  padding-top: map-get($type-scale, '-1');
-  padding-bottom: map-get($type-scale, '-1');
+  padding: map-get($type-scale, '-1');
+  padding-left: 0;
+  padding-right: 0;
 
-  font: {
-    size: map-get($type-scale, '0');
-    weight: normal;
-  }
+  font-size: map-get($type-scale, '0');
+  font-weight: normal;
 
   color: map-get($colors, alternative-text);
   background-color: map-get($colors, accent-alternative);
