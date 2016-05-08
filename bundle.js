@@ -5751,10 +5751,13 @@ var bundle =
 	    controller: NavStatusController
 	};
 	
-	function NavStatusController($rootScope, $stateParams) {
+	function NavStatusController($rootScope) {
 	    var _this = this;
 	
-	    this.currentNavStatus = null;
+	    // The default state of application is:
+	    // account/mail-box/list/inbox (see: mail-box/route.js),
+	    // so the default current status is also 'Inbox'.
+	    this.currentNavStatus = 'Inbox';
 	
 	    // The current navigation status is saved in the data property
 	    // of these root states:
@@ -5763,23 +5766,25 @@ var bundle =
 	    // 'account.mail-box.message-list.' - nav status text: 'message-list'
 	    // 'account.contacts-list' - nav status text: 'Contacts'
 	
-	    $rootScope.$on('$stateChangeStart', function (event, toState) {
+	    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+	        if (!toState.data) {
+	            return;
+	        }
+	
 	        var status = toState.data.currentNavStatus;
 	
 	        if (status !== 'message-list') {
 	            _this.currentNavStatus = status;
+	            // determine whether the current status is inbox or sent-mail
 	        } else {
-	            // Determine whether the current status is 'inbox' or 'sent-mail'
-	            if ($stateParams.boxId === 'inbox') {
-	                _this.currentNavStatus = 'Inbox';
-	            } else {
-	                if ($stateParams.boxId === 'sent-mail') {
-	                    _this.currentNavStatus = 'Sent mail';
+	                if (toParams.boxId === 'inbox') {
+	                    _this.currentNavStatus = 'Inbox';
+	                } else {
+	                    if (toParams.boxId === 'sent-mail') {
+	                        _this.currentNavStatus = 'Sent mail';
+	                    }
 	                }
 	            }
-	        }
-	
-	        console.log(_this.currentNavStatus);
 	    });
 	}
 	
