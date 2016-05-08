@@ -4,16 +4,18 @@ $fonts: (
   'base-size': 14 //px
 );
 
-$type-scale: (
-  '-1': 0.75rem,  // small text
+$type-scale: (    // perfect fourth
+  '-3': 0.422rem,
+  '-2': 0.563rem,
+  '-1': 0.75rem,
   '0': 1rem,      // base text
-  '1': 1.333rem,  // large text
-  '2': 1.777rem,  // base heading
-  '3': 2.369rem   // large heading
+  '1': 1.333rem,  // h3
+  '2': 1.777rem,  // h2
+  '3': 2.369rem   // h1
 );
 
 $colors: (
-  'primary': rgb(247, 247, 247), // 241, 241, 241
+  'primary': rgb(241, 241, 241), // 247, 247, 247
   'border': rgb(209, 209, 209),
   'border-light': rgb(229, 229, 229),
   'secondary': rgb(265, 165, 0),
@@ -25,3 +27,7 @@ $colors: (
   'secondary-text': rgb(102, 102, 102),
   'alternative-text': rgb(255, 255, 255)
 );
+
+$layout: (
+  'top-nav-bar-height': 48 //px
+)

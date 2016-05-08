@@ -125,6 +125,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
+  content: '';
   content: none;
 }
 
@@ -190,7 +191,7 @@ html {
 
 .login_container .login_form {
   padding: 2rem;
-  background-color: #f7f7f7;
+  background-color: #f1f1f1;
   border-radius: 2px;
   -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
@@ -255,6 +256,65 @@ html {
 
 .login_container .login_form .login_errorMessage {
   color: #d14836;
+}
+
+.layout_topNavBar {
+  width: 100%;
+  height: 48px;
+  position: fixed;
+  z-index: 1;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.navStatus_bar {
+  width: 40%;
+  position: fixed;
+  top: 1.21429rem;
+  left: 30%;
+  z-index: 2;
+  font-size: 1rem;
+}
+
+.logout_logoutButton {
+  height: 48px;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: auto 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: transparent;
+  color: #4d90fe;
+  border: none;
+  outline: none;
+  transition: all 150ms;
+}
+
+.logout_logoutButton:hover {
+  color: white;
+  background-color: #4d90fe;
+}
+
+.logout_logoutButton:active {
+  color: white;
+  background-color: #a6c8ff;
+}
+
+.logout_userAvatar {
+  width: 32px;
+  position: fixed;
+  top: 8px;
+  right: 85px;
+  z-index: 2;
+}
+
+.logout_userAvatar img {
+  width: 100%;
+  display: block;
+  border-radius: 21px;
 }
 
 

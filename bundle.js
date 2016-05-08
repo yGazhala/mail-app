@@ -60,15 +60,15 @@ var bundle =
 	
 	var _shared2 = _interopRequireDefault(_shared);
 	
-	var _auth = __webpack_require__(18);
+	var _auth = __webpack_require__(23);
 	
 	var _auth2 = _interopRequireDefault(_auth);
 	
-	var _mailBox = __webpack_require__(23);
+	var _mailBox = __webpack_require__(28);
 	
 	var _mailBox2 = _interopRequireDefault(_mailBox);
 	
-	var _contacts = __webpack_require__(38);
+	var _contacts = __webpack_require__(43);
 	
 	var _contacts2 = _interopRequireDefault(_contacts);
 	
@@ -442,13 +442,21 @@ var bundle =
 	
 	var _layoutComponent2 = _interopRequireDefault(_layoutComponent);
 	
-	var _route = __webpack_require__(17);
+	var _logoutComponent = __webpack_require__(17);
+	
+	var _logoutComponent2 = _interopRequireDefault(_logoutComponent);
+	
+	var _navStatusComponent = __webpack_require__(20);
+	
+	var _navStatusComponent2 = _interopRequireDefault(_navStatusComponent);
+	
+	var _route = __webpack_require__(22);
 	
 	var _route2 = _interopRequireDefault(_route);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).config(_route2.default).name;
+	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).component('logout', _logoutComponent2.default).component('navStatus', _navStatusComponent2.default).config(_route2.default).name;
 
 /***/ },
 /* 4 */
@@ -5393,7 +5401,7 @@ var bundle =
 	// - auth/route.js;
 	// - auth/login/login.component.js;
 	// - shared/route.js;
-	// - shared/layout/layout.component.js.
+	// - shared/logout/logout.component.js.
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -5665,16 +5673,8 @@ var bundle =
 	
 	var layoutComponent = {
 	    bindings: {},
-	    template: _layout2.default,
-	    controller: LayoutController
+	    template: _layout2.default
 	};
-	
-	function LayoutController(AuthService, $state) {
-	    this.logout = function () {
-	        AuthService.logout();
-	        $state.go('login');
-	    };
-	}
 	
 	exports.default = layoutComponent;
 
@@ -5682,10 +5682,117 @@ var bundle =
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "<page-mask class=\"pageMaskWrapper\"></page-mask>\r\n\r\n<section class=\"mailApp__statusBarWrapper\">\r\n    <div class=\"mailApp__statusBar\">\r\n        Status bar will be here\r\n        <button class=\"logoutButton\" ng-click=\"$ctrl.logout()\">Logout</button>\r\n    </div>\r\n</section>\r\n\r\n<section class=\"mailApp__contentWrapper\">\r\n    <div class=\"mailApp__menu\">\r\n        <button\r\n                ui-sref=\"compose\">Compose</button>\r\n        <ul>\r\n            <li ui-sref=\"message-list({boxId: 'inbox'})\" ui-sref-active=\"active\">Inbox</li>\r\n            <li ui-sref=\"message-list({boxId: 'sent-mail'})\" ui-sref-active=\"active\">Sent mail</li>\r\n            <li ui-sref=\"trash-list\" ui-sref-active=\"active\">Trash</li>\r\n            <li ui-sref=\"contacts-list\" ui-sref-active=\"active\"><a href>Contacts</a></li>\r\n        </ul>\r\n    </div>\r\n\r\n    <div class=\"mailApp__mainDisplay\">\r\n        <ui-view></ui-view>\r\n    </div>\r\n</section>";
+	module.exports = "<page-mask class=\"pageMaskWrapper\"></page-mask>\r\n\r\n<section class=\"layout_topNavBar\">\r\n    <nav-status></nav-status>\r\n    <logout></logout>\r\n</section>\r\n\r\n\r\n<section class=\"mailApp__contentWrapper\">\r\n    <div class=\"mailApp__menu\">\r\n        <button\r\n                ui-sref=\"compose\">Compose</button>\r\n        <ul>\r\n            <li ui-sref=\"message-list({boxId: 'inbox'})\" ui-sref-active=\"active\">Inbox</li>\r\n            <li ui-sref=\"message-list({boxId: 'sent-mail'})\" ui-sref-active=\"active\">Sent mail</li>\r\n            <li ui-sref=\"trash-list\" ui-sref-active=\"active\">Trash</li>\r\n            <li ui-sref=\"contacts-list\" ui-sref-active=\"active\"><a href>Contacts</a></li>\r\n        </ul>\r\n    </div>\r\n\r\n    <div class=\"mailApp__mainDisplay\">\r\n        <ui-view></ui-view>\r\n    </div>\r\n</section>";
 
 /***/ },
 /* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _logout = __webpack_require__(18);
+	
+	var _logout2 = _interopRequireDefault(_logout);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var logoutComponent = {
+	    bindings: {},
+	    template: _logout2.default,
+	    controller: LogoutController
+	};
+	
+	function LogoutController(AuthService, $state) {
+	    this.logout = function () {
+	        AuthService.logout();
+	        $state.go('login');
+	    };
+	}
+	
+	exports.default = logoutComponent;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = "<div class=\"logout_userAvatar\"><img src=\"" + __webpack_require__(19) + "\" alt=\"avatar\"></div>\r\n<button class=\"logout_logoutButton\" ng-click=\"$ctrl.logout()\">Sign out</button>\r\n\r\n";
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/jpeg;base64,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"
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// This helper component determines the current root navigation
+	// status and sends message to the user.
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _navStatus = __webpack_require__(21);
+	
+	var _navStatus2 = _interopRequireDefault(_navStatus);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var navStatusComponent = {
+	    bindings: {},
+	    template: _navStatus2.default,
+	    controller: NavStatusController
+	};
+	
+	function NavStatusController($rootScope, $stateParams) {
+	    var _this = this;
+	
+	    this.currentNavStatus = null;
+	
+	    // The current navigation status is saved in the data property
+	    // of these root states:
+	    // 'account.mail-box.compose' - nav status text: 'Compose'
+	    // 'account.mail-box.trash-list' - nav status text: 'Trash'
+	    // 'account.mail-box.message-list.' - nav status text: 'message-list'
+	    // 'account.contacts-list' - nav status text: 'Contacts'
+	
+	    $rootScope.$on('$stateChangeStart', function (event, toState) {
+	        var status = toState.data.currentNavStatus;
+	
+	        if (status !== 'message-list') {
+	            _this.currentNavStatus = status;
+	        } else {
+	            // Determine whether the current status is 'inbox' or 'sent-mail'
+	            if ($stateParams.boxId === 'inbox') {
+	                _this.currentNavStatus = 'Inbox';
+	            } else {
+	                if ($stateParams.boxId === 'sent-mail') {
+	                    _this.currentNavStatus = 'Sent mail';
+	                }
+	            }
+	        }
+	
+	        console.log(_this.currentNavStatus);
+	    });
+	}
+	
+	exports.default = navStatusComponent;
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = "<p class=\"navStatus_bar\" ng-if=\"$ctrl.currentNavStatus\">{{$ctrl.currentNavStatus}}</p>";
+
+/***/ },
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5712,7 +5819,7 @@ var bundle =
 	}
 
 /***/ },
-/* 18 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5722,7 +5829,7 @@ var bundle =
 	// - auth/route.js;
 	// - auth/login/login.component.js;
 	// - shared/route.js;
-	// - shared/layout/layout.component.js.
+	// - shared/logout/logout.component.js.
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -5740,11 +5847,11 @@ var bundle =
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _loginComponent = __webpack_require__(19);
+	var _loginComponent = __webpack_require__(24);
 	
 	var _loginComponent2 = _interopRequireDefault(_loginComponent);
 	
-	var _route = __webpack_require__(22);
+	var _route = __webpack_require__(27);
 	
 	var _route2 = _interopRequireDefault(_route);
 	
@@ -5761,7 +5868,7 @@ var bundle =
 	}).name;
 
 /***/ },
-/* 19 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5770,7 +5877,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _login = __webpack_require__(20);
+	var _login = __webpack_require__(25);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
@@ -5803,19 +5910,19 @@ var bundle =
 	exports.default = loginComponent;
 
 /***/ },
-/* 20 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section class=\"login_pageContainer\">\r\n    <div class=\"login_container\">\r\n        <h1>mailApp</h1>\r\n        <h2>Please, sign in</h2>\r\n        <form class=\"login_form\" name=\"checkUser\" ng-submit=\"$ctrl.checkUser(user)\">\r\n            <div class=\"login_userIcon\"><img src=\"" + __webpack_require__(21) + "\" alt=\"avatar\"></div>\r\n            <p>\r\n                <label for=\"inputEmail\">Email</label>\r\n                <input class=\"login_input\" type=\"email\" id=\"inputEmail\" name=\"email\"\r\n                       ng-model=\"user.email\" placeholder=\"4bz@ukr.net\" required>\r\n            </p>\r\n            <p>\r\n                <label for=\"inputPassword\">Password</label>\r\n                <input class=\"login_input\" type=\"password\" name=\"password\" ng-model=\"user.password\"\r\n                       id=\"inputPassword\" placeholder=\"test\" required>\r\n            </p>\r\n            <p class=\"login_errorMessage\" ng-if=\"$ctrl.isInvalidLoginOrPassword\">Invalid login or password</p>\r\n            <p><input class=\"login_submit\" type=\"submit\" value=\"Sign in\"></p>\r\n        </form>\r\n    </div>\r\n</section>";
+	module.exports = "<section class=\"login_pageContainer\">\r\n    <div class=\"login_container\">\r\n        <h1>mailApp</h1>\r\n        <h2>Please, sign in</h2>\r\n        <form class=\"login_form\" name=\"checkUser\" ng-submit=\"$ctrl.checkUser(user)\">\r\n            <div class=\"login_userIcon\"><img src=\"" + __webpack_require__(26) + "\" alt=\"avatar\"></div>\r\n            <p>\r\n                <label for=\"inputEmail\">Email</label>\r\n                <input class=\"login_input\" type=\"email\" id=\"inputEmail\" name=\"email\"\r\n                       ng-model=\"user.email\" placeholder=\"4bz@ukr.net\" required>\r\n            </p>\r\n            <p>\r\n                <label for=\"inputPassword\">Password</label>\r\n                <input class=\"login_input\" type=\"password\" name=\"password\" ng-model=\"user.password\"\r\n                       id=\"inputPassword\" placeholder=\"test\" required>\r\n            </p>\r\n            <p class=\"login_errorMessage\" ng-if=\"$ctrl.isInvalidLoginOrPassword\">Invalid login or password</p>\r\n            <p><input class=\"login_submit\" type=\"submit\" value=\"Sign in\"></p>\r\n        </form>\r\n    </div>\r\n</section>";
 
 /***/ },
-/* 21 */
+/* 26 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAIAAADajyQQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAPdSURBVGhD7ZrrUuJAEEZ9/4dkF1nQKHKNN1Dcs3aTshYhk+kvGK2cH5aWyaTP9Fx6AhdvP5Re7LvRi+Wy2+1eX1/56X+fi7bEHh8f5/P51dXVn3fG43FRFIvF4vn52a9oGb0YoV9fX//a83tP9ed0OiWHfnVriMXKshwOhwjw8xiDwYDskdKHh4enp6eWRqlS7P7+3nLiBsd5T+G/HPKTgbper70JHTKxzWZjEVvo6XALOZzNZt6QCJmYzSsPtiGWPRLubSnQiDFhMnL1EW5n5RTON43Yzc1NdroqaIHlxFsMIxDbbreXl5ceXQDE2Am80TACMda0eLqA0TiZTLzRMAIxulklRuZfXl683RgCMeomiZihqrmiYhRHo9EouCRW0A61iDcdIyrGyOnF6unF6hEsHlQMQrGuLB4gKTsAq24t96vVSiXGzuGNhhGIUZVLhiK9wxFBVQcLxLQbNOc6bzdGVIwNmiOwcPHgBORNx4iKMXJ+phgwFIViHdrHZrOZcI5xuvN2YwjE4u8FDHqnKApvNIxAjGnGATGYNLpGOA5BIAYkzYKzKDOQv4HTiAGdnb08chd1mTckQiYG1FZ0vAebDFaUiPK3+UoxCvOMjDE55ekCpRhklFdcL3ydWCEWs88lPOQEuFhY0X9ELAaNXuIzdFU11H/oxSjPWQxSJhv+t7e3fpsavRikHD0xH41GqvPyIa2IsafVinGB/DOxj7QitlgsUsS4zG9oAb0Yu1nKHOMCKhVVLX+ITIzSgRG4XC7TXzOa23w+Zx+TG0bFCIilgtLBfBhgiVaG3QIkmX1C+EWQfDH2YnwIyCJr5HNIZcjvbNl0VrB6zBEry9JKJwj6fIq1zBBglGbrNRNjFlVKHkVr0GWcFZiEed8CaSBG/9mA8SefBXsiY77pVp4kxngoioL+a2PgpWCpa/QutV5st9uxXmWcILWQN2Zdulu9GHXql1sZuI3H48TlpEaMrfPMk+o0dDFT3YM7SY0YU6tTYkxyJltK0k6JcX96fXQ26OiUs+kpMe3nyyoQS3lH0ot1hl7sON0UY8WPilFzsCHSQ95kB8CKKjy63IN9F7ELSSMMYF9lHHlwJ6kRA9ys3S/R46H2aOrVRt+GrhcDSs/pdKo6LJ+GxsEexJ+TyYQaKuN9QZKYsd1uyR5HIyYej7RnGxaN8R5eEn7DXgP4ne5Dhsp7tVpF3n80EKtgUeGRDAz6kkwy7gmFEo6YoIrYgz3A/sVlXMyqy720cHd3t1wuqZU69OG6wUrFtGbQAssxIWJefgb/BboGh8QzSAYysa7Ri303Lnzg/zDK8i/o8f/cRBRmigAAAABJRU5ErkJggg=="
 
 /***/ },
-/* 22 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5843,7 +5950,7 @@ var bundle =
 	}
 
 /***/ },
-/* 23 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5856,7 +5963,7 @@ var bundle =
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _angularMessages = __webpack_require__(24);
+	var _angularMessages = __webpack_require__(29);
 	
 	var _angularMessages2 = _interopRequireDefault(_angularMessages);
 	
@@ -5868,31 +5975,31 @@ var bundle =
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _mailBoxComponent = __webpack_require__(26);
+	var _mailBoxComponent = __webpack_require__(31);
 	
 	var _mailBoxComponent2 = _interopRequireDefault(_mailBoxComponent);
 	
-	var _composeComponent = __webpack_require__(27);
+	var _composeComponent = __webpack_require__(32);
 	
 	var _composeComponent2 = _interopRequireDefault(_composeComponent);
 	
-	var _messageListComponent = __webpack_require__(29);
+	var _messageListComponent = __webpack_require__(34);
 	
 	var _messageListComponent2 = _interopRequireDefault(_messageListComponent);
 	
-	var _messageComponent = __webpack_require__(31);
+	var _messageComponent = __webpack_require__(36);
 	
 	var _messageComponent2 = _interopRequireDefault(_messageComponent);
 	
-	var _trashListComponent = __webpack_require__(33);
+	var _trashListComponent = __webpack_require__(38);
 	
 	var _trashListComponent2 = _interopRequireDefault(_trashListComponent);
 	
-	var _trashDetailsComponent = __webpack_require__(35);
+	var _trashDetailsComponent = __webpack_require__(40);
 	
 	var _trashDetailsComponent2 = _interopRequireDefault(_trashDetailsComponent);
 	
-	var _route = __webpack_require__(37);
+	var _route = __webpack_require__(42);
 	
 	var _route2 = _interopRequireDefault(_route);
 	
@@ -5901,15 +6008,15 @@ var bundle =
 	exports.default = _angular2.default.module('mailBox', [_angularMessages2.default, _angularUiRouter2.default, _services2.default]).component('mailBox', _mailBoxComponent2.default).component('compose', _composeComponent2.default).component('messageList', _messageListComponent2.default).component('message', _messageComponent2.default).component('trashList', _trashListComponent2.default).component('trashDetails', _trashDetailsComponent2.default).config(_route2.default).name;
 
 /***/ },
-/* 24 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(25);
+	__webpack_require__(30);
 	module.exports = 'ngMessages';
 
 
 /***/ },
-/* 25 */
+/* 30 */
 /***/ function(module, exports) {
 
 	/*
@@ -5927,7 +6034,7 @@ var bundle =
 
 
 /***/ },
-/* 26 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5961,7 +6068,7 @@ var bundle =
 	exports.default = mailBoxComponent;
 
 /***/ },
-/* 27 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5970,7 +6077,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _compose = __webpack_require__(28);
+	var _compose = __webpack_require__(33);
 	
 	var _compose2 = _interopRequireDefault(_compose);
 	
@@ -6009,13 +6116,13 @@ var bundle =
 	exports.default = composeComponent;
 
 /***/ },
-/* 28 */
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"newMessage__display\">\r\n    <button class=\"backwardButton\" ui-sref=\"message-list({boxId: 'inbox'})\">&#8592;</button>\r\n    <form name=\"newMessageForm\" ng-submit=\"$ctrl.addNewMessageToSentMail(newMessage)\">\r\n        <h2>New message</h2>\r\n        <section>\r\n            <input type=\"text\" name=\"email\" ng-model=\"newMessage.email\" placeholder=\"To\" autofocus required>\r\n            <div ng-messages=\"newMessageForm['email'].$error\" ng-if=\"newMessageForm['email'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <input type=\"text\" name=\"subject\" ng-model=\"newMessage.subject\" placeholder=\"Subject\" required>\r\n            <div ng-messages=\"newMessageForm['subject'].$error\" ng-if=\"newMessageForm['subject'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <textarea name=\"content\" ng-model=\"newMessage.content\" required></textarea>\r\n            <div ng-messages=\"newMessageForm['content'].$error\" ng-if=\"newMessageForm['content'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <input type=\"submit\" value=\"Send\" ng-disabled=\"$ctrl.isSubmitEnabled === false\">\r\n    </form>\r\n</section>";
 
 /***/ },
-/* 29 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6024,7 +6131,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _messageList = __webpack_require__(30);
+	var _messageList = __webpack_require__(35);
 	
 	var _messageList2 = _interopRequireDefault(_messageList);
 	
@@ -6059,13 +6166,13 @@ var bundle =
 	exports.default = messageListComponent;
 
 /***/ },
-/* 30 */
+/* 35 */
 /***/ function(module, exports) {
 
 	module.exports = "<ul class=\"mailBox__messageList\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message);\r\n                $event.stopPropagation()\">x</button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
 
 /***/ },
-/* 31 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6074,7 +6181,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _message = __webpack_require__(32);
+	var _message = __webpack_require__(37);
 	
 	var _message2 = _interopRequireDefault(_message);
 	
@@ -6090,13 +6197,13 @@ var bundle =
 	exports.default = messageComponent;
 
 /***/ },
-/* 32 */
+/* 37 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"mailBox__message\">\r\n    <button class=\"backwardButton\"\r\n        ui-sref=\"message-list({boxId: $ctrl.message.boxId})\">&#8592;</button>\r\n    <div class=\"messageContent\">{{$ctrl.message.content}}</div>\r\n</section>\r\n";
 
 /***/ },
-/* 33 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6105,7 +6212,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _trashList = __webpack_require__(34);
+	var _trashList = __webpack_require__(39);
 	
 	var _trashList2 = _interopRequireDefault(_trashList);
 	
@@ -6139,13 +6246,13 @@ var bundle =
 	exports.default = trashListComponent;
 
 /***/ },
-/* 34 */
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = "<ul class=\"mailBox__messageList\" ng-if=\"$ctrl.isTrashListAllowed()\">\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"trash-details({id: message.id})\"\r\n            >\r\n        <div class=\"messageBoxId__inbox\" ng-if=\"message.boxId === 'inbox'\">&#8659;</div>\r\n        <div class=\"messageBoxId__sent\" ng-if=\"message.boxId === 'sent-mail'\">&#8657;</div>\r\n        <div class=\"mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"restoreMessageButton\"\r\n            ng-click=\"$ctrl.restoreMessage(message);\r\n                $event.stopPropagation()\">&#8629</button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>";
 
 /***/ },
-/* 35 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6154,7 +6261,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _trashDetails = __webpack_require__(36);
+	var _trashDetails = __webpack_require__(41);
 	
 	var _trashDetails2 = _interopRequireDefault(_trashDetails);
 	
@@ -6184,13 +6291,13 @@ var bundle =
 	exports.default = trashDetailsComponent;
 
 /***/ },
-/* 36 */
+/* 41 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"mailBox__message\">\r\n    <button class=\"backwardButton\"\r\n            ui-sref=\"trash-list\">&#8592;</button>\r\n    <div class=\"messageContent\">{{$ctrl.currentMessage.content}}</div>\r\n</section>";
 
 /***/ },
-/* 37 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6208,10 +6315,16 @@ var bundle =
 	    }).state('compose', {
 	        parent: 'mail-box',
 	        url: '/compose',
+	        data: {
+	            currentNavStatus: 'Compose'
+	        },
 	        template: '<compose></compose>'
 	    }).state('message-list', {
 	        parent: 'mail-box',
 	        url: '/list/:boxId',
+	        data: {
+	            currentNavStatus: 'message-list'
+	        },
 	        template: '<message-list messages="stateCtrl.currentBox"\n                           move-message-to-trash="$ctrl.moveMessageToTrash(message)"\n                               ></message-list>',
 	        resolve: { // download data before rendering the state
 	            currentBoxPromise: function currentBoxPromise(MailDataService, $stateParams) {
@@ -6238,6 +6351,9 @@ var bundle =
 	    }).state('trash-list', {
 	        parent: 'mail-box',
 	        url: '/trash-list',
+	        data: {
+	            currentNavStatus: 'Trash'
+	        },
 	        resolve: {
 	            messagesPromise: function messagesPromise(MailDataService) {
 	                return MailDataService.getBox('trash');
@@ -6267,7 +6383,7 @@ var bundle =
 	}
 
 /***/ },
-/* 38 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6280,7 +6396,7 @@ var bundle =
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _angularMessages = __webpack_require__(24);
+	var _angularMessages = __webpack_require__(29);
 	
 	var _angularMessages2 = _interopRequireDefault(_angularMessages);
 	
@@ -6296,23 +6412,23 @@ var bundle =
 	
 	var _shared2 = _interopRequireDefault(_shared);
 	
-	var _contactsListComponent = __webpack_require__(39);
+	var _contactsListComponent = __webpack_require__(44);
 	
 	var _contactsListComponent2 = _interopRequireDefault(_contactsListComponent);
 	
-	var _addUserFormComponent = __webpack_require__(41);
+	var _addUserFormComponent = __webpack_require__(46);
 	
 	var _addUserFormComponent2 = _interopRequireDefault(_addUserFormComponent);
 	
-	var _userCardComponent = __webpack_require__(43);
+	var _userCardComponent = __webpack_require__(48);
 	
 	var _userCardComponent2 = _interopRequireDefault(_userCardComponent);
 	
-	var _userEditFormComponent = __webpack_require__(45);
+	var _userEditFormComponent = __webpack_require__(50);
 	
 	var _userEditFormComponent2 = _interopRequireDefault(_userEditFormComponent);
 	
-	var _route = __webpack_require__(47);
+	var _route = __webpack_require__(52);
 	
 	var _route2 = _interopRequireDefault(_route);
 	
@@ -6321,7 +6437,7 @@ var bundle =
 	exports.default = _angular2.default.module('contacts', [_angularMessages2.default, _angularUiRouter2.default, _services2.default, _shared2.default]).component('contactsList', _contactsListComponent2.default).component('addUserForm', _addUserFormComponent2.default).component('userCard', _userCardComponent2.default).component('userEditForm', _userEditFormComponent2.default).config(_route2.default).name;
 
 /***/ },
-/* 39 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -6330,7 +6446,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _contactsList = __webpack_require__(40);
+	var _contactsList = __webpack_require__(45);
 	
 	var _contactsList2 = _interopRequireDefault(_contactsList);
 	
@@ -6393,13 +6509,13 @@ var bundle =
 	exports.default = contactsListComponent;
 
 /***/ },
-/* 40 */
+/* 45 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"contacts__list\" ng-if=\"$ctrl.isContactsListAllowed()\">\r\n    <button class=\"openAddUserFormButton\" ui-sref=\"add-user\">Add contact</button>\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n    <ul>\r\n        <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n            ui-sref=\"user-card({userId: user.id})\"\r\n                >\r\n            <div class=\"userAvatar\"><img src={{user.avatarUrl}} alt=\"Avatar\"></div>\r\n            <div class=\"userName\">{{user.fullName}}</div>\r\n            <div class=\"userEmail\">{{user.email}}</div>\r\n            <button class=\"removeUserButton\" ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\">x</button>\r\n        </li>\r\n    </ul>\r\n</section>\r\n\r\n\r\n<ui-view>\r\n    <!-- when state will be: \"contacts-list.child\" - child template will be here -->\r\n</ui-view>\r\n";
 
 /***/ },
-/* 41 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6408,7 +6524,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _addUserForm = __webpack_require__(42);
+	var _addUserForm = __webpack_require__(47);
 	
 	var _addUserForm2 = _interopRequireDefault(_addUserForm);
 	
@@ -6431,13 +6547,13 @@ var bundle =
 	exports.default = addUserFormComponent;
 
 /***/ },
-/* 42 */
+/* 47 */
 /***/ function(module, exports) {
 
 	module.exports = "<form class=\"contacts__addUserForm\" name=\"addUserForm\"\r\n      ng-submit=\"$ctrl.addNewUser({user: user})\">\r\n    <button class=\"backwardButton\" ui-sref=\"contacts-list\"\r\n            ng-click=\"$ctrl.closePageMask()\">&#8592;</button>\r\n    <fieldset>\r\n        <section>\r\n            <label>Full name:</label>\r\n            <input type=\"text\" name=\"fullName\" ng-model=\"user.fullName\" placeholder=\"John Smith\" autofocus\r\n                    required ng-minlength=\"4\"\r\n                    >\r\n            <div ng-messages=\"addUserForm['fullName'].$error\" ng-if=\"addUserForm['fullName'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n                <div ng-message=\"minlength\">This field can be at at least 4 characters long.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Date of birth:</label>\r\n            <input type=\"text\" name=\"birthDate\" ng-model=\"user.birthdate\" placeholder=\"YYYY-MM-DD\"\r\n                    required\r\n                    pattern=\"\\d{4}-\\d\\d-\\d\\d\">\r\n            <div ng-messages=\"addUserForm['birthDate'].$error\" ng-if=\"addUserForm['birthDate'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n                <div ng-message=\"pattern\">The date must be in YYYY-MM-DD format</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Gender:</label>\r\n            <input type=\"radio\" name=\"gender\" ng-model=\"user.gender\" value=\"male\" required>male\r\n            <input type=\"radio\" name=\"gender\" ng-model=\"user.gender\" value=\"female\" required>female\r\n            <div ng-messages=\"addUserForm['gender'].$error\" ng-if=\"addUserForm['gender'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Address:</label>\r\n            <input type=\"text\" name=\"address\" ng-model=\"user.address\" placeholder=\"19, Wall st. New York, USA\"\r\n                    required minlength=\"10\">\r\n            <div ng-messages=\"addUserForm['address'].$error\" ng-if=\"addUserForm['address'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n                <div ng-message=\"minlength\">This field can be at at least 10 characters long.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Email:</label>\r\n            <input type=\"email\" name=\"email\" ng-model=\"user.email\" required>\r\n            <div ng-messages=\"addUserForm['email'].$error\" ng-if=\"addUserForm['email'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n                <div ng-message=\"email\">The value must be a correct email</div>\r\n            </div>\r\n        </section>\r\n    </fieldset>\r\n    <input type=\"submit\" value=\"Save\">\r\n</form>\r\n\r\n\r\n";
 
 /***/ },
-/* 43 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6446,7 +6562,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _userCard = __webpack_require__(44);
+	var _userCard = __webpack_require__(49);
 	
 	var _userCard2 = _interopRequireDefault(_userCard);
 	
@@ -6473,13 +6589,13 @@ var bundle =
 	exports.default = userCardComponent;
 
 /***/ },
-/* 44 */
+/* 49 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"contacts__userCard\" ng-if=\"$ctrl.isUserCardAllowed()\">\r\n    <button class=\"backwardButton\" ui-sref=\"contacts-list\">&#8592;</button>\r\n    <button class=\"contacts__openUserEditFormButton\" ui-sref=\"edit-form\">Edit</button>\r\n\r\n    <h3>{{$ctrl.selectedUser.fullName}}</h3>\r\n    <table>\r\n        <tbody>\r\n        <tr>\r\n            <td class=\"label\">Date of birth:</td><td>{{$ctrl.selectedUser.birthdate}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"label\">Gender</td><td>{{$ctrl.selectedUser.gender}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"label\">Address</td><td>{{$ctrl.selectedUser.address}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"label\">Email</td><td>{{$ctrl.selectedUser.email}}</td>\r\n        </tr>\r\n        </tbody>\r\n    </table>\r\n</section>\r\n\r\n<ui-view>\r\n    <!-- when .state will be: \"contacts-list.user-card.edit-form\" -\r\n        user-edit-form.html template will be here -->\r\n</ui-view>";
 
 /***/ },
-/* 45 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6488,7 +6604,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _userEditForm = __webpack_require__(46);
+	var _userEditForm = __webpack_require__(51);
 	
 	var _userEditForm2 = _interopRequireDefault(_userEditForm);
 	
@@ -6505,13 +6621,13 @@ var bundle =
 	exports.default = userEditFormComponent;
 
 /***/ },
-/* 46 */
+/* 51 */
 /***/ function(module, exports) {
 
 	module.exports = "<form class=\"contacts__userEditForm\" name=\"userEditForm\">\r\n    <button class=\"backwardButton\" ui-sref=\"user-card({userId: $ctrl.selectedUser.id})\"\r\n            >&#8592;</button>\r\n    <fieldset>\r\n        <section>\r\n            <label>Full name:</label>\r\n            <input type=\"text\" ng-model=\"$ctrl.selectedUser.fullName\" name=\"fullName\"\r\n                   ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                   ng-model-options=\"{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }\"\r\n                   required minlength=\"4\" autofocus\r\n                    >\r\n            <div ng-messages=\"userEditForm['fullName'].$error\" ng-if=\"userEditForm['fullName'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n                <div ng-message=\"minlength\">This field can be at at least 4 characters long.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Date of birth:</label>\r\n            <input type=\"text\" name=\"birthDate\" ng-model=\"$ctrl.selectedUser.birthdate\"\r\n                   ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                   ng-model-options=\"{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }\"\r\n                   required pattern=\"\\d{4}-\\d\\d-\\d\\d\"\r\n                    >\r\n            <div ng-messages=\"userEditForm['birthDate'].$error\" ng-if=\"userEditForm['birthDate'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n                <div ng-message=\"pattern\">The date must be in YYYY-MM-DD format</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Gender:</label>\r\n            <input type=\"radio\" name=\"gender\" ng-model=\"$ctrl.selectedUser.gender\"\r\n                   ng-checked=\"$ctrl.selectedUser.gender === 'male'\" value=\"male\"\r\n                   ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                    >male\r\n            <input type=\"radio\" name=\"gender\" ng-model=\"$ctrl.selectedUser.gender\"\r\n                   ng-checked=\"$ctrl.selectedUser.gender === 'female'\" value=\"female\"\r\n                   ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                    >female\r\n        </section>\r\n        <section>\r\n            <label>Address:</label>\r\n            <input type=\"text\" name=\"address\" ng-model=\"$ctrl.selectedUser.address\"\r\n                   ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                   ng-model-options=\"{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }\"\r\n                   required minlength=\"10\">\r\n            <div ng-messages=\"userEditForm['address'].$error\" ng-if=\"userEditForm['address'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n                <div ng-message=\"minlength\">This field can be at at least 10 characters long.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Email:</label>\r\n            <input type=\"email\" name=\"email\" ng-model=\"$ctrl.selectedUser.email\"\r\n                   ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                   ng-model-options=\"{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }\"\r\n                   required>\r\n            <div ng-messages=\"userEditForm['email'].$error\" ng-if=\"userEditForm['email'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n                <div ng-message=\"email\">The value must be a correct email</div>\r\n            </div>\r\n        </section>\r\n    </fieldset>\r\n</form>";
 
 /***/ },
-/* 47 */
+/* 52 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6524,10 +6640,11 @@ var bundle =
 	    $stateProvider.state('contacts-list', {
 	        parent: 'account',
 	        url: '/contacts-list',
+	        data: {
+	            currentNavStatus: 'Contacts'
+	        },
 	        template: '<contacts-list></contacts-list>',
 	        controller: function controller(PageMaskService) {
-	            // не срабатывает при возврате с адд юзер форм.
-	            // стейт не перегружается
 	            PageMaskService.close();
 	        }
 	    }).state('add-user', {

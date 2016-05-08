@@ -5,12 +5,11 @@ export default function routingConfig($stateProvider) {
         .state('contacts-list', {
             parent: 'account',
             url: '/contacts-list',
+            data: {
+                currentNavStatus: 'Contacts'
+            },
             template: '<contacts-list></contacts-list>',
-            controller: function(PageMaskService) {
-                // не срабатывает при возврате с адд юзер форм.
-                // стейт не перегружается
-                PageMaskService.close();
-            }
+            controller: function(PageMaskService) {PageMaskService.close();}
         })
 
         .state('add-user', {
@@ -18,9 +17,7 @@ export default function routingConfig($stateProvider) {
             url: '/add-user',
             template: `<add-user-form
                                add-new-user="$ctrl.addNewUser(user)"></add-user-form>`,
-            controller: function(PageMaskService) {
-                PageMaskService.open();
-            }
+            controller: function(PageMaskService) {PageMaskService.open();}
         })
 
         .state('user-card', {

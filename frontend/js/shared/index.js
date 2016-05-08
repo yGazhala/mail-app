@@ -7,6 +7,8 @@ import services from '../services';
 import PageMaskService from './page-mask/page-mask.service.js';
 import pageMaskComponent from './page-mask/page-mask.component.js';
 import layoutComponent from './layout/layout.component.js';
+import logoutComponent from './logout/logout.component.js';
+import navStatusComponent from './nav-status/nav-status.component.js';
 import routingConfig from './route.js';
 
 export default angular
@@ -14,5 +16,7 @@ export default angular
     .service('PageMaskService', PageMaskService)
     .component('pageMask', pageMaskComponent)
     .component('layout', layoutComponent)
+    .component('logout', logoutComponent)
+    .component('navStatus', navStatusComponent)
     .config(routingConfig)
     .name;

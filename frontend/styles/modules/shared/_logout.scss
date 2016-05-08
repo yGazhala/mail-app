@@ -1,0 +1,40 @@
+.logout_logoutButton {
+  height: map-get($layout, top-nav-bar-height) * 1px;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: auto map-get($type-scale, '-1');
+  font-size: map-get($type-scale, '0');
+  font-weight: bold;
+  background-color: transparent;
+  color: map-get($colors, accent-alternative);
+  border: none;
+  outline: none;
+  transition: all 150ms;
+  &:hover {
+    color: map-get($colors, alternative-text);
+    background-color: map-get($colors, accent-alternative);
+  }
+  &:active {
+    color: map-get($colors, alternative-text);
+    background-color: mix(white, map-get($colors, accent-alternative));
+  }
+}
+
+.logout_userAvatar {
+  $avatar-height: 32; // value in px
+  width: $avatar-height * 1px;
+  position: fixed;
+  // vertical align - middle
+  top: (map-get($layout, top-nav-bar-height) - $avatar-height) / 2 * 1px;
+  right: 85px;
+  z-index: 2;
+
+  img {
+    width: 100%;
+    display: block;
+    border-radius: 21px;
+  }
+}

@@ -5,7 +5,7 @@
 // - auth/route.js;
 // - auth/login/login.component.js;
 // - shared/route.js;
-// - shared/layout/layout.component.js.
+// - shared/logout/logout.component.js.
 
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';

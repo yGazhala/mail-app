@@ -5,7 +5,7 @@
 // - auth/route.js;
 // - auth/login/login.component.js;
 // - shared/route.js;
-// - shared/layout/layout.component.js.
+// - shared/logout/logout.component.js.
 
 export default function AuthService($firebaseAuth, FIREBASE_URI) {
     let ref = new Firebase(FIREBASE_URI);

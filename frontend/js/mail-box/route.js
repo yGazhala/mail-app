@@ -12,12 +12,18 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
         .state('compose', {
             parent: 'mail-box',
             url: '/compose',
-            template: `<compose></compose>`
+            data: {
+                currentNavStatus: 'Compose'
+            },
+            template: '<compose></compose>'
         })
 
         .state('message-list', {
             parent: 'mail-box',
             url: '/list/:boxId',
+            data: {
+                currentNavStatus: 'message-list'
+            },
             template: `<message-list messages="stateCtrl.currentBox"
                            move-message-to-trash="$ctrl.moveMessageToTrash(message)"
                                ></message-list>`,
@@ -44,6 +50,9 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
         .state('trash-list', {
             parent: 'mail-box',
             url: '/trash-list',
+            data: {
+                currentNavStatus: 'Trash'
+            },
             resolve: {
                 messagesPromise: (MailDataService) => MailDataService.getBox('trash')
             },
