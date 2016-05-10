@@ -12,26 +12,25 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
         .state('compose', {
             parent: 'mail-box',
             url: '/compose',
-            data: {
-                currentNavStatus: 'Compose'
-            },
             template: '<compose></compose>'
         })
 
         .state('message-list', {
             parent: 'mail-box',
             url: '/list/:boxId',
-            data: {
-                currentNavStatus: 'message-list'
-            },
             template: `<message-list messages="stateCtrl.currentBox"
+                           box-id="stateCtrl.boxId"
                            move-message-to-trash="$ctrl.moveMessageToTrash(message)"
                                ></message-list>`,
             resolve: { // download data before rendering the state
                 currentBoxPromise: (MailDataService, $stateParams) =>
-                    MailDataService.getBox($stateParams.boxId)
+                    MailDataService.getBox($stateParams.boxId),
+                currentBoxId: ($stateParams) => $stateParams.boxId
             },
-            controller: function(currentBoxPromise) { this.currentBox = currentBoxPromise; },
+            controller: function(currentBoxPromise, currentBoxId) {
+                this.currentBox = currentBoxPromise;
+                this.boxId = currentBoxId;
+            },
             controllerAs: 'stateCtrl'
         })
 
@@ -50,9 +49,6 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
         .state('trash-list', {
             parent: 'mail-box',
             url: '/trash-list',
-            data: {
-                currentNavStatus: 'Trash'
-            },
             resolve: {
                 messagesPromise: (MailDataService) => MailDataService.getBox('trash')
             },

@@ -4,13 +4,19 @@ import template from './message-list.html';
 let messageListComponent = {
         bindings: {
             messages: '<', // get data from stateCtrl
+            boxId: '<', // get data from stateCtrl
             moveMessageToTrash: '&' //callback to parent mail-box component
         },
         template,
         controller: MessageListController
 };
 
-function MessageListController($state) {
+function MessageListController($state, NavStatusService) {
+    if(this.boxId === 'inbox') {
+        NavStatusService.setStatus('Inbox');
+    } else {
+        NavStatusService.setStatus('Sent mail');
+    }
 
     this.isMessageListAllowed = function() {
         return $state.is('message-list');

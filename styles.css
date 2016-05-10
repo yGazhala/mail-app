@@ -267,15 +267,6 @@ html {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.navStatus_bar {
-  width: 40%;
-  position: fixed;
-  top: 1.21429rem;
-  left: 30%;
-  z-index: 2;
-  font-size: 1rem;
-}
-
 .logout_logoutButton {
   height: 48px;
   display: inline-block;
@@ -283,7 +274,6 @@ html {
   top: 0;
   right: 0;
   z-index: 2;
-  padding: auto 0.75rem;
   font-size: 1rem;
   font-weight: bold;
   background-color: transparent;
@@ -315,6 +305,22 @@ html {
   width: 100%;
   display: block;
   border-radius: 21px;
+}
+
+.navStatus_bar {
+  height: 48px;
+  width: 7rem;
+  position: fixed;
+  top: 0;
+  left: 30%;
+  z-index: 2;
+}
+
+.navStatus_bar p {
+  padding-top: 17px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #4d90fe;
 }
 
 

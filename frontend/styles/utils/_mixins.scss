@@ -1,9 +1,9 @@
 @mixin submit {
-  padding: map-get($type-scale, '-1');
+  padding: map-get($type-scale, '-1') * 1rem;
   padding-left: 0;
   padding-right: 0;
 
-  font-size: map-get($type-scale, '0');
+  font-size: map-get($type-scale, '0') * 1rem;
   font-weight: normal;
 
   color: map-get($colors, alternative-text);

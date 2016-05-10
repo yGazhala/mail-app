@@ -7,7 +7,9 @@ let composeComponent = {
         controller: ComposeController
 };
 
-function ComposeController(MailDataService, $state) {
+function ComposeController(MailDataService, NavStatusService, $state) {
+    NavStatusService.setStatus('Compose');
+
     this.isSubmitEnabled = true;
 
     this.enableSubmit = function() {

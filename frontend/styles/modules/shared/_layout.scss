@@ -7,14 +7,3 @@
   border-bottom: 1px solid map-get($colors, 'border');
 
 }
-
-.navStatus_bar {
-  width: 40%;
-  position: fixed;
-  // vertical align - middle
-  top: (map-get($layout, top-nav-bar-height) / map-get($fonts, base-size) * 1rem  - map-get($type-scale, '0')) / 2;
-  left: 30%;
-  z-index: 2;
-  font-size: map-get($type-scale, '0');
-}
-

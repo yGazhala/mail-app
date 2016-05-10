@@ -446,7 +446,11 @@ var bundle =
 	
 	var _logoutComponent2 = _interopRequireDefault(_logoutComponent);
 	
-	var _navStatusComponent = __webpack_require__(20);
+	var _navStatusService = __webpack_require__(20);
+	
+	var _navStatusService2 = _interopRequireDefault(_navStatusService);
+	
+	var _navStatusComponent = __webpack_require__(21);
 	
 	var _navStatusComponent2 = _interopRequireDefault(_navStatusComponent);
 	
@@ -456,7 +460,7 @@ var bundle =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).component('logout', _logoutComponent2.default).component('navStatus', _navStatusComponent2.default).config(_route2.default).name;
+	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).component('logout', _logoutComponent2.default).service('NavStatusService', _navStatusService2.default).component('navStatus', _navStatusComponent2.default).config(_route2.default).name;
 
 /***/ },
 /* 4 */
@@ -5682,7 +5686,7 @@ var bundle =
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "<page-mask class=\"pageMaskWrapper\"></page-mask>\r\n\r\n<section class=\"layout_topNavBar\">\r\n    <nav-status></nav-status>\r\n    <logout></logout>\r\n</section>\r\n\r\n\r\n<section class=\"mailApp__contentWrapper\">\r\n    <div class=\"mailApp__menu\">\r\n        <button\r\n                ui-sref=\"compose\">Compose</button>\r\n        <ul>\r\n            <li ui-sref=\"message-list({boxId: 'inbox'})\" ui-sref-active=\"active\">Inbox</li>\r\n            <li ui-sref=\"message-list({boxId: 'sent-mail'})\" ui-sref-active=\"active\">Sent mail</li>\r\n            <li ui-sref=\"trash-list\" ui-sref-active=\"active\">Trash</li>\r\n            <li ui-sref=\"contacts-list\" ui-sref-active=\"active\"><a href>Contacts</a></li>\r\n        </ul>\r\n    </div>\r\n\r\n    <div class=\"mailApp__mainDisplay\">\r\n        <ui-view></ui-view>\r\n    </div>\r\n</section>";
+	module.exports = "<page-mask class=\"pageMaskWrapper\"></page-mask>\r\n\r\n<section class=\"layout_topNavBar\">\r\n    <logout></logout>\r\n</section>\r\n\r\n\r\n<section class=\"mailApp__contentWrapper\">\r\n    <div class=\"mailApp__menu\">\r\n        <button\r\n                ui-sref=\"compose\">Compose</button>\r\n        <ul>\r\n            <li ui-sref=\"message-list({boxId: 'inbox'})\" ui-sref-active=\"active\">Inbox</li>\r\n            <li ui-sref=\"message-list({boxId: 'sent-mail'})\" ui-sref-active=\"active\">Sent mail</li>\r\n            <li ui-sref=\"trash-list\" ui-sref-active=\"active\">Trash</li>\r\n            <li ui-sref=\"contacts-list\" ui-sref-active=\"active\"><a href>Contacts</a></li>\r\n        </ul>\r\n    </div>\r\n\r\n    <div class=\"mailApp__mainDisplay\">\r\n        <ui-view></ui-view>\r\n    </div>\r\n</section>";
 
 /***/ },
 /* 17 */
@@ -5729,72 +5733,46 @@ var bundle =
 
 /***/ },
 /* 20 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
-	// This helper component determines the current root navigation
-	// status and sends message to the user.
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.default = NavStatusService;
+	function NavStatusService() {
+	    var currentNavStatus = null;
 	
-	var _navStatus = __webpack_require__(21);
+	    this.getStatus = function () {
+	        return currentNavStatus;
+	    };
 	
-	var _navStatus2 = _interopRequireDefault(_navStatus);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var navStatusComponent = {
-	    bindings: {},
-	    template: _navStatus2.default,
-	    controller: NavStatusController
-	};
-	
-	function NavStatusController($rootScope) {
-	    var _this = this;
-	
-	    // The default state of application is:
-	    // account/mail-box/list/inbox (see: mail-box/route.js),
-	    // so the default current status is also 'Inbox'.
-	    this.currentNavStatus = 'Inbox';
-	
-	    // The current navigation status is saved in the data property
-	    // of these root states:
-	    // 'account.mail-box.compose' - nav status text: 'Compose'
-	    // 'account.mail-box.trash-list' - nav status text: 'Trash'
-	    // 'account.mail-box.message-list.' - nav status text: 'message-list'
-	    // 'account.contacts-list' - nav status text: 'Contacts'
-	
-	    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-	        if (!toState.data) {
-	            return;
-	        }
-	
-	        var status = toState.data.currentNavStatus;
-	
-	        if (status !== 'message-list') {
-	            _this.currentNavStatus = status;
-	            // determine whether the current status is inbox or sent-mail
-	        } else {
-	                if (toParams.boxId === 'inbox') {
-	                    _this.currentNavStatus = 'Inbox';
-	                } else {
-	                    if (toParams.boxId === 'sent-mail') {
-	                        _this.currentNavStatus = 'Sent mail';
-	                    }
-	                }
-	            }
-	    });
+	    this.setStatus = function (status) {
+	        return currentNavStatus = status;
+	    };
 	}
-	
-	exports.default = navStatusComponent;
 
 /***/ },
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "<p class=\"navStatus_bar\" ng-if=\"$ctrl.currentNavStatus\">{{$ctrl.currentNavStatus}}</p>";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var navStatusComponent = {
+	    bindings: {},
+	    template: '<div class="navStatus_bar" ng-if="$ctrl.currentNavStatus">\n                    <p>{{$ctrl.currentNavStatus}}</p></div>',
+	    controller: NavStatusController
+	};
+	
+	function NavStatusController(NavStatusService) {
+	    this.currentNavStatus = NavStatusService.getStatus();
+	}
+	
+	exports.default = navStatusComponent;
 
 /***/ },
 /* 22 */
@@ -5980,6 +5958,10 @@ var bundle =
 	
 	var _services2 = _interopRequireDefault(_services);
 	
+	var _shared = __webpack_require__(3);
+	
+	var _shared2 = _interopRequireDefault(_shared);
+	
 	var _mailBoxComponent = __webpack_require__(31);
 	
 	var _mailBoxComponent2 = _interopRequireDefault(_mailBoxComponent);
@@ -6010,7 +5992,7 @@ var bundle =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('mailBox', [_angularMessages2.default, _angularUiRouter2.default, _services2.default]).component('mailBox', _mailBoxComponent2.default).component('compose', _composeComponent2.default).component('messageList', _messageListComponent2.default).component('message', _messageComponent2.default).component('trashList', _trashListComponent2.default).component('trashDetails', _trashDetailsComponent2.default).config(_route2.default).name;
+	exports.default = _angular2.default.module('mailBox', [_angularMessages2.default, _angularUiRouter2.default, _services2.default, _shared2.default]).component('mailBox', _mailBoxComponent2.default).component('compose', _composeComponent2.default).component('messageList', _messageListComponent2.default).component('message', _messageComponent2.default).component('trashList', _trashListComponent2.default).component('trashDetails', _trashDetailsComponent2.default).config(_route2.default).name;
 
 /***/ },
 /* 29 */
@@ -6094,7 +6076,9 @@ var bundle =
 	    controller: ComposeController
 	};
 	
-	function ComposeController(MailDataService, $state) {
+	function ComposeController(MailDataService, NavStatusService, $state) {
+	    NavStatusService.setStatus('Compose');
+	
 	    this.isSubmitEnabled = true;
 	
 	    this.enableSubmit = function () {
@@ -6124,7 +6108,7 @@ var bundle =
 /* 33 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"newMessage__display\">\r\n    <button class=\"backwardButton\" ui-sref=\"message-list({boxId: 'inbox'})\">&#8592;</button>\r\n    <form name=\"newMessageForm\" ng-submit=\"$ctrl.addNewMessageToSentMail(newMessage)\">\r\n        <h2>New message</h2>\r\n        <section>\r\n            <input type=\"text\" name=\"email\" ng-model=\"newMessage.email\" placeholder=\"To\" autofocus required>\r\n            <div ng-messages=\"newMessageForm['email'].$error\" ng-if=\"newMessageForm['email'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <input type=\"text\" name=\"subject\" ng-model=\"newMessage.subject\" placeholder=\"Subject\" required>\r\n            <div ng-messages=\"newMessageForm['subject'].$error\" ng-if=\"newMessageForm['subject'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <textarea name=\"content\" ng-model=\"newMessage.content\" required></textarea>\r\n            <div ng-messages=\"newMessageForm['content'].$error\" ng-if=\"newMessageForm['content'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <input type=\"submit\" value=\"Send\" ng-disabled=\"$ctrl.isSubmitEnabled === false\">\r\n    </form>\r\n</section>";
+	module.exports = "<nav-status></nav-status>\r\n<section class=\"newMessage__display\">\r\n    <button class=\"backwardButton\" ui-sref=\"message-list({boxId: 'inbox'})\">&#8592;</button>\r\n    <form name=\"newMessageForm\" ng-submit=\"$ctrl.addNewMessageToSentMail(newMessage)\">\r\n        <h2>New message</h2>\r\n        <section>\r\n            <input type=\"text\" name=\"email\" ng-model=\"newMessage.email\" placeholder=\"To\" autofocus required>\r\n            <div ng-messages=\"newMessageForm['email'].$error\" ng-if=\"newMessageForm['email'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <input type=\"text\" name=\"subject\" ng-model=\"newMessage.subject\" placeholder=\"Subject\" required>\r\n            <div ng-messages=\"newMessageForm['subject'].$error\" ng-if=\"newMessageForm['subject'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <textarea name=\"content\" ng-model=\"newMessage.content\" required></textarea>\r\n            <div ng-messages=\"newMessageForm['content'].$error\" ng-if=\"newMessageForm['content'].$dirty\" role=\"alert\">\r\n                <div ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <input type=\"submit\" value=\"Send\" ng-disabled=\"$ctrl.isSubmitEnabled === false\">\r\n    </form>\r\n</section>";
 
 /***/ },
 /* 34 */
@@ -6145,13 +6129,19 @@ var bundle =
 	var messageListComponent = {
 	    bindings: {
 	        messages: '<', // get data from stateCtrl
+	        boxId: '<', // get data from stateCtrl
 	        moveMessageToTrash: '&' //callback to parent mail-box component
 	    },
 	    template: _messageList2.default,
 	    controller: MessageListController
 	};
 	
-	function MessageListController($state) {
+	function MessageListController($state, NavStatusService) {
+	    if (this.boxId === 'inbox') {
+	        NavStatusService.setStatus('Inbox');
+	    } else {
+	        NavStatusService.setStatus('Sent mail');
+	    }
 	
 	    this.isMessageListAllowed = function () {
 	        return $state.is('message-list');
@@ -6174,7 +6164,7 @@ var bundle =
 /* 35 */
 /***/ function(module, exports) {
 
-	module.exports = "<ul class=\"mailBox__messageList\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message);\r\n                $event.stopPropagation()\">x</button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
+	module.exports = "<nav-status></nav-status>\r\n<ul class=\"mailBox__messageList\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message);\r\n                $event.stopPropagation()\">x</button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
 
 /***/ },
 /* 36 */
@@ -6232,7 +6222,9 @@ var bundle =
 	    controller: TrashListController
 	};
 	
-	function TrashListController($state) {
+	function TrashListController($state, NavStatusService) {
+	    NavStatusService.setStatus('Trash');
+	
 	    this.isTrashListAllowed = function () {
 	        return $state.is('trash-list');
 	    };
@@ -6254,7 +6246,7 @@ var bundle =
 /* 39 */
 /***/ function(module, exports) {
 
-	module.exports = "<ul class=\"mailBox__messageList\" ng-if=\"$ctrl.isTrashListAllowed()\">\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"trash-details({id: message.id})\"\r\n            >\r\n        <div class=\"messageBoxId__inbox\" ng-if=\"message.boxId === 'inbox'\">&#8659;</div>\r\n        <div class=\"messageBoxId__sent\" ng-if=\"message.boxId === 'sent-mail'\">&#8657;</div>\r\n        <div class=\"mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"restoreMessageButton\"\r\n            ng-click=\"$ctrl.restoreMessage(message);\r\n                $event.stopPropagation()\">&#8629</button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>";
+	module.exports = "<nav-status></nav-status>\r\n<ul class=\"mailBox__messageList\" ng-if=\"$ctrl.isTrashListAllowed()\">\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"trash-details({id: message.id})\"\r\n            >\r\n        <div class=\"messageBoxId__inbox\" ng-if=\"message.boxId === 'inbox'\">&#8659;</div>\r\n        <div class=\"messageBoxId__sent\" ng-if=\"message.boxId === 'sent-mail'\">&#8657;</div>\r\n        <div class=\"mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"restoreMessageButton\"\r\n            ng-click=\"$ctrl.restoreMessage(message);\r\n                $event.stopPropagation()\">&#8629</button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>";
 
 /***/ },
 /* 40 */
@@ -6320,24 +6312,22 @@ var bundle =
 	    }).state('compose', {
 	        parent: 'mail-box',
 	        url: '/compose',
-	        data: {
-	            currentNavStatus: 'Compose'
-	        },
 	        template: '<compose></compose>'
 	    }).state('message-list', {
 	        parent: 'mail-box',
 	        url: '/list/:boxId',
-	        data: {
-	            currentNavStatus: 'message-list'
-	        },
-	        template: '<message-list messages="stateCtrl.currentBox"\n                           move-message-to-trash="$ctrl.moveMessageToTrash(message)"\n                               ></message-list>',
+	        template: '<message-list messages="stateCtrl.currentBox"\n                           box-id="stateCtrl.boxId"\n                           move-message-to-trash="$ctrl.moveMessageToTrash(message)"\n                               ></message-list>',
 	        resolve: { // download data before rendering the state
 	            currentBoxPromise: function currentBoxPromise(MailDataService, $stateParams) {
 	                return MailDataService.getBox($stateParams.boxId);
+	            },
+	            currentBoxId: function currentBoxId($stateParams) {
+	                return $stateParams.boxId;
 	            }
 	        },
-	        controller: function controller(currentBoxPromise) {
+	        controller: function controller(currentBoxPromise, currentBoxId) {
 	            this.currentBox = currentBoxPromise;
+	            this.boxId = currentBoxId;
 	        },
 	        controllerAs: 'stateCtrl'
 	    }).state('message', {
@@ -6356,9 +6346,6 @@ var bundle =
 	    }).state('trash-list', {
 	        parent: 'mail-box',
 	        url: '/trash-list',
-	        data: {
-	            currentNavStatus: 'Trash'
-	        },
 	        resolve: {
 	            messagesPromise: function messagesPromise(MailDataService) {
 	                return MailDataService.getBox('trash');
@@ -6463,8 +6450,10 @@ var bundle =
 	    controller: ContactsListController
 	};
 	
-	function ContactsListController(ContactsService, PageMaskService, $state) {
+	function ContactsListController(ContactsService, PageMaskService, NavStatusService, $state) {
 	    var _this = this;
+	
+	    NavStatusService.setStatus('Contacts');
 	
 	    ContactsService.getAll().then(function (contacts) {
 	        _this.contacts = contacts;
@@ -6517,7 +6506,7 @@ var bundle =
 /* 45 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"contacts__list\" ng-if=\"$ctrl.isContactsListAllowed()\">\r\n    <button class=\"openAddUserFormButton\" ui-sref=\"add-user\">Add contact</button>\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n    <ul>\r\n        <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n            ui-sref=\"user-card({userId: user.id})\"\r\n                >\r\n            <div class=\"userAvatar\"><img src={{user.avatarUrl}} alt=\"Avatar\"></div>\r\n            <div class=\"userName\">{{user.fullName}}</div>\r\n            <div class=\"userEmail\">{{user.email}}</div>\r\n            <button class=\"removeUserButton\" ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\">x</button>\r\n        </li>\r\n    </ul>\r\n</section>\r\n\r\n\r\n<ui-view>\r\n    <!-- when state will be: \"contacts-list.child\" - child template will be here -->\r\n</ui-view>\r\n";
+	module.exports = "<nav-status></nav-status>\r\n<section class=\"contacts__list\" ng-if=\"$ctrl.isContactsListAllowed()\">\r\n    <button class=\"openAddUserFormButton\" ui-sref=\"add-user\">Add contact</button>\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n    <ul>\r\n        <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n            ui-sref=\"user-card({userId: user.id})\"\r\n                >\r\n            <div class=\"userAvatar\"><img src={{user.avatarUrl}} alt=\"Avatar\"></div>\r\n            <div class=\"userName\">{{user.fullName}}</div>\r\n            <div class=\"userEmail\">{{user.email}}</div>\r\n            <button class=\"removeUserButton\" ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\">x</button>\r\n        </li>\r\n    </ul>\r\n</section>\r\n\r\n\r\n<ui-view>\r\n    <!-- when state will be: \"contacts-list.child\" - child template will be here -->\r\n</ui-view>\r\n";
 
 /***/ },
 /* 46 */
@@ -6645,9 +6634,6 @@ var bundle =
 	    $stateProvider.state('contacts-list', {
 	        parent: 'account',
 	        url: '/contacts-list',
-	        data: {
-	            currentNavStatus: 'Contacts'
-	        },
 	        template: '<contacts-list></contacts-list>',
 	        controller: function controller(PageMaskService) {
 	            PageMaskService.close();

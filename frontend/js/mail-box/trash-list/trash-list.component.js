@@ -10,7 +10,9 @@ let trashListComponent = {
     controller: TrashListController
 };
 
-function TrashListController($state) {
+function TrashListController($state, NavStatusService) {
+    NavStatusService.setStatus('Trash');
+
     this.isTrashListAllowed = function() {
         return $state.is('trash-list');
     };

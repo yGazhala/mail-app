@@ -5,9 +5,6 @@ export default function routingConfig($stateProvider) {
         .state('contacts-list', {
             parent: 'account',
             url: '/contacts-list',
-            data: {
-                currentNavStatus: 'Contacts'
-            },
             template: '<contacts-list></contacts-list>',
             controller: function(PageMaskService) {PageMaskService.close();}
         })

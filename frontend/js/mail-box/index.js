@@ -5,6 +5,7 @@ import ngMessages from 'angular-messages';
 import uiRouter from 'angular-ui-router';
 
 import services from '../services';
+import shared from '../shared';
 
 import mailBoxComponent from './mail-box.component.js';
 import composeComponent from './compose/compose.component.js';
@@ -16,7 +17,7 @@ import trashDetailsComponent from './trash-details/trash-details.component.js';
 import routingConfig from './route.js';
 
 export default angular
-    .module('mailBox', [ngMessages, uiRouter, services])
+    .module('mailBox', [ngMessages, uiRouter, services, shared])
     .component('mailBox', mailBoxComponent)
     .component('compose', composeComponent)
     .component('messageList', messageListComponent)

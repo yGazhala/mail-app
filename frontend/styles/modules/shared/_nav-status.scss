@@ -1,0 +1,17 @@
+.navStatus_bar {
+  height: map-get($layout, 'top-nav-bar-height') * 1px;
+  width: 7rem;
+  position: fixed;
+  top: 0;
+  left: 30%;
+  z-index: 2;
+
+  p {
+    $font-size: map-get($type-scale, '0') * map-get($fonts, 'base-size');
+    // vertical align  middle
+    padding-top: (map-get($layout, 'top-nav-bar-height') - $font-size) / 2 * 1px;
+    font-size: $font-size * 1px;
+    font-weight: bold;
+    color: map-get($colors, 'accent-alternative');
+  }
+}

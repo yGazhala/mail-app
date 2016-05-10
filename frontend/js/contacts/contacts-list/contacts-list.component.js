@@ -7,7 +7,8 @@ let contactsListComponent = {
     controller: ContactsListController
 };
 
-function ContactsListController(ContactsService, PageMaskService, $state) {
+function ContactsListController(ContactsService, PageMaskService, NavStatusService, $state) {
+    NavStatusService.setStatus('Contacts');
 
     ContactsService.getAll().then((contacts) => {
         this.contacts = contacts;
