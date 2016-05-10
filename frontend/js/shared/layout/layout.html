@@ -4,20 +4,11 @@
     <logout></logout>
 </section>
 
+<section class="layout_sideBar">
+    <compose-button></compose-button>
+    <nav-bar></nav-bar>
+</section>
 
-<section class="mailApp__contentWrapper">
-    <div class="mailApp__menu">
-        <button
-                ui-sref="compose">Compose</button>
-        <ul>
-            <li ui-sref="message-list({boxId: 'inbox'})" ui-sref-active="active">Inbox</li>
-            <li ui-sref="message-list({boxId: 'sent-mail'})" ui-sref-active="active">Sent mail</li>
-            <li ui-sref="trash-list" ui-sref-active="active">Trash</li>
-            <li ui-sref="contacts-list" ui-sref-active="active"><a href>Contacts</a></li>
-        </ul>
-    </div>
-
-    <div class="mailApp__mainDisplay">
-        <ui-view></ui-view>
-    </div>
+<section class="layout_mainContent">
+    <ui-view></ui-view>
 </section>

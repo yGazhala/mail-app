@@ -267,6 +267,23 @@ html {
   border-bottom: 1px solid #d1d1d1;
 }
 
+.layout_sideBar {
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  top: 48px;
+  left: 0;
+  z-index: 1;
+  background-color: white;
+}
+
+.layout_mainContent {
+  width: 100%;
+  padding-top: 58px;
+  padding-left: 210px;
+  padding-right: 10px;
+}
+
 .logout_logoutButton {
   height: 48px;
   display: inline-block;
@@ -312,7 +329,7 @@ html {
   width: 7rem;
   position: fixed;
   top: 0;
-  left: 30%;
+  left: 10%;
   z-index: 2;
 }
 
@@ -321,6 +338,22 @@ html {
   font-size: 14px;
   font-weight: bold;
   color: #4d90fe;
+}
+
+.shared_navBar ul {
+  width: 100%;
+  padding-left: 0;
+}
+
+.shared_navBar li {
+  padding: 10px;
+  border-bottom: 1px solid lightsteelblue;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.shared_navBar li.active {
+  background-color: aliceblue;
 }
 
 

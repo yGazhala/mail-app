@@ -1,0 +1,20 @@
+.shared_navBar {
+
+  ul {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  li {
+    padding: 10px;
+    border-bottom: 1px solid lightsteelblue;
+    list-style-type: none;
+    cursor: pointer;
+  }
+
+
+
+  li.active {
+    background-color: aliceblue;
+  }
+}

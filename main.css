@@ -1,48 +1,14 @@
 
-.mailApp__contentWrapper {
-    padding-top: 40px;
-    max-width: 1024px;
-}
-
-
-
 /* =menu -------------------*/
-.mailApp__menu {
-    /*display: block;*/
-    position: fixed;
-    height: 100%;
-    width: 150px;
-    z-index: 1;
-    border-right: 1px solid lightsteelblue;
-}
 
-.mailApp__menu ul {
-    padding-left: 0;
-}
 
-.mailApp__menu li {
-    padding: 10px;
-    border-bottom: 1px solid lightsteelblue;
-    list-style-type: none;
-    cursor: pointer;
-}
-
-.mailApp__menu li:first-child {
-
-}
-
-.mailApp__menu li.active {
-    background-color: aliceblue;
-}
 
 /* end menu ----------------*/
 
 /* =mainDisplay ------------*/
 .mailApp__mainDisplay {
-    display: block;
-
     margin-left: 150px;
-    padding: 10px;
+
     overflow-y: auto;
 }
 

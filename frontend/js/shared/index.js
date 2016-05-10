@@ -10,6 +10,8 @@ import layoutComponent from './layout/layout.component.js';
 import logoutComponent from './logout/logout.component.js';
 import NavStatusService from './nav-status/nav-status.service.js';
 import navStatusComponent from './nav-status/nav-status.component.js';
+import navBarComponent from './nav-bar/nav-bar.component.js';
+import composeButtonComponent from './compose-button.component.js';
 import routingConfig from './route.js';
 
 export default angular
@@ -20,5 +22,7 @@ export default angular
     .component('logout', logoutComponent)
     .service('NavStatusService', NavStatusService)
     .component('navStatus', navStatusComponent)
+    .component('navBar', navBarComponent)
+    .component('composeButton', composeButtonComponent)
     .config(routingConfig)
     .name;
