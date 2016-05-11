@@ -176,7 +176,7 @@ html {
   text-align: center;
   font-size: 1.777rem;
   padding-bottom: 1.777rem;
-  color: #d14836;
+  color: #dd4b39;
   font-weight: normal;
 }
 
@@ -255,23 +255,44 @@ html {
 }
 
 .login_container .login_form .login_errorMessage {
-  color: #d14836;
+  color: #dd4b39;
 }
 
 .layout_topNavBar {
   width: 100%;
   height: 48px;
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1;
   background-color: #f1f1f1;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.layout_secondaryMenu {
+  width: 100%;
+  height: 40px;
+  position: fixed;
+  top: 48px;
+  left: 0;
+  z-index: 1;
+  background-color: white;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.layout_secondaryMenu .layout_logo {
+  display: inline-block;
+  font-size: 1.333rem;
+  color: #dd4b39;
+  margin-top: 10.669px;
+  margin-left: 2rem;
 }
 
 .layout_sideBar {
   width: 200px;
   height: 100%;
   position: fixed;
-  top: 48px;
+  top: 112px;
   left: 0;
   z-index: 1;
   background-color: white;
@@ -279,9 +300,9 @@ html {
 
 .layout_mainContent {
   width: 100%;
-  padding-top: 58px;
-  padding-left: 210px;
-  padding-right: 10px;
+  padding-top: 102px;
+  padding-left: 214px;
+  padding-right: 14px;
 }
 
 .logout_logoutButton {
@@ -346,14 +367,27 @@ html {
 }
 
 .shared_navBar li {
-  padding: 10px;
-  border-bottom: 1px solid lightsteelblue;
+  padding: 0.75rem;
+  padding-left: 2rem;
   list-style-type: none;
   cursor: pointer;
 }
 
+.shared_navBar li:hover {
+  background-color: #f8f8f8;
+}
+
 .shared_navBar li.active {
-  background-color: aliceblue;
+  color: #dd4b39;
+  font-weight: bold;
+}
+
+.shared_composeButton {
+  height: 16px;
+  position: fixed;
+  top: 88px;
+  left: 2rem;
+  z-index: 2;
 }
 
 

@@ -1,0 +1,7 @@
+.shared_composeButton {
+  height: (map-get($layout, 'compose-button-height') - 8) * 1px;
+  position: fixed;
+  top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height')) * 1px;
+  left: map-get($layout, 'content-margin-left') * 1rem;
+  z-index: 2;
+}

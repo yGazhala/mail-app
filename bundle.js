@@ -5694,7 +5694,7 @@ var bundle =
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "<page-mask class=\"pageMaskWrapper\"></page-mask>\r\n\r\n<section class=\"layout_topNavBar\">\r\n    <logout></logout>\r\n</section>\r\n\r\n<section class=\"layout_sideBar\">\r\n    <compose-button></compose-button>\r\n    <nav-bar></nav-bar>\r\n</section>\r\n\r\n<section class=\"layout_mainContent\">\r\n    <ui-view></ui-view>\r\n</section>\r\n";
+	module.exports = "<page-mask class=\"pageMaskWrapper\"></page-mask>\r\n\r\n<section class=\"layout_topNavBar\">\r\n    <logout></logout>\r\n</section>\r\n\r\n<section class=\"layout_secondaryMenu\">\r\n    <div class=\"layout_logo\">mailApp</div>\r\n</section>\r\n\r\n<compose-button></compose-button>\r\n\r\n<section class=\"layout_sideBar\">\r\n    <nav-bar></nav-bar>\r\n</section>\r\n\r\n<section class=\"layout_mainContent\">\r\n    <ui-view></ui-view>\r\n</section>\r\n";
 
 /***/ },
 /* 17 */

@@ -1,20 +1,22 @@
 .shared_navBar {
-
   ul {
     width: 100%;
     padding-left: 0;
   }
 
   li {
-    padding: 10px;
-    border-bottom: 1px solid lightsteelblue;
+    padding: map-get($type-scale, '-1') * 1rem;
+    padding-left: map-get($layout, 'content-margin-left') * 1rem;
     list-style-type: none;
     cursor: pointer;
   }
 
-
+  li:hover {
+    background-color: mix(white, map-get($colors, 'primary'));
+  }
 
   li.active {
-    background-color: aliceblue;
+    color: map-get($colors, 'accent');
+    font-weight: bold;
   }
 }

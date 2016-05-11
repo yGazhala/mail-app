@@ -2,16 +2,37 @@
   width: 100%;
   height: map-get($layout, 'top-nav-bar-height') * 1px;
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1;
   background-color: map-get($colors, 'primary');
   border-bottom: 1px solid map-get($colors, 'border');
+}
+
+.layout_secondaryMenu {
+  width: 100%;
+  height: map-get($layout, 'secondary-menu-height') * 1px;
+  position: fixed;
+  top: map-get($layout, 'top-nav-bar-height') * 1px;
+  left: 0;
+  z-index: 1;
+  background-color: map-get($colors, 'background');
+  border-bottom: 1px solid map-get($colors, 'border');
+
+  .layout_logo {
+    display: inline-block;
+    font-size: map-get($type-scale, '1') * 1rem;
+    color: map-get($colors, 'accent');
+    margin-top: (map-get($layout, 'secondary-menu-height') - map-get($fonts, 'base-size') * map-get($type-scale, '1')) / 2 * 1px;
+    margin-left: map-get($layout, 'content-margin-left') * 1rem;
+  }
 }
 
 .layout_sideBar {
   width: map-get($layout, 'side-bar-width') * 1px;
   height: 100%;
   position: fixed;
-  top: map-get($layout, 'top-nav-bar-height') * 1px;
+  top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height') + map-get($layout, 'compose-button-height')) * 1px;
   left: 0;
   z-index: 1;
   background-color: map-get($colors, 'background');
@@ -19,7 +40,7 @@
 
 .layout_mainContent {
   width: 100%;
-  padding-top: map-get($layout, 'top-nav-bar-height') * 1px + 10px;
-  padding-left: map-get($layout, 'side-bar-width') * 1px + 10px;
-  padding-right: 10px;
+  padding-top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height')) * 1px + 14px;
+  padding-left: map-get($layout, 'side-bar-width') * 1px + 14px;
+  padding-right: 14px;
 }

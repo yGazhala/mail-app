@@ -15,10 +15,9 @@ $type-scale: (    // perfect fourth
 
 $colors: (
   'primary': rgb(241, 241, 241), // 247, 247, 247
-  'border': rgb(209, 209, 209),
-  'border-light': rgb(229, 229, 229),
+  'border': rgb(229, 229, 229), // 209, 209, 209
   'secondary': rgb(265, 165, 0),
-  'accent': rgb(209, 72, 54), // 197, 55, 39
+  'accent': rgb(221, 75, 57), //  209, 72, 54
   'accent-alternative': rgb(77, 144, 254),
   'background': rgb(255, 255, 255),
   'base-text': rgb(34, 34, 34),
@@ -29,5 +28,8 @@ $colors: (
 
 $layout: (
   'top-nav-bar-height': 48, //px
-  'side-bar-width': 200
+  'secondary-menu-height': 40, //px
+  'compose-button-height': 24,//px
+  'side-bar-width': 200, //px
+  'content-margin-left': 2 //rem
 )
