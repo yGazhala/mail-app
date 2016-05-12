@@ -5809,7 +5809,7 @@ var bundle =
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"shared_navBar\">\r\n    <ul>\r\n        <li ui-sref=\"message-list({boxId: 'inbox'})\" ui-sref-active=\"active\">Inbox</li>\r\n        <li ui-sref=\"message-list({boxId: 'sent-mail'})\" ui-sref-active=\"active\">Sent mail</li>\r\n        <li ui-sref=\"trash-list\" ui-sref-active=\"active\">Trash</li>\r\n        <li ui-sref=\"contacts-list\" ui-sref-active=\"active\"><a href>Contacts</a></li>\r\n    </ul>\r\n</div>";
+	module.exports = "<div class=\"shared_navBar\">\r\n    <ul>\r\n        <li ui-sref=\"message-list({boxId: 'inbox'})\" ui-sref-active=\"active\">Inbox</li>\r\n        <li ui-sref=\"message-list({boxId: 'sent-mail'})\" ui-sref-active=\"active\">Sent mail</li>\r\n        <li ui-sref=\"trash-list\" ui-sref-active=\"active\">Trash</li>\r\n        <li ui-sref=\"contacts-list\" ui-sref-active=\"active\">Contacts</li>\r\n    </ul>\r\n</div>";
 
 /***/ },
 /* 24 */
@@ -5822,7 +5822,7 @@ var bundle =
 	});
 	var composeButtonComponent = {
 	    bindings: {},
-	    template: '<button class="shared_composeButton"\n                    ui-sref="compose">Compose</button>'
+	    template: '<button class="shared_composeButton"\n                    ui-sref="compose">compose</button>'
 	};
 	
 	exports.default = composeButtonComponent;
@@ -6217,7 +6217,7 @@ var bundle =
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav-status></nav-status>\r\n<ul class=\"mailBox__messageList\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message);\r\n                $event.stopPropagation()\">x</button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"messageList_container\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input class=\"messageList_searchField\" type=\"text\" ng-model=\"searchText\">\r\n    <label class=\"messageList_searchIcon\">&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message);\r\n                $event.stopPropagation()\">x</button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
 
 /***/ },
 /* 39 */

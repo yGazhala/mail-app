@@ -1,6 +1,7 @@
 .shared_navBar {
   ul {
     width: 100%;
+    margin-top: map-get($layout, 'compose-button-height') /2 * 1px;
     padding-left: 0;
   }
 
@@ -12,11 +13,11 @@
   }
 
   li:hover {
-    background-color: mix(white, map-get($colors, 'primary'));
+    background-color: mix(white, map-get($colors, 'primary'), 10%);
   }
 
   li.active {
     color: map-get($colors, 'accent');
-    font-weight: bold;
+    font-weight: bold
   }
 }

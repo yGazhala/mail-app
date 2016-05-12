@@ -3,7 +3,7 @@
   width: 7rem;
   position: fixed;
   top: 0;
-  left: 10%;
+  left: map-get($layout, 'content-margin-left') * 1rem;
   z-index: 2;
 
   p {

@@ -241,6 +241,7 @@ html {
   background-color: #4d90fe;
   border: 1px solid #4d90fe;
   border-radius: 2px;
+  outline: none;
   width: 100%;
 }
 
@@ -250,7 +251,6 @@ html {
 }
 
 .login_container .login_form .login_submit:active {
-  outline: none;
   background-color: #5f9bfe;
 }
 
@@ -282,7 +282,8 @@ html {
 
 .layout_secondaryMenu .layout_logo {
   display: inline-block;
-  font-size: 1.333rem;
+  font-size: 1rem;
+  font-weight: bold;
   color: #dd4b39;
   margin-top: 10.669px;
   margin-left: 2rem;
@@ -292,7 +293,7 @@ html {
   width: 200px;
   height: 100%;
   position: fixed;
-  top: 112px;
+  top: 115px;
   left: 0;
   z-index: 1;
   background-color: white;
@@ -300,7 +301,7 @@ html {
 
 .layout_mainContent {
   width: 100%;
-  padding-top: 102px;
+  padding-top: 88px;
   padding-left: 214px;
   padding-right: 14px;
 }
@@ -350,7 +351,7 @@ html {
   width: 7rem;
   position: fixed;
   top: 0;
-  left: 10%;
+  left: 2rem;
   z-index: 2;
 }
 
@@ -363,6 +364,7 @@ html {
 
 .shared_navBar ul {
   width: 100%;
+  margin-top: 13.5px;
   padding-left: 0;
 }
 
@@ -374,7 +376,7 @@ html {
 }
 
 .shared_navBar li:hover {
-  background-color: #f8f8f8;
+  background-color: #f2f2f2;
 }
 
 .shared_navBar li.active {
@@ -383,11 +385,67 @@ html {
 }
 
 .shared_composeButton {
-  height: 16px;
+  height: 27px;
+  width: 97px;
   position: fixed;
-  top: 88px;
+  top: 101.5px;
   left: 2rem;
   z-index: 2;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: rgba(0, 0, 0, 0.0980392) 0 1px 0;
+  color: white;
+  background-color: #dd4b39;
+  border: 1px solid #d24736;
+  border-radius: 2px;
+  outline: none;
+}
+
+.shared_composeButton:hover {
+  background-color: #d24736;
+  border-color: #c74433;
+}
+
+.shared_composeButton:active {
+  -webkit-box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.messageList_searchField {
+  height: 24px;
+  width: 350px;
+  position: fixed;
+  top: 12px;
+  left: 214px;
+  z-index: 2;
+}
+
+.messageList_searchIcon {
+  font-size: 20px;
+  position: fixed;
+  top: 12px;
+  left: 574px;
+  color: #4d90fe;
+  z-index: 2;
+}
+
+.messageList_container {
+  padding-left: 0;
+}
+
+.messageList_container li {
+  position: relative;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+  list-style-type: none;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.messageList_container li:hover {
+  background-color: #f1f1f1;
 }
 
 

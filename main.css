@@ -1,23 +1,4 @@
 /* =messageList ------------*/
-.mailBox__messageList {
-    padding-left: 0;
-}
-
-.mailBox__messageList li {
-    position: relative;
-    padding: 5px 10px 5px 10px;
-    cursor: pointer;
-    list-style-type: none;
-    border-bottom: 1px solid lightsteelblue;
-}
-
-.mailBox__messageList li:first-child {
-    padding-top: 0;
-}
-
-.mailBox__messageList li:hover {
-    background-color: aliceblue;
-}
 
 .mailAddress, .messageSubject, .messagePreview {
     display: inline-block;

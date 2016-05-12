@@ -3,7 +3,7 @@
 let composeButtonComponent = {
     bindings: {},
     template: `<button class="shared_composeButton"
-                    ui-sref="compose">Compose</button>`
+                    ui-sref="compose">compose</button>`
 };
 
 export default composeButtonComponent;
