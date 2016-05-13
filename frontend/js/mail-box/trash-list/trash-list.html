@@ -1,19 +1,21 @@
 <nav-status></nav-status>
-<ul class="mailBox__messageList" ng-if="$ctrl.isTrashListAllowed()">
-    <input type="text" ng-model="searchText"><label>&#128269;</label>
+
+<ul class="trashList_container" ng-if="$ctrl.isTrashListAllowed()">
+    <input class="trashList_searchField" type="text" ng-model="searchText">
+    <label class="trashList_searchIcon">&#128269;</label>
 
     <li ng-repeat="message in $ctrl.messages | orderBy: '-date' | filter:searchText"
         ui-sref="trash-details({id: message.id})"
             >
-        <div class="messageBoxId__inbox" ng-if="message.boxId === 'inbox'">&#8659;</div>
-        <div class="messageBoxId__sent" ng-if="message.boxId === 'sent-mail'">&#8657;</div>
-        <div class="mailAddress">{{message.email}}</div>
-        <div class="messageSubject">{{message.subject.slice(0, 21)}}</div>
-        <div class="messagePreview">{{message.content.slice(0, 21)}}</div>
-        <div class="messageDate">{{message.date|date:'MMM d'}}</div>
-        <button class="restoreMessageButton"
-            ng-click="$ctrl.restoreMessage(message);
-                $event.stopPropagation()">&#8629</button>
+        <div class="trashList_boxId_inbox" ng-if="message.boxId === 'inbox'">&#8659;</div>
+        <div class="trashList_boxId_sent" ng-if="message.boxId === 'sent-mail'">&#8657;</div>
+        <div class="trashList_mailAddress">{{message.email}}</div>
+        <div class="trashList_messageSubject">{{message.subject.slice(0, 21)}}</div>
+        <div class="trashList_messagePreview">{{message.content.slice(0, 21)}}</div>
+        <div class="trashList_messageDate">{{message.date|date:'MMM d'}}</div>
+        <button class="trashList_restoreMessageButton"
+            ng-click="$ctrl.restoreMessage(message); $event.stopPropagation()"
+                >&#8629</button>
     </li>
 </ul>
 

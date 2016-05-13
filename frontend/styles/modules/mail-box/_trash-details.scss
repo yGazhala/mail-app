@@ -1,0 +1,52 @@
+.trashDetails_container {
+  max-width: map-get($layout, 'message-width') * 1px;
+  position: relative;
+}
+
+.trashDetails_boxId_inbox,
+.trashDetails_boxId_sent {
+  padding: map-get($type-scale, '-3') * 1rem 0;
+  font-size: map-get($type-scale, '-1') * 1rem;
+  color: map-get($colors, 'accent');
+}
+
+.trashDetails_boxId_sent {
+  color: map-get($colors, 'accent-alternative');
+}
+
+.trashDetails_date {
+  position: absolute;
+  top: map-get($type-scale, '-3') * 1rem;
+  right: 0;
+  font-size: map-get($type-scale, '-1') * 1rem;
+  color: map-get($colors, 'secondary-text');
+}
+
+.trashDetails_subject {
+  padding: map-get($type-scale, '-1') * 1rem 0;
+  font-size: map-get($type-scale, '1') * 1rem;
+  border-top: 1px solid map-get($colors, 'border');
+  border-bottom: 1px solid map-get($colors, 'border');
+}
+
+.trashDetails_email {
+  padding: map-get($type-scale, '-2') * 1rem 0;
+  color: map-get($colors, 'accent-alternative');
+  background-color: mix(white, map-get($colors, 'primary'), 50%);
+  border-bottom: 1px solid map-get($colors, 'border');
+  span {
+    color: map-get($colors, 'base-text');
+    margin-right: map-get($type-scale, '-2') * 1rem;
+  }
+}
+
+.trashDetails_content {
+  min-height: 180px;
+  padding: map-get($type-scale, '-2') * 1rem 0;
+  border-bottom: 1px solid mix(black, map-get($colors, 'border'), 10%);
+}
+
+.trashDetails_backwardButton {
+  @include secondaryMenuButton;
+  left: (map-get($layout, 'side-bar-width') + 14) *1px;
+}

@@ -1,26 +1,26 @@
 <nav-status></nav-status>
-<section class="newMessage__display">
-    <button class="backwardButton" ui-sref="message-list({boxId: 'inbox'})">&#8592;</button>
+<button class="compose_backwardButton" ui-sref="message-list({boxId: 'inbox'})">&#8592;</button>
+
+<section class="compose_container">
     <form name="newMessageForm" ng-submit="$ctrl.addNewMessageToSentMail(newMessage)">
-        <h2>New message</h2>
+        <h3>New message</h3>
         <section>
-            <input type="text" name="email" ng-model="newMessage.email" placeholder="To" autofocus required>
+            <input class="compose_email" type="text" name="email"
+                   ng-model="newMessage.email" placeholder="To" autofocus required>
             <div ng-messages="newMessageForm['email'].$error" ng-if="newMessageForm['email'].$dirty" role="alert">
-                <div ng-message="required">Please, enter a value for this field.</div>
+                <div class="compose_errorMessage" ng-message="required">Please, enter a value for this field.</div>
             </div>
         </section>
         <section>
-            <input type="text" name="subject" ng-model="newMessage.subject" placeholder="Subject" required>
+            <input class="compose_subject" type="text" name="subject" ng-model="newMessage.subject"
+                   placeholder="Subject" required>
             <div ng-messages="newMessageForm['subject'].$error" ng-if="newMessageForm['subject'].$dirty" role="alert">
-                <div ng-message="required">Please, enter a value for this field.</div>
+                <div class="compose_errorMessage" ng-message="required">Please, enter a value for this field.</div>
             </div>
         </section>
         <section>
-            <textarea name="content" ng-model="newMessage.content" required></textarea>
-            <div ng-messages="newMessageForm['content'].$error" ng-if="newMessageForm['content'].$dirty" role="alert">
-                <div ng-message="required">Please, enter a value for this field.</div>
-            </div>
+            <textarea class="compose_content" name="content" ng-model="newMessage.content"></textarea>
         </section>
-        <input type="submit" value="Send" ng-disabled="$ctrl.isSubmitEnabled === false">
+        <input class="compose_submit" type="submit" value="Send" ng-disabled="$ctrl.isSubmitEnabled === false">
     </form>
 </section>

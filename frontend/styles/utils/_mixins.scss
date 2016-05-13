@@ -56,3 +56,60 @@
   color: map-get($colors, 'accent-alternative');
   z-index: 2;
 }
+
+@mixin itemsList {
+  padding-left: 0;
+
+  li {
+    position: relative;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+    list-style-type: none;
+    background-color: mix(white, map-get($colors, 'primary'), 50%);
+    border-bottom: 1px solid map-get($colors, 'border');
+
+    &:hover {
+      background-color: map-get($colors, 'primary');
+    }
+  }
+}
+
+@mixin elementInlineBlock {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@mixin listItemButton {
+  $width: 18;
+  height: $width * 1px;
+  width: $width * 1px;
+  position: absolute;
+  top: 50%;
+  right: $width / 2 * 1px;
+  margin-top: (-$width / 2 * 1px);
+  padding: 0;
+  border: 1px solid map-get($colors, 'accent-alternative');
+  color: map-get($colors, 'accent-alternative');
+  font-weight: bold;
+  background-color: transparent;
+  border-radius: 11px;
+  outline: none;
+  &:hover {
+    color: map-get($colors, 'alternative-text');
+    background-color: map-get($colors, 'accent-alternative');
+  }
+  &:active {
+    color: map-get($colors, 'alternative-text');
+    background-color: mix(white, map-get($colors, 'accent-alternative'), 20%);
+  }
+}
+
+@mixin secondaryMenuButton {
+  $button-height: 28; //px
+  height: $button-height *1px;
+  width: 4rem;
+  position: fixed;
+  top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height')/2 - $button-height/2) * 1px;
+  z-index: 2;
+  font-size: map-get($type-scale, '1') * 1rem;
+}

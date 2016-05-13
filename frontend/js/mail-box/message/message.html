@@ -1,5 +1,9 @@
-<section class="mailBox__message">
-    <button class="backwardButton"
+<button class="message_backwardButton"
         ui-sref="message-list({boxId: $ctrl.message.boxId})">&#8592;</button>
-    <div class="messageContent">{{$ctrl.message.content}}</div>
+
+<section class="message_container">
+    <div class="message_date">{{$ctrl.message.date|date:'MMM d'}}</div>
+    <div class="message_subject">{{$ctrl.message.subject}}</div>
+    <div class="message_email"><span>Email:</span>{{$ctrl.message.email}}</div>
+    <div class="message_content">{{$ctrl.message.content}}</div>
 </section>

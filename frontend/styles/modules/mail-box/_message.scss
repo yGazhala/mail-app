@@ -1,0 +1,47 @@
+.message_container {
+  max-width: map-get($layout, 'message-width') * 1px;
+  position: relative;
+}
+
+.message_date {
+  position: absolute;
+  top: map-get($type-scale, '-1') * 1rem;
+  right: 0;
+  color: map-get($colors, 'secondary-text');
+}
+
+.message_subject {
+  padding: map-get($type-scale, '-1') * 1rem 0;
+  font-size: map-get($type-scale, '1') * 1rem;
+  border-bottom: 1px solid map-get($colors, 'border');
+}
+
+.message_email {
+  padding: map-get($type-scale, '-2') * 1rem 0;
+  color: map-get($colors, 'accent-alternative');
+  background-color: mix(white, map-get($colors, 'primary'), 50%);
+  border-bottom: 1px solid map-get($colors, 'border');
+  span {
+    color: map-get($colors, 'base-text');
+    margin-right: map-get($type-scale, '-2') * 1rem;
+  }
+}
+
+.message_content {
+  min-height: 180px;
+  padding: map-get($type-scale, '-2') * 1rem 0;
+  border-bottom: 1px solid mix(black, map-get($colors, 'border'), 10%);
+}
+
+.message_backwardButton {
+  @include secondaryMenuButton;
+  left: (map-get($layout, 'side-bar-width') + 14) *1px;
+}
+
+@media screen and (max-width: 600px) {
+  .message_date {
+    position: static;
+    padding: map-get($type-scale, '-2') * 1rem 0;
+    border-bottom: 1px solid map-get($colors, 'border');
+  }
+}

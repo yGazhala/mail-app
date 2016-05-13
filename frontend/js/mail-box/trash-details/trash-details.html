@@ -1,5 +1,13 @@
-<section class="mailBox__message">
-    <button class="backwardButton"
-            ui-sref="trash-list">&#8592;</button>
-    <div class="messageContent">{{$ctrl.currentMessage.content}}</div>
+<button class="trashDetails_backwardButton"
+        ui-sref="trash-list">&#8592;</button>
+
+<section class="trashDetails_container">
+    <div class="trashDetails_date">{{$ctrl.currentMessage.date|date:'MMM d'}}</div>
+    <div class="trashDetails_boxId_inbox"
+         ng-if="$ctrl.currentMessage.boxId === 'inbox'">&#8659; Inbox</div>
+    <div class="trashDetails_boxId_sent"
+         ng-if="$ctrl.currentMessage.boxId === 'sent-mail'">&#8657; Sent mail</div>
+    <div class="trashDetails_subject">{{$ctrl.currentMessage.subject}}</div>
+    <div class="trashDetails_email"><span>Email:</span>{{$ctrl.currentMessage.email}}</div>
+    <div class="trashDetails_content">{{$ctrl.currentMessage.content}}</div>
 </section>

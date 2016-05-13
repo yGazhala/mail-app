@@ -1,33 +1,43 @@
-.messageList_searchField {
+.trashList_searchField {
   @include searchField;
 }
 
-.messageList_searchIcon {
+.trashList_searchIcon {
   @include searchIcon;
 }
 
-.messageList_container {
+.trashList_container {
   @include itemsList;
 }
 
-.messageList_mailAddress {
+.trashList_boxId_inbox, .trashList_boxId_sent {
+  @include elementInlineBlock;
+  margin-right: 10px;
+  color: map-get($colors, 'accent');
+}
+
+.trashList_boxId_sent {
+  color: map-get($colors, 'accent-alternative');
+}
+
+.trashList_mailAddress {
   width: 25%;
   @include elementInlineBlock;
   font-style: oblique;
 }
 
-.messageList_messageSubject {
+.trashList_messageSubject {
   width: 25%;
   @include elementInlineBlock;
 }
 
-.messageList_messagePreview {
+.trashList_messagePreview {
   width: 30%;
   @include elementInlineBlock;
   color: map-get($colors, 'secondary-text');
 }
 
-.messageList_messageDate {
+.trashList_messageDate {
   position: absolute;
   right: 36px;
   top: 50%;
@@ -35,19 +45,19 @@
   @include elementInlineBlock;
 }
 
-.messageList_removeMessageButton {
+.trashList_restoreMessageButton {
   @include listItemButton;
 }
 
 @media screen and (max-width: 600px) {
-  .messageList_mailAddress,
-  .messageList_messageSubject,
-  .messageList_messagePreview {
+  .trashList_mailAddress,
+  .trashList_messageSubject,
+  .trashList_messagePreview {
     display: block;
     width: 100%;
   }
 
-  .messageList_messageDate {
+  .trashList_messageDate {
     top: 0;
     right: 0;
     margin-top: 0;
@@ -55,8 +65,7 @@
     color: map-get($colors, 'secondary-text');
   }
 
-  .messageList_removeMessageButton {
+  .trashList_restoreMessageButton {
     right: 0;
   }
 }
-
