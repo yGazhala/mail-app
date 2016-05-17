@@ -80,7 +80,7 @@
 }
 
 @mixin listItemButton {
-  $width: 18;
+  $width: 20;
   height: $width * 1px;
   width: $width * 1px;
   position: absolute;
@@ -88,18 +88,14 @@
   right: $width / 2 * 1px;
   margin-top: (-$width / 2 * 1px);
   padding: 0;
-  border: 1px solid map-get($colors, 'accent-alternative');
-  color: map-get($colors, 'accent-alternative');
-  font-weight: bold;
-  background-color: transparent;
-  border-radius: 11px;
+  background: url('../../images/list-buttons-12x12.png') no-repeat;
+  border: 1px solid transparent;
+  border-radius: $width / 2 * 1px;
   outline: none;
   &:hover {
-    color: map-get($colors, 'alternative-text');
     background-color: map-get($colors, 'accent-alternative');
   }
   &:active {
-    color: map-get($colors, 'alternative-text');
     background-color: mix(white, map-get($colors, 'accent-alternative'), 20%);
   }
 }

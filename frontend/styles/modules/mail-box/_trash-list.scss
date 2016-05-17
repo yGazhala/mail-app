@@ -39,7 +39,7 @@
 
 .trashList_messageDate {
   position: absolute;
-  right: 36px;
+  right: 40px;
   top: 50%;
   margin-top: -8px;
   @include elementInlineBlock;
@@ -47,6 +47,13 @@
 
 .trashList_restoreMessageButton {
   @include listItemButton;
+  background-position: -7px -71px;
+  &:hover {
+    background-position: -7px -103px;
+  }
+  &:active {
+    background-position: -7px -103px;
+  }
 }
 
 @media screen and (max-width: 600px) {

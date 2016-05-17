@@ -469,7 +469,7 @@ html {
 
 .messageList_messageDate {
   position: absolute;
-  right: 36px;
+  right: 40px;
   top: 50%;
   margin-top: -8px;
   display: inline-block;
@@ -477,29 +477,34 @@ html {
 }
 
 .messageList_removeMessageButton {
-  height: 18px;
-  width: 18px;
+  height: 20px;
+  width: 20px;
   position: absolute;
   top: 50%;
-  right: 9px;
-  margin-top: -9px;
+  right: 10px;
+  margin-top: -10px;
   padding: 0;
-  border: 1px solid #4d90fe;
-  color: #4d90fe;
-  font-weight: bold;
-  background-color: transparent;
-  border-radius: 11px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAACACAYAAABqZmsaAAAEVUlEQVR4Xu2av29TVxTHP8cO+TEgkjIxMUFVdUDin4goOCSQpFIihi5lQakjqLoAiip16ESCkBCVWJCClISoEBdK06UTY8dWkbp0aodWQQptkjbOt7q2X7Cf7Pi+p+ekw7WUIc/33vO9n3Pu0XvfZ+OQP3bI8QkCAoFAIBDwJnBhTiM5NNGzbpNLM/ZPswZ27q56unb1GLNHpU/smU+T8xZQuFNewGxcsNL32sbiIirBpWXEeaTF0nT+w0wFfPxAR37f1IJgJC6iITg8PdFn419dtX8zFeAWaybizTvY3s4TBndreqcg2k29CIwSogs41yo17SgkFhAn4f5PGzwVATcplnN36eXGMRv54SPbarfj+PeJCYzNqHtrQE8QBcQzjDxwAXixk7NL307ZdhIRiQS44Jv9WjIYirC7YNE1jOc7ZpeTiPAW4Irvt00tAsPxnNcLc4XZu26jrZpV6hREjahVgAYRsFwq5kZ9UuFNoDCni0hXel/bRKvdORHbA5rXrs2Xpu1ppgJ8FkszxptAmsV95gQBgUAgEAgEAoFAIBAIBALeBCSNABPApFlzf0BSD/AYeGSWsT8gaQEYB1aAsbiIWvBl4DywaGbZ+gOSjgBOhCPRICIW3N2Oj5t1wB9oJqL2iB/tPFHwVE/HMRElqPoDrVLT7tbcuwjrF4qJcF81rYt2wVMRqBgS1WqPsFf8AVcbZgfgD0jqBp4ABcBZcXv+AHDJrIP+QC34EjAUYa9hjq49By4nEeFdA7W8V/yBJsfQUYlEuMIcbdWsUvsDdY2oaYAYnWUzy9YfkHQRuOLa8T6t2JGYd39mwR/w6QIpnFK/Zf1HeZ8C/yWTjQwCAoFAIBAIBAKBQCAQ8CZQmNX0xjHud/9BvqeLIqZJ4L3a7cfPyOa3d5hd/dT+SnJLkkDArhCrGCeBd1sEWSt32eCLa/arr4hkAt6uuobZ7d5NvnOXtvoYRPq8JuwX+uxM6ar97SMirYCXOzkbrn9FO3JPx8tlvZI4jexmadq+yFrAG8A9FVc+wq5/U7S79UEKcxqnauX8VCrm3s9UgM9iw3fUXzatu7GlYs6Lrtcgn+BuzKEL6HgKZmaU+3GAG/k8D7++Zn/Wk+l4EbpgQ3O6pepx2/cY2radXfnMNnxSl6gGPrink/kdfQ+cOvBGFAUc+lJH1c3UgbdiH5xpxiRKQZoA7eYEAYFAIBAIBAKBQCAQCAQC3gQkTQP3ay8qi+53BA3+QPVl1axZh/wBSQJWYX9/ABg064A/UBMQ3WOuAbeh6g+4oMBbfwDOmGXsD8QEuJfVw/WvaCUdB14Bp4GbZhn7A5Ia/AHgulmjPyDJ/cSj4g+Y2cH7A5L6gYo/YGZeBe41qN3DxZ5r8j8Q0NkUSMoBN4CHZo3+QMeLsGJMSbdqx63dMTxr1gF/QJIzKff1BzrWiOoK7SgwdeCt2PckJB2X6TFMGrzSL9JMynJOEBAIBAKHTuA/x50MnxWe2swAAAAASUVORK5CYII=) no-repeat;
+  border: 1px solid transparent;
+  border-radius: 10px;
   outline: none;
+  background-position: -7px -7px;
 }
 
 .messageList_removeMessageButton:hover {
-  color: white;
   background-color: #4d90fe;
 }
 
 .messageList_removeMessageButton:active {
-  color: white;
   background-color: #71a6fe;
+}
+
+.messageList_removeMessageButton:hover {
+  background-position: -7px -39px;
+}
+
+.messageList_removeMessageButton:active {
+  background-position: -7px -39px;
 }
 
 @media screen and (max-width: 600px) {
@@ -646,7 +651,7 @@ html {
 
 .trashList_messageDate {
   position: absolute;
-  right: 36px;
+  right: 40px;
   top: 50%;
   margin-top: -8px;
   display: inline-block;
@@ -654,29 +659,34 @@ html {
 }
 
 .trashList_restoreMessageButton {
-  height: 18px;
-  width: 18px;
+  height: 20px;
+  width: 20px;
   position: absolute;
   top: 50%;
-  right: 9px;
-  margin-top: -9px;
+  right: 10px;
+  margin-top: -10px;
   padding: 0;
-  border: 1px solid #4d90fe;
-  color: #4d90fe;
-  font-weight: bold;
-  background-color: transparent;
-  border-radius: 11px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAACACAYAAABqZmsaAAAEVUlEQVR4Xu2av29TVxTHP8cO+TEgkjIxMUFVdUDin4goOCSQpFIihi5lQakjqLoAiip16ESCkBCVWJCClISoEBdK06UTY8dWkbp0aodWQQptkjbOt7q2X7Cf7Pi+p+ekw7WUIc/33vO9n3Pu0XvfZ+OQP3bI8QkCAoFAIBDwJnBhTiM5NNGzbpNLM/ZPswZ27q56unb1GLNHpU/smU+T8xZQuFNewGxcsNL32sbiIirBpWXEeaTF0nT+w0wFfPxAR37f1IJgJC6iITg8PdFn419dtX8zFeAWaybizTvY3s4TBndreqcg2k29CIwSogs41yo17SgkFhAn4f5PGzwVATcplnN36eXGMRv54SPbarfj+PeJCYzNqHtrQE8QBcQzjDxwAXixk7NL307ZdhIRiQS44Jv9WjIYirC7YNE1jOc7ZpeTiPAW4Irvt00tAsPxnNcLc4XZu26jrZpV6hREjahVgAYRsFwq5kZ9UuFNoDCni0hXel/bRKvdORHbA5rXrs2Xpu1ppgJ8FkszxptAmsV95gQBgUAgEAgEAoFAIBAIBALeBCSNABPApFlzf0BSD/AYeGSWsT8gaQEYB1aAsbiIWvBl4DywaGbZ+gOSjgBOhCPRICIW3N2Oj5t1wB9oJqL2iB/tPFHwVE/HMRElqPoDrVLT7tbcuwjrF4qJcF81rYt2wVMRqBgS1WqPsFf8AVcbZgfgD0jqBp4ABcBZcXv+AHDJrIP+QC34EjAUYa9hjq49By4nEeFdA7W8V/yBJsfQUYlEuMIcbdWsUvsDdY2oaYAYnWUzy9YfkHQRuOLa8T6t2JGYd39mwR/w6QIpnFK/Zf1HeZ8C/yWTjQwCAoFAIBAIBAKBQCAQ8CZQmNX0xjHud/9BvqeLIqZJ4L3a7cfPyOa3d5hd/dT+SnJLkkDArhCrGCeBd1sEWSt32eCLa/arr4hkAt6uuobZ7d5NvnOXtvoYRPq8JuwX+uxM6ar97SMirYCXOzkbrn9FO3JPx8tlvZI4jexmadq+yFrAG8A9FVc+wq5/U7S79UEKcxqnauX8VCrm3s9UgM9iw3fUXzatu7GlYs6Lrtcgn+BuzKEL6HgKZmaU+3GAG/k8D7++Zn/Wk+l4EbpgQ3O6pepx2/cY2radXfnMNnxSl6gGPrink/kdfQ+cOvBGFAUc+lJH1c3UgbdiH5xpxiRKQZoA7eYEAYFAIBAIBAKBQCAQCAQC3gQkTQP3ay8qi+53BA3+QPVl1axZh/wBSQJWYX9/ABg064A/UBMQ3WOuAbeh6g+4oMBbfwDOmGXsD8QEuJfVw/WvaCUdB14Bp4GbZhn7A5Ia/AHgulmjPyDJ/cSj4g+Y2cH7A5L6gYo/YGZeBe41qN3DxZ5r8j8Q0NkUSMoBN4CHZo3+QMeLsGJMSbdqx63dMTxr1gF/QJIzKff1BzrWiOoK7SgwdeCt2PckJB2X6TFMGrzSL9JMynJOEBAIBAKHTuA/x50MnxWe2swAAAAASUVORK5CYII=) no-repeat;
+  border: 1px solid transparent;
+  border-radius: 10px;
   outline: none;
+  background-position: -7px -71px;
 }
 
 .trashList_restoreMessageButton:hover {
-  color: white;
   background-color: #4d90fe;
 }
 
 .trashList_restoreMessageButton:active {
-  color: white;
   background-color: #71a6fe;
+}
+
+.trashList_restoreMessageButton:hover {
+  background-position: -7px -103px;
+}
+
+.trashList_restoreMessageButton:active {
+  background-position: -7px -103px;
 }
 
 @media screen and (max-width: 600px) {

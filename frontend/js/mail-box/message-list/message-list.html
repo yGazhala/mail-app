@@ -12,8 +12,7 @@
         <div class="messageList_messagePreview">{{message.content.slice(0, 21)}}</div>
         <div class="messageList_messageDate">{{message.date|date:'MMM d'}}</div>
         <button class="messageList_removeMessageButton"
-            ng-click="$ctrl.removeMessage(message); $event.stopPropagation()"
-                >&#215;</button>
+            ng-click="$ctrl.removeMessage(message); $event.stopPropagation()"></button>
     </li>
 </ul>
 

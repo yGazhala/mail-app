@@ -14,8 +14,7 @@
         <div class="trashList_messagePreview">{{message.content.slice(0, 21)}}</div>
         <div class="trashList_messageDate">{{message.date|date:'MMM d'}}</div>
         <button class="trashList_restoreMessageButton"
-            ng-click="$ctrl.restoreMessage(message); $event.stopPropagation()"
-                >&#8629</button>
+            ng-click="$ctrl.restoreMessage(message); $event.stopPropagation()"></button>
     </li>
 </ul>
 
