@@ -1,7 +1,7 @@
 <nav-status></nav-status>
 
 <ul class="messageList_container" ng-if="$ctrl.isMessageListAllowed()">
-    <input class="messageList_searchField" type="text" ng-model="searchText">
+    <input class="messageList_searchField" type="text" ng-model="searchText" placeholder="Type to search">
     <label class="messageList_searchIcon">&#128269;</label>
 
     <li ng-repeat="message in $ctrl.messages | orderBy: '-date' | filter:searchText"

@@ -5656,7 +5656,7 @@ var bundle =
 	});
 	var pageMaskComponent = {
 	    bindings: {},
-	    template: '<div class="mailApp__pageMask"\n                    ng-class="{open: $ctrl.isPageMaskOpened()}"></div>',
+	    template: '<div class="shared_pageMask"\n                    ng-class="{open: $ctrl.isPageMaskOpened()}"></div>',
 	
 	    controller: function controller(PageMaskService) {
 	        this.isPageMaskOpened = function () {
@@ -6217,7 +6217,7 @@ var bundle =
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"messageList_container\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input class=\"messageList_searchField\" type=\"text\" ng-model=\"searchText\">\r\n    <label class=\"messageList_searchIcon\">&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"messageList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"messageList_removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"messageList_container\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input class=\"messageList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\">\r\n    <label class=\"messageList_searchIcon\">&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"messageList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"messageList_removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
 
 /***/ },
 /* 39 */
@@ -6299,7 +6299,7 @@ var bundle =
 /* 42 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"trashList_container\" ng-if=\"$ctrl.isTrashListAllowed()\">\r\n    <input class=\"trashList_searchField\" type=\"text\" ng-model=\"searchText\">\r\n    <label class=\"trashList_searchIcon\">&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"trash-details({id: message.id})\"\r\n            >\r\n        <div class=\"trashList_boxId_inbox\" ng-if=\"message.boxId === 'inbox'\">&#8659;</div>\r\n        <div class=\"trashList_boxId_sent\" ng-if=\"message.boxId === 'sent-mail'\">&#8657;</div>\r\n        <div class=\"trashList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"trashList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"trashList_restoreMessageButton\"\r\n            ng-click=\"$ctrl.restoreMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"trashList_container\" ng-if=\"$ctrl.isTrashListAllowed()\">\r\n    <input class=\"trashList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\">\r\n    <label class=\"trashList_searchIcon\">&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"trash-details({id: message.id})\"\r\n            >\r\n        <div class=\"trashList_boxId_inbox\" ng-if=\"message.boxId === 'inbox'\">&#8659;</div>\r\n        <div class=\"trashList_boxId_sent\" ng-if=\"message.boxId === 'sent-mail'\">&#8657;</div>\r\n        <div class=\"trashList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"trashList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"trashList_restoreMessageButton\"\r\n            ng-click=\"$ctrl.restoreMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>";
 
 /***/ },
 /* 43 */
@@ -6557,9 +6557,9 @@ var bundle =
 
 /***/ },
 /* 48 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<nav-status></nav-status>\r\n<section class=\"contacts__list\" ng-if=\"$ctrl.isContactsListAllowed()\">\r\n    <button class=\"openAddUserFormButton\" ui-sref=\"add-user\">Add contact</button>\r\n    <input type=\"text\" ng-model=\"searchText\"><label>&#128269;</label>\r\n    <ul>\r\n        <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n            ui-sref=\"user-card({userId: user.id})\"\r\n                >\r\n            <div class=\"userAvatar\"><img src={{user.avatarUrl}} alt=\"Avatar\"></div>\r\n            <div class=\"userName\">{{user.fullName}}</div>\r\n            <div class=\"userEmail\">{{user.email}}</div>\r\n            <button class=\"removeUserButton\" ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\">x</button>\r\n        </li>\r\n    </ul>\r\n</section>\r\n\r\n\r\n<ui-view>\r\n    <!-- when state will be: \"contacts-list.child\" - child template will be here -->\r\n</ui-view>\r\n";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<button class=\"contactsList_openAddUserFormButton\"\r\n    ng-if=\"$ctrl.isContactsListAllowed()\" ui-sref=\"add-user\">Add</button>\r\n\r\n<ul class=\"contactsList_container\" ng-if=\"$ctrl.isContactsListAllowed()\">\r\n    <input class=\"contactsList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\">\r\n    <label class=\"contactsList_searchIcon\">&#128269;</label>\r\n    <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n        ui-sref=\"user-card({userId: user.id})\">\r\n        <div class=\"contactsList_userAvatar\"><img src=\"" + __webpack_require__(29) + "\" alt=\"Avatar\"></div>\r\n        <div class=\"contactsList_userName\">{{user.fullName}}</div>\r\n        <div class=\"contactsList_userEmail\">{{user.email}}</div>\r\n        <button class=\"contactsList_removeUserButton\"\r\n            ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\"\r\n                ></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n";
 
 /***/ },
 /* 49 */

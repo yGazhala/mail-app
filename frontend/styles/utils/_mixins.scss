@@ -103,9 +103,9 @@
 @mixin secondaryMenuButton {
   $button-height: 28; //px
   height: $button-height *1px;
-  width: 4rem;
   position: fixed;
   top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height')/2 - $button-height/2) * 1px;
   z-index: 2;
-  font-size: map-get($type-scale, '1') * 1rem;
+  padding: 0 1rem;
+  font-size: map-get($type-scale, '0') * 1rem;
 }

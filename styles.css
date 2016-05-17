@@ -207,7 +207,7 @@ html {
 .login_container .login_form .login_userIcon img {
   width: 100%;
   height: auto;
-  border-radius: 42px;
+  border-radius: 36px;
 }
 
 .login_container .login_form p {
@@ -412,6 +412,30 @@ html {
   box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
+.shared_pageMask {
+  width: 0;
+  height: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: black;
+  opacity: 0;
+  z-index: 3;
+  -webkit-transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+  -moz-transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+  -o-transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+  transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
+  /* property, duration, delay */
+}
+
+.shared_pageMask.open {
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
 .messageList_searchField {
   height: 24px;
   width: 350px;
@@ -566,12 +590,13 @@ html {
 
 .message_backwardButton {
   height: 28px;
-  width: 4rem;
   position: fixed;
   top: 54px;
   z-index: 2;
-  font-size: 1.333rem;
+  padding: 0 1rem;
+  font-size: 1rem;
   left: 214px;
+  font-size: 1.333rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -761,21 +786,22 @@ html {
 
 .trashDetails_backwardButton {
   height: 28px;
-  width: 4rem;
   position: fixed;
   top: 54px;
   z-index: 2;
-  font-size: 1.333rem;
+  padding: 0 1rem;
+  font-size: 1rem;
   left: 214px;
+  font-size: 1.333rem;
 }
 
 .compose_backwardButton {
   height: 28px;
-  width: 4rem;
   position: fixed;
   top: 54px;
   z-index: 2;
-  font-size: 1.333rem;
+  padding: 0 1rem;
+  font-size: 1rem;
   left: 214px;
 }
 
@@ -838,6 +864,114 @@ html {
 .compose_errorMessage {
   color: #dd4b39;
   border-top: 1px solid #e5e5e5;
+}
+
+.contactsList_searchField {
+  height: 24px;
+  width: 350px;
+  position: fixed;
+  top: 12px;
+  left: 214px;
+  z-index: 2;
+}
+
+.contactsList_searchIcon {
+  font-size: 20px;
+  position: fixed;
+  top: 12px;
+  left: 574px;
+  color: #4d90fe;
+  z-index: 2;
+}
+
+.contactsList_openAddUserFormButton {
+  height: 28px;
+  position: fixed;
+  top: 54px;
+  z-index: 2;
+  padding: 0 1rem;
+  font-size: 1rem;
+  left: 214px;
+}
+
+.contactsList_container {
+  padding-left: 0;
+}
+
+.contactsList_container li {
+  position: relative;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+  list-style-type: none;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.contactsList_container li:hover {
+  background-color: #f1f1f1;
+}
+
+.contactsList_userAvatar {
+  width: 32px;
+  margin-right: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.contactsList_userAvatar img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.contactsList_userName,
+.contactsList_userEmail {
+  width: 30%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.contactsList_userEmail {
+  font-style: oblique;
+}
+
+.contactsList_removeUserButton {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -10px;
+  padding: 0;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAACACAYAAABqZmsaAAAEVUlEQVR4Xu2av29TVxTHP8cO+TEgkjIxMUFVdUDin4goOCSQpFIihi5lQakjqLoAiip16ESCkBCVWJCClISoEBdK06UTY8dWkbp0aodWQQptkjbOt7q2X7Cf7Pi+p+ekw7WUIc/33vO9n3Pu0XvfZ+OQP3bI8QkCAoFAIBDwJnBhTiM5NNGzbpNLM/ZPswZ27q56unb1GLNHpU/smU+T8xZQuFNewGxcsNL32sbiIirBpWXEeaTF0nT+w0wFfPxAR37f1IJgJC6iITg8PdFn419dtX8zFeAWaybizTvY3s4TBndreqcg2k29CIwSogs41yo17SgkFhAn4f5PGzwVATcplnN36eXGMRv54SPbarfj+PeJCYzNqHtrQE8QBcQzjDxwAXixk7NL307ZdhIRiQS44Jv9WjIYirC7YNE1jOc7ZpeTiPAW4Irvt00tAsPxnNcLc4XZu26jrZpV6hREjahVgAYRsFwq5kZ9UuFNoDCni0hXel/bRKvdORHbA5rXrs2Xpu1ppgJ8FkszxptAmsV95gQBgUAgEAgEAoFAIBAIBALeBCSNABPApFlzf0BSD/AYeGSWsT8gaQEYB1aAsbiIWvBl4DywaGbZ+gOSjgBOhCPRICIW3N2Oj5t1wB9oJqL2iB/tPFHwVE/HMRElqPoDrVLT7tbcuwjrF4qJcF81rYt2wVMRqBgS1WqPsFf8AVcbZgfgD0jqBp4ABcBZcXv+AHDJrIP+QC34EjAUYa9hjq49By4nEeFdA7W8V/yBJsfQUYlEuMIcbdWsUvsDdY2oaYAYnWUzy9YfkHQRuOLa8T6t2JGYd39mwR/w6QIpnFK/Zf1HeZ8C/yWTjQwCAoFAIBAIBAKBQCAQ8CZQmNX0xjHud/9BvqeLIqZJ4L3a7cfPyOa3d5hd/dT+SnJLkkDArhCrGCeBd1sEWSt32eCLa/arr4hkAt6uuobZ7d5NvnOXtvoYRPq8JuwX+uxM6ar97SMirYCXOzkbrn9FO3JPx8tlvZI4jexmadq+yFrAG8A9FVc+wq5/U7S79UEKcxqnauX8VCrm3s9UgM9iw3fUXzatu7GlYs6Lrtcgn+BuzKEL6HgKZmaU+3GAG/k8D7++Zn/Wk+l4EbpgQ3O6pepx2/cY2radXfnMNnxSl6gGPrink/kdfQ+cOvBGFAUc+lJH1c3UgbdiH5xpxiRKQZoA7eYEAYFAIBAIBAKBQCAQCAQC3gQkTQP3ay8qi+53BA3+QPVl1axZh/wBSQJWYX9/ABg064A/UBMQ3WOuAbeh6g+4oMBbfwDOmGXsD8QEuJfVw/WvaCUdB14Bp4GbZhn7A5Ia/AHgulmjPyDJ/cSj4g+Y2cH7A5L6gYo/YGZeBe41qN3DxZ5r8j8Q0NkUSMoBN4CHZo3+QMeLsGJMSbdqx63dMTxr1gF/QJIzKff1BzrWiOoK7SgwdeCt2PckJB2X6TFMGrzSL9JMynJOEBAIBAKHTuA/x50MnxWe2swAAAAASUVORK5CYII=) no-repeat;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  background-position: -7px -7px;
+}
+
+.contactsList_removeUserButton:hover {
+  background-color: #4d90fe;
+}
+
+.contactsList_removeUserButton:active {
+  background-color: #71a6fe;
+}
+
+.contactsList_removeUserButton:hover,
+.contactsList_removeUserButton:active {
+  background-position: -7px -39px;
+}
+
+@media screen and (max-width: 600px) {
+  .contactsList_userName,
+  .contactsList_userEmail {
+    display: block;
+    width: 100%;
+  }
+
+  .contactsList_removeUserButton {
+    right: 0;
+  }
 }
 
 

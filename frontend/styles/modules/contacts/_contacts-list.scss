@@ -1,0 +1,59 @@
+.contactsList_searchField {
+  @include searchField;
+}
+
+.contactsList_searchIcon {
+  @include searchIcon;
+}
+
+.contactsList_openAddUserFormButton {
+  @include secondaryMenuButton;
+  left: (map-get($layout, 'side-bar-width') + 14) *1px;
+}
+
+.contactsList_container {
+  @include itemsList;
+}
+
+.contactsList_userAvatar {
+  $container-width: 32; //px
+  width: $container-width * 1px;
+  margin-right: $container-width / 2 * 1px;
+  @include elementInlineBlock;
+
+  img {
+    width: 100%;
+    border-radius: $container-width / 2 * 1px;
+  }
+}
+
+.contactsList_userName,
+.contactsList_userEmail {
+  width: 30%;
+  @include elementInlineBlock;
+}
+
+.contactsList_userEmail {
+  font-style: oblique;
+}
+
+.contactsList_removeUserButton {
+  @include listItemButton;
+  background-position: -7px -7px;
+
+  &:hover, &:active {
+    background-position: -7px -39px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .contactsList_userName,
+  .contactsList_userEmail {
+    display: block;
+    width: 100%;
+  }
+
+  .contactsList_removeUserButton {
+    right: 0;
+  }
+}

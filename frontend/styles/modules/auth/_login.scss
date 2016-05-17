@@ -55,15 +55,16 @@
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 
     .login_userIcon {
-      max-width: 72px;
+      $icon-width: 72;
+      max-width: $icon-width * 1px;
       margin: 0 auto;
       padding-bottom: 2rem;
-    }
 
-    .login_userIcon img {
-      width: 100%;
-      height: auto;
-      border-radius: 42px;
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: $icon-width / 2 * 1px;
+      }
     }
 
     p {

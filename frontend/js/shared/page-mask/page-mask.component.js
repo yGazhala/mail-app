@@ -2,7 +2,7 @@
 
 let pageMaskComponent = {
     bindings: {},
-    template: `<div class="mailApp__pageMask"
+    template: `<div class="shared_pageMask"
                     ng-class="{open: $ctrl.isPageMaskOpened()}"></div>`,
 
     controller: function(PageMaskService) {

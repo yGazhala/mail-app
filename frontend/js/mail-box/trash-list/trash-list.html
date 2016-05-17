@@ -1,7 +1,7 @@
 <nav-status></nav-status>
 
 <ul class="trashList_container" ng-if="$ctrl.isTrashListAllowed()">
-    <input class="trashList_searchField" type="text" ng-model="searchText">
+    <input class="trashList_searchField" type="text" ng-model="searchText" placeholder="Type to search">
     <label class="trashList_searchIcon">&#128269;</label>
 
     <li ng-repeat="message in $ctrl.messages | orderBy: '-date' | filter:searchText"
