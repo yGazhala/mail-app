@@ -14,7 +14,9 @@ $type-scale: (    // perfect fourth
 );
 
 $colors: (
-  'primary': rgb(241, 241, 241), // 247, 247, 247
+  'primary': rgb(241, 241, 241),
+  'primary-light': mix(white, rgb(241, 241, 241), 50%),
+  'primary-dark': mix(black, rgb(241, 241, 241), 70%),
   'border': rgb(229, 229, 229), // 209, 209, 209
   'secondary': rgb(265, 165, 0),
   'accent': rgb(221, 75, 57), //  209, 72, 54

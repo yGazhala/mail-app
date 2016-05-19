@@ -1,0 +1,114 @@
+.addUserForm_pageWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  z-index: 4;
+}
+
+.addUserForm_container {
+  background-color: map-get($colors, 'background');
+
+  fieldset {  position: relative;  }
+
+  section {
+    padding-bottom: map-get($type-scale, '2') * 1rem;
+
+    &.addUserForm_email {
+      padding-bottom: 5rem;
+    }
+  }
+
+  label {
+    display: inline-block;
+    width: 7rem;
+    vertical-align: top;
+    text-align: right;
+    margin-right: 1rem;
+  }
+}
+
+.addUserForm_inputField {
+  width: 20rem;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid map-get($colors, 'border');
+}
+
+.addUserForm_errorMessage {
+  color: map-get($colors, 'accent');
+  text-align: right;
+}
+
+.addUserForm_submit {
+  @include submit;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 1rem map-get($type-scale, '-1') * 1rem;
+  padding: map-get($type-scale, '-2') * 1rem 1rem;
+}
+
+.addUserForm_topBar {
+  $top-bar-height: 42;
+
+  height: $top-bar-height * 1px;
+  position: relative;
+  margin-bottom: 3rem;
+  background-color: map-get($colors, 'primary-dark');
+
+  .addUserForm_backwardButton {
+    height: $top-bar-height * 1px;
+    padding-left: map-get($type-scale, '-1') * 1rem;
+    padding-right: map-get($type-scale, '-1') * 1rem;
+    font-size: map-get($type-scale, '1') * 1rem;
+    color: map-get($colors, 'alternative-text');
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    &:hover {
+      background-color: mix(black, map-get($colors, 'primary-dark'), 30%);
+    }
+    &:active {
+      background-color: mix(black, map-get($colors, 'primary-dark'), 50%);
+    }
+  }
+
+  h3 {
+    @include elementInlineBlock;
+    position: absolute;
+    top: ($top-bar-height - map-get($fonts, 'base-size'))/ 2 * 1px;
+    right: map-get($type-scale, '-1') * 1rem;
+    font-size: map-get($fonts, 'base-size') * 1px;
+    font-weight: bold;
+    color: map-get($colors, 'alternative-text');
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .addUserForm_container {
+    width: 100%;
+
+    label {
+      width: 100%;
+      display: block;
+      text-align: left;
+      padding-bottom: map-get($type-scale, '-1') * 1rem;
+    }
+  }
+
+  .addUserForm_inputField {
+    width: 100%;
+    display: block;
+  }
+
+  .addUserForm_errorMessage {
+    text-align: left;
+  }
+}

@@ -1,19 +1,22 @@
-<page-mask class="pageMaskWrapper"></page-mask>
+<section class="layout_rootContainer" ng-class="{pageMaskOpened: $ctrl.isPageMaskOpened()}">
+    <page-mask></page-mask>
 
-<section class="layout_topNavBar">
-    <logout></logout>
+    <section class="layout_topNavBar">
+        <logout></logout>
+    </section>
+
+    <section class="layout_secondaryMenu">
+        <div class="layout_logo">mailApp</div>
+    </section>
+
+    <compose-button></compose-button>
+
+    <section class="layout_sideBar">
+        <nav-bar></nav-bar>
+    </section>
+
+    <section class="layout_mainContent">
+        <ui-view></ui-view>
+    </section>
 </section>
 
-<section class="layout_secondaryMenu">
-    <div class="layout_logo">mailApp</div>
-</section>
-
-<compose-button></compose-button>
-
-<section class="layout_sideBar">
-    <nav-bar></nav-bar>
-</section>
-
-<section class="layout_mainContent">
-    <ui-view></ui-view>
-</section>

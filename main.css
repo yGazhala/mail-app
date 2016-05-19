@@ -24,35 +24,6 @@
 /* end userCard ---------------*/
 
 /* =addUserForm ---------------*/
-.contacts__addUserForm {
-    position: absolute;
-    top: 30%;
-    left: 30%;
-    z-index: 3;
-    min-width: 320px;
-    padding: 15px;
-
-    background-color: aliceblue;
-    border-radius: 5px;
-}
-
-.contacts__addUserForm fieldset {
-    margin-top: 20px;
-}
-
-.contacts__addUserForm section {
-    padding-bottom: 15px;
-}
-
-.contacts__addUserForm label {
-    display: inline-block;
-    width: 35%;
-    vertical-align: top;
-    text-align: right;
-    margin-right: 10px;
-    color: rgb(70,130,180);
-    font-weight: bold;
-}
 
 .contacts__addUserForm input[type=text],
 .contacts__addUserForm input[type=email]{
@@ -62,14 +33,6 @@
 .contacts__addUserForm input[type=submit] {
     margin-top: 10px;
     margin-left: 85%;
-}
-
-.contacts__addUserForm div[ng-message=required],
-.contacts__addUserForm div[ng-message=minlength],
-.contacts__addUserForm div[ng-message=pattern],
-.contacts__addUserForm div[ng-message=email] {
-    color: red;
-    text-align: right;
 }
 
 /* end addUserForm ------------*/

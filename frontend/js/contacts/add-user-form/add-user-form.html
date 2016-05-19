@@ -1,55 +1,67 @@
-<form class="contacts__addUserForm" name="addUserForm"
-      ng-submit="$ctrl.addNewUser({user: user})">
-    <button class="backwardButton" ui-sref="contacts-list"
-            ng-click="$ctrl.closePageMask()">&#8592;</button>
-    <fieldset>
-        <section>
-            <label>Full name:</label>
-            <input type="text" name="fullName" ng-model="user.fullName" placeholder="John Smith" autofocus
-                    required ng-minlength="4"
-                    >
-            <div ng-messages="addUserForm['fullName'].$error" ng-if="addUserForm['fullName'].$dirty" role="alert">
-                <div ng-message="required">Please, enter a value for this field.</div>
-                <div ng-message="minlength">This field can be at at least 4 characters long.</div>
-            </div>
-        </section>
-        <section>
-            <label>Date of birth:</label>
-            <input type="text" name="birthDate" ng-model="user.birthdate" placeholder="YYYY-MM-DD"
-                    required
-                    pattern="\d{4}-\d\d-\d\d">
-            <div ng-messages="addUserForm['birthDate'].$error" ng-if="addUserForm['birthDate'].$dirty" role="alert">
-                <div ng-message="required">Please, enter a value for this field.</div>
-                <div ng-message="pattern">The date must be in YYYY-MM-DD format</div>
-            </div>
-        </section>
-        <section>
-            <label>Gender:</label>
-            <input type="radio" name="gender" ng-model="user.gender" value="male" required>male
-            <input type="radio" name="gender" ng-model="user.gender" value="female" required>female
-            <div ng-messages="addUserForm['gender'].$error" ng-if="addUserForm['gender'].$dirty" role="alert">
-                <div ng-message="required">Please, enter a value for this field.</div>
-            </div>
-        </section>
-        <section>
-            <label>Address:</label>
-            <input type="text" name="address" ng-model="user.address" placeholder="19, Wall st. New York, USA"
-                    required minlength="10">
-            <div ng-messages="addUserForm['address'].$error" ng-if="addUserForm['address'].$dirty" role="alert">
-                <div ng-message="required">Please, enter a value for this field.</div>
-                <div ng-message="minlength">This field can be at at least 10 characters long.</div>
-            </div>
-        </section>
-        <section>
-            <label>Email:</label>
-            <input type="email" name="email" ng-model="user.email" required>
-            <div ng-messages="addUserForm['email'].$error" ng-if="addUserForm['email'].$dirty" role="alert">
-                <div ng-message="required">Please, enter a value for this field.</div>
-                <div ng-message="email">The value must be a correct email</div>
-            </div>
-        </section>
-    </fieldset>
-    <input type="submit" value="Save">
-</form>
+<section class="addUserForm_pageWrapper">
+    <form class="addUserForm_container" name="addUserForm"
+          ng-submit="$ctrl.addNewUser({user: user})">
+        <div class="addUserForm_topBar">
+            <button class="addUserForm_backwardButton" ui-sref="contacts-list"
+                    ng-click="$ctrl.closePageMask()">&#8592;</button>
+            <h3>New user</h3>
+        </div>
+        <fieldset>
+            <section>
+                <label>Full name:</label>
+                <input class="addUserForm_inputField" type="text" name="fullName" ng-model="user.fullName"
+                    placeholder="John Smith" autofocus required ng-minlength="4">
+                <div ng-messages="addUserForm['fullName'].$error" ng-if="addUserForm['fullName'].$dirty" role="alert">
+                    <div class="addUserForm_errorMessage" ng-message="required"
+                        >Please, enter a value for this field.</div>
+                    <div class="addUserForm_errorMessage" ng-message="minlength"
+                        >This field can be at at least 4 characters long.</div>
+                </div>
+            </section>
+            <section>
+                <label>Date of birth:</label>
+                <input class="addUserForm_inputField" type="text" name="birthDate" ng-model="user.birthdate"
+                    placeholder="YYYY-MM-DD" required pattern="\d{4}-\d\d-\d\d">
+                <div ng-messages="addUserForm['birthDate'].$error" ng-if="addUserForm['birthDate'].$dirty" role="alert">
+                    <div class="addUserForm_errorMessage" ng-message="required"
+                        >Please, enter a value for this field.</div>
+                    <div class="addUserForm_errorMessage" ng-message="pattern"
+                        >The date must be in YYYY-MM-DD format</div>
+                </div>
+            </section>
+            <section>
+                <label>Gender:</label>
+                <input type="radio" name="gender" ng-model="user.gender" value="male" required>male
+                <input type="radio" name="gender" ng-model="user.gender" value="female" required>female
+                <div ng-messages="addUserForm['gender'].$error" ng-if="addUserForm['gender'].$dirty" role="alert">
+                    <div class="addUserForm_errorMessage" ng-message="required"
+                        >Please, enter a value for this field.</div>
+                </div>
+            </section>
+            <section>
+                <label>Address:</label>
+                <input class="addUserForm_inputField" type="text" name="address" ng-model="user.address"
+                    placeholder="19, Wall st. New York, USA" required minlength="10">
+                <div ng-messages="addUserForm['address'].$error" ng-if="addUserForm['address'].$dirty" role="alert">
+                    <div class="addUserForm_errorMessage" ng-message="required"
+                        >Please, enter a value for this field.</div>
+                    <div class="addUserForm_errorMessage" ng-message="minlength"
+                        >This field can be at at least 10 characters long.</div>
+                </div>
+            </section>
+            <section class="addUserForm_email">
+                <label>Email:</label>
+                <input class="addUserForm_inputField" type="email" name="email" ng-model="user.email" required>
+                <div ng-messages="addUserForm['email'].$error" ng-if="addUserForm['email'].$dirty" role="alert">
+                    <div class="addUserForm_errorMessage" ng-message="required"
+                        >Please, enter a value for this field.</div>
+                    <div class="addUserForm_errorMessage" ng-message="email"
+                        >The value must be a correct email</div>
+                </div>
+            </section>
+            <input class="addUserForm_submit" type="submit" value="Create">
+        </fieldset>
+    </form>
+</section>
 
 

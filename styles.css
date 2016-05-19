@@ -258,6 +258,19 @@ html {
   color: #dd4b39;
 }
 
+.layout_rootContainer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: auto;
+}
+
+.layout_rootContainer.pageMaskOpened {
+  overflow: hidden;
+}
+
 .layout_topNavBar {
   width: 100%;
   height: 48px;
@@ -432,7 +445,7 @@ html {
 .shared_pageMask.open {
   width: 100%;
   height: 100%;
-  opacity: 0.7;
+  opacity: 0.5;
   transition: opacity 0.3s;
 }
 
@@ -589,9 +602,9 @@ html {
 }
 
 .message_backwardButton {
-  height: 28px;
+  height: 24px;
   position: fixed;
-  top: 54px;
+  top: 56px;
   z-index: 2;
   padding: 0 1rem;
   font-size: 1rem;
@@ -785,9 +798,9 @@ html {
 }
 
 .trashDetails_backwardButton {
-  height: 28px;
+  height: 24px;
   position: fixed;
-  top: 54px;
+  top: 56px;
   z-index: 2;
   padding: 0 1rem;
   font-size: 1rem;
@@ -796,9 +809,9 @@ html {
 }
 
 .compose_backwardButton {
-  height: 28px;
+  height: 24px;
   position: fixed;
-  top: 54px;
+  top: 56px;
   z-index: 2;
   padding: 0 1rem;
   font-size: 1rem;
@@ -814,7 +827,7 @@ html {
   font-weight: bold;
   color: white;
   padding: 0.75rem;
-  background-color: #606060;
+  background-color: #484848;
 }
 
 .compose_email,
@@ -885,9 +898,9 @@ html {
 }
 
 .contactsList_openAddUserFormButton {
-  height: 28px;
+  height: 24px;
   position: fixed;
-  top: 54px;
+  top: 56px;
   z-index: 2;
   padding: 0 1rem;
   font-size: 1rem;
@@ -971,6 +984,142 @@ html {
 
   .contactsList_removeUserButton {
     right: 0;
+  }
+}
+
+.addUserForm_pageWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  z-index: 4;
+}
+
+.addUserForm_container {
+  background-color: white;
+}
+
+.addUserForm_container fieldset {
+  position: relative;
+}
+
+.addUserForm_container section {
+  padding-bottom: 1.777rem;
+}
+
+.addUserForm_container section.addUserForm_email {
+  padding-bottom: 5rem;
+}
+
+.addUserForm_container label {
+  display: inline-block;
+  width: 7rem;
+  vertical-align: top;
+  text-align: right;
+  margin-right: 1rem;
+}
+
+.addUserForm_inputField {
+  width: 20rem;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.addUserForm_errorMessage {
+  color: #dd4b39;
+  text-align: right;
+}
+
+.addUserForm_submit {
+  padding: 0.75rem;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 1rem;
+  font-weight: normal;
+  color: white;
+  background-color: #4d90fe;
+  border: 1px solid #4d90fe;
+  border-radius: 2px;
+  outline: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 1rem 0.75rem;
+  padding: 0.563rem 1rem;
+}
+
+.addUserForm_submit:hover {
+  background-color: #4582e5;
+  border-color: #4582e5;
+}
+
+.addUserForm_submit:active {
+  background-color: #5f9bfe;
+}
+
+.addUserForm_topBar {
+  height: 42px;
+  position: relative;
+  margin-bottom: 3rem;
+  background-color: #484848;
+}
+
+.addUserForm_topBar .addUserForm_backwardButton {
+  height: 42px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 1.333rem;
+  color: white;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.addUserForm_topBar .addUserForm_backwardButton:hover {
+  background-color: #323232;
+}
+
+.addUserForm_topBar .addUserForm_backwardButton:active {
+  background-color: #242424;
+}
+
+.addUserForm_topBar h3 {
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  top: 14px;
+  right: 0.75rem;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .addUserForm_container {
+    width: 100%;
+  }
+
+  .addUserForm_container label {
+    width: 100%;
+    display: block;
+    text-align: left;
+    padding-bottom: 0.75rem;
+  }
+
+  .addUserForm_inputField {
+    width: 100%;
+    display: block;
+  }
+
+  .addUserForm_errorMessage {
+    text-align: left;
   }
 }
 

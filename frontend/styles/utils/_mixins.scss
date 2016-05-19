@@ -65,7 +65,7 @@
     padding: 5px 10px 5px 10px;
     cursor: pointer;
     list-style-type: none;
-    background-color: mix(white, map-get($colors, 'primary'), 50%);
+    background-color: map-get($colors, 'primary-light');
     border-bottom: 1px solid map-get($colors, 'border');
 
     &:hover {
@@ -101,7 +101,7 @@
 }
 
 @mixin secondaryMenuButton {
-  $button-height: 28; //px
+  $button-height: 24; //px
   height: $button-height *1px;
   position: fixed;
   top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height')/2 - $button-height/2) * 1px;
