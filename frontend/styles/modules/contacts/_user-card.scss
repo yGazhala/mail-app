@@ -1,0 +1,49 @@
+.userCard_backwardButton {
+  @include secondaryMenuButton;
+  left: (map-get($layout, 'side-bar-width') + map-get($layout, 'main-content-padding-left')) *1px;
+}
+
+.userCard_openUserEditFormButton {
+  @include secondaryMenuButton;
+  left: (map-get($layout, 'side-bar-width') + map-get($layout, 'main-content-padding-left') + 62) *1px;
+  padding: 0 0.7rem;
+}
+
+.userCard_container {
+  max-width: map-get($layout, 'message-width') * 1px;
+}
+
+.userCard_fullName {
+  padding: map-get($type-scale, '-1') * 1rem 0;
+  padding-left: map-get($type-scale, '-2') * 1rem;
+  font-size: map-get($type-scale, '0') * 1rem;
+  color: map-get($colors, 'base-text');
+  background-color: map-get($colors, 'primary-light');
+  border: 1px solid map-get($colors, 'border');
+  border-top: none;
+}
+
+.userCard_container table {
+  width: 100%;
+
+  td {
+   padding: map-get($type-scale, '-1') * 1rem 0;
+   border-bottom: 1px solid map-get($colors, 'border');
+  }
+
+  tr {
+    border-left: 1px solid map-get($colors, 'border');
+    border-right: 1px solid map-get($colors, 'border');
+  }
+
+  tr:nth-child(2n) {
+    background-color: map-get($colors, 'primary-light');
+  }
+}
+.userCard_label {
+  width: 8rem;
+  font-style: oblique;
+  span {
+    margin-left: map-get($type-scale, '-2') * 1rem;
+  }
+}

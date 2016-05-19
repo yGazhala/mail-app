@@ -19,7 +19,7 @@
 .message_email {
   padding: map-get($type-scale, '-2') * 1rem 0;
   color: map-get($colors, 'accent-alternative');
-  background-color: mix(white, map-get($colors, 'primary'), 50%);
+  background-color: map-get($colors, 'primary-light');
   border-bottom: 1px solid map-get($colors, 'border');
   span {
     color: map-get($colors, 'base-text');

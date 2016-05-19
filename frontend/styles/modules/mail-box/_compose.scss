@@ -1,6 +1,6 @@
 .compose_backwardButton {
   @include secondaryMenuButton;
-  left: (map-get($layout, 'side-bar-width') + 14) *1px;
+  left: (map-get($layout, 'side-bar-width') + map-get($layout, 'main-content-padding-left')) *1px;
 }
 
 .compose_container {

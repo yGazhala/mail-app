@@ -1,0 +1,80 @@
+.userEditForm_backwardButton {
+  @include secondaryMenuButton;
+  left: (map-get($layout, 'side-bar-width') + map-get($layout, 'main-content-padding-left')) *1px;
+}
+
+.userEditForm_container {
+  max-width: map-get($layout, 'message-width') * 1px;
+
+  h3 {
+    padding: map-get($type-scale, '-1') * 1rem;
+    color: map-get($colors, 'alternative-text');
+    background-color: map-get($colors, 'primary-dark');
+  }
+
+  section {
+    padding-bottom: map-get($type-scale, '0') * 1rem;
+    border-left: 1px solid map-get($colors, 'border');
+    border-right: 1px solid map-get($colors, 'border');
+  }
+
+  .userEditForm_fullName {
+    padding-top: map-get($type-scale, '3') * 1rem;
+  }
+
+  label {
+    width: 15%;
+    margin-right: 2%;
+    display: inline-block;
+    color: map-get($colors, 'secondary-text');
+    font-style: oblique;
+    vertical-align: top;
+    text-align: right;
+  }
+}
+
+.userEditForm_inputField {
+  width: 82%;
+  border: none;
+  outline: none;
+  font-size: map-get($type-scale, '0') * 1rem;
+  border-bottom: 1px solid map-get($colors, 'border');
+}
+
+.userEditForm_errorMessage {
+  color: map-get($colors, 'accent');
+  text-align: center;
+}
+
+.userEditForm_reminder {
+  margin-bottom: map-get($type-scale, '1') * 1rem;
+  padding: map-get($type-scale, '-1') * 1rem;
+  color: map-get($colors, 'accent-alternative');
+  font-size: map-get($type-scale, '-1') * 1rem;
+  text-align: right;
+  border: 1px solid map-get($colors, 'border');
+  border-top: none;
+}
+
+@media screen and (max-width: 600px) {
+  .userEditForm_container {
+
+    label {
+      width: 100%;
+      margin-right: 0;
+      display: block;
+      text-align: left;
+      font-size: map-get($type-scale, '-1') * 1rem;
+      padding-bottom: map-get($type-scale, '-1') * 1rem;
+    }
+  }
+
+  .userEditForm_inputField {
+    width: 100%;
+    display: block;
+  }
+
+  .userEditForm_errorMessage {
+    text-align: left;
+  }
+}
