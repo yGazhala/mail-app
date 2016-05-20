@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   overflow: auto;
-  // When the page mask is opened, hide the overflows on the body
+  // If the page mask is opened, hide the overflows on the body
   // to prevent document scrolling.
   &.pageMaskOpened {
     overflow: hidden;
@@ -21,6 +21,28 @@
   z-index: 1;
   background-color: map-get($colors, 'primary');
   border-bottom: 1px solid map-get($colors, 'border');
+}
+
+.layout_openSideBarButton,
+.layout_closeSideBarButton,
+.layout_sideBarLogoutContainer {
+  display: none;
+}
+
+.layout_userAvatar {
+  $avatar-height: 32; // value in px
+  width: $avatar-height * 1px;
+  position: fixed;
+  // vertical align - middle
+  top: (map-get($layout, top-nav-bar-height) - $avatar-height) / 2 * 1px;
+  right: 85px;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    display: block;
+    border-radius: 21px;
+  }
 }
 
 .layout_secondaryMenu {
@@ -47,7 +69,7 @@
   width: map-get($layout, 'side-bar-width') * 1px;
   height: 100%;
   position: fixed;
-  top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height') + map-get($layout, 'compose-button-height')) * 1px;
+  top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height')) * 1px;
   left: 0;
   z-index: 1;
   background-color: map-get($colors, 'background');
@@ -57,4 +79,55 @@
   width: 100%;
   padding-top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height')) * 1px;
   padding-left: map-get($layout, 'side-bar-width') * 1px + 14px;
+}
+
+@media screen and (max-width: map-get($points, '-2')) {
+  .layout_topNavBarLogoutContainer {
+    display: none;
+  }
+
+  .layout_sideBarLogoutContainer {
+    display: block;
+  }
+
+  .layout_openSideBarButton {
+    $button-height: 20;
+    height: $button-height * 1px;
+    position: fixed;
+    top: (map-get($layout, 'top-nav-bar-height') - $button-height)/2 * 1px;
+    left: 0.5rem;
+    display: inline-block;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    padding: 0;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  .layout_closeSideBarButton {
+    display: inline-block;
+  }
+
+  .layout_sideBar {
+    top: 0;
+    left: - map-get($layout, 'side-bar-width') * 1px;
+    z-index: 4;
+    overflow-y: auto;
+    -webkit-transition: left 0.3s;
+    -moz-transition: left 0.3s;
+    -o-transition: left 0.3s;
+    transition: left 0.3s;
+  }
+
+  .layout_sideBar.layout_sideBarOpened {
+    left: 0;
+  }
+
+  .layout_mainContent {
+    padding-left: 0;
+  }
 }

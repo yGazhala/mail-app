@@ -77,3 +77,8 @@ and (max-width: map-get($points, '0')) {
   }
 }
 
+@media screen and (max-width: map-get($points, '-2')) {
+  .messageList_searchField {
+    display: none;
+  }
+}

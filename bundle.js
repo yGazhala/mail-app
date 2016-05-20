@@ -442,25 +442,21 @@ var bundle =
 	
 	var _layoutComponent2 = _interopRequireDefault(_layoutComponent);
 	
-	var _logoutComponent = __webpack_require__(17);
+	var _logoutComponent = __webpack_require__(19);
 	
 	var _logoutComponent2 = _interopRequireDefault(_logoutComponent);
 	
-	var _navStatusService = __webpack_require__(20);
+	var _navStatusService = __webpack_require__(21);
 	
 	var _navStatusService2 = _interopRequireDefault(_navStatusService);
 	
-	var _navStatusComponent = __webpack_require__(21);
+	var _navStatusComponent = __webpack_require__(22);
 	
 	var _navStatusComponent2 = _interopRequireDefault(_navStatusComponent);
 	
-	var _navBarComponent = __webpack_require__(22);
+	var _navBarComponent = __webpack_require__(23);
 	
 	var _navBarComponent2 = _interopRequireDefault(_navBarComponent);
-	
-	var _composeButtonComponent = __webpack_require__(24);
-	
-	var _composeButtonComponent2 = _interopRequireDefault(_composeButtonComponent);
 	
 	var _route = __webpack_require__(25);
 	
@@ -468,7 +464,7 @@ var bundle =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).component('logout', _logoutComponent2.default).service('NavStatusService', _navStatusService2.default).component('navStatus', _navStatusComponent2.default).component('navBar', _navBarComponent2.default).component('composeButton', _composeButtonComponent2.default).config(_route2.default).name;
+	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).component('logout', _logoutComponent2.default).service('NavStatusService', _navStatusService2.default).component('navStatus', _navStatusComponent2.default).component('navBar', _navBarComponent2.default).config(_route2.default).name;
 
 /***/ },
 /* 4 */
@@ -5689,9 +5685,27 @@ var bundle =
 	    controller: LayoutController
 	};
 	
-	function LayoutController(PageMaskService) {
+	function LayoutController(PageMaskService, $timeout) {
+	    var _this = this;
+	
 	    this.isPageMaskOpened = function () {
 	        return PageMaskService.isOpened;
+	    };
+	
+	    this.isSideBarOpened = false;
+	
+	    this.openSideBar = function () {
+	        _this.isSideBarOpened = true;
+	        PageMaskService.open();
+	    };
+	
+	    this.closeSideBar = function () {
+	        if (_this.isSideBarOpened) {
+	            $timeout(function () {
+	                _this.isSideBarOpened = false;
+	                PageMaskService.close();
+	            }, 300);
+	        }
 	    };
 	}
 	
@@ -5699,12 +5713,24 @@ var bundle =
 
 /***/ },
 /* 16 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section class=\"layout_rootContainer\" ng-class=\"{pageMaskOpened: $ctrl.isPageMaskOpened()}\">\r\n    <page-mask></page-mask>\r\n\r\n    <section class=\"layout_topNavBar\">\r\n        <logout></logout>\r\n    </section>\r\n\r\n    <section class=\"layout_secondaryMenu\">\r\n        <div class=\"layout_logo\">mailApp</div>\r\n    </section>\r\n\r\n    <compose-button></compose-button>\r\n\r\n    <section class=\"layout_sideBar\">\r\n        <nav-bar></nav-bar>\r\n    </section>\r\n\r\n    <section class=\"layout_mainContent\">\r\n        <ui-view></ui-view>\r\n    </section>\r\n</section>\r\n\r\n";
+	module.exports = "<section class=\"layout_rootContainer\" ng-class=\"{pageMaskOpened: $ctrl.isPageMaskOpened()}\">\r\n    <page-mask></page-mask>\r\n\r\n    <section class=\"layout_topNavBar\">\r\n        <button class=\"layout_openSideBarButton\"\r\n            ng-class=\"{layout_sideBarClosed: !$ctrl.isSideBarOpened}\"\r\n            ng-click=\"$ctrl.openSideBar()\"><img src=\"" + __webpack_require__(17) + "\" alt=\"menu\"></button>\r\n\r\n        <div class=\"layout_topNavBarLogoutContainer\">\r\n            <div class=\"layout_userAvatar\"><img src=\"" + __webpack_require__(18) + "\" alt=\"avatar\"></div>\r\n            <logout></logout>\r\n        </div>\r\n    </section>\r\n\r\n    <section class=\"layout_secondaryMenu\">\r\n        <div class=\"layout_logo\">mailApp</div>\r\n    </section>\r\n\r\n    <section class=\"layout_sideBar\" ng-class=\"{layout_sideBarOpened: $ctrl.isSideBarOpened}\"\r\n        ng-click=\"$ctrl.closeSideBar()\">\r\n\r\n        <button class=\"layout_closeSideBarButton\" ng-click=\"$ctrl.closeSideBar()\">Close menu</button>\r\n        <nav-bar></nav-bar>\r\n        <div class=\"layout_sideBarLogoutContainer\">\r\n            <logout></logout>\r\n        </div>\r\n    </section>\r\n\r\n    <section class=\"layout_mainContent\">\r\n        <ui-view></ui-view>\r\n    </section>\r\n</section>\r\n\r\n";
 
 /***/ },
 /* 17 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/png;base64,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"
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/jpeg;base64,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"
+
+/***/ },
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5713,7 +5739,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _logout = __webpack_require__(18);
+	var _logout = __webpack_require__(20);
 	
 	var _logout2 = _interopRequireDefault(_logout);
 	
@@ -5735,19 +5761,13 @@ var bundle =
 	exports.default = logoutComponent;
 
 /***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = "<div class=\"logout_userAvatar\"><img src=\"" + __webpack_require__(19) + "\" alt=\"avatar\"></div>\r\n<button class=\"logout_logoutButton\" ng-click=\"$ctrl.logout()\">Sign out</button>\r\n\r\n";
-
-/***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
-	module.exports = "data:image/jpeg;base64,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"
+	module.exports = "<button class=\"logout_logoutButton\" ng-click=\"$ctrl.logout()\">Sign out</button>\r\n\r\n";
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5769,7 +5789,7 @@ var bundle =
 	}
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5790,7 +5810,7 @@ var bundle =
 	exports.default = navStatusComponent;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5799,7 +5819,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _navBar = __webpack_require__(23);
+	var _navBar = __webpack_require__(24);
 	
 	var _navBar2 = _interopRequireDefault(_navBar);
 	
@@ -5813,26 +5833,10 @@ var bundle =
 	exports.default = navBarComponent;
 
 /***/ },
-/* 23 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"shared_navBar\">\r\n    <ul>\r\n        <li ui-sref=\"message-list({boxId: 'inbox'})\" ui-sref-active=\"active\">Inbox</li>\r\n        <li ui-sref=\"message-list({boxId: 'sent-mail'})\" ui-sref-active=\"active\">Sent mail</li>\r\n        <li ui-sref=\"trash-list\" ui-sref-active=\"active\">Trash</li>\r\n        <li ui-sref=\"contacts-list\" ui-sref-active=\"active\">Contacts</li>\r\n    </ul>\r\n</div>";
-
-/***/ },
 /* 24 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var composeButtonComponent = {
-	    bindings: {},
-	    template: '<button class="shared_composeButton"\n                    ui-sref="compose">compose</button>'
-	};
-	
-	exports.default = composeButtonComponent;
+	module.exports = "<div class=\"navBar_container\">\r\n    <button class=\"navBar_composeButton\" ui-sref=\"compose\">compose</button>\r\n    <ul>\r\n        <li ui-sref=\"message-list({boxId: 'inbox'})\" ui-sref-active=\"active\">Inbox</li>\r\n        <li ui-sref=\"message-list({boxId: 'sent-mail'})\" ui-sref-active=\"active\">Sent mail</li>\r\n        <li ui-sref=\"trash-list\" ui-sref-active=\"active\">Trash</li>\r\n        <li ui-sref=\"contacts-list\" ui-sref-active=\"active\">Contacts</li>\r\n    </ul>\r\n</div>\r\n\r\n<!-- next content appears if screen width is less than 569 px\r\n<button class=\"navBar_openSliderMenuButton\" ng-class=\"{sliderMenuClosed: !$ctrl.isSliderMenuOpened}\"\r\n    ng-click=\"$ctrl.openSliderMenu()\"><img src=\"" + __webpack_require__(17) + "\" alt=\"menu\"></button>\r\n\r\n<div class=\"navBar_sliderMenuContainer\" ng-class=\"{sliderMenuOpened: $ctrl.isSliderMenuOpened}\">\r\n    <button class=\"navBar_closeSliderMenuButton\" ng-click=\"$ctrl.closeSliderMenu()\">Close menu</button>\r\n    <button class=\"navBar_composeButton\" ui-sref=\"compose\">compose</button>\r\n    <ul>\r\n        <li ng-click=\"$ctrl.closeSliderMenu()\" ui-sref=\"message-list({boxId: 'inbox'})\"\r\n            ui-sref-active=\"active\">Inbox</li>\r\n        <li ng-click=\"$ctrl.closeSliderMenu()\" ui-sref=\"message-list({boxId: 'sent-mail'})\"\r\n            ui-sref-active=\"active\">Sent mail</li>\r\n        <li ng-click=\"$ctrl.closeSliderMenu()\" ui-sref=\"trash-list\"\r\n            ui-sref-active=\"active\">Trash</li>\r\n        <li ng-click=\"$ctrl.closeSliderMenu()\" ui-sref=\"contacts-list\"\r\n            ui-sref-active=\"active\">Contacts</li>\r\n    </ul>\r\n    <logout></logout>\r\n</div>\r\n-->";
 
 /***/ },
 /* 25 */

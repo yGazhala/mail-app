@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   left: map-get($layout, 'content-margin-left') * 1rem;
-  z-index: 2;
+  z-index: 1;
 
   p {
     $font-size: map-get($type-scale, '0') * map-get($fonts, 'base-size');
@@ -13,5 +13,11 @@
     font-size: $font-size * 1px;
     font-weight: bold;
     color: map-get($colors, 'accent-alternative');
+  }
+}
+
+@media screen and (max-width: map-get($points, '-2')) {
+  .navStatus_bar {
+    left: 4rem;
   }
 }

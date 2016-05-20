@@ -2,17 +2,28 @@
     <page-mask></page-mask>
 
     <section class="layout_topNavBar">
-        <logout></logout>
+        <button class="layout_openSideBarButton"
+            ng-class="{layout_sideBarClosed: !$ctrl.isSideBarOpened}"
+            ng-click="$ctrl.openSideBar()"><img src="../../../images/menu-icon.png" alt="menu"></button>
+
+        <div class="layout_topNavBarLogoutContainer">
+            <div class="layout_userAvatar"><img src="../../../images/avatar.jpg" alt="avatar"></div>
+            <logout></logout>
+        </div>
     </section>
 
     <section class="layout_secondaryMenu">
         <div class="layout_logo">mailApp</div>
     </section>
 
-    <compose-button></compose-button>
+    <section class="layout_sideBar" ng-class="{layout_sideBarOpened: $ctrl.isSideBarOpened}"
+        ng-click="$ctrl.closeSideBar()">
 
-    <section class="layout_sideBar">
+        <button class="layout_closeSideBarButton" ng-click="$ctrl.closeSideBar()">Close menu</button>
         <nav-bar></nav-bar>
+        <div class="layout_sideBarLogoutContainer">
+            <logout></logout>
+        </div>
     </section>
 
     <section class="layout_mainContent">

@@ -22,18 +22,8 @@
   }
 }
 
-.logout_userAvatar {
-  $avatar-height: 32; // value in px
-  width: $avatar-height * 1px;
-  position: fixed;
-  // vertical align - middle
-  top: (map-get($layout, top-nav-bar-height) - $avatar-height) / 2 * 1px;
-  right: 85px;
-  z-index: 2;
-
-  img {
-    width: 100%;
-    display: block;
-    border-radius: 21px;
+@media screen and (max-width: map-get($points, '-2')) {
+  .logout_logoutButton {
+    position: static;
   }
 }
