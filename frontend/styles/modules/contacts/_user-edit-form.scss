@@ -56,7 +56,7 @@
   border-top: none;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: map-get($points, '-1')) {
   .userEditForm_container {
 
     label {

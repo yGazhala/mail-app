@@ -46,7 +46,17 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: map-get($points, '-1'))
+and (max-width: map-get($points, '0')) {
+  .messageList_searchField {
+    width: map-get($layout, 'search-field-width') * 0.67px;
+    left: map-get($layout, 'side-bar-width') * 0.67px;
+  }
+
+  .messageList_searchIcon {
+    left: (map-get($layout, 'side-bar-width') * 0.67 + map-get($layout, 'search-field-width') * 0.67 + map-get($fonts, 'base-size')) * 1px;
+  }
+
   .messageList_mailAddress,
   .messageList_messageSubject,
   .messageList_messagePreview {

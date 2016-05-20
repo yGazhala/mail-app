@@ -44,7 +44,7 @@
   width: map-get($layout, 'search-field-width') *1px;
   position: fixed;
   top: (map-get($layout, 'top-nav-bar-height') - map-get($layout, 'search-field-height')) / 2 * 1px;
-  left: (map-get($layout, 'side-bar-width') + 14) * 1px;
+  left: (map-get($layout, 'side-bar-width') + map-get($fonts, 'base-size')) * 1px;
   z-index: 2;
 }
 
@@ -52,7 +52,7 @@
   font-size: (map-get($layout, 'search-field-height') - 4) * 1px;
   position: fixed;
   top: (map-get($layout, 'top-nav-bar-height') - map-get($layout, 'search-field-height')) / 2 * 1px;
-  left: (map-get($layout, 'side-bar-width') + 14 + map-get($layout, 'search-field-width') + 10) * 1px;
+  left: (map-get($layout, 'side-bar-width') + map-get($fonts, 'base-size') + map-get($layout, 'search-field-width') + 10) * 1px;
   color: map-get($colors, 'accent-alternative');
   z-index: 2;
 }

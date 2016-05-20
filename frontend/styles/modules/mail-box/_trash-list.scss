@@ -55,8 +55,17 @@
     background-position: -7px -103px;
   }
 }
+@media screen and (min-width: map-get($points, '-1'))
+and (max-width: map-get($points, '0')) {
+  .trashList_searchField {
+    width: map-get($layout, 'search-field-width') * 0.67px;
+    left: map-get($layout, 'side-bar-width') * 0.67px;
+  }
 
-@media screen and (max-width: 600px) {
+  .trashList_searchIcon {
+    left: (map-get($layout, 'side-bar-width') * 0.67 + map-get($layout, 'search-field-width') * 0.67 + map-get($fonts, 'base-size')) * 1px;
+  }
+
   .trashList_mailAddress,
   .trashList_messageSubject,
   .trashList_messagePreview {
@@ -72,7 +81,7 @@
     color: map-get($colors, 'secondary-text');
   }
 
-  .trashList_restoreMessageButton {
+  .trashList_removeMessageButton {
     right: 0;
   }
 }

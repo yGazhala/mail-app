@@ -8,7 +8,7 @@
 
 .contactsList_openAddUserFormButton {
   @include secondaryMenuButton;
-  left: (map-get($layout, 'side-bar-width') + 14) *1px;
+  left: (map-get($layout, 'side-bar-width') + map-get($fonts, 'base-size')) *1px;
 }
 
 .contactsList_container {
@@ -46,14 +46,24 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: map-get($points, '-1'))
+and (max-width: map-get($points, '0')) {
+  .contactsList_searchField {
+    width: map-get($layout, 'search-field-width') * 0.67px;
+    left: map-get($layout, 'side-bar-width') * 0.67px;
+  }
+
+  .contactsList_searchIcon {
+    left: (map-get($layout, 'side-bar-width') * 0.67 + map-get($layout, 'search-field-width') * 0.67 + map-get($fonts, 'base-size')) * 1px;
+  }
+
   .contactsList_userName,
   .contactsList_userEmail {
     display: block;
     width: 100%;
   }
 
-  .contactsList_removeUserButton {
+  .contactsList_removeMessageButton {
     right: 0;
   }
 }

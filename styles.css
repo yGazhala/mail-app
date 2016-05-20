@@ -544,7 +544,16 @@ html {
   background-position: -7px -39px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 667px) and (max-width: 767px) {
+  .messageList_searchField {
+    width: 234.5px;
+    left: 134px;
+  }
+
+  .messageList_searchIcon {
+    left: 382.5px;
+  }
+
   .messageList_mailAddress,
   .messageList_messageSubject,
   .messageList_messagePreview {
@@ -727,7 +736,16 @@ html {
   background-position: -7px -103px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 667px) and (max-width: 767px) {
+  .trashList_searchField {
+    width: 234.5px;
+    left: 134px;
+  }
+
+  .trashList_searchIcon {
+    left: 382.5px;
+  }
+
   .trashList_mailAddress,
   .trashList_messageSubject,
   .trashList_messagePreview {
@@ -743,7 +761,7 @@ html {
     color: #666666;
   }
 
-  .trashList_restoreMessageButton {
+  .trashList_removeMessageButton {
     right: 0;
   }
 }
@@ -975,14 +993,23 @@ html {
   background-position: -7px -39px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 667px) and (max-width: 767px) {
+  .contactsList_searchField {
+    width: 234.5px;
+    left: 134px;
+  }
+
+  .contactsList_searchIcon {
+    left: 382.5px;
+  }
+
   .contactsList_userName,
   .contactsList_userEmail {
     display: block;
     width: 100%;
   }
 
-  .contactsList_removeUserButton {
+  .contactsList_removeMessageButton {
     right: 0;
   }
 }
@@ -1101,7 +1128,7 @@ html {
   color: white;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 667px) {
   .addUserForm_container {
     width: 100%;
   }
@@ -1248,7 +1275,7 @@ html {
   border-top: none;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 667px) {
   .userEditForm_container label {
     width: 100%;
     margin-right: 0;
