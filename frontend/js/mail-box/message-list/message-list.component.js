@@ -22,6 +22,12 @@ function MessageListController($state, NavStatusService) {
         return $state.is('message-list');
     };
 
+    this.isMobileSearchFieldOpened = false;
+
+    this.toggleMobileSearchField = function() {
+        this.isMobileSearchFieldOpened = !this.isMobileSearchFieldOpened;
+    };
+
     this.removeMessage = function(message) {
         // callback to parent mail-box component
         this.moveMessageToTrash({message: message}).then(() => {

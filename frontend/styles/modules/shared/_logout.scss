@@ -24,6 +24,14 @@
 
 @media screen and (max-width: map-get($points, '-2')) {
   .logout_logoutButton {
+    height: auto;
+    margin-left: 2rem;
+    padding: map-get($type-scale, '-1') * 1rem 0;
     position: static;
+    z-index: inherit;
+    &:hover, &:active {
+      color: map-get($colors, 'accent-alternative');
+      background-color: transparent;
+    }
   }
 }

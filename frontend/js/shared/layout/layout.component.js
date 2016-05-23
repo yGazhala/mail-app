@@ -22,9 +22,9 @@ function LayoutController(PageMaskService, $timeout) {
             $timeout(()=> {
                 this.isSideBarOpened = false;
                 PageMaskService.close();
-            }, 300);
+            }, 200);
         }
-    }
+    };
 }
 
 export default layoutComponent;

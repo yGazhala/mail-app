@@ -299,7 +299,7 @@ html {
 .layout_userAvatar img {
   width: 100%;
   display: block;
-  border-radius: 21px;
+  border-radius: 16px;
 }
 
 .layout_secondaryMenu {
@@ -339,18 +339,14 @@ html {
 }
 
 @media screen and (max-width: 569px) {
-  .layout_topNavBarLogoutContainer {
+  .layout_secondaryMenu {
     display: none;
   }
 
-  .layout_sideBarLogoutContainer {
-    display: block;
-  }
-
   .layout_openSideBarButton {
-    height: 20px;
+    height: 18px;
     position: fixed;
-    top: 14px;
+    top: 15px;
     left: 0.5rem;
     display: inline-block;
     background-color: transparent;
@@ -364,13 +360,10 @@ html {
     width: auto;
   }
 
-  .layout_closeSideBarButton {
-    display: inline-block;
-  }
-
   .layout_sideBar {
+    width: 75%;
     top: 0;
-    left: -200px;
+    left: -75%;
     z-index: 4;
     overflow-y: auto;
     -webkit-transition: left 0.3s;
@@ -383,7 +376,50 @@ html {
     left: 0;
   }
 
+  .layout_sideBarAvatarContainer {
+    padding: 0.75rem 0;
+    background-color: #f1f1f1;
+  }
+
+  .layout_userAvatar {
+    width: 48px;
+    position: static;
+    margin-left: 2rem;
+  }
+
+  .layout_userAvatar img {
+    border-radius: 24px;
+  }
+
+  .layout_closeSideBarButton {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 0;
+    padding-left: 2rem;
+    background-color: #f8f8f8;
+    outline: none;
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: left;
+    font-size: 1rem;
+    color: #4d90fe;
+  }
+
+  .layout_closeSideBarButton:active {
+    background-color: #d9d9d9;
+  }
+
+  .layout_topNavBarLogoutContainer {
+    display: none;
+  }
+
+  .layout_sideBarLogoutContainer {
+    display: block;
+  }
+
   .layout_mainContent {
+    padding-top: 48px;
     padding-left: 0;
   }
 }
@@ -416,7 +452,17 @@ html {
 
 @media screen and (max-width: 569px) {
   .logout_logoutButton {
+    height: auto;
+    margin-left: 2rem;
+    padding: 0.75rem 0;
     position: static;
+    z-index: inherit;
+  }
+
+  .logout_logoutButton:hover,
+  .logout_logoutButton:active {
+    color: #4d90fe;
+    background-color: transparent;
   }
 }
 
@@ -537,6 +583,10 @@ html {
   height: 100%;
   opacity: 0.5;
   transition: opacity 0.3s;
+}
+
+.messageList_toggleMobileSearchFieldButton {
+  display: none;
 }
 
 .messageList_searchField {
@@ -667,6 +717,39 @@ html {
 @media screen and (max-width: 569px) {
   .messageList_searchField {
     display: none;
+  }
+
+  .messageList_container li {
+    background-color: transparent;
+  }
+
+  .messageList_mailAddress,
+  .messageList_messageSubject,
+  .messageList_messagePreview {
+    display: block;
+    width: 100%;
+  }
+
+  .messageList_messageDate {
+    top: 0;
+    right: 0;
+    margin-top: 0;
+    font-size: 0.75rem;
+    color: #666666;
+  }
+
+  .messageList_removeMessageButton {
+    right: 0;
+  }
+
+  .messageList_toggleMobileSearchFieldButton {
+    display: inline-block;
+  }
+
+  .messageList_mobileSearchFieldOpened {
+    display: block;
+    position: static;
+    width: 100%;
   }
 }
 

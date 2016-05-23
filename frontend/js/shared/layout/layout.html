@@ -1,9 +1,8 @@
 <section class="layout_rootContainer" ng-class="{pageMaskOpened: $ctrl.isPageMaskOpened()}">
-    <page-mask></page-mask>
+    <page-mask ng-click="$ctrl.closeSideBar()"></page-mask>
 
     <section class="layout_topNavBar">
-        <button class="layout_openSideBarButton"
-            ng-class="{layout_sideBarClosed: !$ctrl.isSideBarOpened}"
+        <button class="layout_openSideBarButton" ng-class="{layout_sideBarClosed: !$ctrl.isSideBarOpened}"
             ng-click="$ctrl.openSideBar()"><img src="../../../images/menu-icon.png" alt="menu"></button>
 
         <div class="layout_topNavBarLogoutContainer">
@@ -16,12 +15,13 @@
         <div class="layout_logo">mailApp</div>
     </section>
 
-    <section class="layout_sideBar" ng-class="{layout_sideBarOpened: $ctrl.isSideBarOpened}"
-        ng-click="$ctrl.closeSideBar()">
-
-        <button class="layout_closeSideBarButton" ng-click="$ctrl.closeSideBar()">Close menu</button>
-        <nav-bar></nav-bar>
-        <div class="layout_sideBarLogoutContainer">
+    <section class="layout_sideBar" ng-class="{layout_sideBarOpened: $ctrl.isSideBarOpened}">
+        <div class="layout_sideBarAvatarContainer">
+            <div class="layout_userAvatar"><img src="../../../images/avatar.jpg" alt="avatar"></div>
+        </div>
+        <button class="layout_closeSideBarButton" ng-click="$ctrl.closeSideBar()">&#8592; Close menu</button>
+        <nav-bar ng-click="$ctrl.closeSideBar()"></nav-bar>
+        <div class="layout_sideBarLogoutContainer" ng-click="$ctrl.closeSideBar()">
             <logout></logout>
         </div>
     </section>

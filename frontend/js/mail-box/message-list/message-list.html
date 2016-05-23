@@ -1,8 +1,11 @@
 <nav-status></nav-status>
 
 <ul class="messageList_container" ng-if="$ctrl.isMessageListAllowed()">
-    <input class="messageList_searchField" type="text" ng-model="searchText" placeholder="Type to search">
+    <input class="messageList_searchField" type="text" ng-model="searchText" placeholder="Type to search"
+        ng-class="{messageList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}">
     <label class="messageList_searchIcon">&#128269;</label>
+    <button class="messageList_toggleMobileSearchFieldButton"
+        ng-click="$ctrl.toggleMobileSearchField()">&#128269;</button>
 
     <li ng-repeat="message in $ctrl.messages | orderBy: '-date' | filter:searchText"
         ui-sref="message({id: message.id})"

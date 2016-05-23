@@ -5704,7 +5704,7 @@ var bundle =
 	            $timeout(function () {
 	                _this.isSideBarOpened = false;
 	                PageMaskService.close();
-	            }, 300);
+	            }, 200);
 	        }
 	    };
 	}
@@ -5715,7 +5715,7 @@ var bundle =
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section class=\"layout_rootContainer\" ng-class=\"{pageMaskOpened: $ctrl.isPageMaskOpened()}\">\r\n    <page-mask></page-mask>\r\n\r\n    <section class=\"layout_topNavBar\">\r\n        <button class=\"layout_openSideBarButton\"\r\n            ng-class=\"{layout_sideBarClosed: !$ctrl.isSideBarOpened}\"\r\n            ng-click=\"$ctrl.openSideBar()\"><img src=\"" + __webpack_require__(17) + "\" alt=\"menu\"></button>\r\n\r\n        <div class=\"layout_topNavBarLogoutContainer\">\r\n            <div class=\"layout_userAvatar\"><img src=\"" + __webpack_require__(18) + "\" alt=\"avatar\"></div>\r\n            <logout></logout>\r\n        </div>\r\n    </section>\r\n\r\n    <section class=\"layout_secondaryMenu\">\r\n        <div class=\"layout_logo\">mailApp</div>\r\n    </section>\r\n\r\n    <section class=\"layout_sideBar\" ng-class=\"{layout_sideBarOpened: $ctrl.isSideBarOpened}\"\r\n        ng-click=\"$ctrl.closeSideBar()\">\r\n\r\n        <button class=\"layout_closeSideBarButton\" ng-click=\"$ctrl.closeSideBar()\">Close menu</button>\r\n        <nav-bar></nav-bar>\r\n        <div class=\"layout_sideBarLogoutContainer\">\r\n            <logout></logout>\r\n        </div>\r\n    </section>\r\n\r\n    <section class=\"layout_mainContent\">\r\n        <ui-view></ui-view>\r\n    </section>\r\n</section>\r\n\r\n";
+	module.exports = "<section class=\"layout_rootContainer\" ng-class=\"{pageMaskOpened: $ctrl.isPageMaskOpened()}\">\r\n    <page-mask ng-click=\"$ctrl.closeSideBar()\"></page-mask>\r\n\r\n    <section class=\"layout_topNavBar\">\r\n        <button class=\"layout_openSideBarButton\" ng-class=\"{layout_sideBarClosed: !$ctrl.isSideBarOpened}\"\r\n            ng-click=\"$ctrl.openSideBar()\"><img src=\"" + __webpack_require__(17) + "\" alt=\"menu\"></button>\r\n\r\n        <div class=\"layout_topNavBarLogoutContainer\">\r\n            <div class=\"layout_userAvatar\"><img src=\"" + __webpack_require__(18) + "\" alt=\"avatar\"></div>\r\n            <logout></logout>\r\n        </div>\r\n    </section>\r\n\r\n    <section class=\"layout_secondaryMenu\">\r\n        <div class=\"layout_logo\">mailApp</div>\r\n    </section>\r\n\r\n    <section class=\"layout_sideBar\" ng-class=\"{layout_sideBarOpened: $ctrl.isSideBarOpened}\">\r\n        <div class=\"layout_sideBarAvatarContainer\">\r\n            <div class=\"layout_userAvatar\"><img src=\"" + __webpack_require__(18) + "\" alt=\"avatar\"></div>\r\n        </div>\r\n        <button class=\"layout_closeSideBarButton\" ng-click=\"$ctrl.closeSideBar()\">&#8592; Close menu</button>\r\n        <nav-bar ng-click=\"$ctrl.closeSideBar()\"></nav-bar>\r\n        <div class=\"layout_sideBarLogoutContainer\" ng-click=\"$ctrl.closeSideBar()\">\r\n            <logout></logout>\r\n        </div>\r\n    </section>\r\n\r\n    <section class=\"layout_mainContent\">\r\n        <ui-view></ui-view>\r\n    </section>\r\n</section>\r\n\r\n";
 
 /***/ },
 /* 17 */
@@ -6211,6 +6211,12 @@ var bundle =
 	        return $state.is('message-list');
 	    };
 	
+	    this.isMobileSearchFieldOpened = false;
+	
+	    this.toggleMobileSearchField = function () {
+	        this.isMobileSearchFieldOpened = !this.isMobileSearchFieldOpened;
+	    };
+	
 	    this.removeMessage = function (message) {
 	        var _this = this;
 	
@@ -6228,7 +6234,7 @@ var bundle =
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"messageList_container\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input class=\"messageList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\">\r\n    <label class=\"messageList_searchIcon\">&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"messageList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"messageList_removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"messageList_container\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input class=\"messageList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{messageList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"messageList_searchIcon\">&#128269;</label>\r\n    <button class=\"messageList_toggleMobileSearchFieldButton\"\r\n        ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"messageList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"messageList_removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
 
 /***/ },
 /* 39 */

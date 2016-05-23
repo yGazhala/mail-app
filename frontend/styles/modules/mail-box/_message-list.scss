@@ -1,3 +1,7 @@
+.messageList_toggleMobileSearchFieldButton {
+  display: none;
+}
+
 .messageList_searchField {
   @include searchField;
 }
@@ -80,5 +84,40 @@ and (max-width: map-get($points, '0')) {
 @media screen and (max-width: map-get($points, '-2')) {
   .messageList_searchField {
     display: none;
+  }
+
+  .messageList_container {
+    li {
+      background-color: transparent;
+    }
+  }
+
+  .messageList_mailAddress,
+  .messageList_messageSubject,
+  .messageList_messagePreview {
+    display: block;
+    width: 100%;
+  }
+
+  .messageList_messageDate {
+    top: 0;
+    right: 0;
+    margin-top: 0;
+    font-size: map-get($type-scale, '-1') * 1rem;
+    color: map-get($colors, 'secondary-text');
+  }
+
+  .messageList_removeMessageButton {
+    right: 0;
+  }
+
+  .messageList_toggleMobileSearchFieldButton {
+    display: inline-block;
+  }
+
+  .messageList_mobileSearchFieldOpened {
+    display: block;
+    position: static;
+    width: 100%;
   }
 }
