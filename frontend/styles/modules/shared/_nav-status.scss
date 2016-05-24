@@ -16,7 +16,7 @@
   }
 }
 
-@media screen and (max-width: map-get($points, '-2')) {
+@media screen and (max-width: map-get($points, '-1')) {
   .navStatus_bar {
     left: 4rem;
   }

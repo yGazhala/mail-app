@@ -39,10 +39,14 @@
   font-size: map-get($type-scale, '1') * 1rem;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: map-get($points, '-1')) {
   .message_date {
     position: static;
     padding: map-get($type-scale, '-2') * 1rem 0;
     border-bottom: 1px solid map-get($colors, 'border');
+  }
+
+  .message_backwardButton {
+    @include mobileBackwardButton;
   }
 }

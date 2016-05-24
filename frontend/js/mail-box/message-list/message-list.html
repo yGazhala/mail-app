@@ -1,6 +1,7 @@
 <nav-status></nav-status>
 
-<ul class="messageList_container" ng-if="$ctrl.isMessageListAllowed()">
+<ul class="messageList_container" ng-if="$ctrl.isMessageListAllowed()"
+    ng-class="{messageList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}">
     <input class="messageList_searchField" type="text" ng-model="searchText" placeholder="Type to search"
         ng-class="{messageList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}">
     <label class="messageList_searchIcon">&#128269;</label>

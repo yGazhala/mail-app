@@ -31,7 +31,6 @@ $colors: (
 $layout: (
   'top-nav-bar-height': 48, //px
   'secondary-menu-height': 40, //px
-  //'compose-button-height': 27,//px
   'side-bar-width': 200, //px
   'content-margin-left': 2, //rem
   'main-content-padding-left': 14, //px
@@ -43,6 +42,6 @@ $layout: (
 $points: (
   '-3': 240px,
   '-2': 569px,
-  '-1': 667px,
-  '0': 767px
+  '-1': 667px, // devices with screen width 667px and less (smartphones)
+  '0': 767px // devices with screen width more than 767px (pc and tablets)
 )

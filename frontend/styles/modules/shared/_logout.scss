@@ -22,7 +22,7 @@
   }
 }
 
-@media screen and (max-width: map-get($points, '-2')) {
+@media screen and (max-width: map-get($points, '-1')) {
   .logout_logoutButton {
     height: auto;
     margin-left: 2rem;

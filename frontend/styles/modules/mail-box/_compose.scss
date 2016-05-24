@@ -45,3 +45,9 @@
   color: map-get($colors, 'accent');
   border-top: 1px solid map-get($colors, 'border');
 }
+
+@media screen and (max-width: map-get($points, '-1')) {
+  .compose_backwardButton {
+    @include mobileBackwardButton;
+  }
+}

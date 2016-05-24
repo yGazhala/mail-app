@@ -15,7 +15,7 @@
 }
 
 .messageList_mailAddress {
-  width: 25%;
+  width: 30%;
   @include elementInlineBlock;
   font-style: oblique;
 }
@@ -26,7 +26,7 @@
 }
 
 .messageList_messagePreview {
-  width: 30%;
+  width: 25%;
   @include elementInlineBlock;
   color: map-get($colors, 'secondary-text');
 }
@@ -50,17 +50,7 @@
   }
 }
 
-@media screen and (min-width: map-get($points, '-1'))
-and (max-width: map-get($points, '0')) {
-  .messageList_searchField {
-    width: map-get($layout, 'search-field-width') * 0.67px;
-    left: map-get($layout, 'side-bar-width') * 0.67px;
-  }
-
-  .messageList_searchIcon {
-    left: (map-get($layout, 'side-bar-width') * 0.67 + map-get($layout, 'search-field-width') * 0.67 + map-get($fonts, 'base-size')) * 1px;
-  }
-
+@media screen and (max-width: map-get($points, '0')) {
   .messageList_mailAddress,
   .messageList_messageSubject,
   .messageList_messagePreview {
@@ -81,8 +71,21 @@ and (max-width: map-get($points, '0')) {
   }
 }
 
-@media screen and (max-width: map-get($points, '-2')) {
+
+@media screen and (min-width: map-get($points, '-1')) and (max-width: map-get($points, '0')) {
   .messageList_searchField {
+    width: map-get($layout, 'search-field-width') * 0.67px;
+    left: map-get($layout, 'side-bar-width') * 0.67px;
+  }
+
+  .messageList_searchIcon {
+    left: (map-get($layout, 'side-bar-width') * 0.67 + map-get($layout, 'search-field-width') * 0.67 + map-get($fonts, 'base-size')) * 1px;
+  }
+}
+
+@media screen and (max-width: map-get($points, '-1')) {
+  .messageList_searchField,
+  .messageList_searchIcon {
     display: none;
   }
 
@@ -90,34 +93,20 @@ and (max-width: map-get($points, '0')) {
     li {
       background-color: transparent;
     }
-  }
-
-  .messageList_mailAddress,
-  .messageList_messageSubject,
-  .messageList_messagePreview {
-    display: block;
-    width: 100%;
-  }
-
-  .messageList_messageDate {
-    top: 0;
-    right: 0;
-    margin-top: 0;
-    font-size: map-get($type-scale, '-1') * 1rem;
-    color: map-get($colors, 'secondary-text');
-  }
-
-  .messageList_removeMessageButton {
-    right: 0;
+    transition: padding-top 200ms;
   }
 
   .messageList_toggleMobileSearchFieldButton {
-    display: inline-block;
+    @include mobileTopNavBarButton;
+    right: 0;
   }
 
   .messageList_mobileSearchFieldOpened {
-    display: block;
-    position: static;
-    width: 100%;
+    @include mobileSearchFieldOpened;
+  }
+
+  .messageList_container.messageList_mobileSearchFieldOpened {
+    padding-top: map-get($layout, 'search-field-height') * 1px;
+    transition: padding-top 200ms;
   }
 }

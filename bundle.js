@@ -6234,7 +6234,7 @@ var bundle =
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"messageList_container\" ng-if=\"$ctrl.isMessageListAllowed()\">\r\n    <input class=\"messageList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{messageList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"messageList_searchIcon\">&#128269;</label>\r\n    <button class=\"messageList_toggleMobileSearchFieldButton\"\r\n        ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"messageList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"messageList_removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"messageList_container\" ng-if=\"$ctrl.isMessageListAllowed()\"\r\n    ng-class=\"{messageList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <input class=\"messageList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{messageList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"messageList_searchIcon\">&#128269;</label>\r\n    <button class=\"messageList_toggleMobileSearchFieldButton\"\r\n        ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"messageList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"messageList_removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
 
 /***/ },
 /* 39 */
@@ -6299,6 +6299,12 @@ var bundle =
 	        return $state.is('trash-list');
 	    };
 	
+	    this.isMobileSearchFieldOpened = false;
+	
+	    this.toggleMobileSearchField = function () {
+	        this.isMobileSearchFieldOpened = !this.isMobileSearchFieldOpened;
+	    };
+	
 	    this.restoreMessage = function (message) {
 	        var _this = this;
 	
@@ -6316,7 +6322,7 @@ var bundle =
 /* 42 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"trashList_container\" ng-if=\"$ctrl.isTrashListAllowed()\">\r\n    <input class=\"trashList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\">\r\n    <label class=\"trashList_searchIcon\">&#128269;</label>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"trash-details({id: message.id})\"\r\n            >\r\n        <div class=\"trashList_boxId_inbox\" ng-if=\"message.boxId === 'inbox'\">&#8659;</div>\r\n        <div class=\"trashList_boxId_sent\" ng-if=\"message.boxId === 'sent-mail'\">&#8657;</div>\r\n        <div class=\"trashList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"trashList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"trashList_restoreMessageButton\"\r\n            ng-click=\"$ctrl.restoreMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"trashList_container\" ng-if=\"$ctrl.isTrashListAllowed()\"\r\n    ng-class=\"{trashList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <input class=\"trashList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{trashList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"trashList_searchIcon\">&#128269;</label>\r\n    <button class=\"trashList_toggleMobileSearchFieldButton\"\r\n        ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"trash-details({id: message.id})\"\r\n            >\r\n        <div class=\"trashList_boxId_inbox\" ng-if=\"message.boxId === 'inbox'\">&#8659;</div>\r\n        <div class=\"trashList_boxId_sent\" ng-if=\"message.boxId === 'sent-mail'\">&#8657;</div>\r\n        <div class=\"trashList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"trashList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"trashList_restoreMessageButton\"\r\n            ng-click=\"$ctrl.restoreMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>";
 
 /***/ },
 /* 43 */

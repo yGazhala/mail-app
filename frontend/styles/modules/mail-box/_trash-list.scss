@@ -1,3 +1,7 @@
+.trashList_toggleMobileSearchFieldButton {
+  display: none;
+}
+
 .trashList_searchField {
   @include searchField;
 }
@@ -21,7 +25,7 @@
 }
 
 .trashList_mailAddress {
-  width: 25%;
+  width: 30%;
   @include elementInlineBlock;
   font-style: oblique;
 }
@@ -32,7 +36,7 @@
 }
 
 .trashList_messagePreview {
-  width: 30%;
+  width: 25%;
   @include elementInlineBlock;
   color: map-get($colors, 'secondary-text');
 }
@@ -55,17 +59,8 @@
     background-position: -7px -103px;
   }
 }
-@media screen and (min-width: map-get($points, '-1'))
-and (max-width: map-get($points, '0')) {
-  .trashList_searchField {
-    width: map-get($layout, 'search-field-width') * 0.67px;
-    left: map-get($layout, 'side-bar-width') * 0.67px;
-  }
 
-  .trashList_searchIcon {
-    left: (map-get($layout, 'side-bar-width') * 0.67 + map-get($layout, 'search-field-width') * 0.67 + map-get($fonts, 'base-size')) * 1px;
-  }
-
+@media screen and (max-width: map-get($points, '0')) {
   .trashList_mailAddress,
   .trashList_messageSubject,
   .trashList_messagePreview {
@@ -83,5 +78,44 @@ and (max-width: map-get($points, '0')) {
 
   .trashList_removeMessageButton {
     right: 0;
+  }
+}
+
+@media screen and (min-width: map-get($points, '-1')) and (max-width: map-get($points, '0')) {
+  .trashList_searchField {
+    width: map-get($layout, 'search-field-width') * 0.67px;
+    left: map-get($layout, 'side-bar-width') * 0.67px;
+  }
+
+  .trashList_searchIcon {
+    left: (map-get($layout, 'side-bar-width') * 0.67 + map-get($layout, 'search-field-width') * 0.67 + map-get($fonts, 'base-size')) * 1px;
+  }
+}
+
+@media screen and (max-width: map-get($points, '-1')) {
+  .trashList_searchField,
+  .trashList_searchIcon {
+    display: none;
+  }
+
+  .trashList_container {
+    li {
+      background-color: transparent;
+    }
+    transition: padding-top 200ms;
+  }
+
+  .trashList_toggleMobileSearchFieldButton {
+    @include mobileTopNavBarButton;
+    right: 0;
+  }
+
+  .trashList_mobileSearchFieldOpened {
+    @include mobileSearchFieldOpened;
+  }
+
+  .trashList_container.trashList_mobileSearchFieldOpened {
+    padding-top: map-get($layout, 'search-field-height') * 1px;
+    transition: padding-top 200ms;
   }
 }

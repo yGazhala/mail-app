@@ -338,7 +338,7 @@ html {
   padding-left: 214px;
 }
 
-@media screen and (max-width: 569px) {
+@media screen and (max-width: 667px) {
   .layout_secondaryMenu {
     display: none;
   }
@@ -353,6 +353,7 @@ html {
     outline: none;
     border: none;
     padding: 0;
+    cursor: pointer;
   }
 
   .layout_openSideBarButton img {
@@ -450,7 +451,7 @@ html {
   background-color: #a6c8ff;
 }
 
-@media screen and (max-width: 569px) {
+@media screen and (max-width: 667px) {
   .logout_logoutButton {
     height: auto;
     margin-left: 2rem;
@@ -482,7 +483,7 @@ html {
   color: #4d90fe;
 }
 
-@media screen and (max-width: 569px) {
+@media screen and (max-width: 667px) {
   .navStatus_bar {
     left: 4rem;
   }
@@ -595,7 +596,7 @@ html {
   position: fixed;
   top: 12px;
   left: 214px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .messageList_searchIcon {
@@ -604,7 +605,7 @@ html {
   top: 12px;
   left: 574px;
   color: #4d90fe;
-  z-index: 2;
+  z-index: 1;
 }
 
 .messageList_container {
@@ -625,7 +626,7 @@ html {
 }
 
 .messageList_mailAddress {
-  width: 25%;
+  width: 30%;
   display: inline-block;
   vertical-align: middle;
   font-style: oblique;
@@ -638,7 +639,7 @@ html {
 }
 
 .messageList_messagePreview {
-  width: 30%;
+  width: 25%;
   display: inline-block;
   vertical-align: middle;
   color: #666666;
@@ -684,16 +685,7 @@ html {
   background-position: -7px -39px;
 }
 
-@media screen and (min-width: 667px) and (max-width: 767px) {
-  .messageList_searchField {
-    width: 234.5px;
-    left: 134px;
-  }
-
-  .messageList_searchIcon {
-    left: 382.5px;
-  }
-
+@media screen and (max-width: 767px) {
   .messageList_mailAddress,
   .messageList_messageSubject,
   .messageList_messagePreview {
@@ -714,42 +706,64 @@ html {
   }
 }
 
-@media screen and (max-width: 569px) {
+@media screen and (min-width: 667px) and (max-width: 767px) {
   .messageList_searchField {
+    width: 234.5px;
+    left: 134px;
+  }
+
+  .messageList_searchIcon {
+    left: 382.5px;
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .messageList_searchField,
+  .messageList_searchIcon {
     display: none;
+  }
+
+  .messageList_container {
+    transition: padding-top 200ms;
   }
 
   .messageList_container li {
     background-color: transparent;
   }
 
-  .messageList_mailAddress,
-  .messageList_messageSubject,
-  .messageList_messagePreview {
-    display: block;
-    width: 100%;
-  }
-
-  .messageList_messageDate {
-    top: 0;
-    right: 0;
-    margin-top: 0;
-    font-size: 0.75rem;
-    color: #666666;
-  }
-
-  .messageList_removeMessageButton {
-    right: 0;
-  }
-
   .messageList_toggleMobileSearchFieldButton {
+    height: 48px;
     display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    right: 0;
+  }
+
+  .messageList_toggleMobileSearchFieldButton:active {
+    background-color: #4d90fe;
+    color: white;
   }
 
   .messageList_mobileSearchFieldOpened {
     display: block;
-    position: static;
+    top: 48px;
+    left: 0;
     width: 100%;
+  }
+
+  .messageList_container.messageList_mobileSearchFieldOpened {
+    padding-top: 24px;
+    transition: padding-top 200ms;
   }
 }
 
@@ -800,12 +814,41 @@ html {
   font-size: 1.333rem;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 667px) {
   .message_date {
     position: static;
     padding: 0.563rem 0;
     border-bottom: 1px solid #e5e5e5;
   }
+
+  .message_backwardButton {
+    height: 48px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    left: 0;
+    z-index: 2;
+    background-color: #f1f1f1;
+  }
+
+  .message_backwardButton:active {
+    background-color: #4d90fe;
+    color: white;
+  }
+}
+
+.trashList_toggleMobileSearchFieldButton {
+  display: none;
 }
 
 .trashList_searchField {
@@ -814,7 +857,7 @@ html {
   position: fixed;
   top: 12px;
   left: 214px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .trashList_searchIcon {
@@ -823,7 +866,7 @@ html {
   top: 12px;
   left: 574px;
   color: #4d90fe;
-  z-index: 2;
+  z-index: 1;
 }
 
 .trashList_container {
@@ -856,7 +899,7 @@ html {
 }
 
 .trashList_mailAddress {
-  width: 25%;
+  width: 30%;
   display: inline-block;
   vertical-align: middle;
   font-style: oblique;
@@ -869,7 +912,7 @@ html {
 }
 
 .trashList_messagePreview {
-  width: 30%;
+  width: 25%;
   display: inline-block;
   vertical-align: middle;
   color: #666666;
@@ -915,16 +958,7 @@ html {
   background-position: -7px -103px;
 }
 
-@media screen and (min-width: 667px) and (max-width: 767px) {
-  .trashList_searchField {
-    width: 234.5px;
-    left: 134px;
-  }
-
-  .trashList_searchIcon {
-    left: 382.5px;
-  }
-
+@media screen and (max-width: 767px) {
   .trashList_mailAddress,
   .trashList_messageSubject,
   .trashList_messagePreview {
@@ -942,6 +976,67 @@ html {
 
   .trashList_removeMessageButton {
     right: 0;
+  }
+}
+
+@media screen and (min-width: 667px) and (max-width: 767px) {
+  .trashList_searchField {
+    width: 234.5px;
+    left: 134px;
+  }
+
+  .trashList_searchIcon {
+    left: 382.5px;
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .trashList_searchField,
+  .trashList_searchIcon {
+    display: none;
+  }
+
+  .trashList_container {
+    transition: padding-top 200ms;
+  }
+
+  .trashList_container li {
+    background-color: transparent;
+  }
+
+  .trashList_toggleMobileSearchFieldButton {
+    height: 48px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    right: 0;
+  }
+
+  .trashList_toggleMobileSearchFieldButton:active {
+    background-color: #4d90fe;
+    color: white;
+  }
+
+  .trashList_mobileSearchFieldOpened {
+    display: block;
+    top: 48px;
+    left: 0;
+    width: 100%;
+  }
+
+  .trashList_container.trashList_mobileSearchFieldOpened {
+    padding-top: 24px;
+    transition: padding-top 200ms;
   }
 }
 
@@ -1076,13 +1171,40 @@ html {
   border-top: 1px solid #e5e5e5;
 }
 
+@media screen and (max-width: 667px) {
+  .compose_backwardButton {
+    height: 48px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    left: 0;
+    z-index: 2;
+    background-color: #f1f1f1;
+  }
+
+  .compose_backwardButton:active {
+    background-color: #4d90fe;
+    color: white;
+  }
+}
+
 .contactsList_searchField {
   height: 24px;
   width: 350px;
   position: fixed;
   top: 12px;
   left: 214px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .contactsList_searchIcon {
@@ -1091,7 +1213,7 @@ html {
   top: 12px;
   left: 574px;
   color: #4d90fe;
-  z-index: 2;
+  z-index: 1;
 }
 
 .contactsList_openAddUserFormButton {

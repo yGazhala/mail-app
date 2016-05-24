@@ -17,6 +17,12 @@ function TrashListController($state, NavStatusService) {
         return $state.is('trash-list');
     };
 
+    this.isMobileSearchFieldOpened = false;
+
+    this.toggleMobileSearchField = function() {
+        this.isMobileSearchFieldOpened = !this.isMobileSearchFieldOpened;
+    };
+
     this.restoreMessage = function(message) {
         // callback to parent mail-box component
         this.moveMessageToOriginalBox({message: message}).then(() => {

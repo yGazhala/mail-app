@@ -1,8 +1,12 @@
 <nav-status></nav-status>
 
-<ul class="trashList_container" ng-if="$ctrl.isTrashListAllowed()">
-    <input class="trashList_searchField" type="text" ng-model="searchText" placeholder="Type to search">
+<ul class="trashList_container" ng-if="$ctrl.isTrashListAllowed()"
+    ng-class="{trashList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}">
+    <input class="trashList_searchField" type="text" ng-model="searchText" placeholder="Type to search"
+        ng-class="{trashList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}">
     <label class="trashList_searchIcon">&#128269;</label>
+    <button class="trashList_toggleMobileSearchFieldButton"
+        ng-click="$ctrl.toggleMobileSearchField()">&#128269;</button>
 
     <li ng-repeat="message in $ctrl.messages | orderBy: '-date' | filter:searchText"
         ui-sref="trash-details({id: message.id})"
