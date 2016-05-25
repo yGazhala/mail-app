@@ -1,11 +1,16 @@
 <nav-status></nav-status>
 
 <button class="contactsList_openAddUserFormButton"
-    ng-if="$ctrl.isContactsListAllowed()" ui-sref="add-user">Add</button>
+    ng-if="$ctrl.isContactsListAllowed()" ui-sref="add-user"></button>
 
-<ul class="contactsList_container" ng-if="$ctrl.isContactsListAllowed()">
-    <input class="contactsList_searchField" type="text" ng-model="searchText" placeholder="Type to search">
+<ul class="contactsList_container" ng-if="$ctrl.isContactsListAllowed()"
+    ng-class="{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}">
+    <input class="contactsList_searchField" type="text" ng-model="searchText" placeholder="Type to search"
+        ng-class="{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}">
     <label class="contactsList_searchIcon">&#128269;</label>
+    <button class="contactsList_toggleMobileSearchFieldButton"
+            ng-click="$ctrl.toggleMobileSearchField()">&#128269;</button>
+
     <li ng-repeat="user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText"
         ui-sref="user-card({userId: user.id})">
         <div class="contactsList_userAvatar"><img src="../../../images/user-icon.png" alt="Avatar"></div>

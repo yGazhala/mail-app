@@ -57,8 +57,11 @@
 }
 
 @media screen and (max-width: map-get($points, '-1')) {
-  .userEditForm_container {
+  .userEditForm_backwardButton {
+    @include mobileBackwardButton;
+  }
 
+  .userEditForm_container {
     label {
       width: 100%;
       margin-right: 0;

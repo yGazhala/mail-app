@@ -5,8 +5,13 @@
 
 .userCard_openUserEditFormButton {
   @include secondaryMenuButton;
-  left: (map-get($layout, 'side-bar-width') + map-get($layout, 'main-content-padding-left') + 62) *1px;
-  padding: 0 0.7rem;
+  left: (map-get($layout, 'side-bar-width') + map-get($layout, 'main-content-padding-left') + 70) *1px;
+  background-image: url('../../../images/edit-user-17x18.png');
+  background-repeat: no-repeat;
+  background-position: +10px -44px;
+  &:hover {
+    background-position: +10px -7px;
+  }
 }
 
 .userCard_container {
@@ -45,5 +50,42 @@
   font-style: oblique;
   span {
     margin-left: map-get($type-scale, '-2') * 1rem;
+  }
+}
+
+@media screen and (max-width: map-get($points, '-1')) {
+  .userCard_backwardButton {
+    @include mobileBackwardButton;
+  }
+
+  .userCard_openUserEditFormButton {
+    @include mobileTopNavBarButton;
+    width: 33px;
+    right: 0;
+    left: auto;
+    padding: 0;
+    background-position: 0 -68px;
+    transition: none;
+    transition: background-color 200ms;
+    &:hover {
+      background-position: 0 -68px;
+    }
+    &:active {
+      background-position: 0 -106px;
+    }
+  }
+
+  .userCard_fullName {
+    background-color: transparent;
+  }
+
+  .userCard_container table {
+    tr:nth-child(2n) {
+      background-color: transparent;
+    }
+
+    tr:nth-child(2n+1) {
+      background-color: map-get($colors, 'primary-light');
+    }
   }
 }

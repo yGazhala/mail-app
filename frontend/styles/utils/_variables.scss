@@ -17,9 +17,8 @@ $colors: (
   'primary': rgb(241, 241, 241),
   'primary-light': mix(white, rgb(241, 241, 241), 50%),
   'primary-dark': mix(black, rgb(241, 241, 241), 70%),
-  'border': rgb(229, 229, 229), // 209, 209, 209
-  'secondary': rgb(265, 165, 0),
-  'accent': rgb(221, 75, 57), //  209, 72, 54
+  'border': rgb(229, 229, 229),
+  'accent': rgb(221, 75, 57),
   'accent-alternative': rgb(77, 144, 254),
   'background': rgb(255, 255, 255),
   'base-text': rgb(34, 34, 34),
@@ -40,8 +39,6 @@ $layout: (
 );
 
 $points: (
-  '-3': 240px,
-  '-2': 569px,
   '-1': 667px, // devices with screen width 667px and less (smartphones)
   '0': 767px // devices with screen width more than 767px (pc and tablets)
 )

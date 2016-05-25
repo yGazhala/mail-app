@@ -6540,6 +6540,12 @@ var bundle =
 	        return $state.is('contacts-list') || $state.is('add-user');
 	    };
 	
+	    this.isMobileSearchFieldOpened = false;
+	
+	    this.toggleMobileSearchField = function () {
+	        this.isMobileSearchFieldOpened = !this.isMobileSearchFieldOpened;
+	    };
+	
 	    this.addNewUser = function (newUser) {
 	        var _this2 = this;
 	
@@ -6582,7 +6588,7 @@ var bundle =
 /* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<nav-status></nav-status>\r\n\r\n<button class=\"contactsList_openAddUserFormButton\"\r\n    ng-if=\"$ctrl.isContactsListAllowed()\" ui-sref=\"add-user\">Add</button>\r\n\r\n<ul class=\"contactsList_container\" ng-if=\"$ctrl.isContactsListAllowed()\">\r\n    <input class=\"contactsList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\">\r\n    <label class=\"contactsList_searchIcon\">&#128269;</label>\r\n    <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n        ui-sref=\"user-card({userId: user.id})\">\r\n        <div class=\"contactsList_userAvatar\"><img src=\"" + __webpack_require__(29) + "\" alt=\"Avatar\"></div>\r\n        <div class=\"contactsList_userName\">{{user.fullName}}</div>\r\n        <div class=\"contactsList_userEmail\">{{user.email}}</div>\r\n        <button class=\"contactsList_removeUserButton\"\r\n            ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\"\r\n                ></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<button class=\"contactsList_openAddUserFormButton\"\r\n    ng-if=\"$ctrl.isContactsListAllowed()\" ui-sref=\"add-user\"></button>\r\n\r\n<ul class=\"contactsList_container\" ng-if=\"$ctrl.isContactsListAllowed()\"\r\n    ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <input class=\"contactsList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"contactsList_searchIcon\">&#128269;</label>\r\n    <button class=\"contactsList_toggleMobileSearchFieldButton\"\r\n            ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n        ui-sref=\"user-card({userId: user.id})\">\r\n        <div class=\"contactsList_userAvatar\"><img src=\"" + __webpack_require__(29) + "\" alt=\"Avatar\"></div>\r\n        <div class=\"contactsList_userName\">{{user.fullName}}</div>\r\n        <div class=\"contactsList_userEmail\">{{user.email}}</div>\r\n        <button class=\"contactsList_removeUserButton\"\r\n            ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\"\r\n                ></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n";
 
 /***/ },
 /* 49 */
@@ -6662,7 +6668,7 @@ var bundle =
 /* 52 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"userCard_container\" ng-if=\"$ctrl.isUserCardAllowed()\">\r\n    <button class=\"userCard_backwardButton\" ui-sref=\"contacts-list\">&#8592;</button>\r\n    <button class=\"userCard_openUserEditFormButton\" ui-sref=\"edit-form\">Edit</button>\r\n\r\n    <h3 class=\"userCard_fullName\">{{$ctrl.selectedUser.fullName}}</h3>\r\n    <table>\r\n        <tbody>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Date of birth:</span></td><td>{{$ctrl.selectedUser.birthdate}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Gender:</span></td><td>{{$ctrl.selectedUser.gender}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Address:</span></td><td>{{$ctrl.selectedUser.address}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Email:</span></td><td>{{$ctrl.selectedUser.email}}</td>\r\n        </tr>\r\n        </tbody>\r\n    </table>\r\n</section>\r\n\r\n<ui-view></ui-view>";
+	module.exports = "<section class=\"userCard_container\" ng-if=\"$ctrl.isUserCardAllowed()\">\r\n    <button class=\"userCard_backwardButton\" ui-sref=\"contacts-list\">&#8592;</button>\r\n    <button class=\"userCard_openUserEditFormButton\" ui-sref=\"edit-form\"></button>\r\n\r\n    <h3 class=\"userCard_fullName\">{{$ctrl.selectedUser.fullName}}</h3>\r\n    <table>\r\n        <tbody>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Date of birth:</span></td><td>{{$ctrl.selectedUser.birthdate}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Gender:</span></td><td>{{$ctrl.selectedUser.gender}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Address:</span></td><td>{{$ctrl.selectedUser.address}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Email:</span></td><td>{{$ctrl.selectedUser.email}}</td>\r\n        </tr>\r\n        </tbody>\r\n    </table>\r\n</section>\r\n\r\n<ui-view></ui-view>";
 
 /***/ },
 /* 53 */

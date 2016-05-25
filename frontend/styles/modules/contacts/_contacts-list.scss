@@ -1,3 +1,7 @@
+.contactsList_toggleMobileSearchFieldButton {
+  display: none;
+}
+
 .contactsList_searchField {
   @include searchField;
 }
@@ -9,6 +13,12 @@
 .contactsList_openAddUserFormButton {
   @include secondaryMenuButton;
   left: (map-get($layout, 'side-bar-width') + map-get($fonts, 'base-size')) *1px;
+  background-image: url('../../../images/add-user-17x23.png');
+  background-repeat: no-repeat;
+  background-position: +3px -45px;
+  &:hover {
+    background-position: +3px -8px;
+  }
 }
 
 .contactsList_container {
@@ -46,17 +56,7 @@
   }
 }
 
-@media screen and (min-width: map-get($points, '-1'))
-and (max-width: map-get($points, '0')) {
-  .contactsList_searchField {
-    width: map-get($layout, 'search-field-width') * 0.67px;
-    left: map-get($layout, 'side-bar-width') * 0.67px;
-  }
-
-  .contactsList_searchIcon {
-    left: (map-get($layout, 'side-bar-width') * 0.67 + map-get($layout, 'search-field-width') * 0.67 + map-get($fonts, 'base-size')) * 1px;
-  }
-
+@media screen and (max-width: map-get($points, '0')) {
   .contactsList_userName,
   .contactsList_userEmail {
     display: block;
@@ -65,5 +65,61 @@ and (max-width: map-get($points, '0')) {
 
   .contactsList_removeMessageButton {
     right: 0;
+  }
+}
+
+@media screen and (min-width: map-get($points, '-1')) and (max-width: map-get($points, '0')) {
+  .contactsList_searchField {
+    width: map-get($layout, 'search-field-width') * 0.67px;
+    left: map-get($layout, 'side-bar-width') * 0.67px;
+  }
+
+  .contactsList_searchIcon {
+    left: (map-get($layout, 'side-bar-width') * 0.67 + map-get($layout, 'search-field-width') * 0.67 + map-get($fonts, 'base-size')) * 1px;
+  }
+}
+
+@media screen and (max-width: map-get($points, '-1')) {
+  .contactsList_searchField,
+  .contactsList_searchIcon {
+    display: none;
+  }
+
+  .contactsList_container {
+    li {
+      background-color: transparent;
+    }
+    transition: padding-top 200ms;
+  }
+
+  .contactsList_toggleMobileSearchFieldButton {
+    @include mobileTopNavBarButton;
+    right: 0;
+  }
+
+  .contactsList_mobileSearchFieldOpened {
+    @include mobileSearchFieldOpened;
+  }
+
+  .contactsList_container.contactsList_mobileSearchFieldOpened {
+    padding-top: map-get($layout, 'search-field-height') * 1px;
+    transition: padding-top 200ms;
+  }
+
+  .contactsList_openAddUserFormButton {
+    @include mobileTopNavBarButton;
+    width: 33px;
+    left: auto;
+    right: 44px;
+    padding: 0;
+    background-position: -6px -68px;
+    transition: none;
+    transition: background-color 200ms;
+    &:hover {
+      background-position: -6px -68px;
+    }
+    &:active {
+      background-position: -6px -106px;
+    }
   }
 }

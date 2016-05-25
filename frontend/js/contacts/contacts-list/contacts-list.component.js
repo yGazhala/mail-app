@@ -19,6 +19,12 @@ function ContactsListController(ContactsService, PageMaskService, NavStatusServi
         return $state.is('contacts-list') || $state.is('add-user');
     };
 
+    this.isMobileSearchFieldOpened = false;
+
+    this.toggleMobileSearchField = function() {
+        this.isMobileSearchFieldOpened = !this.isMobileSearchFieldOpened;
+    };
+
     this.addNewUser = function(newUser) {
         ContactsService.addUser(newUser)
             .then((newUser) => {

@@ -84,11 +84,25 @@
 @mixin secondaryMenuButton {
   $button-height: 24; //px
   height: $button-height *1px;
+  width: 4rem;
   position: fixed;
   top: (map-get($layout, 'top-nav-bar-height') + map-get($layout, 'secondary-menu-height')/2 - $button-height/2) * 1px;
-  z-index: 2;
-  padding: 0 1rem;
+  z-index: 1;
+  padding: 0;
+  color: map-get($colors, 'heading-text');
   font-size: map-get($type-scale, '0') * 1rem;
+  background-color: map-get($colors, 'primary');
+  outline: none;
+  border: 1px solid map-get($colors, 'border');
+  border-radius: 2px;
+  &:hover {
+    color: map-get($colors, 'base-text');
+    border-color: mix(black, map-get($colors, 'border'), 10%);
+  }
+  &:active {
+    color: map-get($colors, 'accent-alternative');
+    border-color: map-get($colors, 'accent-alternative');
+  }
 }
 
 @mixin mobileSearchFieldOpened {
@@ -124,4 +138,8 @@
   left: 0;
   z-index: 2;
   background-color: map-get($colors, 'primary');
+  border-bottom: 1px solid map-get($colors, 'border');
+  &:hover {
+    border-bottom: 1px solid map-get($colors, 'border');
+  }
 }

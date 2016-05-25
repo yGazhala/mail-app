@@ -29,6 +29,7 @@
     padding: map-get($type-scale, '-1') * 1rem 0;
     position: static;
     z-index: inherit;
+    cursor: pointer;
     &:hover, &:active {
       color: map-get($colors, 'accent-alternative');
       background-color: transparent;

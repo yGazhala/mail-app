@@ -49,5 +49,10 @@
 .trashDetails_backwardButton {
   @include secondaryMenuButton;
   left: (map-get($layout, 'side-bar-width') + 14) *1px;
-  font-size: map-get($type-scale, '1') * 1rem;
+}
+
+@media screen and (max-width: map-get($points, '-1')) {
+  .trashDetails_backwardButton {
+    @include mobileBackwardButton;
+  }
 }

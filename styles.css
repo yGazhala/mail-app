@@ -458,6 +458,7 @@ html {
     padding: 0.75rem 0;
     position: static;
     z-index: inherit;
+    cursor: pointer;
   }
 
   .logout_logoutButton:hover,
@@ -805,13 +806,28 @@ html {
 
 .message_backwardButton {
   height: 24px;
+  width: 4rem;
   position: fixed;
   top: 56px;
-  z-index: 2;
-  padding: 0 1rem;
+  z-index: 1;
+  padding: 0;
+  color: #555555;
   font-size: 1rem;
+  background-color: #f1f1f1;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
   left: 214px;
-  font-size: 1.333rem;
+}
+
+.message_backwardButton:hover {
+  color: #222222;
+  border-color: #cecece;
+}
+
+.message_backwardButton:active {
+  color: #4d90fe;
+  border-color: #4d90fe;
 }
 
 @media screen and (max-width: 667px) {
@@ -839,11 +855,16 @@ html {
     left: 0;
     z-index: 2;
     background-color: #f1f1f1;
+    border-bottom: 1px solid #e5e5e5;
   }
 
   .message_backwardButton:active {
     background-color: #4d90fe;
     color: white;
+  }
+
+  .message_backwardButton:hover {
+    border-bottom: 1px solid #e5e5e5;
   }
 }
 
@@ -1091,23 +1112,86 @@ html {
 
 .trashDetails_backwardButton {
   height: 24px;
+  width: 4rem;
   position: fixed;
   top: 56px;
-  z-index: 2;
-  padding: 0 1rem;
+  z-index: 1;
+  padding: 0;
+  color: #555555;
   font-size: 1rem;
+  background-color: #f1f1f1;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
   left: 214px;
-  font-size: 1.333rem;
+}
+
+.trashDetails_backwardButton:hover {
+  color: #222222;
+  border-color: #cecece;
+}
+
+.trashDetails_backwardButton:active {
+  color: #4d90fe;
+  border-color: #4d90fe;
+}
+
+@media screen and (max-width: 667px) {
+  .trashDetails_backwardButton {
+    height: 48px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    left: 0;
+    z-index: 2;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .trashDetails_backwardButton:active {
+    background-color: #4d90fe;
+    color: white;
+  }
+
+  .trashDetails_backwardButton:hover {
+    border-bottom: 1px solid #e5e5e5;
+  }
 }
 
 .compose_backwardButton {
   height: 24px;
+  width: 4rem;
   position: fixed;
   top: 56px;
-  z-index: 2;
-  padding: 0 1rem;
+  z-index: 1;
+  padding: 0;
+  color: #555555;
   font-size: 1rem;
+  background-color: #f1f1f1;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
   left: 214px;
+}
+
+.compose_backwardButton:hover {
+  color: #222222;
+  border-color: #cecece;
+}
+
+.compose_backwardButton:active {
+  color: #4d90fe;
+  border-color: #4d90fe;
 }
 
 .compose_container {
@@ -1190,12 +1274,21 @@ html {
     left: 0;
     z-index: 2;
     background-color: #f1f1f1;
+    border-bottom: 1px solid #e5e5e5;
   }
 
   .compose_backwardButton:active {
     background-color: #4d90fe;
     color: white;
   }
+
+  .compose_backwardButton:hover {
+    border-bottom: 1px solid #e5e5e5;
+  }
+}
+
+.contactsList_toggleMobileSearchFieldButton {
+  display: none;
 }
 
 .contactsList_searchField {
@@ -1218,12 +1311,35 @@ html {
 
 .contactsList_openAddUserFormButton {
   height: 24px;
+  width: 4rem;
   position: fixed;
   top: 56px;
-  z-index: 2;
-  padding: 0 1rem;
+  z-index: 1;
+  padding: 0;
+  color: #555555;
   font-size: 1rem;
+  background-color: #f1f1f1;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
   left: 214px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAACUCAYAAAAKwdBgAAAHIElEQVR4Xu2cT2gc1x3Hv98RcmVSNxcfcnCLd2RSkJ1De/EtMhgCBitxYZ+Nwbg22KeAvXWg1PjgBQeDLpGcWzE4wTEU72hlKtE6Iaf2YAgUqhb7pp1VyaU0pxTJdUg137Kzkqo/q5l5s5pBgrdHz+/NfP2Z92bMfPx7xB76cQ9lhQtb1N1yZB1ZwC2womaBIxuTrVQqV0h+AOCnAP5F8tHQ0FD9xYsXi3nRF/Lo8n1/HMCve4T6yvO80fn5+e/yBN7xsL7vvwXgbwmL90YYhhOlhfV9/0sAbwC4HIbhX9ZfuFKp3CL5YUKYP4dhOFpm2H8A+EkURScWFhb+tP7CCVNgtWwuDMOf7YqwlUrlAsnPtgsj6WG73f5loWF93/9k3QUMgNckfU7yn50/J3m/1Wo9O3To0P7BwcHnJP0egb73PO/4/Pz8X4sOq6QLSLrYbrdjokeOHBmJomgGwPC6MUsAroZh+Ls8QWMgWQf6vn97XX0NwOsAPgXQmb+QNN1ut/++er7Dhw8PDQwMnJH0JoBvoih6srCwEN+FvL/MYTctom0XWN4gWcYVEvbo0aP7lpaWRjzPGyZ5AMArAF9Leh6G4bdZgvWqyRu2s9gOkrzZarWed068ctvPATgv6W0A+3tcMAIwJ6kp6YHttMgVdnOI4eHhU5J+C+DHFtT+A+BOGIadV3PnL5H66zus7/snAXwBYCD1aj0KSN5ttVq3sozdibDTAH6R5WLb1CyFYfjDLON3ImyH6jtZLrZdTRiGmXJkKkoK4vv+3gnbD1HbsX2Ttb1gP/UubD/0ksY6so6szb9ni6Jlc143Z21o2dQ6sja0bGodWRtaNrWOrA0tm1pH1oaWTa0ja0PLprYwstVqdYsAkVQPgmB3CZCzZ8+OS+opQBYXF0efPn26OwSIMSZRgJC80Wg0yhMgxphYgERRdLnZbG4QIMaYzqegRAESBEF5AsQYE3+fBXAiCIINAiRhCqyupbkgCMoTIClhL0jaVoCQfNhoNIoVIMaYLQIEwOcA4k/vku5PTU09M8Z0vst2vtn2FCBRFB1vNpvFChBjTKIAAXAxCIKYqDFmBMAWAULyaqPRKF6AVKvV257nxc9lSWsChGQsQJaXl6ebzeaaALl06dLQ4uLiGZKxAAHwJAiC8gVI0py1eSPZ1uZ6g6WFNcbsAzBCcljSAUmvPM+LBUgQBOUKkJXFdtDzvJuPHz+OBUjntr98+fKcpPMAEgUIyViA2E6LXGQ3375qtXqKpLUAkXTn2LFj4/V6vRwBUq1WT5LMLUAk3Z2amipHgBhj+hYgQRCUI0CMMX07hSAIMk3HTEVJj5g9Fdb2WdlPfd9k+7m47VgX1pZY1npHNisp2zpH1pZY1npHNisp2zpH1pZY1npHNisp2zpH1pZY1npHNisp2zpH1pZY1vrCyI5N6AqotQ4QQI+GBr168D53lwA5PbE8TnKLABHw1bLH0afXuDsEyHsf6a3IU0IHCG/M1lieADl9L/qSwhuMeHnmBjcIkLEJ3QKVKEBma155AmRsMuoKEI8nZq9xgwDZbgqsLiICczM1rzwBkhT23UldEBIECPRwpjZQrAAZm1xeJ0AYd4B0BYjiT+8evfu/v85n5iPtf+WppwAR8L3n8fjMNRYrQMYmo2QBQl6cvd7tqXnvY41EkbZ2gIhXZ3/F4gXI6Xu67UVRV4B4rEGdDhB9SnU7QEBveqbGNQFy4hMN/ejfOCPhTQrf/Hcfnvzx/W4fTt5frpdC0pzNGyTLuELCmrr2Lb2OkQFiGMIBeniFCF//4Ds8D37DcgVId7HxYETe/MN1xgJk5bafg3ReKQIEYHN5EA9sp0Uusptv2diEToH2HSAU7/z8W4zX6yxHgJy+p5OUcgsQQHdnawPlCJB3J6Np9dkBMlvzyhEgYxPRF2B/HSCzta4TTvtlKko6yZ4Km0ZjJ4/3TXYnw6Sdy4VNI5T3uCObl1zaOEc2jVDe445sXnJp4xzZNEJ5jzuyecmljXNk0wjlPe7I5iWXNs6RTSOU93hhZCVdAbBOgOARgDq5ywSIpG23wAIwSu4SASIpdQssskQBImltCyxyowCRlNoBQrI8ASJprQOE3ChAEqbA6rqaI1meAEkJewHAth0gAB6SLFaASErsAAFwn+QzSYkdIACOkwULEEmpHSCrm4pJ6tkB0tkCiyxBgEhK3AILwDT5fwEiaQjAGQBrHSCrG5GV+lJImrN5g2QZl+sNlhZWUtwBsrIT2toWWJ1uJrJkAbKy2A4CuEl2BcjKbY+3wErrAAHQBPDAdlrkIrv5lkk6BcC6A6SzBRaAzv9NKEeASOprCywAd0mWI0A6G+H1uwUWyXIEiLpaqa8tsEhmmo6ZipIeK3sqbJbn407V9E12p4JkOY8Lm4VSnhpHNg+1LGMc2SyU8tQ4snmoZRnzPwHNzLPOjNhUAAAAAElFTkSuQmCC);
+  background-repeat: no-repeat;
+  background-position: +3px -45px;
+}
+
+.contactsList_openAddUserFormButton:hover {
+  color: #222222;
+  border-color: #cecece;
+}
+
+.contactsList_openAddUserFormButton:active {
+  color: #4d90fe;
+  border-color: #4d90fe;
+}
+
+.contactsList_openAddUserFormButton:hover {
+  background-position: +3px -8px;
 }
 
 .contactsList_container {
@@ -1294,16 +1410,7 @@ html {
   background-position: -7px -39px;
 }
 
-@media screen and (min-width: 667px) and (max-width: 767px) {
-  .contactsList_searchField {
-    width: 234.5px;
-    left: 134px;
-  }
-
-  .contactsList_searchIcon {
-    left: 382.5px;
-  }
-
+@media screen and (max-width: 767px) {
   .contactsList_userName,
   .contactsList_userEmail {
     display: block;
@@ -1315,20 +1422,133 @@ html {
   }
 }
 
+@media screen and (min-width: 667px) and (max-width: 767px) {
+  .contactsList_searchField {
+    width: 234.5px;
+    left: 134px;
+  }
+
+  .contactsList_searchIcon {
+    left: 382.5px;
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .contactsList_searchField,
+  .contactsList_searchIcon {
+    display: none;
+  }
+
+  .contactsList_container {
+    transition: padding-top 200ms;
+  }
+
+  .contactsList_container li {
+    background-color: transparent;
+  }
+
+  .contactsList_toggleMobileSearchFieldButton {
+    height: 48px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    right: 0;
+  }
+
+  .contactsList_toggleMobileSearchFieldButton:active {
+    background-color: #4d90fe;
+    color: white;
+  }
+
+  .contactsList_mobileSearchFieldOpened {
+    display: block;
+    top: 48px;
+    left: 0;
+    width: 100%;
+  }
+
+  .contactsList_container.contactsList_mobileSearchFieldOpened {
+    padding-top: 24px;
+    transition: padding-top 200ms;
+  }
+
+  .contactsList_openAddUserFormButton {
+    height: 48px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    width: 33px;
+    left: auto;
+    right: 44px;
+    padding: 0;
+    background-position: -6px -68px;
+    transition: none;
+    transition: background-color 200ms;
+  }
+
+  .contactsList_openAddUserFormButton:active {
+    background-color: #4d90fe;
+    color: white;
+  }
+
+  .contactsList_openAddUserFormButton:hover {
+    background-position: -6px -68px;
+  }
+
+  .contactsList_openAddUserFormButton:active {
+    background-position: -6px -106px;
+  }
+}
+
 .addUserForm_pageWrapper {
-  width: 100%;
-  height: 100%;
   position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
   overflow: auto;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0;
+  background-color: transparent;
   z-index: 4;
 }
 
+.addUserForm_pageWrapper:before {
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  content: '';
+}
+
 .addUserForm_container {
+  display: inline-block;
+  white-space: normal;
+  font-size: 14px;
+  vertical-align: middle;
+  text-align: left;
   background-color: white;
 }
 
@@ -1453,23 +1673,61 @@ html {
 
 .userCard_backwardButton {
   height: 24px;
+  width: 4rem;
   position: fixed;
   top: 56px;
-  z-index: 2;
-  padding: 0 1rem;
+  z-index: 1;
+  padding: 0;
+  color: #555555;
   font-size: 1rem;
+  background-color: #f1f1f1;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
   left: 214px;
+}
+
+.userCard_backwardButton:hover {
+  color: #222222;
+  border-color: #cecece;
+}
+
+.userCard_backwardButton:active {
+  color: #4d90fe;
+  border-color: #4d90fe;
 }
 
 .userCard_openUserEditFormButton {
   height: 24px;
+  width: 4rem;
   position: fixed;
   top: 56px;
-  z-index: 2;
-  padding: 0 1rem;
+  z-index: 1;
+  padding: 0;
+  color: #555555;
   font-size: 1rem;
-  left: 276px;
-  padding: 0 0.7rem;
+  background-color: #f1f1f1;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
+  left: 284px;
+  background-image: url(data:image/png;base64,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);
+  background-repeat: no-repeat;
+  background-position: +10px -44px;
+}
+
+.userCard_openUserEditFormButton:hover {
+  color: #222222;
+  border-color: #cecece;
+}
+
+.userCard_openUserEditFormButton:active {
+  color: #4d90fe;
+  border-color: #4d90fe;
+}
+
+.userCard_openUserEditFormButton:hover {
+  background-position: +10px -7px;
 }
 
 .userCard_container {
@@ -1513,14 +1771,111 @@ html {
   margin-left: 0.563rem;
 }
 
+@media screen and (max-width: 667px) {
+  .userCard_backwardButton {
+    height: 48px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    left: 0;
+    z-index: 2;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .userCard_backwardButton:active {
+    background-color: #4d90fe;
+    color: white;
+  }
+
+  .userCard_backwardButton:hover {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .userCard_openUserEditFormButton {
+    height: 48px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    width: 33px;
+    right: 0;
+    left: auto;
+    padding: 0;
+    background-position: 0 -68px;
+    transition: none;
+    transition: background-color 200ms;
+  }
+
+  .userCard_openUserEditFormButton:active {
+    background-color: #4d90fe;
+    color: white;
+  }
+
+  .userCard_openUserEditFormButton:hover {
+    background-position: 0 -68px;
+  }
+
+  .userCard_openUserEditFormButton:active {
+    background-position: 0 -106px;
+  }
+
+  .userCard_fullName {
+    background-color: transparent;
+  }
+
+  .userCard_container table tr:nth-child(2n) {
+    background-color: transparent;
+  }
+
+  .userCard_container table tr:nth-child(2n+1) {
+    background-color: #f8f8f8;
+  }
+}
+
 .userEditForm_backwardButton {
   height: 24px;
+  width: 4rem;
   position: fixed;
   top: 56px;
-  z-index: 2;
-  padding: 0 1rem;
+  z-index: 1;
+  padding: 0;
+  color: #555555;
   font-size: 1rem;
+  background-color: #f1f1f1;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
   left: 214px;
+}
+
+.userEditForm_backwardButton:hover {
+  color: #222222;
+  border-color: #cecece;
+}
+
+.userEditForm_backwardButton:active {
+  color: #4d90fe;
+  border-color: #4d90fe;
 }
 
 .userEditForm_container {
@@ -1577,6 +1932,36 @@ html {
 }
 
 @media screen and (max-width: 667px) {
+  .userEditForm_backwardButton {
+    height: 48px;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 1.333rem;
+    color: #4d90fe;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms;
+    left: 0;
+    z-index: 2;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .userEditForm_backwardButton:active {
+    background-color: #4d90fe;
+    color: white;
+  }
+
+  .userEditForm_backwardButton:hover {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
   .userEditForm_container label {
     width: 100%;
     margin-right: 0;
