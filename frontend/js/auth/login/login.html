@@ -15,7 +15,15 @@
                        id="inputPassword" placeholder="test" required>
             </p>
             <p class="login_errorMessage" ng-if="$ctrl.isInvalidLoginOrPassword">Invalid login or password</p>
-            <p><input class="login_submit" type="submit" value="Sign in"></p>
+            <p ng-if="!$ctrl.isLoadingIndicatorActive">
+                <input class="login_submit" type="submit" value="Sign in">
+            </p>
+            <p ng-if="$ctrl.isLoadingIndicatorActive">
+                <button class="login_loadingIndicator">
+                    <loading-indicator></loading-indicator>
+                </button>
+            </p>
         </form>
     </div>
+
 </section>

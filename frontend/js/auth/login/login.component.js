@@ -8,11 +8,12 @@ let loginComponent = {
 };
 
 function LoginController(AuthService, $state) {
-
-    // helper flag for the ng-if directive at the login.html
     this.isInvalidLoginOrPassword = false;
 
+    this.isLoadingIndicatorActive = false;
+
     this.checkUser = function(user) {
+        this.isLoadingIndicatorActive = true;
 
         AuthService.authWithPassword(user)
             .then(() => {
@@ -22,6 +23,7 @@ function LoginController(AuthService, $state) {
             .catch((error) => {
                 console.error("Authentication failed:", error);
                 this.isInvalidLoginOrPassword = true;
+                this.isLoadingIndicatorActive = false;
             });
 
     }

@@ -60,15 +60,15 @@ var bundle =
 	
 	var _shared2 = _interopRequireDefault(_shared);
 	
-	var _auth = __webpack_require__(26);
+	var _auth = __webpack_require__(28);
 	
 	var _auth2 = _interopRequireDefault(_auth);
 	
-	var _mailBox = __webpack_require__(31);
+	var _mailBox = __webpack_require__(33);
 	
 	var _mailBox2 = _interopRequireDefault(_mailBox);
 	
-	var _contacts = __webpack_require__(46);
+	var _contacts = __webpack_require__(48);
 	
 	var _contacts2 = _interopRequireDefault(_contacts);
 	
@@ -458,13 +458,17 @@ var bundle =
 	
 	var _navBarComponent2 = _interopRequireDefault(_navBarComponent);
 	
-	var _route = __webpack_require__(25);
+	var _loadingIndicatorComponent = __webpack_require__(25);
+	
+	var _loadingIndicatorComponent2 = _interopRequireDefault(_loadingIndicatorComponent);
+	
+	var _route = __webpack_require__(27);
 	
 	var _route2 = _interopRequireDefault(_route);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).component('logout', _logoutComponent2.default).service('NavStatusService', _navStatusService2.default).component('navStatus', _navStatusComponent2.default).component('navBar', _navBarComponent2.default).config(_route2.default).name;
+	exports.default = _angular2.default.module('shared', [_angularUiRouter2.default, _services2.default]).service('PageMaskService', _pageMaskService2.default).component('pageMask', _pageMaskComponent2.default).component('layout', _layoutComponent2.default).component('logout', _logoutComponent2.default).service('NavStatusService', _navStatusService2.default).component('navStatus', _navStatusComponent2.default).component('navBar', _navBarComponent2.default).component('loadingIndicator', _loadingIndicatorComponent2.default).config(_route2.default).name;
 
 /***/ },
 /* 4 */
@@ -5840,6 +5844,35 @@ var bundle =
 
 /***/ },
 /* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _loadingIndicator = __webpack_require__(26);
+	
+	var _loadingIndicator2 = _interopRequireDefault(_loadingIndicator);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var loadingIndicatorComponent = {
+	    bindings: {},
+	    template: _loadingIndicator2.default
+	};
+	
+	exports.default = loadingIndicatorComponent;
+
+/***/ },
+/* 26 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"loadingIndicator_jumping\">\r\n    <span></span><span></span><span></span><span></span><span></span>\r\n</div>";
+
+/***/ },
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5866,7 +5899,7 @@ var bundle =
 	}
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5894,17 +5927,21 @@ var bundle =
 	
 	var _services2 = _interopRequireDefault(_services);
 	
-	var _loginComponent = __webpack_require__(27);
+	var _shared = __webpack_require__(3);
+	
+	var _shared2 = _interopRequireDefault(_shared);
+	
+	var _loginComponent = __webpack_require__(29);
 	
 	var _loginComponent2 = _interopRequireDefault(_loginComponent);
 	
-	var _route = __webpack_require__(30);
+	var _route = __webpack_require__(32);
 	
 	var _route2 = _interopRequireDefault(_route);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _angular2.default.module('auth', [_angularUiRouter2.default, _services2.default]).component('login', _loginComponent2.default).config(_route2.default).run(function ($rootScope, $state) {
+	exports.default = _angular2.default.module('auth', [_angularUiRouter2.default, _services2.default, _shared2.default]).component('login', _loginComponent2.default).config(_route2.default).run(function ($rootScope, $state) {
 	    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
 	        // We can catch the error thrown when the $requireAuth promise is rejected
 	        // and redirect the user back to the login page.
@@ -5915,7 +5952,7 @@ var bundle =
 	}).name;
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5924,7 +5961,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _login = __webpack_require__(28);
+	var _login = __webpack_require__(30);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
@@ -5937,12 +5974,14 @@ var bundle =
 	};
 	
 	function LoginController(AuthService, $state) {
-	
-	    // helper flag for the ng-if directive at the login.html
 	    this.isInvalidLoginOrPassword = false;
+	
+	    this.isLoadingIndicatorActive = false;
 	
 	    this.checkUser = function (user) {
 	        var _this = this;
+	
+	        this.isLoadingIndicatorActive = true;
 	
 	        AuthService.authWithPassword(user).then(function () {
 	            _this.isInvalidLoginOrPassword = false;
@@ -5950,6 +5989,7 @@ var bundle =
 	        }).catch(function (error) {
 	            console.error("Authentication failed:", error);
 	            _this.isInvalidLoginOrPassword = true;
+	            _this.isLoadingIndicatorActive = false;
 	        });
 	    };
 	}
@@ -5957,19 +5997,19 @@ var bundle =
 	exports.default = loginComponent;
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section class=\"login_pageContainer\">\r\n    <div class=\"login_container\">\r\n        <h1>mailApp</h1>\r\n        <h2>Please, sign in</h2>\r\n        <form class=\"login_form\" name=\"checkUser\" ng-submit=\"$ctrl.checkUser(user)\">\r\n            <div class=\"login_userIcon\"><img src=\"" + __webpack_require__(29) + "\" alt=\"avatar\"></div>\r\n            <p>\r\n                <label for=\"inputEmail\">Email</label>\r\n                <input class=\"login_input\" type=\"email\" id=\"inputEmail\" name=\"email\"\r\n                       ng-model=\"user.email\" placeholder=\"4bz@ukr.net\" required>\r\n            </p>\r\n            <p>\r\n                <label for=\"inputPassword\">Password</label>\r\n                <input class=\"login_input\" type=\"password\" name=\"password\" ng-model=\"user.password\"\r\n                       id=\"inputPassword\" placeholder=\"test\" required>\r\n            </p>\r\n            <p class=\"login_errorMessage\" ng-if=\"$ctrl.isInvalidLoginOrPassword\">Invalid login or password</p>\r\n            <p><input class=\"login_submit\" type=\"submit\" value=\"Sign in\"></p>\r\n        </form>\r\n    </div>\r\n</section>";
+	module.exports = "<section class=\"login_pageContainer\">\r\n    <div class=\"login_container\">\r\n        <h1>mailApp</h1>\r\n        <h2>Please, sign in</h2>\r\n        <form class=\"login_form\" name=\"checkUser\" ng-submit=\"$ctrl.checkUser(user)\">\r\n            <div class=\"login_userIcon\"><img src=\"" + __webpack_require__(31) + "\" alt=\"avatar\"></div>\r\n            <p>\r\n                <label for=\"inputEmail\">Email</label>\r\n                <input class=\"login_input\" type=\"email\" id=\"inputEmail\" name=\"email\"\r\n                       ng-model=\"user.email\" placeholder=\"4bz@ukr.net\" required>\r\n            </p>\r\n            <p>\r\n                <label for=\"inputPassword\">Password</label>\r\n                <input class=\"login_input\" type=\"password\" name=\"password\" ng-model=\"user.password\"\r\n                       id=\"inputPassword\" placeholder=\"test\" required>\r\n            </p>\r\n            <p class=\"login_errorMessage\" ng-if=\"$ctrl.isInvalidLoginOrPassword\">Invalid login or password</p>\r\n            <p ng-if=\"!$ctrl.isLoadingIndicatorActive\">\r\n                <input class=\"login_submit\" type=\"submit\" value=\"Sign in\">\r\n            </p>\r\n            <p ng-if=\"$ctrl.isLoadingIndicatorActive\">\r\n                <button class=\"login_loadingIndicator\">\r\n                    <loading-indicator></loading-indicator>\r\n                </button>\r\n            </p>\r\n        </form>\r\n    </div>\r\n\r\n</section>\r\n";
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAIAAADajyQQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAPdSURBVGhD7ZrrUuJAEEZ9/4dkF1nQKHKNN1Dcs3aTshYhk+kvGK2cH5aWyaTP9Fx6AhdvP5Re7LvRi+Wy2+1eX1/56X+fi7bEHh8f5/P51dXVn3fG43FRFIvF4vn52a9oGb0YoV9fX//a83tP9ed0OiWHfnVriMXKshwOhwjw8xiDwYDskdKHh4enp6eWRqlS7P7+3nLiBsd5T+G/HPKTgbper70JHTKxzWZjEVvo6XALOZzNZt6QCJmYzSsPtiGWPRLubSnQiDFhMnL1EW5n5RTON43Yzc1NdroqaIHlxFsMIxDbbreXl5ceXQDE2Am80TACMda0eLqA0TiZTLzRMAIxulklRuZfXl683RgCMeomiZihqrmiYhRHo9EouCRW0A61iDcdIyrGyOnF6unF6hEsHlQMQrGuLB4gKTsAq24t96vVSiXGzuGNhhGIUZVLhiK9wxFBVQcLxLQbNOc6bzdGVIwNmiOwcPHgBORNx4iKMXJ+phgwFIViHdrHZrOZcI5xuvN2YwjE4u8FDHqnKApvNIxAjGnGATGYNLpGOA5BIAYkzYKzKDOQv4HTiAGdnb08chd1mTckQiYG1FZ0vAebDFaUiPK3+UoxCvOMjDE55ekCpRhklFdcL3ydWCEWs88lPOQEuFhY0X9ELAaNXuIzdFU11H/oxSjPWQxSJhv+t7e3fpsavRikHD0xH41GqvPyIa2IsafVinGB/DOxj7QitlgsUsS4zG9oAb0Yu1nKHOMCKhVVLX+ITIzSgRG4XC7TXzOa23w+Zx+TG0bFCIilgtLBfBhgiVaG3QIkmX1C+EWQfDH2YnwIyCJr5HNIZcjvbNl0VrB6zBEry9JKJwj6fIq1zBBglGbrNRNjFlVKHkVr0GWcFZiEed8CaSBG/9mA8SefBXsiY77pVp4kxngoioL+a2PgpWCpa/QutV5st9uxXmWcILWQN2Zdulu9GHXql1sZuI3H48TlpEaMrfPMk+o0dDFT3YM7SY0YU6tTYkxyJltK0k6JcX96fXQ26OiUs+kpMe3nyyoQS3lH0ot1hl7sON0UY8WPilFzsCHSQ95kB8CKKjy63IN9F7ELSSMMYF9lHHlwJ6kRA9ys3S/R46H2aOrVRt+GrhcDSs/pdKo6LJ+GxsEexJ+TyYQaKuN9QZKYsd1uyR5HIyYej7RnGxaN8R5eEn7DXgP4ne5Dhsp7tVpF3n80EKtgUeGRDAz6kkwy7gmFEo6YoIrYgz3A/sVlXMyqy720cHd3t1wuqZU69OG6wUrFtGbQAssxIWJefgb/BboGh8QzSAYysa7Ri303Lnzg/zDK8i/o8f/cRBRmigAAAABJRU5ErkJggg=="
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5997,7 +6037,7 @@ var bundle =
 	}
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6010,7 +6050,7 @@ var bundle =
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _angularMessages = __webpack_require__(32);
+	var _angularMessages = __webpack_require__(34);
 	
 	var _angularMessages2 = _interopRequireDefault(_angularMessages);
 	
@@ -6026,31 +6066,31 @@ var bundle =
 	
 	var _shared2 = _interopRequireDefault(_shared);
 	
-	var _mailBoxComponent = __webpack_require__(34);
+	var _mailBoxComponent = __webpack_require__(36);
 	
 	var _mailBoxComponent2 = _interopRequireDefault(_mailBoxComponent);
 	
-	var _composeComponent = __webpack_require__(35);
+	var _composeComponent = __webpack_require__(37);
 	
 	var _composeComponent2 = _interopRequireDefault(_composeComponent);
 	
-	var _messageListComponent = __webpack_require__(37);
+	var _messageListComponent = __webpack_require__(39);
 	
 	var _messageListComponent2 = _interopRequireDefault(_messageListComponent);
 	
-	var _messageComponent = __webpack_require__(39);
+	var _messageComponent = __webpack_require__(41);
 	
 	var _messageComponent2 = _interopRequireDefault(_messageComponent);
 	
-	var _trashListComponent = __webpack_require__(41);
+	var _trashListComponent = __webpack_require__(43);
 	
 	var _trashListComponent2 = _interopRequireDefault(_trashListComponent);
 	
-	var _trashDetailsComponent = __webpack_require__(43);
+	var _trashDetailsComponent = __webpack_require__(45);
 	
 	var _trashDetailsComponent2 = _interopRequireDefault(_trashDetailsComponent);
 	
-	var _route = __webpack_require__(45);
+	var _route = __webpack_require__(47);
 	
 	var _route2 = _interopRequireDefault(_route);
 	
@@ -6059,15 +6099,15 @@ var bundle =
 	exports.default = _angular2.default.module('mailBox', [_angularMessages2.default, _angularUiRouter2.default, _services2.default, _shared2.default]).component('mailBox', _mailBoxComponent2.default).component('compose', _composeComponent2.default).component('messageList', _messageListComponent2.default).component('message', _messageComponent2.default).component('trashList', _trashListComponent2.default).component('trashDetails', _trashDetailsComponent2.default).config(_route2.default).name;
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(33);
+	__webpack_require__(35);
 	module.exports = 'ngMessages';
 
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports) {
 
 	/*
@@ -6085,7 +6125,7 @@ var bundle =
 
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6119,7 +6159,7 @@ var bundle =
 	exports.default = mailBoxComponent;
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6128,7 +6168,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _compose = __webpack_require__(36);
+	var _compose = __webpack_require__(38);
 	
 	var _compose2 = _interopRequireDefault(_compose);
 	
@@ -6169,13 +6209,13 @@ var bundle =
 	exports.default = composeComponent;
 
 /***/ },
-/* 36 */
+/* 38 */
 /***/ function(module, exports) {
 
 	module.exports = "<nav-status></nav-status>\r\n<button class=\"compose_backwardButton\" ui-sref=\"message-list({boxId: 'inbox'})\">&#8592;</button>\r\n\r\n<section class=\"compose_container\">\r\n    <form name=\"newMessageForm\" ng-submit=\"$ctrl.addNewMessageToSentMail(newMessage)\">\r\n        <h3>New message</h3>\r\n        <section>\r\n            <input class=\"compose_email\" type=\"text\" name=\"email\"\r\n                   ng-model=\"newMessage.email\" placeholder=\"To\" autofocus required>\r\n            <div ng-messages=\"newMessageForm['email'].$error\" ng-if=\"newMessageForm['email'].$dirty\" role=\"alert\">\r\n                <div class=\"compose_errorMessage\" ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <input class=\"compose_subject\" type=\"text\" name=\"subject\" ng-model=\"newMessage.subject\"\r\n                   placeholder=\"Subject\" required>\r\n            <div ng-messages=\"newMessageForm['subject'].$error\" ng-if=\"newMessageForm['subject'].$dirty\" role=\"alert\">\r\n                <div class=\"compose_errorMessage\" ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <textarea class=\"compose_content\" name=\"content\" ng-model=\"newMessage.content\"></textarea>\r\n        </section>\r\n        <input class=\"compose_submit\" type=\"submit\" value=\"Send\" ng-disabled=\"$ctrl.isSubmitEnabled === false\">\r\n    </form>\r\n</section>";
 
 /***/ },
-/* 37 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6184,7 +6224,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _messageList = __webpack_require__(38);
+	var _messageList = __webpack_require__(40);
 	
 	var _messageList2 = _interopRequireDefault(_messageList);
 	
@@ -6231,13 +6271,13 @@ var bundle =
 	exports.default = messageListComponent;
 
 /***/ },
-/* 38 */
+/* 40 */
 /***/ function(module, exports) {
 
 	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"messageList_container\" ng-if=\"$ctrl.isMessageListAllowed()\"\r\n    ng-class=\"{messageList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <input class=\"messageList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{messageList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"messageList_searchIcon\">&#128269;</label>\r\n    <button class=\"messageList_toggleMobileSearchFieldButton\"\r\n        ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"message({id: message.id})\"\r\n            >\r\n        <div class=\"messageList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"messageList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"messageList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"messageList_removeMessageButton\"\r\n            ng-click=\"$ctrl.removeMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n\r\n\r\n";
 
 /***/ },
-/* 39 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6246,7 +6286,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _message = __webpack_require__(40);
+	var _message = __webpack_require__(42);
 	
 	var _message2 = _interopRequireDefault(_message);
 	
@@ -6262,13 +6302,13 @@ var bundle =
 	exports.default = messageComponent;
 
 /***/ },
-/* 40 */
+/* 42 */
 /***/ function(module, exports) {
 
 	module.exports = "<button class=\"message_backwardButton\"\r\n        ui-sref=\"message-list({boxId: $ctrl.message.boxId})\">&#8592;</button>\r\n\r\n<section class=\"message_container\">\r\n    <div class=\"message_date\">{{$ctrl.message.date|date:'MMM d'}}</div>\r\n    <div class=\"message_subject\">{{$ctrl.message.subject}}</div>\r\n    <div class=\"message_email\"><span>Email:</span>{{$ctrl.message.email}}</div>\r\n    <div class=\"message_content\">{{$ctrl.message.content}}</div>\r\n</section>\r\n";
 
 /***/ },
-/* 41 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6277,7 +6317,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _trashList = __webpack_require__(42);
+	var _trashList = __webpack_require__(44);
 	
 	var _trashList2 = _interopRequireDefault(_trashList);
 	
@@ -6319,13 +6359,13 @@ var bundle =
 	exports.default = trashListComponent;
 
 /***/ },
-/* 42 */
+/* 44 */
 /***/ function(module, exports) {
 
 	module.exports = "<nav-status></nav-status>\r\n\r\n<ul class=\"trashList_container\" ng-if=\"$ctrl.isTrashListAllowed()\"\r\n    ng-class=\"{trashList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <input class=\"trashList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{trashList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"trashList_searchIcon\">&#128269;</label>\r\n    <button class=\"trashList_toggleMobileSearchFieldButton\"\r\n        ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"message in $ctrl.messages | orderBy: '-date' | filter:searchText\"\r\n        ui-sref=\"trash-details({id: message.id})\"\r\n            >\r\n        <div class=\"trashList_boxId_inbox\" ng-if=\"message.boxId === 'inbox'\">&#8659;</div>\r\n        <div class=\"trashList_boxId_sent\" ng-if=\"message.boxId === 'sent-mail'\">&#8657;</div>\r\n        <div class=\"trashList_mailAddress\">{{message.email}}</div>\r\n        <div class=\"trashList_messageSubject\">{{message.subject.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messagePreview\">{{message.content.slice(0, 21)}}</div>\r\n        <div class=\"trashList_messageDate\">{{message.date|date:'MMM d'}}</div>\r\n        <button class=\"trashList_restoreMessageButton\"\r\n            ng-click=\"$ctrl.restoreMessage(message); $event.stopPropagation()\"></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>";
 
 /***/ },
-/* 43 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6334,7 +6374,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _trashDetails = __webpack_require__(44);
+	var _trashDetails = __webpack_require__(46);
 	
 	var _trashDetails2 = _interopRequireDefault(_trashDetails);
 	
@@ -6364,13 +6404,13 @@ var bundle =
 	exports.default = trashDetailsComponent;
 
 /***/ },
-/* 44 */
+/* 46 */
 /***/ function(module, exports) {
 
 	module.exports = "<button class=\"trashDetails_backwardButton\"\r\n        ui-sref=\"trash-list\">&#8592;</button>\r\n\r\n<section class=\"trashDetails_container\">\r\n    <div class=\"trashDetails_date\">{{$ctrl.currentMessage.date|date:'MMM d'}}</div>\r\n    <div class=\"trashDetails_boxId_inbox\"\r\n         ng-if=\"$ctrl.currentMessage.boxId === 'inbox'\">&#8659; Inbox</div>\r\n    <div class=\"trashDetails_boxId_sent\"\r\n         ng-if=\"$ctrl.currentMessage.boxId === 'sent-mail'\">&#8657; Sent mail</div>\r\n    <div class=\"trashDetails_subject\">{{$ctrl.currentMessage.subject}}</div>\r\n    <div class=\"trashDetails_email\"><span>Email:</span>{{$ctrl.currentMessage.email}}</div>\r\n    <div class=\"trashDetails_content\">{{$ctrl.currentMessage.content}}</div>\r\n</section>";
 
 /***/ },
-/* 45 */
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6451,7 +6491,7 @@ var bundle =
 	}
 
 /***/ },
-/* 46 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6464,7 +6504,7 @@ var bundle =
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _angularMessages = __webpack_require__(32);
+	var _angularMessages = __webpack_require__(34);
 	
 	var _angularMessages2 = _interopRequireDefault(_angularMessages);
 	
@@ -6480,23 +6520,23 @@ var bundle =
 	
 	var _shared2 = _interopRequireDefault(_shared);
 	
-	var _contactsListComponent = __webpack_require__(47);
+	var _contactsListComponent = __webpack_require__(49);
 	
 	var _contactsListComponent2 = _interopRequireDefault(_contactsListComponent);
 	
-	var _addUserFormComponent = __webpack_require__(49);
+	var _addUserFormComponent = __webpack_require__(51);
 	
 	var _addUserFormComponent2 = _interopRequireDefault(_addUserFormComponent);
 	
-	var _userCardComponent = __webpack_require__(51);
+	var _userCardComponent = __webpack_require__(53);
 	
 	var _userCardComponent2 = _interopRequireDefault(_userCardComponent);
 	
-	var _userEditFormComponent = __webpack_require__(53);
+	var _userEditFormComponent = __webpack_require__(55);
 	
 	var _userEditFormComponent2 = _interopRequireDefault(_userEditFormComponent);
 	
-	var _route = __webpack_require__(55);
+	var _route = __webpack_require__(57);
 	
 	var _route2 = _interopRequireDefault(_route);
 	
@@ -6505,7 +6545,7 @@ var bundle =
 	exports.default = _angular2.default.module('contacts', [_angularMessages2.default, _angularUiRouter2.default, _services2.default, _shared2.default]).component('contactsList', _contactsListComponent2.default).component('addUserForm', _addUserFormComponent2.default).component('userCard', _userCardComponent2.default).component('userEditForm', _userEditFormComponent2.default).config(_route2.default).name;
 
 /***/ },
-/* 47 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -6514,7 +6554,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _contactsList = __webpack_require__(48);
+	var _contactsList = __webpack_require__(50);
 	
 	var _contactsList2 = _interopRequireDefault(_contactsList);
 	
@@ -6585,13 +6625,13 @@ var bundle =
 	exports.default = contactsListComponent;
 
 /***/ },
-/* 48 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<nav-status></nav-status>\r\n\r\n<button class=\"contactsList_openAddUserFormButton\"\r\n    ng-if=\"$ctrl.isContactsListAllowed()\" ui-sref=\"add-user\"></button>\r\n\r\n<ul class=\"contactsList_container\" ng-if=\"$ctrl.isContactsListAllowed()\"\r\n    ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <input class=\"contactsList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"contactsList_searchIcon\">&#128269;</label>\r\n    <button class=\"contactsList_toggleMobileSearchFieldButton\"\r\n            ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n        ui-sref=\"user-card({userId: user.id})\">\r\n        <div class=\"contactsList_userAvatar\"><img src=\"" + __webpack_require__(29) + "\" alt=\"Avatar\"></div>\r\n        <div class=\"contactsList_userName\">{{user.fullName}}</div>\r\n        <div class=\"contactsList_userEmail\">{{user.email}}</div>\r\n        <button class=\"contactsList_removeUserButton\"\r\n            ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\"\r\n                ></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<button class=\"contactsList_openAddUserFormButton\"\r\n    ng-if=\"$ctrl.isContactsListAllowed()\" ui-sref=\"add-user\"></button>\r\n\r\n<ul class=\"contactsList_container\" ng-if=\"$ctrl.isContactsListAllowed()\"\r\n    ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <input class=\"contactsList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"contactsList_searchIcon\">&#128269;</label>\r\n    <button class=\"contactsList_toggleMobileSearchFieldButton\"\r\n            ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n        ui-sref=\"user-card({userId: user.id})\">\r\n        <div class=\"contactsList_userAvatar\"><img src=\"" + __webpack_require__(31) + "\" alt=\"Avatar\"></div>\r\n        <div class=\"contactsList_userName\">{{user.fullName}}</div>\r\n        <div class=\"contactsList_userEmail\">{{user.email}}</div>\r\n        <button class=\"contactsList_removeUserButton\"\r\n            ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\"\r\n                ></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n";
 
 /***/ },
-/* 49 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6600,7 +6640,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _addUserForm = __webpack_require__(50);
+	var _addUserForm = __webpack_require__(52);
 	
 	var _addUserForm2 = _interopRequireDefault(_addUserForm);
 	
@@ -6623,13 +6663,13 @@ var bundle =
 	exports.default = addUserFormComponent;
 
 /***/ },
-/* 50 */
+/* 52 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"addUserForm_pageWrapper\">\r\n    <form class=\"addUserForm_container\" name=\"addUserForm\"\r\n          ng-submit=\"$ctrl.addNewUser({user: user})\">\r\n        <div class=\"addUserForm_topBar\">\r\n            <button class=\"addUserForm_backwardButton\" ui-sref=\"contacts-list\"\r\n                    ng-click=\"$ctrl.closePageMask()\">&#8592;</button>\r\n            <h3>New user</h3>\r\n        </div>\r\n        <fieldset>\r\n            <section>\r\n                <label>Full name:</label>\r\n                <input class=\"addUserForm_inputField\" type=\"text\" name=\"fullName\" ng-model=\"user.fullName\"\r\n                    placeholder=\"John Smith\" autofocus required ng-minlength=\"4\">\r\n                <div ng-messages=\"addUserForm['fullName'].$error\" ng-if=\"addUserForm['fullName'].$dirty\" role=\"alert\">\r\n                    <div class=\"addUserForm_errorMessage\" ng-message=\"required\"\r\n                        >Please, enter a value for this field.</div>\r\n                    <div class=\"addUserForm_errorMessage\" ng-message=\"minlength\"\r\n                        >This field can be at at least 4 characters long.</div>\r\n                </div>\r\n            </section>\r\n            <section>\r\n                <label>Date of birth:</label>\r\n                <input class=\"addUserForm_inputField\" type=\"text\" name=\"birthDate\" ng-model=\"user.birthdate\"\r\n                    placeholder=\"YYYY-MM-DD\" required pattern=\"\\d{4}-\\d\\d-\\d\\d\">\r\n                <div ng-messages=\"addUserForm['birthDate'].$error\" ng-if=\"addUserForm['birthDate'].$dirty\" role=\"alert\">\r\n                    <div class=\"addUserForm_errorMessage\" ng-message=\"required\"\r\n                        >Please, enter a value for this field.</div>\r\n                    <div class=\"addUserForm_errorMessage\" ng-message=\"pattern\"\r\n                        >The date must be in YYYY-MM-DD format</div>\r\n                </div>\r\n            </section>\r\n            <section>\r\n                <label>Gender:</label>\r\n                <input type=\"radio\" name=\"gender\" ng-model=\"user.gender\" value=\"male\" required>male\r\n                <input type=\"radio\" name=\"gender\" ng-model=\"user.gender\" value=\"female\" required>female\r\n                <div ng-messages=\"addUserForm['gender'].$error\" ng-if=\"addUserForm['gender'].$dirty\" role=\"alert\">\r\n                    <div class=\"addUserForm_errorMessage\" ng-message=\"required\"\r\n                        >Please, enter a value for this field.</div>\r\n                </div>\r\n            </section>\r\n            <section>\r\n                <label>Address:</label>\r\n                <input class=\"addUserForm_inputField\" type=\"text\" name=\"address\" ng-model=\"user.address\"\r\n                    placeholder=\"19, Wall st. New York, USA\" required minlength=\"10\">\r\n                <div ng-messages=\"addUserForm['address'].$error\" ng-if=\"addUserForm['address'].$dirty\" role=\"alert\">\r\n                    <div class=\"addUserForm_errorMessage\" ng-message=\"required\"\r\n                        >Please, enter a value for this field.</div>\r\n                    <div class=\"addUserForm_errorMessage\" ng-message=\"minlength\"\r\n                        >This field can be at at least 10 characters long.</div>\r\n                </div>\r\n            </section>\r\n            <section class=\"addUserForm_email\">\r\n                <label>Email:</label>\r\n                <input class=\"addUserForm_inputField\" type=\"email\" name=\"email\" ng-model=\"user.email\" required>\r\n                <div ng-messages=\"addUserForm['email'].$error\" ng-if=\"addUserForm['email'].$dirty\" role=\"alert\">\r\n                    <div class=\"addUserForm_errorMessage\" ng-message=\"required\"\r\n                        >Please, enter a value for this field.</div>\r\n                    <div class=\"addUserForm_errorMessage\" ng-message=\"email\"\r\n                        >The value must be a correct email</div>\r\n                </div>\r\n            </section>\r\n            <input class=\"addUserForm_submit\" type=\"submit\" value=\"Create\">\r\n        </fieldset>\r\n    </form>\r\n</section>\r\n\r\n\r\n";
 
 /***/ },
-/* 51 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6638,7 +6678,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _userCard = __webpack_require__(52);
+	var _userCard = __webpack_require__(54);
 	
 	var _userCard2 = _interopRequireDefault(_userCard);
 	
@@ -6665,13 +6705,13 @@ var bundle =
 	exports.default = userCardComponent;
 
 /***/ },
-/* 52 */
+/* 54 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"userCard_container\" ng-if=\"$ctrl.isUserCardAllowed()\">\r\n    <button class=\"userCard_backwardButton\" ui-sref=\"contacts-list\">&#8592;</button>\r\n    <button class=\"userCard_openUserEditFormButton\" ui-sref=\"edit-form\"></button>\r\n\r\n    <h3 class=\"userCard_fullName\">{{$ctrl.selectedUser.fullName}}</h3>\r\n    <table>\r\n        <tbody>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Date of birth:</span></td><td>{{$ctrl.selectedUser.birthdate}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Gender:</span></td><td>{{$ctrl.selectedUser.gender}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Address:</span></td><td>{{$ctrl.selectedUser.address}}</td>\r\n        </tr>\r\n        <tr>\r\n            <td class=\"userCard_label\"><span>Email:</span></td><td>{{$ctrl.selectedUser.email}}</td>\r\n        </tr>\r\n        </tbody>\r\n    </table>\r\n</section>\r\n\r\n<ui-view></ui-view>";
 
 /***/ },
-/* 53 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6680,7 +6720,7 @@ var bundle =
 	    value: true
 	});
 	
-	var _userEditForm = __webpack_require__(54);
+	var _userEditForm = __webpack_require__(56);
 	
 	var _userEditForm2 = _interopRequireDefault(_userEditForm);
 	
@@ -6697,13 +6737,13 @@ var bundle =
 	exports.default = userEditFormComponent;
 
 /***/ },
-/* 54 */
+/* 56 */
 /***/ function(module, exports) {
 
 	module.exports = "<form class=\"userEditForm_container\" name=\"userEditForm\">\r\n    <button class=\"userEditForm_backwardButton\"\r\n        ui-sref=\"user-card({userId: $ctrl.selectedUser.id})\">&#8592;</button>\r\n    <h3>Edit contact</h3>\r\n    <fieldset>\r\n        <section class=\"userEditForm_fullName\">\r\n            <label>Full name:</label>\r\n            <input class=\"userEditForm_inputField\" type=\"text\" ng-model=\"$ctrl.selectedUser.fullName\" name=\"fullName\"\r\n                ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                ng-model-options=\"{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }\"\r\n                required minlength=\"4\" autofocus>\r\n            <div ng-messages=\"userEditForm['fullName'].$error\" ng-if=\"userEditForm['fullName'].$dirty\" role=\"alert\">\r\n                <div class=\"userEditForm_errorMessage\" ng-message=\"required\"\r\n                    >Please, enter a value for this field.</div>\r\n                <div class=\"userEditForm_errorMessage\" ng-message=\"minlength\"\r\n                    >This field can be at at least 4 characters long.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Date of birth:</label>\r\n            <input class=\"userEditForm_inputField\" type=\"text\" name=\"birthDate\" ng-model=\"$ctrl.selectedUser.birthdate\"\r\n                ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                ng-model-options=\"{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }\"\r\n                required pattern=\"\\d{4}-\\d\\d-\\d\\d\">\r\n            <div ng-messages=\"userEditForm['birthDate'].$error\" ng-if=\"userEditForm['birthDate'].$dirty\" role=\"alert\">\r\n                <div class=\"userEditForm_errorMessage\" ng-message=\"required\"\r\n                    >Please, enter a value for this field.</div>\r\n                <div class=\"userEditForm_errorMessage\" ng-message=\"pattern\"\r\n                    >The date must be in YYYY-MM-DD format</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Gender:</label>\r\n            <input type=\"radio\" name=\"gender\" ng-model=\"$ctrl.selectedUser.gender\"\r\n                ng-checked=\"$ctrl.selectedUser.gender === 'male'\" value=\"male\"\r\n                ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                    >male\r\n            <input type=\"radio\" name=\"gender\" ng-model=\"$ctrl.selectedUser.gender\"\r\n                ng-checked=\"$ctrl.selectedUser.gender === 'female'\" value=\"female\"\r\n                ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                    >female\r\n        </section>\r\n        <section>\r\n            <label>Address:</label>\r\n            <input class=\"userEditForm_inputField\" type=\"text\" name=\"address\" ng-model=\"$ctrl.selectedUser.address\"\r\n                ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                ng-model-options=\"{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }\"\r\n                required minlength=\"10\">\r\n            <div ng-messages=\"userEditForm['address'].$error\" ng-if=\"userEditForm['address'].$dirty\" role=\"alert\">\r\n                <div class=\"userEditForm_errorMessage\" ng-message=\"required\"\r\n                    >Please, enter a value for this field.</div>\r\n                <div class=\"userEditForm_errorMessage\" ng-message=\"minlength\"\r\n                    >This field can be at at least 10 characters long.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <label>Email:</label>\r\n            <input class=\"userEditForm_inputField\" type=\"email\" name=\"email\" ng-model=\"$ctrl.selectedUser.email\"\r\n                ng-change=\"$ctrl.updateUser({user: $ctrl.selectedUser})\"\r\n                ng-model-options=\"{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }\"\r\n                required>\r\n            <div ng-messages=\"userEditForm['email'].$error\" ng-if=\"userEditForm['email'].$dirty\" role=\"alert\">\r\n                <div class=\"userEditForm_errorMessage\" ng-message=\"required\"\r\n                    >Please, enter a value for this field.</div>\r\n                <div class=\"userEditForm_errorMessage\" ng-message=\"email\"\r\n                    >The value must be a correct email</div>\r\n            </div>\r\n        </section>\r\n        <div class=\"userEditForm_reminder\">All changes are automatically saved</div>\r\n    </fieldset>\r\n</form>";
 
 /***/ },
-/* 55 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';

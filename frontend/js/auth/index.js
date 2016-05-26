@@ -11,12 +11,13 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 
 import services from '../services';
+import shared from '../shared';
 
 import loginComponent from './login/login.component.js';
 import routingConfig from './route.js';
 
 export default angular
-    .module('auth', [uiRouter, services])
+    .module('auth', [uiRouter, services, shared])
     .component('login', loginComponent)
     .config(routingConfig)
     .run(function($rootScope, $state) {
