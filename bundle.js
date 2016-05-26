@@ -6135,11 +6135,23 @@ var bundle =
 	});
 	var mailBoxComponent = {
 	    bindings: {},
-	    template: '<ui-view></ui-view>',
+	    template: '<section ng-if="$ctrl.operationResult" class="mailBox_operationResultContainer">\n                   <div>{{$ctrl.operationResult}}</div>\n               </section>\n               <ui-view></ui-view>',
 	    controller: MailBoxController
 	};
 	
-	function MailBoxController(MailDataService) {
+	function MailBoxController(MailDataService, $timeout) {
+	    this.operationResult = 'Your message has been moved to sent mail';
+	
+	    this.showOperationResult = function (message) {
+	        var _this = this;
+	
+	        this.operationResult = message;
+	
+	        // Hide the message after timeout
+	        $timeout(function () {
+	            return _this.operationResult = null;
+	        }, 8000);
+	    };
 	
 	    this.moveMessageToTrash = function (message) {
 	
@@ -6175,7 +6187,9 @@ var bundle =
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var composeComponent = {
-	    bindings: {},
+	    bindings: {
+	        showOperationResult: '&'
+	    },
 	    template: _compose2.default,
 	    controller: ComposeController
 	};
@@ -6198,10 +6212,15 @@ var bundle =
 	    };
 	
 	    this.addNewMessageToSentMail = function (newMessage) {
+	        var _this = this;
+	
 	        this.disableSubmit();
 	
 	        MailDataService.addNewMessageToSentMail(newMessage).then(function () {
-	            return $state.go('message-list', { boxId: 'sent-mail' });
+	            _this.showOperationResult({
+	                message: 'Your message has been moved to sent mail'
+	            });
+	            $state.go('message-list', { boxId: 'sent-mail' });
 	        });
 	    };
 	}
@@ -6428,7 +6447,7 @@ var bundle =
 	    }).state('compose', {
 	        parent: 'mail-box',
 	        url: '/compose',
-	        template: '<compose></compose>'
+	        template: '<compose show-operation-result="$ctrl.showOperationResult(message)"></compose>'
 	    }).state('message-list', {
 	        parent: 'mail-box',
 	        url: '/list/:boxId',

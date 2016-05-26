@@ -2,7 +2,9 @@
 import template from './compose.html';
 
 let composeComponent = {
-        bindings: {},
+        bindings: {
+            showOperationResult: '&'
+        },
         template,
         controller: ComposeController
 };
@@ -28,9 +30,12 @@ function ComposeController(MailDataService, NavStatusService, $state) {
         this.disableSubmit();
 
         MailDataService.addNewMessageToSentMail(newMessage)
-            .then(() =>
-                $state.go('message-list', {boxId: 'sent-mail'})
-            );
+            .then(() => {
+                this.showOperationResult({
+                    message: 'Your message has been moved to sent mail'
+                });
+                $state.go('message-list', {boxId: 'sent-mail'});
+            });
     };
 }
 

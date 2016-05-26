@@ -1,0 +1,26 @@
+.mailBox_operationResultContainer {
+  width: 100%;
+  position: fixed;
+  top: (map-get($layout, 'top-nav-bar-height') - 5) * 1px;
+  left: 0;
+  z-index: 2;
+  div {
+    max-width: 25rem;
+    margin: 0 auto;
+    padding: 0 map-get($type-scale, '-3') * 1rem;
+    text-align: center;
+    font-weight: bold;
+    background-color: map-get($colors, 'alert-light');
+    border: 1px solid map-get($colors, 'alert');
+    border-radius: 2px;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media screen and (max-width: map-get($points, '-1')) {
+  .mailBox_operationResultContainer {
+    top: 75%;
+  }
+}
