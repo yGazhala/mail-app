@@ -3,7 +3,7 @@ import template from './compose.html';
 
 let composeComponent = {
         bindings: {
-            showOperationResult: '&'
+            showStatusMessage: '&' // callback to parent mail-box component
         },
         template,
         controller: ComposeController
@@ -31,7 +31,7 @@ function ComposeController(MailDataService, NavStatusService, $state) {
 
         MailDataService.addNewMessageToSentMail(newMessage)
             .then(() => {
-                this.showOperationResult({
+                this.showStatusMessage({
                     message: 'Your message has been moved to sent mail'
                 });
                 $state.go('message-list', {boxId: 'sent-mail'});

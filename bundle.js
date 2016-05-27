@@ -6135,36 +6135,32 @@ var bundle =
 	});
 	var mailBoxComponent = {
 	    bindings: {},
-	    template: '<section ng-if="$ctrl.operationResult" class="mailBox_operationResultContainer">\n                   <div>{{$ctrl.operationResult}}</div>\n               </section>\n               <ui-view></ui-view>',
+	    template: '<section ng-if="$ctrl.statusMessage" class="mailBox_statusMessageContainer">\n                   <div>{{$ctrl.statusMessage}}</div>\n               </section>\n               <ui-view></ui-view>',
 	    controller: MailBoxController
 	};
 	
 	function MailBoxController(MailDataService, $timeout) {
-	    this.operationResult = 'Your message has been moved to sent mail';
+	    this.statusMessage = null;
 	
-	    this.showOperationResult = function (message) {
+	    this.showStatusMessage = function (message) {
 	        var _this = this;
 	
-	        this.operationResult = message;
+	        this.statusMessage = message;
 	
 	        // Hide the message after timeout
 	        $timeout(function () {
-	            return _this.operationResult = null;
-	        }, 8000);
+	            return _this.statusMessage = null;
+	        }, 5000);
 	    };
 	
 	    this.moveMessageToTrash = function (message) {
 	
-	        return MailDataService.removeMessage(message).then(function () {
-	            return MailDataService.addMessageToTrash(message);
-	        });
+	        return MailDataService.removeMessage(message).then(MailDataService.addMessageToTrash(message)).then(this.showStatusMessage('The message has been moved to the Trash'));
 	    };
 	
 	    this.moveMessageToOriginalBox = function (message) {
 	
-	        return MailDataService.removeMessageFromTrash(message).then(function () {
-	            return MailDataService.addMessage(message);
-	        });
+	        return MailDataService.removeMessageFromTrash(message).then(MailDataService.addMessage(message)).then(this.showStatusMessage('The message has been restored'));
 	    };
 	}
 	
@@ -6188,7 +6184,7 @@ var bundle =
 	
 	var composeComponent = {
 	    bindings: {
-	        showOperationResult: '&'
+	        showStatusMessage: '&' // callback to parent mail-box component
 	    },
 	    template: _compose2.default,
 	    controller: ComposeController
@@ -6217,7 +6213,7 @@ var bundle =
 	        this.disableSubmit();
 	
 	        MailDataService.addNewMessageToSentMail(newMessage).then(function () {
-	            _this.showOperationResult({
+	            _this.showStatusMessage({
 	                message: 'Your message has been moved to sent mail'
 	            });
 	            $state.go('message-list', { boxId: 'sent-mail' });
@@ -6231,7 +6227,7 @@ var bundle =
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav-status></nav-status>\r\n<button class=\"compose_backwardButton\" ui-sref=\"message-list({boxId: 'inbox'})\">&#8592;</button>\r\n\r\n<section class=\"compose_container\">\r\n    <form name=\"newMessageForm\" ng-submit=\"$ctrl.addNewMessageToSentMail(newMessage)\">\r\n        <h3>New message</h3>\r\n        <section>\r\n            <input class=\"compose_email\" type=\"text\" name=\"email\"\r\n                   ng-model=\"newMessage.email\" placeholder=\"To\" autofocus required>\r\n            <div ng-messages=\"newMessageForm['email'].$error\" ng-if=\"newMessageForm['email'].$dirty\" role=\"alert\">\r\n                <div class=\"compose_errorMessage\" ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <input class=\"compose_subject\" type=\"text\" name=\"subject\" ng-model=\"newMessage.subject\"\r\n                   placeholder=\"Subject\" required>\r\n            <div ng-messages=\"newMessageForm['subject'].$error\" ng-if=\"newMessageForm['subject'].$dirty\" role=\"alert\">\r\n                <div class=\"compose_errorMessage\" ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <textarea class=\"compose_content\" name=\"content\" ng-model=\"newMessage.content\"></textarea>\r\n        </section>\r\n        <input class=\"compose_submit\" type=\"submit\" value=\"Send\" ng-disabled=\"$ctrl.isSubmitEnabled === false\">\r\n    </form>\r\n</section>";
+	module.exports = "<nav-status></nav-status>\r\n<button class=\"compose_backwardButton\" ui-sref=\"message-list({boxId: 'inbox'})\">&#8592;</button>\r\n\r\n<section class=\"compose_container\">\r\n    <form name=\"newMessageForm\" ng-submit=\"$ctrl.addNewMessageToSentMail(newMessage)\">\r\n        <h3>New message</h3>\r\n        <section>\r\n            <input class=\"compose_email\" type=\"text\" name=\"email\"\r\n                   ng-model=\"newMessage.email\" placeholder=\"To\" autofocus required>\r\n            <div ng-messages=\"newMessageForm['email'].$error\" ng-if=\"newMessageForm['email'].$dirty\" role=\"alert\">\r\n                <div class=\"compose_errorMessage\" ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <input class=\"compose_subject\" type=\"text\" name=\"subject\" ng-model=\"newMessage.subject\"\r\n                   placeholder=\"Subject\" required>\r\n            <div ng-messages=\"newMessageForm['subject'].$error\" ng-if=\"newMessageForm['subject'].$dirty\" role=\"alert\">\r\n                <div class=\"compose_errorMessage\" ng-message=\"required\">Please, enter a value for this field.</div>\r\n            </div>\r\n        </section>\r\n        <section>\r\n            <textarea class=\"compose_content\" name=\"content\" ng-model=\"newMessage.content\"></textarea>\r\n        </section>\r\n        <input class=\"compose_submit\" type=\"submit\" value=\"Send\" ng-disabled=\"$ctrl.isSubmitEnabled === false\">\r\n        <div class=\"compose_note\">\r\n            Note, in this test version there is no real postal server.\r\n            The new message will not be sent to the recipient,\r\n            it will be just stored in the sent mail directory on the server.\r\n        </div>\r\n    </form>\r\n</section>";
 
 /***/ },
 /* 39 */
@@ -6447,7 +6443,7 @@ var bundle =
 	    }).state('compose', {
 	        parent: 'mail-box',
 	        url: '/compose',
-	        template: '<compose show-operation-result="$ctrl.showOperationResult(message)"></compose>'
+	        template: '<compose show-status-message="$ctrl.showStatusMessage(message)"></compose>'
 	    }).state('message-list', {
 	        parent: 'mail-box',
 	        url: '/list/:boxId',
@@ -6585,13 +6581,26 @@ var bundle =
 	    controller: ContactsListController
 	};
 	
-	function ContactsListController(ContactsService, PageMaskService, NavStatusService, $state) {
-	    var _this = this;
+	function ContactsListController(ContactsService, PageMaskService, NavStatusService, $state, $timeout) {
+	    var _this2 = this;
 	
 	    NavStatusService.setStatus('Contacts');
 	
+	    this.statusMessage = null;
+	
+	    this.showStatusMessage = function (message) {
+	        var _this = this;
+	
+	        this.statusMessage = message;
+	
+	        // Hide the message after timeout
+	        $timeout(function () {
+	            return _this.statusMessage = null;
+	        }, 5000);
+	    };
+	
 	    ContactsService.getAll().then(function (contacts) {
-	        _this.contacts = contacts;
+	        _this2.contacts = contacts;
 	    });
 	
 	    this.isContactsListAllowed = function () {
@@ -6606,34 +6615,39 @@ var bundle =
 	    };
 	
 	    this.addNewUser = function (newUser) {
-	        var _this2 = this;
+	        var _this3 = this;
 	
-	        ContactsService.addUser(newUser).then(function (newUser) {
-	            // update contacts list
-	            _this2.contacts.push(newUser);
-	            PageMaskService.close(); // костыль
+	        ContactsService.addUser(newUser)
+	        // update contacts list
+	        .then(function (newUser) {
+	            _this3.contacts.push(newUser);
+	            PageMaskService.close();
+	            _this3.showStatusMessage('The new contact has been created');
 	            $state.go('contacts-list');
 	        });
 	    };
 	
 	    this.removeUser = function (user) {
-	        var _this3 = this;
+	        var _this4 = this;
 	
 	        ContactsService.removeUser(user).then(function () {
-	            _this3.contacts.splice(_this3.contacts.indexOf(user), 1);
+	            _this4.contacts.splice(_this4.contacts.indexOf(user), 1);
+	            _this4.showStatusMessage('The contact has been removed');
 	        });
 	    };
 	
 	    this.updateUser = function (user) {
-	        var _this4 = this;
+	        var _this5 = this;
 	
 	        ContactsService.updateUser(user)
 	        // update contacts list
 	        .then(function () {
-	            var max = _this4.contacts.length;
+	            _this5.showStatusMessage('The contact has been updated');
+	
+	            var max = _this5.contacts.length;
 	            for (var i = 0; i < max; i++) {
-	                if (_this4.contacts[i].id === user.id) {
-	                    _this4.contacts[i] = user;
+	                if (_this5.contacts[i].id === user.id) {
+	                    _this5.contacts[i] = user;
 	                    return;
 	                }
 	            }
@@ -6647,7 +6661,7 @@ var bundle =
 /* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<nav-status></nav-status>\r\n\r\n<button class=\"contactsList_openAddUserFormButton\"\r\n    ng-if=\"$ctrl.isContactsListAllowed()\" ui-sref=\"add-user\"></button>\r\n\r\n<ul class=\"contactsList_container\" ng-if=\"$ctrl.isContactsListAllowed()\"\r\n    ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <input class=\"contactsList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"contactsList_searchIcon\">&#128269;</label>\r\n    <button class=\"contactsList_toggleMobileSearchFieldButton\"\r\n            ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n        ui-sref=\"user-card({userId: user.id})\">\r\n        <div class=\"contactsList_userAvatar\"><img src=\"" + __webpack_require__(31) + "\" alt=\"Avatar\"></div>\r\n        <div class=\"contactsList_userName\">{{user.fullName}}</div>\r\n        <div class=\"contactsList_userEmail\">{{user.email}}</div>\r\n        <button class=\"contactsList_removeUserButton\"\r\n            ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\"\r\n                ></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n";
+	module.exports = "<nav-status></nav-status>\r\n\r\n<section ng-if=\"$ctrl.statusMessage\" class=\"contactsList_statusMessageContainer\">\r\n    <div>{{$ctrl.statusMessage}}</div>\r\n</section>\r\n\r\n<button class=\"contactsList_openAddUserFormButton\"\r\n    ng-if=\"$ctrl.isContactsListAllowed()\" ui-sref=\"add-user\"></button>\r\n\r\n<ul class=\"contactsList_container\" ng-if=\"$ctrl.isContactsListAllowed()\"\r\n    ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <input class=\"contactsList_searchField\" type=\"text\" ng-model=\"searchText\" placeholder=\"Type to search\"\r\n        ng-class=\"{contactsList_mobileSearchFieldOpened: $ctrl.isMobileSearchFieldOpened}\">\r\n    <label class=\"contactsList_searchIcon\">&#128269;</label>\r\n    <button class=\"contactsList_toggleMobileSearchFieldButton\"\r\n            ng-click=\"$ctrl.toggleMobileSearchField()\">&#128269;</button>\r\n\r\n    <li ng-repeat=\"user in $ctrl.contacts | orderBy: 'fullName' | filter:searchText\"\r\n        ui-sref=\"user-card({userId: user.id})\">\r\n        <div class=\"contactsList_userAvatar\"><img src=\"" + __webpack_require__(31) + "\" alt=\"Avatar\"></div>\r\n        <div class=\"contactsList_userName\">{{user.fullName}}</div>\r\n        <div class=\"contactsList_userEmail\">{{user.email}}</div>\r\n        <button class=\"contactsList_removeUserButton\"\r\n            ng-click=\"$ctrl.removeUser(user); $event.stopPropagation();\"\r\n                ></button>\r\n    </li>\r\n</ul>\r\n\r\n<ui-view></ui-view>\r\n";
 
 /***/ },
 /* 51 */
@@ -6667,7 +6681,7 @@ var bundle =
 	
 	var addUserFormComponent = {
 	    bindings: {
-	        addNewUser: '&' // callback to parent contacts-list component
+	        addNewUser: '&' // callbacks to parent contacts-list component
 	    },
 	    template: _addUserForm2.default,
 	    controller: AddUserFormController
@@ -6782,14 +6796,14 @@ var bundle =
 	    }).state('add-user', {
 	        parent: 'contacts-list',
 	        url: '/add-user',
-	        template: '<add-user-form\n                               add-new-user="$ctrl.addNewUser(user)"></add-user-form>',
+	        template: '<add-user-form add-new-user="$ctrl.addNewUser(user)"></add-user-form>',
 	        controller: function controller(PageMaskService) {
 	            PageMaskService.open();
 	        }
 	    }).state('user-card', {
 	        parent: 'contacts-list',
 	        url: '/:userId',
-	        template: '<user-card selected-user="stateCtrl.selectedUser"\n                               update-user="$ctrl.updateUser(user)"></user-card>',
+	        template: '<user-card selected-user="stateCtrl.selectedUser"\n                           update-user="$ctrl.updateUser(user)"></user-card>',
 	        resolve: {
 	            // download user data before rendering the state
 	            userData: function userData($stateParams, ContactsService) {
@@ -6803,7 +6817,7 @@ var bundle =
 	    }).state('edit-form', {
 	        parent: 'user-card',
 	        url: '/edit-form',
-	        template: '<user-edit-form selected-user="$ctrl.selectedUser"\n                                update-user="$ctrl.updateUser({user: user})"\n                                    ></user-edit-form>'
+	        template: '<user-edit-form selected-user="$ctrl.selectedUser"\n                            update-user="$ctrl.updateUser({user: user})"\n                                ></user-edit-form>'
 	    });
 	}
 

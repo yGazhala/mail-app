@@ -7,8 +7,17 @@ let contactsListComponent = {
     controller: ContactsListController
 };
 
-function ContactsListController(ContactsService, PageMaskService, NavStatusService, $state) {
+function ContactsListController(ContactsService, PageMaskService, NavStatusService, $state, $timeout) {
     NavStatusService.setStatus('Contacts');
+
+    this.statusMessage = null;
+
+    this.showStatusMessage = function(message) {
+        this.statusMessage = message;
+
+        // Hide the message after timeout
+        $timeout(() => this.statusMessage = null, 5000);
+    };
 
     ContactsService.getAll().then((contacts) => {
         this.contacts = contacts;
@@ -27,10 +36,11 @@ function ContactsListController(ContactsService, PageMaskService, NavStatusServi
 
     this.addNewUser = function(newUser) {
         ContactsService.addUser(newUser)
+            // update contacts list
             .then((newUser) => {
-                // update contacts list
                 this.contacts.push(newUser);
-                PageMaskService.close(); // костыль
+                PageMaskService.close();
+                this.showStatusMessage('The new contact has been created');
                 $state.go('contacts-list');
             });
 
@@ -40,6 +50,7 @@ function ContactsListController(ContactsService, PageMaskService, NavStatusServi
         ContactsService.removeUser(user)
             .then(() => {
                 this.contacts.splice(this.contacts.indexOf(user), 1);
+                this.showStatusMessage('The contact has been removed');
             });
     };
 
@@ -47,6 +58,8 @@ function ContactsListController(ContactsService, PageMaskService, NavStatusServi
         ContactsService.updateUser(user)
             // update contacts list
             .then(()=> {
+                this.showStatusMessage('The contact has been updated');
+
                 let max = this.contacts.length;
                 for(let i = 0; i < max; i++) {
                    if (this.contacts[i].id === user.id) {

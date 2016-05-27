@@ -12,7 +12,7 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
         .state('compose', {
             parent: 'mail-box',
             url: '/compose',
-            template: '<compose show-operation-result="$ctrl.showOperationResult(message)"></compose>'
+            template: '<compose show-status-message="$ctrl.showStatusMessage(message)"></compose>'
         })
 
         .state('message-list', {

@@ -56,6 +56,10 @@
   }
 }
 
+.contactsList_statusMessageContainer {
+  @include statusMessageContainer;
+}
+
 @media screen and (max-width: map-get($points, '0')) {
   .contactsList_userName,
   .contactsList_userEmail {
@@ -121,5 +125,9 @@
     &:active {
       background-position: -6px -106px;
     }
+  }
+
+  .contactsList_statusMessageContainer {
+    top: 75%;
   }
 }

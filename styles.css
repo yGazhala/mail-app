@@ -780,7 +780,7 @@ html {
   }
 }
 
-.mailBox_operationResultContainer {
+.mailBox_statusMessageContainer {
   width: 100%;
   position: fixed;
   top: 43px;
@@ -788,7 +788,7 @@ html {
   z-index: 2;
 }
 
-.mailBox_operationResultContainer div {
+.mailBox_statusMessageContainer div {
   max-width: 25rem;
   margin: 0 auto;
   padding: 0 0.422rem;
@@ -803,7 +803,7 @@ html {
 }
 
 @media screen and (max-width: 667px) {
-  .mailBox_operationResultContainer {
+  .mailBox_statusMessageContainer {
     top: 75%;
   }
 }
@@ -1476,6 +1476,17 @@ html {
   border-top: 1px solid #e5e5e5;
 }
 
+.compose_note {
+  margin-top: 1.333rem;
+  padding: 0 0.422rem;
+  background-color: #f9edbe;
+  border: 1px solid #f0c36d;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 @media screen and (max-width: 667px) {
   .compose_backwardButton {
     height: 48px;
@@ -1631,6 +1642,28 @@ html {
   background-position: -7px -39px;
 }
 
+.contactsList_statusMessageContainer {
+  width: 100%;
+  position: fixed;
+  top: 43px;
+  left: 0;
+  z-index: 2;
+}
+
+.contactsList_statusMessageContainer div {
+  max-width: 25rem;
+  margin: 0 auto;
+  padding: 0 0.422rem;
+  text-align: center;
+  font-weight: bold;
+  background-color: #f9edbe;
+  border: 1px solid #f0c36d;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 @media screen and (max-width: 767px) {
   .contactsList_userName,
   .contactsList_userEmail {
@@ -1738,6 +1771,10 @@ html {
 
   .contactsList_openAddUserFormButton:active {
     background-position: -6px -106px;
+  }
+
+  .contactsList_statusMessageContainer {
+    top: 75%;
   }
 }
 

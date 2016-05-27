@@ -1,5 +1,9 @@
 <nav-status></nav-status>
 
+<section ng-if="$ctrl.statusMessage" class="contactsList_statusMessageContainer">
+    <div>{{$ctrl.statusMessage}}</div>
+</section>
+
 <button class="contactsList_openAddUserFormButton"
     ng-if="$ctrl.isContactsListAllowed()" ui-sref="add-user"></button>
 

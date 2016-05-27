@@ -22,5 +22,10 @@
             <textarea class="compose_content" name="content" ng-model="newMessage.content"></textarea>
         </section>
         <input class="compose_submit" type="submit" value="Send" ng-disabled="$ctrl.isSubmitEnabled === false">
+        <div class="compose_note">
+            Note, in this test version there is no real postal server.
+            The new message will not be sent to the recipient,
+            it will be just stored in the sent mail directory on the server.
+        </div>
     </form>
 </section>

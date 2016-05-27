@@ -46,6 +46,17 @@
   border-top: 1px solid map-get($colors, 'border');
 }
 
+.compose_note {
+  margin-top: map-get($type-scale, '1') * 1rem;
+  padding: 0 map-get($type-scale, '-3') * 1rem;
+  background-color: map-get($colors, 'alert-light');
+  border: 1px solid map-get($colors, 'alert');
+  border-radius: 2px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 @media screen and (max-width: map-get($points, '-1')) {
   .compose_backwardButton {
     @include mobileBackwardButton;

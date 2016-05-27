@@ -3,7 +3,7 @@ import template from './add-user-form.html';
 
 let addUserFormComponent = {
     bindings: {
-        addNewUser: '&' // callback to parent contacts-list component
+        addNewUser: '&' // callbacks to parent contacts-list component
     },
     template,
     controller: AddUserFormController

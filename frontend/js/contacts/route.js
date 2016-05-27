@@ -12,8 +12,7 @@ export default function routingConfig($stateProvider) {
         .state('add-user', {
             parent: 'contacts-list',
             url: '/add-user',
-            template: `<add-user-form
-                               add-new-user="$ctrl.addNewUser(user)"></add-user-form>`,
+            template: '<add-user-form add-new-user="$ctrl.addNewUser(user)"></add-user-form>',
             controller: function(PageMaskService) {PageMaskService.open();}
         })
 
@@ -21,7 +20,7 @@ export default function routingConfig($stateProvider) {
             parent: 'contacts-list',
             url: '/:userId',
             template: `<user-card selected-user="stateCtrl.selectedUser"
-                               update-user="$ctrl.updateUser(user)"></user-card>`,
+                           update-user="$ctrl.updateUser(user)"></user-card>`,
             resolve: {
                 // download user data before rendering the state
                 userData: function($stateParams, ContactsService) {
@@ -36,7 +35,7 @@ export default function routingConfig($stateProvider) {
             parent: 'user-card',
             url: '/edit-form',
             template: `<user-edit-form selected-user="$ctrl.selectedUser"
-                                update-user="$ctrl.updateUser({user: user})"
-                                    ></user-edit-form>`
+                            update-user="$ctrl.updateUser({user: user})"
+                                ></user-edit-form>`
         })
 }
