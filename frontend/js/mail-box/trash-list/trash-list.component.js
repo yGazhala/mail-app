@@ -6,10 +6,11 @@ let trashListComponent = {
         messages: '<', // get data from state controller
         moveMessageToOriginalBox: '&' // callback to parent mail-box component
     },
-    template,
+    template: template,
     controller: TrashListController
 };
 
+/*@ngInject*/
 function TrashListController($state, NavStatusService) {
     NavStatusService.setStatus('Trash');
 

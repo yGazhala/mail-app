@@ -7,10 +7,11 @@ let messageListComponent = {
             boxId: '<', // get data from stateCtrl
             moveMessageToTrash: '&' //callback to parent mail-box component
         },
-        template,
+        template: template,
         controller: MessageListController
 };
 
+/*@ngInject*/
 function MessageListController($state, NavStatusService) {
     if(this.boxId === 'inbox') {
         NavStatusService.setStatus('Inbox');

@@ -7,6 +7,7 @@ let loginComponent = {
     controller: LoginController
 };
 
+/*@ngInject*/
 function LoginController(AuthService, $state) {
     this.isInvalidLoginOrPassword = false;
 

@@ -7,6 +7,7 @@
 // - shared/route.js;
 // - shared/logout/logout.component.js.
 
+/*@ngInject*/
 export default function AuthService($firebaseAuth, FIREBASE_URI) {
     let ref = new Firebase(FIREBASE_URI);
 

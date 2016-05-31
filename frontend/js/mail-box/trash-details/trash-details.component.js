@@ -6,7 +6,7 @@ let trashDetailsComponent = {
         messages: '<', // get data from parent trash-list component
         currentMessageId: '<' // get data from state controller
     },
-    template,
+    template: template,
     controller: TrashDetailsController
 };
 

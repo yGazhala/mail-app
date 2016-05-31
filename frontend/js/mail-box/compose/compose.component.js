@@ -5,10 +5,11 @@ let composeComponent = {
         bindings: {
             showStatusMessage: '&' // callback to parent mail-box component
         },
-        template,
+        template: template,
         controller: ComposeController
 };
 
+/*@ngInject*/
 function ComposeController(MailDataService, NavStatusService, $state) {
     NavStatusService.setStatus('Compose');
 

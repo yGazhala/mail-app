@@ -1,5 +1,6 @@
 "use strict";
 
+/*@ngInject*/
 export default function ContactsService($http, NormalizeToArrayFactory, FIREBASE_URI, FIREBASE_SECRET) {
     let uri = FIREBASE_URI + '/contacts';
 

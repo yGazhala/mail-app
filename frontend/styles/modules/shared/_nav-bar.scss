@@ -47,29 +47,3 @@
     box-shadow: inset 0 0 1px 1px rgba(0,0,0,0.2);
   }
 }
-
-/*
-.navBar_openSliderMenuButton,
-.navBar_sliderMenuContainer {
-  display: none;
-}
-
-@media screen and (max-width: map-get($points, '-2')) {
-  .navBar_container {display: none;}
-
-  .navBar_openSliderMenuButton {
-    $button-height: 40; //px
-    height: $button-height * 1px;
-    position: fixed;
-    top: $button-height / 2 * 1px;
-    left: 0.5rem;
-    display: inline-block;
-
-    img {
-      height: 100%;
-      width: auto;
-    }
-  }
-  .navBar_sliderMenuContainer {display: block;}
-}
-*/

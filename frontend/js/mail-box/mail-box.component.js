@@ -9,6 +9,7 @@ let mailBoxComponent = {
     controller: MailBoxController
 };
 
+/*@ngInject*/
 function MailBoxController(MailDataService, $timeout) {
     this.statusMessage = null;
 

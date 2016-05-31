@@ -4,8 +4,7 @@ let pageMaskComponent = {
     bindings: {},
     template: `<div class="shared_pageMask"
                     ng-class="{open: $ctrl.isPageMaskOpened()}"></div>`,
-
-    controller: function(PageMaskService) {
+    controller: /*@ngInject*/ function(PageMaskService) {
         this.isPageMaskOpened = () => PageMaskService.isOpened;
     }
 };

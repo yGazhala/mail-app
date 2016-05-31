@@ -6,6 +6,7 @@
 // Then in response.data we will receive this object instead of the array.
 // To continue working with an array we will use this factory.
 
+/*@ngInject*/
 export default function NormalizeToArrayFactory() {
 
     return function(object) {

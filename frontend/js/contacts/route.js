@@ -1,19 +1,20 @@
 'use strict';
 
+/*@ngInject*/
 export default function routingConfig($stateProvider) {
     $stateProvider
         .state('contacts-list', {
             parent: 'account',
             url: '/contacts-list',
             template: '<contacts-list></contacts-list>',
-            controller: function(PageMaskService) {PageMaskService.close();}
+            controller: /*@ngInject*/ function(PageMaskService) {PageMaskService.close();}
         })
 
         .state('add-user', {
             parent: 'contacts-list',
             url: '/add-user',
             template: '<add-user-form add-new-user="$ctrl.addNewUser(user)"></add-user-form>',
-            controller: function(PageMaskService) {PageMaskService.open();}
+            controller: /*@ngInject*/ function(PageMaskService) {PageMaskService.open();}
         })
 
         .state('user-card', {
@@ -23,7 +24,7 @@ export default function routingConfig($stateProvider) {
                            update-user="$ctrl.updateUser(user)"></user-card>`,
             resolve: {
                 // download user data before rendering the state
-                userData: function($stateParams, ContactsService) {
+                userData: /*@ngInject*/ function($stateParams, ContactsService) {
                     return ContactsService.getOne($stateParams.userId);
                 }
             },

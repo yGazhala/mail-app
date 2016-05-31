@@ -1,5 +1,6 @@
 'use strict';
 
+/*@ngInject*/
 export default function routingConfig($stateProvider) {
     $stateProvider
         .state('account', {
@@ -7,7 +8,7 @@ export default function routingConfig($stateProvider) {
             url: '/account',
             template: '<layout></layout>',
             resolve: {
-                currentAuth: function(AuthService) {
+                currentAuth: /*@ngInject*/ function(AuthService) {
                     // requireAuth returns a promise so the resolve waits for it to complete.
                     // If the promise is rejected, it will throw a $stateChangeError,
                     // and user will be redirected to the login page.

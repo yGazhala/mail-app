@@ -1,5 +1,6 @@
 'use strict';
 
+/*@ngInject*/
 export default function routingConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('mail-box', {
@@ -23,9 +24,9 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
                            move-message-to-trash="$ctrl.moveMessageToTrash(message)"
                                ></message-list>`,
             resolve: { // download data before rendering the state
-                currentBoxPromise: (MailDataService, $stateParams) =>
+                currentBoxPromise: /*@ngInject*/ (MailDataService, $stateParams) =>
                     MailDataService.getBox($stateParams.boxId),
-                currentBoxId: ($stateParams) => $stateParams.boxId
+                currentBoxId: /*@ngInject*/ ($stateParams) => $stateParams.boxId
             },
             controller: function(currentBoxPromise, currentBoxId) {
                 this.currentBox = currentBoxPromise;
@@ -39,7 +40,7 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
             url: '/:id',
             template: '<message message="stateCtrl.message"></message>',
             resolve: {
-                currentMessagePromise: ($stateParams, MailDataService) =>
+                currentMessagePromise: /*@ngInject*/ ($stateParams, MailDataService) =>
                     MailDataService.getMessage($stateParams.boxId, $stateParams.id)
             },
             controller: function(currentMessagePromise) { this.message = currentMessagePromise; },
@@ -50,7 +51,7 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
             parent: 'mail-box',
             url: '/trash-list',
             resolve: {
-                messagesPromise: (MailDataService) => MailDataService.getBox('trash')
+                messagesPromise: /*@ngInject*/ (MailDataService) => MailDataService.getBox('trash')
             },
             template: `<trash-list messages="stateCtrl.messages"
                                 move-message-to-original-box=
@@ -66,7 +67,7 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
             template: `<trash-details messages="$ctrl.messages"
                             current-message-id="stateCtrl.currentMessageId"></trash-details>`,
             resolve: {
-                currentMessageId: ($stateParams) => $stateParams.id
+                currentMessageId: /*@ngInject*/ ($stateParams) => $stateParams.id
             },
             controller: function (currentMessageId) { this.currentMessageId = currentMessageId; },
             controllerAs: 'stateCtrl'

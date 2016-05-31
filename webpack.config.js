@@ -1,86 +1,206 @@
 'use strict';
+// Modules
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
-//let path = require('path');
+// Get npm lifecycle event to determine the environment
+var ENV = process.env.npm_lifecycle_event;
+var isTest = ENV === 'test' || ENV === 'test-watch';
+var isProd = ENV === 'build';
 
-module.exports = {
-    context: __dirname + '/frontend', // здесь прикол
+module.exports = function makeWebpackConfig () {
 
-    entry: {
-        bundle: './js/core.js',
-        styles: './styles/core.scss'
-    },
+    var config = {};
 
-    output: {
-        path: __dirname + '/',
-        //path: path.resolve(__dirname, "/"),
-        filename: '[name].js',
-        //publicPath: '/assets/',
+    config.entry = isTest ? {} : {
+        bundle: __dirname + '/frontend/js/core.js',
+        styles: __dirname + '/frontend/styles/core.scss'
+    };
+
+    config.output = isTest ? {} : {
+        // Absolute output directory
+        path: __dirname + '/public',
+
+        // Output path from the view of the page
+        // Uses webpack-dev-server in development
+        publicPath: isProd ? '/' : 'http://localhost:8080/',
+
+        // Filename for entry points
+        // Only adds hash in build mode
+        filename: isProd ? '[name].[hash].js' : '[name].bundle.js',
+
+        // Filename for non-entry points
+        // Only adds hash in build mode
+        chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js',
+
+        // The global variable name to get access to code inside the app.
+        // It may be useful with debugging.
         library: '[name]'
-    },
+    };
 
-    watch: true,
+    // Devtool
+    // Reference: http://webpack.github.io/docs/configuration.html#devtool
+    // Type of source map
+    if (isTest) {
+        config.devtool = 'inline-source-map';
+    } else if (isProd) {
+        config.devtool = 'source-map';
+    } else {
+        config.devtool = 'eval-source-map';
+    }
 
-    // The project rebuilds through 100 ms after changes have been made
-    watchOptions: {
-        aggregateTimeout: 100
-    },
-
-    devtool: 'source-map',
+    // The project rebuilds through 300 ms after changes have been made
+    config.watchOptions = {
+        aggregateTimeout: 300
+    };
 
     // Resolve setting describes how Webpack resolves modules.
     // We can simplify the default settings in purpose of making Webpack work more quickly
-    // You can also find default settings here:
-    // https://webpack.github.io/docs/configuration.html#resolve-modulesdirectories
-    resolve: {
+    // Reference: https://webpack.github.io/docs/configuration.html#resolve-modulesdirectories
+    config.resolve = {
         modulesDirectories: ['node_modules'],
         extensions: ['', '.js']
-    },
+    };
 
     // The same thing we are doing for loaders
-    resolveLoader: {
+    config.resolveLoader = {
         modulesDirectories: ['node_modules'],
         moduleTemplates: ['*-loader', '*'],
         extensions: ['', '.js']
-    },
+    };
 
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                include: /frontend/,
-                loader: 'babel',
-                query: {presets: ['es2015']}
+    config.module = {
+        preLoaders: [],
+
+        loaders: [{
+            // Babel loader
+            // Compiles ES6 into ES5 code
+            // Reference: https://github.com/babel/babel-loader
+            test: /\.js$/,
+            include: /frontend/,
+            loader: 'babel',
+            query: {presets: ['es2015']}
             }, {
-                test: /\.html$/,
-                exclude: /node_modules/,
-                loader: 'html'
+            // HTML loader
+            // Allow loading html through js
+            // Reference: https://github.com/webpack/html-loader
+            test: /\.html$/,
+            exclude: /node_modules/,
+            loader: 'html'
             }, {
-                test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                exclude: /node_modules/,
-                // if file size less than 10kb - use the url loader, else - the file loader
-                loader: 'url?name=[path][name].[ext]&limit=10000'
+            // URL loader
+            // The URL loader returns a Data Url if a file is smaller than a limit.
+            // If it is not  - the file is copied to a separate directory.
+            // The URL loader is an extension of the File loader,
+            // that is why we need the File loader as a dependency.
+            // Reference: https://github.com/webpack/url-loader
+            test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+            exclude: /node_modules/,
+            loader: 'url?name=[path][name].[ext]&limit=10000'
             }, {
-                test: /\.scss$/,
-                exclude: /node_modules/,
-                loader: ExtractTextPlugin.extract('css!resolve-url!sass?sourceMap')
-            }
-        ],
+            // SASS, CSS and Style loaders
+            // SASS loader compiles SASS into CSS.
+            // CSS and Style loaders allow loading CSS through JS,
+            // by injecting a <style> tag to the DOM.
+            // ExtractTextPlugin extracts CSS from JS to the separate file.
+            // References: https://github.com/jtangelder/sass-loader
+            //             https://github.com/webpack/css-loader
+            //             https://github.com/webpack/style-loader
+
+            // Note: in this project CSS is extracted to the separate file,
+            // therefore The Style loader is not used.
+            // In case of injecting CSS into JS, this configuration would be:
+            // loader: 'style!css!resolve-url!sass?sourceMap',
+            // and we also need to add The style loader into the dependencies.
+            test: /\.scss$/,
+            exclude: /node_modules/,
+            loader: isTest ? 'null' : ExtractTextPlugin.extract('css!resolve-url!sass?sourceMap')
+        }],
 
         // Loaders must not parse next libraries and frameworks
         noParse: wrapRegexp(/\/node_modules\/(angular\/angular|angular-messages\/angular-messages|angular-ui-router\/release\/angular-ui-router|angularfire\/dist\/angularfire|firebase\/lib\/firebase-node)/, 'noParse')
-    },
-
-    plugins: [
-        new ExtractTextPlugin('styles.css', {allChunks: true})
-    ]
-};
-
-// This helper function writes into console, which files have not been parsing
-function wrapRegexp(regexp, label) {
-    regexp.test = function(path) {
-        console.log(label, path);
-        return RegExp.prototype.test.call(this, path);
     };
-    return regexp;
-}
+
+    // Isparta loader
+    // Instrument JS files with Isparta for subsequent code coverage reporting.
+    // Reference: https://github.com/ColCh/isparta-instrumenter-loader
+    // Skip node_modules and files that end with '.spec.js'
+    if (isTest) {
+        config.module.preLoaders.push({
+            test: /\.js$/,
+            exclude: [
+                /node_modules/,
+                /\.spec\.js$/
+            ],
+            loader: 'isparta-instrumenter'
+        })
+    }
+
+    // Plugins
+    // Reference: http://webpack.github.io/docs/configuration.html#plugins
+    // List: http://webpack.github.io/docs/list-of-plugins.html
+    config.plugins = [];
+
+    if(!isTest) {
+        config.plugins.push(
+            // Extract CSS from JS to the separate file.
+            // Reference: https://github.com/webpack/extract-text-webpack-plugin
+            new ExtractTextPlugin('styles.css', {allChunks: true})
+        );
+    }
+
+    // Add build specific plugins
+    if (isProd) {
+        config.plugins.push(
+            // Only emit files when there are no errors
+            // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
+            new webpack.NoErrorsPlugin(),
+
+            // Run ng-annotate
+            // Reference: https://github.com/jeffling/ng-annotate-webpack-plugin
+            new ngAnnotatePlugin({add: true}),
+
+            // Minify all javascript, switch loaders to minimizing mode
+            // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
+            new webpack.optimize.UglifyJsPlugin(),
+
+            // Copy assets from the public folder to the output
+            // Reference: https://github.com/kevlened/copy-webpack-plugin
+            new CopyWebpackPlugin([{
+                from: __dirname + '/public'
+            }])
+        )
+    }
+
+    // Dev server configuration
+    // Reference: http://webpack.github.io/docs/configuration.html#devserver
+    // Reference: http://webpack.github.io/docs/webpack-dev-server.html
+
+    config.devServer = {
+        host: 'localhost', //default
+            port: '8080', //default
+            contentBase: './public',
+            stats: 'minimal'
+        /*
+         Note that many editors support “safe write” feature and have it enabled by default,
+         which makes dev server unable to watch files correctly. “Safe write” means changes
+         are not written directly to original file but to temporary one instead,
+         which is renamed and replaces original file when save operation is completed successfully.
+         This behaviour causes file watcher to lose the track because the original file is removed.
+         In order to prevent this issue, you have to disable “safe write” feature in your editor.
+         */
+    };
+
+    // This helper function writes into console, which files have not been parsing
+    function wrapRegexp(regexp, label) {
+        regexp.test = function(path) {
+            console.log(label, path);
+            return RegExp.prototype.test.call(this, path);
+        };
+        return regexp;
+    }
+
+    return config;
+}();
