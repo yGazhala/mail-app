@@ -3,7 +3,6 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Get npm lifecycle event to determine the environment
 var ENV = process.env.npm_lifecycle_event;
@@ -28,12 +27,10 @@ module.exports = function makeWebpackConfig () {
         publicPath: isProd ? '/' : 'http://localhost:8080/',
 
         // Filename for entry points
-        // Only adds hash in build mode
-        filename: isProd ? '[name].[hash].js' : '[name].bundle.js',
+        filename: '[name].js',
 
         // Filename for non-entry points
-        // Only adds hash in build mode
-        chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js',
+        chunkFilename: '[name].js',
 
         // The global variable name to get access to code inside the app.
         // It may be useful with debugging.
@@ -43,13 +40,8 @@ module.exports = function makeWebpackConfig () {
     // Devtool
     // Reference: http://webpack.github.io/docs/configuration.html#devtool
     // Type of source map
-    if (isTest) {
-        config.devtool = 'inline-source-map';
-    } else if (isProd) {
-        config.devtool = 'source-map';
-    } else {
-        config.devtool = 'eval-source-map';
-    }
+    config.devtool = 'source-map';
+
 
     // The project rebuilds through 300 ms after changes have been made
     config.watchOptions = {
@@ -147,7 +139,10 @@ module.exports = function makeWebpackConfig () {
         config.plugins.push(
             // Extract CSS from JS to the separate file.
             // Reference: https://github.com/webpack/extract-text-webpack-plugin
-            new ExtractTextPlugin('styles.css', {allChunks: true})
+            new ExtractTextPlugin('styles.css', {allChunks: true}),
+            // Run ng-annotate
+            // Reference: https://github.com/jeffling/ng-annotate-webpack-plugin
+            new ngAnnotatePlugin({add: true})
         );
     }
 
@@ -156,21 +151,11 @@ module.exports = function makeWebpackConfig () {
         config.plugins.push(
             // Only emit files when there are no errors
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
-            new webpack.NoErrorsPlugin(),
-
-            // Run ng-annotate
-            // Reference: https://github.com/jeffling/ng-annotate-webpack-plugin
-            new ngAnnotatePlugin({add: true}),
+            new webpack.NoErrorsPlugin()
 
             // Minify all javascript, switch loaders to minimizing mode
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-            new webpack.optimize.UglifyJsPlugin(),
-
-            // Copy assets from the public folder to the output
-            // Reference: https://github.com/kevlened/copy-webpack-plugin
-            new CopyWebpackPlugin([{
-                from: __dirname + '/public'
-            }])
+            //new webpack.optimize.UglifyJsPlugin()
         )
     }
 
