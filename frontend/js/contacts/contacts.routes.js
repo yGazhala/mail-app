@@ -1,22 +1,24 @@
 'use strict';
 
-/* @ngInject */
-export default function routingConfig($stateProvider) {
+routerConfig.$inject = ['$stateProvider'];
+function routerConfig($stateProvider) {
     $stateProvider
         .state('contacts-list', {
             parent: 'account',
             url: '/contacts-list',
             template: '<contacts-list></contacts-list>',
-            /* @ngInject */
-            controller: function(PageMaskService) {PageMaskService.close();}
+            controller: ['PageMaskService', function (PageMaskService) {
+                PageMaskService.close();
+            }]
         })
 
         .state('add-user', {
             parent: 'contacts-list',
             url: '/add-user',
             template: '<add-user-form add-new-user="$ctrl.addNewUser(user)"></add-user-form>',
-            /* @ngInject */
-            controller: function(PageMaskService) {PageMaskService.open();}
+            controller: ['PageMaskService', function(PageMaskService) {
+                PageMaskService.open();
+            }]
         })
 
         .state('user-card', {
@@ -26,10 +28,9 @@ export default function routingConfig($stateProvider) {
                            update-user="$ctrl.updateUser(user)"></user-card>`,
             resolve: {
                 // download user data before rendering the state
-                /* @ngInject */
-                userData: function($stateParams, ContactsService) {
+                userData: ['$stateParams','ContactsService', function($stateParams, ContactsService) {
                     return ContactsService.getOne($stateParams.userId);
-                }
+                }]
             },
             controller: ['userData', function (userData) {
                 this.selectedUser = userData;
@@ -45,3 +46,5 @@ export default function routingConfig($stateProvider) {
                                 ></user-edit-form>`
         })
 }
+
+export default routerConfig;

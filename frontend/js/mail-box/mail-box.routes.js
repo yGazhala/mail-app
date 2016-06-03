@@ -1,7 +1,7 @@
 'use strict';
 
-/*@ngInject*/
-export default function routingConfig($stateProvider, $urlRouterProvider) {
+routerConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('mail-box', {
             abstract: true,
@@ -23,15 +23,19 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
                            box-id="stateCtrl.boxId"
                            move-message-to-trash="$ctrl.moveMessageToTrash(message)"
                                ></message-list>`,
-            resolve: { // download data before rendering the state
-                currentBoxPromise: /*@ngInject*/ (MailDataService, $stateParams) =>
-                    MailDataService.getBox($stateParams.boxId),
-                currentBoxId: /*@ngInject*/ ($stateParams) => $stateParams.boxId
+            // download data before rendering the state
+            resolve: {
+                currentBoxPromise: ['MailDataService', '$stateParams', function (MailDataService, $stateParams) {
+                    return MailDataService.getBox($stateParams.boxId);
+                }],
+                currentBoxId: ['$stateParams', function ($stateParams) {
+                    return $stateParams.boxId;
+                }]
             },
-            controller: function(currentBoxPromise, currentBoxId) {
+            controller: ['currentBoxPromise', 'currentBoxId', function(currentBoxPromise, currentBoxId) {
                 this.currentBox = currentBoxPromise;
                 this.boxId = currentBoxId;
-            },
+            }],
             controllerAs: 'stateCtrl'
         })
 
@@ -40,10 +44,13 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
             url: '/:id',
             template: '<message message="stateCtrl.message"></message>',
             resolve: {
-                currentMessagePromise: /*@ngInject*/ ($stateParams, MailDataService) =>
-                    MailDataService.getMessage($stateParams.boxId, $stateParams.id)
+                currentMessagePromise: ['$stateParams', 'MailDataService', function ($stateParams, MailDataService) {
+                    return MailDataService.getMessage($stateParams.boxId, $stateParams.id);
+                }]
             },
-            controller: function(currentMessagePromise) { this.message = currentMessagePromise; },
+            controller: ['currentMessagePromise', function(currentMessagePromise) {
+                this.message = currentMessagePromise;
+            }],
             controllerAs: 'stateCtrl'
         })
 
@@ -51,13 +58,17 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
             parent: 'mail-box',
             url: '/trash-list',
             resolve: {
-                messagesPromise: /*@ngInject*/ (MailDataService) => MailDataService.getBox('trash')
+                messagesPromise: ['MailDataService', function (MailDataService) {
+                    return MailDataService.getBox('trash');
+                }]
             },
             template: `<trash-list messages="stateCtrl.messages"
                                 move-message-to-original-box=
                                     "$ctrl.moveMessageToOriginalBox(message)"
                                         ></trash-list>`,
-            controller: function (messagesPromise) { this.messages = messagesPromise; },
+            controller: ['messagesPromise', function (messagesPromise) {
+                this.messages = messagesPromise;
+            }],
             controllerAs: 'stateCtrl'
         })
 
@@ -67,11 +78,17 @@ export default function routingConfig($stateProvider, $urlRouterProvider) {
             template: `<trash-details messages="$ctrl.messages"
                             current-message-id="stateCtrl.currentMessageId"></trash-details>`,
             resolve: {
-                currentMessageId: /*@ngInject*/ ($stateParams) => $stateParams.id
+                currentMessageId: ['$stateParams', function ($stateParams) {
+                    return $stateParams.id;
+                }]
             },
-            controller: function (currentMessageId) { this.currentMessageId = currentMessageId; },
+            controller: ['currentMessageId', function (currentMessageId) {
+                this.currentMessageId = currentMessageId;
+            }],
             controllerAs: 'stateCtrl'
         });
 
     $urlRouterProvider.otherwise('account/mail-box/list/inbox');
 }
+
+export default routerConfig;

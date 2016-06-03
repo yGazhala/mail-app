@@ -12,7 +12,7 @@ import NavStatusService from './nav-status/nav-status.service.js';
 import navStatusComponent from './nav-status/nav-status.component.js';
 import navBarComponent from './nav-bar/nav-bar.component.js';
 import loadingIndicatorComponent from './loading-indicator/loading-indicator.component.js';
-import routingConfig from './route.js';
+import routerConfig from './shared.routes.js';
 
 export default angular
     .module('shared', [uiRouter, services])
@@ -24,5 +24,5 @@ export default angular
     .component('navStatus', navStatusComponent)
     .component('navBar', navBarComponent)
     .component('loadingIndicator', loadingIndicatorComponent)
-    .config(routingConfig)
+    .config(routerConfig)
     .name;

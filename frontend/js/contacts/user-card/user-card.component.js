@@ -10,7 +10,7 @@ let userCardComponent = {
     controller: UserCardController
 };
 
-/*@ngInject*/
+/* @ngInject */
 function UserCardController($state) {
     // Helper method for determining when to show the user card.
     // When state will be "user-card", it will allow "ng-if" directive

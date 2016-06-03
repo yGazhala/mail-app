@@ -10,7 +10,7 @@ let trashListComponent = {
     controller: TrashListController
 };
 
-/*@ngInject*/
+/* @ngInject */
 function TrashListController($state, NavStatusService) {
     NavStatusService.setStatus('Trash');
 

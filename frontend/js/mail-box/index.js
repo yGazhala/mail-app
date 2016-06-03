@@ -14,7 +14,7 @@ import messageComponent from './message/message.component.js';
 import trashListComponent from './trash-list/trash-list.component.js';
 import trashDetailsComponent from './trash-details/trash-details.component.js';
 
-import routingConfig from './route.js';
+import routerConfig from './mail-box.routes.js';
 
 export default angular
     .module('mailBox', [ngMessages, uiRouter, services, shared])
@@ -24,5 +24,5 @@ export default angular
     .component('message', messageComponent)
     .component('trashList', trashListComponent)
     .component('trashDetails', trashDetailsComponent)
-    .config(routingConfig)
+    .config(routerConfig)
     .name;

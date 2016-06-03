@@ -7,7 +7,7 @@ let layoutComponent = {
     controller: LayoutController
 };
 
-/*@ngInject*/
+/* @ngInject */
 function LayoutController(PageMaskService, $timeout) {
     this.isPageMaskOpened = () => PageMaskService.isOpened;
 

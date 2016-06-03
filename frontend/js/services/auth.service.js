@@ -2,13 +2,13 @@
 // This service implements user's authentication, provided by $firebaseAuth.
 // This service is used by:
 // - auth/index.js;
-// - auth/route.js;
+// - auth/auth.routes.js;
 // - auth/login/login.component.js;
-// - shared/route.js;
+// - shared/shared.routes.js;
 // - shared/logout/logout.component.js.
 
-/*@ngInject*/
-export default function AuthService($firebaseAuth, FIREBASE_URI) {
+AuthService.$inject = ['$firebaseAuth', 'FIREBASE_URI'];
+function AuthService($firebaseAuth, FIREBASE_URI) {
     let ref = new Firebase(FIREBASE_URI);
 
     // This authObj returned by $firebaseAuth contains several methods
@@ -34,3 +34,5 @@ export default function AuthService($firebaseAuth, FIREBASE_URI) {
         return this._authObj.$waitForAuth();
     };
 }
+
+export default AuthService;
