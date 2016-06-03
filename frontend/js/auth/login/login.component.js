@@ -1,14 +1,7 @@
 'use strict';
 import template from './login.html';
 
-let loginComponent = {
-    bindings: {},
-    template,
-    controller: LoginController
-};
-
-/*@ngInject*/
-function LoginController(AuthService, $state) {
+let LoginController = ['AuthService', '$state', function (AuthService, $state) {
     this.isInvalidLoginOrPassword = false;
 
     this.isLoadingIndicatorActive = false;
@@ -28,6 +21,12 @@ function LoginController(AuthService, $state) {
             });
 
     }
-}
+}];
+
+let loginComponent = {
+    bindings: {},
+    template,
+    controller: LoginController
+};
 
 export default loginComponent;

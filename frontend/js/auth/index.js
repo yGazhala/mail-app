@@ -1,10 +1,11 @@
 'use strict';
 // This module describes user's login/password authentication provided by $firebaseAuth service
 // You can also see dependencies at:
-// - services/auth.service.js
-// - auth/route.js;
+// - services/auth.service.js;
+// - auth/auth.routes.js;
+// - auth/auth.run.js;
 // - auth/login/login.component.js;
-// - shared/route.js;
+// - shared/shared.routes.js;
 // - shared/logout/logout.component.js.
 
 import angular from 'angular';
@@ -14,19 +15,12 @@ import services from '../services';
 import shared from '../shared';
 
 import loginComponent from './login/login.component.js';
-import routingConfig from './route.js';
+import routesConfig from './auth.routes.js';
+import runConfig from './auth.run.js';
 
 export default angular
     .module('auth', [uiRouter, services, shared])
     .component('login', loginComponent)
-    .config(routingConfig)
-    .run( /*@ngInject*/ function($rootScope, $state) {
-        $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
-            // We can catch the error thrown when the $requireAuth promise is rejected
-            // and redirect the user back to the login page.
-            if (error === 'AUTH_REQUIRED') {
-                $state.go('login');
-            }
-        });
-    })
+    .config(routesConfig)
+    .run(runConfig)
     .name;

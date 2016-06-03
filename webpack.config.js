@@ -139,10 +139,10 @@ module.exports = function makeWebpackConfig () {
         config.plugins.push(
             // Extract CSS from JS to the separate file.
             // Reference: https://github.com/webpack/extract-text-webpack-plugin
-            new ExtractTextPlugin('styles.css', {allChunks: true}),
+            new ExtractTextPlugin('styles.css', {allChunks: true})
             // Run ng-annotate
             // Reference: https://github.com/jeffling/ng-annotate-webpack-plugin
-            new ngAnnotatePlugin({add: true})
+            //new ngAnnotatePlugin({add: true})
         );
     }
 

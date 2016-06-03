@@ -1,14 +1,13 @@
 'use strict';
 
-/*@ngInject*/
-export default function routingConfig($stateProvider) {
+export default ['$stateProvider', function ($stateProvider) {
     $stateProvider
         .state('login', {
             url: '/login',
             template: '<login></login>',
             resolve: {
                 // controller will not be loaded until waitForAuth resolves
-                currentAuth: /*@ngInject*/ function(AuthService, $state) {
+                currentAuth: ['AuthService', '$state', function(AuthService, $state) {
                     return AuthService.waitForAuth()
                         .then((authData) => {
                             // If user has been authenticated already, redirect to inbox
@@ -16,7 +15,7 @@ export default function routingConfig($stateProvider) {
                                 $state.go('message-list', {boxId: 'inbox'});
                             }
                         })
-                }
+                }]
             }
         })
-}
+}];
