@@ -1,12 +1,13 @@
 'use strict';
 
-export default ['$stateProvider', function ($stateProvider) {
+routerConfig.$inject = ['$stateProvider'];
+function routerConfig ($stateProvider) {
     $stateProvider
         .state('login', {
             url: '/login',
             template: '<login></login>',
+            // controller will not be loaded until waitForAuth resolves
             resolve: {
-                // controller will not be loaded until waitForAuth resolves
                 currentAuth: ['AuthService', '$state', function(AuthService, $state) {
                     return AuthService.waitForAuth()
                         .then((authData) => {
@@ -18,4 +19,6 @@ export default ['$stateProvider', function ($stateProvider) {
                 }]
             }
         })
-}];
+}
+
+export default routerConfig;

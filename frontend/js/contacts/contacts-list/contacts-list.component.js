@@ -7,7 +7,7 @@ let contactsListComponent = {
     controller: ContactsListController
 };
 
-/* @ngInject */
+ContactsListController.$inject = ['ContactsService', 'PageMaskService', 'NavStatusService', '$state', '$timeout'];
 function ContactsListController(ContactsService, PageMaskService, NavStatusService, $state, $timeout) {
     NavStatusService.setStatus('Contacts');
 

@@ -8,7 +8,7 @@ let logoutComponent = {
     controller: LogoutController
 };
 
-/* @ngInject */
+LogoutController.$inject = ['AuthService', '$state'];
 function LogoutController(AuthService, $state) {
     this.logout = function() {
         AuthService.logout();

@@ -15,12 +15,12 @@ import services from '../services';
 import shared from '../shared';
 
 import loginComponent from './login/login.component.js';
-import routesConfig from './auth.routes.js';
+import routerConfig from './auth.routes.js';
 import runConfig from './auth.run.js';
 
 export default angular
     .module('auth', [uiRouter, services, shared])
     .component('login', loginComponent)
-    .config(routesConfig)
+    .config(routerConfig)
     .run(runConfig)
     .name;

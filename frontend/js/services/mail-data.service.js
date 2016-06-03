@@ -1,7 +1,7 @@
 'use strict';
 
-/* @ngInject */
-export default function MailDataService($http, NormalizeToArrayFactory, FIREBASE_URI, FIREBASE_SECRET) {
+MailDataService.$inject = ['$http', 'NormalizeToArrayFactory', 'FIREBASE_URI', 'FIREBASE_SECRET'];
+function MailDataService($http, NormalizeToArrayFactory, FIREBASE_URI, FIREBASE_SECRET) {
     let uri = FIREBASE_URI + '/';
 
     this.getBox = function(boxId) {
@@ -87,3 +87,5 @@ export default function MailDataService($http, NormalizeToArrayFactory, FIREBASE
             .then((response) => response.data); // response.data === null
     }
 }
+
+export default MailDataService;

@@ -7,8 +7,9 @@ let navStatusComponent = {
     controller: NavStatusController
 };
 
-/* @ngInject */
+NavStatusController.$inject = ['NavStatusService'];
 function NavStatusController(NavStatusService) {
+
     this.currentNavStatus = NavStatusService.getStatus();
 }
 

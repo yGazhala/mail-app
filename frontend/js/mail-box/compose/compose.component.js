@@ -9,7 +9,7 @@ let composeComponent = {
         controller: ComposeController
 };
 
-/* @ngInject */
+ComposeController.$inject = ['MailDataService', 'NavStatusService', '$state'];
 function ComposeController(MailDataService, NavStatusService, $state) {
     NavStatusService.setStatus('Compose');
 

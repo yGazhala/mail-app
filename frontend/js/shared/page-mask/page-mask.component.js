@@ -7,8 +7,9 @@ let pageMaskComponent = {
     controller: PageMaskController
 };
 
-/* @ngInject */
+PageMaskController.$inject = ['PageMaskService'];
 function PageMaskController (PageMaskService) {
+
     this.isPageMaskOpened = () => PageMaskService.isOpened;
 }
 

@@ -1,7 +1,14 @@
 'use strict';
 import template from './login.html';
 
-let LoginController = ['AuthService', '$state', function (AuthService, $state) {
+let loginComponent = {
+    bindings: {},
+    template,
+    controller: LoginController
+};
+
+LoginController.$inject = ['AuthService', '$state'];
+function LoginController (AuthService, $state) {
     this.isInvalidLoginOrPassword = false;
 
     this.isLoadingIndicatorActive = false;
@@ -21,12 +28,6 @@ let LoginController = ['AuthService', '$state', function (AuthService, $state) {
             });
 
     }
-}];
-
-let loginComponent = {
-    bindings: {},
-    template,
-    controller: LoginController
-};
+}
 
 export default loginComponent;

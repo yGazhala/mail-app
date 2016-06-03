@@ -1,6 +1,7 @@
 'use strict';
 
-let runConfig = ['$rootScope', '$state', function($rootScope, $state) {
+runConfig.$inject = ['$rootScope', '$state'];
+function runConfig ($rootScope, $state) {
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         // We can catch the error thrown when the $requireAuth promise is rejected
         // and redirect the user back to the login page.
@@ -8,6 +9,6 @@ let runConfig = ['$rootScope', '$state', function($rootScope, $state) {
             $state.go('login');
         }
     });
-}];
+}
 
 export default runConfig;

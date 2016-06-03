@@ -2,6 +2,7 @@
 // This service implements user's authentication, provided by $firebaseAuth.
 // This service is used by:
 // - auth/index.js;
+// - auth/auth.run.js;
 // - auth/auth.routes.js;
 // - auth/login/login.component.js;
 // - shared/shared.routes.js;

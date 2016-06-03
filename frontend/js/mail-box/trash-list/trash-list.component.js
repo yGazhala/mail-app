@@ -10,7 +10,7 @@ let trashListComponent = {
     controller: TrashListController
 };
 
-/* @ngInject */
+TrashListController.$inject = ['$state', 'NavStatusService'];
 function TrashListController($state, NavStatusService) {
     NavStatusService.setStatus('Trash');
 
@@ -34,4 +34,3 @@ function TrashListController($state, NavStatusService) {
 }
 
 export default trashListComponent;
-

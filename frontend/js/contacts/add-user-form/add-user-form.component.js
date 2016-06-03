@@ -9,7 +9,7 @@ let addUserFormComponent = {
     controller: AddUserFormController
 };
 
-/* @ngInject */
+AddUserFormController.$inject = ['PageMaskService'];
 function AddUserFormController(PageMaskService) {
     this.closePageMask = function() {
         PageMaskService.close();

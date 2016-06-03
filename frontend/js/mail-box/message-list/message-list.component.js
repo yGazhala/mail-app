@@ -11,7 +11,7 @@ let messageListComponent = {
         controller: MessageListController
 };
 
-/* @ngInject */
+MessageListController.$inject = ['$state', 'NavStatusService'];
 function MessageListController($state, NavStatusService) {
     if(this.boxId === 'inbox') {
         NavStatusService.setStatus('Inbox');

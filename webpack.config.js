@@ -142,7 +142,8 @@ module.exports = function makeWebpackConfig () {
             new ExtractTextPlugin('styles.css', {allChunks: true})
             // Run ng-annotate
             // Reference: https://github.com/jeffling/ng-annotate-webpack-plugin
-            //new ngAnnotatePlugin({add: true})
+            // Uncomment to add
+            // new ngAnnotatePlugin({add: true})
         );
     }
 
@@ -151,11 +152,11 @@ module.exports = function makeWebpackConfig () {
         config.plugins.push(
             // Only emit files when there are no errors
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
-            new webpack.NoErrorsPlugin()
+            new webpack.NoErrorsPlugin(),
 
             // Minify all javascript, switch loaders to minimizing mode
             // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-            //new webpack.optimize.UglifyJsPlugin()
+            new webpack.optimize.UglifyJsPlugin()
         )
     }
 
