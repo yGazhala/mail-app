@@ -2,12 +2,12 @@
 // Modules
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
 // Get npm lifecycle event to determine the environment
 var ENV = process.env.npm_lifecycle_event;
 var isTest = ENV === 'test' || ENV === 'test-watch';
 var isProd = ENV === 'build';
+var isDevBuild = ENV === 'dev-build';
 
 module.exports = function makeWebpackConfig () {
 
@@ -24,7 +24,7 @@ module.exports = function makeWebpackConfig () {
 
         // Output path from the view of the page
         // Uses webpack-dev-server in development
-        publicPath: isProd ? '/' : 'http://localhost:8080/',
+        publicPath: (isProd || isDevBuild) ? '/' : 'http://localhost:8080/',
 
         // Filename for entry points
         filename: '[name].js',
@@ -140,10 +140,6 @@ module.exports = function makeWebpackConfig () {
             // Extract CSS from JS to the separate file.
             // Reference: https://github.com/webpack/extract-text-webpack-plugin
             new ExtractTextPlugin('styles.css', {allChunks: true})
-            // Run ng-annotate
-            // Reference: https://github.com/jeffling/ng-annotate-webpack-plugin
-            // Uncomment to add
-            // new ngAnnotatePlugin({add: true})
         );
     }
 
