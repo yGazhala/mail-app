@@ -24,9 +24,9 @@
 - логин: `my@email.com`
 - пароль: `test`
 
-[Демонстрация](http://ygazhala.github.io/mail-app "Прямая ссылка")
+[Демонстрация](https://gazhala.firebaseapp.com "Прямая ссылка")
 
-[Демонстрация на популярных мобильных устройствах](http://www.responsinator.com/?url=http%3A%2F%2Fygazhala.github.io%2Fmail-app "Открыть с использованием сервиса responsinator.com")
+[Демонстрация на популярных мобильных устройствах](http://www.responsinator.com/?url=https%3A%2F%2Fgazhala.firebaseapp.com "Открыть с использованием сервиса responsinator.com")
 
 ## Локальная установка
 
@@ -62,15 +62,16 @@ services/auth.service.js;
 auth/auth.routes.js;
 auth/auth.run.js;
 auth/login/login.component.js;
+auth/logout/logout.component.js.
 shared/shared.routes.js;
-shared/logout/logout.component.js.
+shared/layout/layout.html;
 ```
 
 - Модуль `shared` - содержит общий макет страницы и общие компоненты, которые используются во всем приложении. Сюда относятся такие компоненты как: layout, page-mask, nav-bar и т.д.
 
 - Модуль `mail-box` - реализует функционал почтового ящика, включает компоненты: message-list, message, compose и т.д.
 
-- Модуль `contacts` - по аналогии с предыдущим модулем, модуль contacts реализует функционал книги контактов.
+- Модуль `contacts` - по аналогии с предыдущим модулем, модуль "contacts" реализует функционал книги контактов.
 
 - Модуль `core` - это главный модуль, объединяет все модули в одно приложения и является точкой входа в программу.
 

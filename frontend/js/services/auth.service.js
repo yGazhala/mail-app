@@ -5,8 +5,8 @@
 // - auth/auth.run.js;
 // - auth/auth.routes.js;
 // - auth/login/login.component.js;
+// - auth/logout/logout.component.js.
 // - shared/shared.routes.js;
-// - shared/logout/logout.component.js.
 
 AuthService.$inject = ['$firebaseAuth', 'FIREBASE_URI'];
 function AuthService($firebaseAuth, FIREBASE_URI) {
