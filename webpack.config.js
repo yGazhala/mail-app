@@ -2,6 +2,7 @@
 // Modules
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Get npm lifecycle event to determine the environment
 var ENV = process.env.npm_lifecycle_event;
@@ -134,6 +135,12 @@ module.exports = function makeWebpackConfig () {
     // Reference: http://webpack.github.io/docs/configuration.html#plugins
     // List: http://webpack.github.io/docs/list-of-plugins.html
     config.plugins = [];
+
+    config.plugins.push(
+        // CopyWebpackPlugin copies individual files or entire directories to the build directory.
+        // https://github.com/kevlened/copy-webpack-plugin
+        new CopyWebpackPlugin([{from: 'node_modules/angular-material/angular-material.min.css'}])
+    );
 
     if(!isTest) {
         config.plugins.push(
