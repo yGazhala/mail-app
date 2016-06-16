@@ -5,10 +5,27 @@
     <form name="newMessageForm" ng-submit="$ctrl.addNewMessageToSentMail(newMessage)">
         <h3>New message</h3>
         <section>
-            <input class="compose_email" type="text" name="email"
-                   ng-model="newMessage.email" placeholder="To" autofocus required>
-            <div ng-messages="newMessageForm['email'].$error" ng-if="newMessageForm['email'].$dirty" role="alert">
-                <div class="compose_errorMessage" ng-message="required">Please, enter a value for this field.</div>
+            <md-autocomplete class="compose_autoCompleteEmail"
+                    required
+                    md-input-name="email"
+                    md-no-cache="true"
+                    md-selected-item-change="$ctrl.selectedItemChange(item)"
+                    md-search-text-change="$ctrl.searchTextChange($ctrl.searchText)"
+                    md-search-text="$ctrl.searchText"
+                    md-items="item in $ctrl.querySearch($ctrl.searchText)"
+                    md-item-text="item.email"
+                    md-min-length="1"
+                    placeholder="Start typing to add a recipient"
+                    md-menu-class="autocomplete-custom-template">
+                <md-item-template>
+                    <span md-highlight-text="$ctrl.searchText"
+                          md-highlight-flags="^i"
+                          class="item-title">{{item.fullName}}</span>
+                    <span class="item-metadata compose_autoCompleteItemEmail">{{item.email}}</span>
+                </md-item-template>
+            </md-autocomplete>
+            <div ng-messages="newMessageForm['email'].$error" ng-if="newMessageForm['email'].$dirty">
+                <div class="compose_errorMessage" ng-message="required">Please, enter a correct email.</div>
             </div>
         </section>
         <section>

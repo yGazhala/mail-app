@@ -4,6 +4,12 @@ import angular from 'angular';
 import ngMessages from 'angular-messages';
 import uiRouter from 'angular-ui-router';
 
+//Angular material dependencies
+import ngAnimate from 'angular-animate';
+import ngAria from 'angular-aria';
+import ngMaterial from 'angular-material';
+
+// modules
 import services from '../services';
 import shared from '../shared';
 
@@ -17,7 +23,7 @@ import trashDetailsComponent from './trash-details/trash-details.component.js';
 import routerConfig from './mail-box.routes.js';
 
 export default angular
-    .module('mailBox', [ngMessages, uiRouter, services, shared])
+    .module('mailBox', [ngMessages, uiRouter, ngMaterial, services, shared])
     .component('mailBox', mailBoxComponent)
     .component('compose', composeComponent)
     .component('messageList', messageListComponent)

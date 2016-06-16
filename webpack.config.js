@@ -112,7 +112,7 @@ module.exports = function makeWebpackConfig () {
         }],
 
         // Loaders must not parse next libraries and frameworks
-        noParse: wrapRegexp(/\/node_modules\/(angular\/angular|angular-messages\/angular-messages|angular-ui-router\/release\/angular-ui-router|angularfire\/dist\/angularfire|firebase\/lib\/firebase-node)/, 'noParse')
+        noParse: wrapRegexp(/\/node_modules\/(angular\/angular|angular-messages\/angular-messages|angular-ui-router\/release\/angular-ui-router|angularfire\/dist\/angularfire|firebase\/lib\/firebase-node|angular-material\/|angular-animate\/|angular-aria\/)/, 'noParse')
     };
 
     // Isparta loader

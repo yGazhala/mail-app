@@ -15,7 +15,6 @@
   }
 }
 
-.compose_email,
 .compose_subject {
   width: 100%;
   padding: map-get($type-scale, '-1') * 1rem map-get($type-scale, '-3') * 1rem;
@@ -24,6 +23,22 @@
   border-top: 1px solid map-get($colors, 'border');
   border-left: 1px solid map-get($colors, 'border');
   border-right: 1px solid map-get($colors, 'border');
+}
+// overwrite ngMaterail autocomplete
+.compose_autoCompleteEmail {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-top: 1px solid map-get($colors, 'border');
+  border-left: 1px solid map-get($colors, 'border');
+  border-right: 1px solid map-get($colors, 'border');
+  input {
+    padding-left: map-get($type-scale, '-3') * 1rem !important;
+  }
+}
+// overwrite ngMaterail autocomplete
+md-autocomplete-wrap {
+  box-shadow: none !important;
 }
 
 .compose_content {
@@ -55,6 +70,11 @@
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.compose_autoCompleteItemEmail {
+  margin-left: 1rem;
+  color: map-get($colors, 'accent-alternative');
 }
 
 @media screen and (max-width: map-get($points, '-1')) {
