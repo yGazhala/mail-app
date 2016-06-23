@@ -1,64 +1,67 @@
-# Почтовое приложение с Angular 1.5 и Firebase
+# Mail app with Angular 1.5, Firebase and authorization
 
-Это браузерное одностраничное приложение для работы с электронной почтой на компьютере или мобильном устройстве пользователя.
-Программа включает два основных модуля: почтовый ящик и книга контактов.
+This is a browser single page application for managing emails on personal computers or on mobile devices.
+The app consists of 2 main modules: "mail-box" and "contacts".
 
-## Основные возможности
+## Core features
 
-- Приложение взаимодействует с сервером посредством AJAX запросов, осуществляет чтение, добавление, обновление и удаление пользовательских данных на сервере.
+- The app connects with a server by AJAX technology and implements creating, reading, updating and deleting user data on the server.
 
-- Модуль "mail-box" представляет пользователю интерфейс для поиска, чтения, отправки и удаления писем. При заполнении поля "email" в форме отправки письма, автоматически подгружаются контакты удовлетворяющие поисковому запросу. Также поддерживается возможность восстановления писем из корзины.
+- The "mail-box" module provides a user interface for searching, creating, reading and deleting emails. When the user fills in the email field at the compose form, requiring contacts are being shown automatically by the autocomplete component. In addition, restoring emails from the trash is also supported.
 
-- Модуль "contacts" представляет интерфейс для поиска, добавления, редактирования и удаления контактов.
+- The "contacts" module provides an interface for searching, creating, reading, updating and deleting contacts.
 
-- Проверка заполнения пользовательских форм реализована с помощью модуля "ngMessages". 
+- Checking of user forms was implemented with "ngMessages" module.
 
-- Разработанное с учетом адаптивной верстки, приложение работает, как на настольных компьютерах, так и на мобильных устройствах.
+- Routing was made with Angular UI router.
 
-- Поддержка браузеров: начиная с IE10+ .
+- The app was developed with responsive web design, thereby it runs well on desktops, tablets and smartphones.
 
-> Обратите внимание: в этой тестовой версии приложения, на бекенде не существует реального почтового сервера. После отправки письма, оно не будет доставлено получателю, а лишь будет сохранено на сервере в директории "отправленные письма".
+- Browser support: IE10+ .
 
-## Демонстрация
+> Note: in this test version, there is no a real postal service on the server. Thus, new messages will not be sent to receivers. They will be just saved at the sent mail directory on the server.
 
-Чтобы посмотреть работу приложения, перейдите по одной из ссылок ниже и введите тестовые данные для авторизации:
+## Demo
 
-- логин: `my@email.com`
-- пароль: `test`
+To see demo in your browser, please follow one of the next links and pass authorization with this login/password:
 
-[Демонстрация](https://gazhala.firebaseapp.com "Прямая ссылка")
+- login: `my@email.com`
+- password: `test`
 
-[Демонстрация на популярных мобильных устройствах](http://www.responsinator.com/?url=https%3A%2F%2Fgazhala.firebaseapp.com "Открыть с использованием сервиса responsinator.com")
+[Demo](https://gazhala.firebaseapp.com "Direct link")
 
-## Локальная установка
+[Demo on popular mobile devices](http://www.responsinator.com/?url=https%3A%2F%2Fgazhala.firebaseapp.com "See through responsinator.com service")
 
-Чтобы запустить приложение локально, необходимо произвести его сборку с помощью Webpack. Исходные файлы находятся в директории `frontend`. В результате сборки в директорию `public` будут сохранены "пакетные" файлы `bundle.js` и `styles.css`, а также source-maps со ссылками на исходники. 
+## Local installation
 
-Для начала сборки убедитесь, что у вас глобально установлены: node.js, npm и webpack.
+To run the app locally, you need to compile package files with Webpack. The source code is in the `frontend` directory. In the end of packaging, Webpack adds resulted `bundle.js`, `styles.css` and the source-maps to the `public` directory.
 
-Далее:
+At first, make sure, that node.js, npm and Webpack are installed globally.
 
-1. Клонируйте этот репозиторий: https://github.com/yGazhala/mail-app.git
+Next:
 
-2. Перейдите в директорию с проектом и выполните команду: `npm install`, дождитесь установки всех зависимостей.
+1. Clone this repository: https://github.com/yGazhala/mail-app.git
 
-3. Выполните сборку с запуском локального дев-сервера, выполнив команду: `npm start`.
+2. Navigate to the project directory and run: `npm install`, wait until all dependencies will be installed.
 
-4. В адресной строке браузера наберите: `localhost:8080`.
+3. To compile package files and run the local dev-server, execute: `npm start`.
 
-После запуска дев-сервера, он отслеживает изменения в исходных файлах (в директории `frontend`) и отображает результаты в браузере.
+4. Open your browser and type in the new window: `localhost:8080`.
 
-Другие варианты сборки:
-- `npm run build` - запускает сборку с минификацией, собранные файлы сохраняются в папке `public`.
-- `npm run dev-build` - запускает сборку без минификации.
+When the dev-server runs, it tracks all changes in the source code (`frontend` directory) and updates the results in the browser.
 
-## Архитектура и файловая система
+You can also make the package files without running the dev-server:
+- `npm run build` - makes compressed files and adds them to the `public` directory.
+- `npm run dev-build` - makes uncompressed files.
 
-Приложение состоит из 6 модулей, которые в свою очередь включают отдельные компоненты. В каждой директории модуля находится файл `index.js` в котором инициализируется angular-модуль и объявляются angular-сущности (компоненты, сервисы и т.д). Сами компоненты описаны в отдельных JS файлах, в JS объектах и функциях, которые импортируются в `index.js`.
+## Architecture and the file system
 
-- Модуль `services` - включает сервисы, которые предоставляют данные для всего приложения. Сюда относятся: MailDataService, ContactsService, AuthService. Посредством этих сервисов осуществляются взаимодействие с сервером Firebase.
+The app consists of 6 modules, each of them also includes separate components. Each module directory includes `index.js` file, that initializes angular-module and angular-entities (components, services etc.). The original entities were written in JavaScript objects and functions and were imported to the `index.js`.
 
-- Модуль `auth` - реализует "login/password" аутентификацию пользователя. Аутентификация осуществляется на сервере Firebase, посредством библиотеки AngularFire. В приложении, аутентификация размещена с помощью angular-ui-router. Детальнее по размещению авторизации смотрите следующие файлы:
+- `services` module provides data services to the entire application. It includes MailDataService, ContactsService, AuthService. The app is connected with Firebase server by these services.
+
+- `auth` module provides user "login/password" authentication. The authentication is performed on Firebase server by using AngularFire library. In the app, the authentication is placed with angular-ui-router. To understand how the authentication is implemented, see the next files:
+
 ```
 services/auth.service.js;
 auth/auth.routes.js;
@@ -69,19 +72,21 @@ shared/shared.routes.js;
 shared/layout/layout.html;
 ```
 
-- Модуль `shared` - содержит общий макет страницы и общие компоненты, которые используются во всем приложении. Сюда относятся такие компоненты как: layout, page-mask, nav-bar и т.д.
+- `shared` module describes the page layout and includes common components that are used by different modules of the app. These components are "layout", "page-mask", "nav-bar" etc.
 
-- Модуль `mail-box` - реализует функционал почтового ящика, включает компоненты: message-list, message, compose и т.д. Для реализации автозаполнения поля "email", в форме отправки пиьсма, использовалась библиотека Angular Material. Это единственная задача в этом приложении, для которой использовалась эта библиотека.
+- `mail-box` module provides user interface for managing emails, it includes the next components: "message-list", "message", "compose" etc. Autocomplete service for the "email" field at the compose form was implemented with Angular Material library. It was the only task in the app, which this library was used for.
 
-- Модуль `contacts` - по аналогии с предыдущим модулем, модуль "contacts" реализует функционал книги контактов.
+- `contacts` - like the previous one, this module provides user interface for managing contacts.
 
-- Модуль `core` - это главный модуль, объединяет все модули в одно приложения и является точкой входа в программу.
+- `core` module joins all modules to one application, it is also the program entry point.
 
-### Организация стилей CSS
+### CSS stylesheet structure
 
-Исходные файлы стилей написаны с использованием препроцессора SASS и скомпилированы в один итоговый файл `styles.css`.
-Как и в случае с организацией JS кода, стили CSS разбиты на модули и компоненты, таким образом, каждому компоненту соответствуют его стили.
-Общая структура стилей выглядит так:
+The source code was written in SASS and was compiled to the single `styles.css` file.
+
+Organization of stylesheets is similar to the structuring of the JavaScript code. The styles were divided into modules and components, thus each component corresponds its styles.
+
+The general structure is:
 ```
 base
 	- base.scss
@@ -89,7 +94,7 @@ base
 modules
 	- auth
 	- contacts
-		// компоненты
+		// components
 		- contacts-list.scss
 		- user-card.scss
 		...
@@ -101,9 +106,9 @@ utils
 core.scss
 ```
 
-Здесь дополнительно присутствуют два модуля:
-- Модуль `base` - включает сброс стилей браузера и общие базовые стили, такие как размер шрифта.
-- Модуль `utils` - содержит все глобальные переменные и миксины, используемые в компонентах. Вынесение глобальных переменных в отдельный файл дает возможность удобно изменять общие стили для всего приложения, такие как цвета, шрифт и т.д. 
+There are two extra modules:
+- `base` module describes setting of browser styles and common base styles, as a font-family and font-size.
+- `utils` module includes all global variables and mixins, that are used by all classes. This allows changing common styles for the entire app easily.
 
-Для организации "областей видимости" к CSS классам добавляется префикс, который состоит из имени компонента, к которому относится данный класс стилей.
-Например, класс `.contactsList_removeUserButton` относится к кнопке удаления контакта в компоненте `contacts-list`.
+To arrange "namespaces" - prefixes are added to names of CSS classes. Each prefix - is the name of the corresponding component.
+For example, `.contactsList_removeUserButton` class refers to the remove user button in the `contacts-list` component.
