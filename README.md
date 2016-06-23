@@ -1,4 +1,4 @@
-# Mail app with Angular 1.5, Firebase and authorization
+## Mail app with Angular 1.5, Firebase and authorization
 
 This is a browser single page application for managing emails on personal computers or on mobile devices.
 The app consists of 2 main modules: "mail-box" and "contacts".
@@ -7,7 +7,7 @@ The app consists of 2 main modules: "mail-box" and "contacts".
 
 - The app connects with a server by AJAX technology and implements creating, reading, updating and deleting user data on the server.
 
-- The "mail-box" module provides a user interface for searching, creating, reading and deleting emails. When the user fills in the email field at the compose form, requiring contacts are being shown automatically by the autocomplete component. In addition, restoring emails from the trash is also supported.
+- The "mail-box" module provides a user interface for searching, creating, reading and deleting emails. When the user fills in the email field on the compose form, requiring contacts are being shown automatically by the "md-autocomplete" directive. In addition, restoring emails from the trash is also supported.
 
 - The "contacts" module provides an interface for searching, creating, reading, updating and deleting contacts.
 
