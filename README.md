@@ -7,7 +7,7 @@ The app consists of 2 main modules: "mail-box" and "contacts".
 
 - The app connects with a server by AJAX technology and implements creating, reading, updating and deleting user data on the server.
 
-- The "mail-box" module provides a user interface for searching, creating, reading and deleting emails. When the user fills in the email field on the compose form, requiring contacts are being shown automatically by the "md-autocomplete" directive. In addition, restoring emails from the trash is also supported.
+- The "mail-box" module provides a user interface for searching, creating, reading and deleting emails. When the user fills in the email field on the compose form, requiring contacts are being shown automatically. In addition, restoring emails from the trash is also supported.
 
 - The "contacts" module provides an interface for searching, creating, reading, updating and deleting contacts.
 
@@ -19,7 +19,7 @@ The app consists of 2 main modules: "mail-box" and "contacts".
 
 - Browser support: IE10+ .
 
-> Note: in this test version, there is no a real postal service on the server. Thus, new messages will not be sent to receivers. They will be just saved at the sent mail directory on the server.
+> Note: in this test version, there is no a real postal service on the server. Thus, new messages will not be sent to receivers. They will be just saved in the sent mail directory on the server.
 
 ## Demo
 
@@ -74,7 +74,7 @@ shared/layout/layout.html;
 
 - `shared` module describes the page layout and includes common components that are used by different modules of the app. These components are "layout", "page-mask", "nav-bar" etc.
 
-- `mail-box` module provides user interface for managing emails, it includes the next components: "message-list", "message", "compose" etc. Autocomplete service for the "email" field at the compose form was implemented with Angular Material library. It was the only task in the app, which this library was used for.
+- `mail-box` module provides user interface for managing emails, it includes the next components: "message-list", "message", "compose" etc. The autocomplete service for the "email" field at the compose form was implemented with Angular Material library. It was the only task in the app, which this library was used for.
 
 - `contacts` - like the previous one, this module provides user interface for managing contacts.
 
