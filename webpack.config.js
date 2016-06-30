@@ -41,8 +41,11 @@ module.exports = function makeWebpackConfig () {
     // Devtool
     // Reference: http://webpack.github.io/docs/configuration.html#devtool
     // Type of source map
-    config.devtool = 'source-map';
-
+    if (isTest) {
+        config.devtool = 'inline-source-map';
+    } else  {
+        config.devtool = 'source-map';
+    }
 
     // The project rebuilds through 300 ms after changes have been made
     config.watchOptions = {
@@ -120,6 +123,7 @@ module.exports = function makeWebpackConfig () {
     // Instrument JS files with Isparta for subsequent code coverage reporting.
     // Reference: https://github.com/ColCh/isparta-instrumenter-loader
     // Skip node_modules and files that end with '.spec.js'
+    /*
     if (isTest) {
         config.module.preLoaders.push({
             test: /\.js$/,
@@ -129,7 +133,7 @@ module.exports = function makeWebpackConfig () {
             ],
             loader: 'isparta-instrumenter'
         })
-    }
+    }*/
 
     // Plugins
     // Reference: http://webpack.github.io/docs/configuration.html#plugins

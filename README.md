@@ -7,7 +7,7 @@ The app consists of 2 main modules: "mail-box" and "contacts".
 
 - The app connects with a server by AJAX technology and implements creating, reading, updating and deleting user data on the server.
 
-- The "mail-box" module provides a user interface for searching, creating, reading and deleting emails. When the user fills in the email field on the compose form, requiring contacts are being shown automatically. In addition, restoring emails from the trash is also supported.
+- The "mail-box" module provides a user interface for searching, creating, reading and deleting emails. An autocomplete in the email field on the compose form was implemented. When the user fills in the field, requiring contacts are being shown automatically. In addition, restoring emails from the trash is also supported.
 
 - The "contacts" module provides an interface for searching, creating, reading, updating and deleting contacts.
 
@@ -36,7 +36,7 @@ To see demo in your browser, please follow one of the next links and pass author
 
 To run the app locally, you need to compile package files with Webpack. The source code is in the `frontend` directory. In the end of packaging, Webpack adds resulted `bundle.js`, `styles.css` and the source-maps to the `public` directory.
 
-At first, make sure, that node.js, npm and Webpack are installed globally.
+At first, ensure you are running `Node (v4.4.x+)` and `NPM (2.15.x+)`.
 
 Next:
 
@@ -46,7 +46,7 @@ Next:
 
 3. To compile package files and run the local dev-server, execute: `npm start`.
 
-4. Open your browser and type in the new window: `localhost:8080`.
+4. Open in your browser: `localhost:8080`.
 
 When the dev-server runs, it tracks all changes in the source code (`frontend` directory) and updates the results in the browser.
 
@@ -74,7 +74,7 @@ shared/layout/layout.html;
 
 - `shared` module describes the page layout and includes common components that are used by different modules of the app. These components are "layout", "page-mask", "nav-bar" etc.
 
-- `mail-box` module provides user interface for managing emails, it includes the next components: "message-list", "message", "compose" etc. The autocomplete service for the "email" field at the compose form was implemented with Angular Material library. It was the only task in the app, which this library was used for.
+- `mail-box` module provides user interface for managing emails, it includes the next components: "message-list", "message", "compose" etc. The autocomplete service for the "email" field on the compose form was implemented with Angular Material library. It was the only task in the app, which this library was used for.
 
 - `contacts` - like the previous one, this module provides user interface for managing contacts.
 
