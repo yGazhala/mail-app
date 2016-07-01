@@ -1,10 +1,7 @@
 "use strict";
-// The application data were stored at the FireBase as an array of objects.
-// But there is some particularity in the FireBase REST API:
-// when we add the new object to our data, the array
-// will be converted to the collection of objects.
-// Then in response.data we will receive the object instead of the array.
-// To continue working with the array we will use this factory.
+// The application data were stored at the Firebase as a map object
+// with a simple key/value pair. To continue working with an array
+// on the client side, we transform the data received from the server by this factory.
 
 export default function NormalizeToArrayFactory() {
 
