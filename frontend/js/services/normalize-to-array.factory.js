@@ -6,7 +6,7 @@
 export default function NormalizeToArrayFactory() {
 
     return function(object) {
-        if(!object) return [];
+        if(isEmpty(object)) return [];
 
         return Object.keys(object).map(key => {
             let normalizedObject = object[key];
@@ -15,5 +15,14 @@ export default function NormalizeToArrayFactory() {
 
             return normalizedObject;
             });
+
+        // Helper function for checking if an object is empty
+        function isEmpty(object) {
+            for (let key in object) {
+                return false;
+            }
+
+            return true;
+        }
     };
 }
