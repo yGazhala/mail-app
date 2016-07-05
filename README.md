@@ -5,7 +5,7 @@ The app consists of 2 main modules: "mail-box" and "contacts".
 
 ## Core features
 
-- The app connects with a server by AJAX technology and implements creating, reading, updating and deleting user data on the server.
+- The app communicates with Firebase server through AJAX and REST API. All user data are stored on the server.   
 
 - The "mail-box" module provides a user interface for searching, creating, reading and deleting emails. An autocomplete in the email field on the compose form was implemented. When the user fills in the field, requiring contacts are being shown automatically. In addition, restoring emails from the trash is also supported.
 
@@ -19,7 +19,7 @@ The app consists of 2 main modules: "mail-box" and "contacts".
 
 - Browser support: IE10+ .
 
-> Note: in this test version, there is no a real postal service on the server. Thus, new messages will not be sent to receivers. They will be just saved in the sent mail directory on the server.
+> Note: in this test version, there is no a real postal service on the server. Thus, new messages will not be sent to recipients. They will be just saved in the sent mail directory on the server.
 
 ## Demo
 
