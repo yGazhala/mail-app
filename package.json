@@ -4,11 +4,11 @@
   "description": "Single page application with Angular 1.5 and FireBase",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "webpack --display-modules --progress --colors",
-    "dev-build": "webpack --display-modules --progress --colors",
-    "start": "webpack-dev-server --history-api-fallback --inline --hot --progress --colors",
-    "test": "karma start",
-    "test-watch": "karma start --auto-watch --no-single-run"
+    "build": "./node_modules/.bin/webpack --display-modules --progress --colors",
+    "dev-build": "./node_modules/.bin/webpack --display-modules --progress --colors",
+    "start": "./node_modules/.bin/webpack-dev-server --history-api-fallback --inline --hot --progress --colors",
+    "test": "./node_modules/.bin/karma start",
+    "test-watch": "./node_modules/.bin/karma start --auto-watch --no-single-run"
   },
   "repository": {
     "type": "git",

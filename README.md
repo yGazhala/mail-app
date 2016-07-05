@@ -36,7 +36,7 @@ To see demo in your browser, please follow one of the next links and pass author
 
 To run the app locally, you need to compile package files with Webpack. The source code is in the `frontend` directory. In the end of packaging, Webpack adds resulted `bundle.js`, `styles.css` and the source-maps to the `public` directory.
 
-At first, ensure you are running `Node (v4.4.x+)` and `NPM (2.15.x+)`.
+At first, ensure you are running `Node (v4.1.x+)` and `NPM (2.15.x+)`.
 
 Next:
 
@@ -46,13 +46,21 @@ Next:
 
 3. To compile package files and run the local dev-server, execute: `npm start`.
 
-4. Open in your browser: `localhost:8080`.
+4. Open in your browser: `http://localhost:8080`.
 
 When the dev-server runs, it tracks all changes in the source code (`frontend` directory) and updates the results in the browser.
 
 You can also make the package files without running the dev-server:
 - `npm run build` - makes compressed files and adds them to the `public` directory.
 - `npm run dev-build` - makes uncompressed files.
+
+## Unit testing
+
+There are two ways of running tests:
+- `npm run test` - single run;
+- `npm run test-watch` - live mode (TDD style).
+
+> Note: writing unit tests is ongoing. Currently, the next modules are covered with tests: `services` - 94,6%.
 
 ## Architecture and the file system
 
@@ -79,6 +87,8 @@ shared/layout/layout.html;
 - `contacts` - like the previous one, this module provides user interface for managing contacts.
 
 - `core` module joins all modules to one application, it is also the program entry point.
+
+- `mocks` directory includes static data needed for unit tests.
 
 ### CSS stylesheet structure
 

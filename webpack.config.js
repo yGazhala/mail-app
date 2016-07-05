@@ -121,10 +121,7 @@ module.exports = function makeWebpackConfig () {
 
     // Isparta loader
     // Instrument JS files with Isparta for subsequent code coverage reporting.
-    // Reference: https://github.com/ColCh/isparta-instrumenter-loader
-    // Skip node_modules and files that end with '.spec.js'
-
-
+    // Reference: https://github.com/deepsweet/isparta-loader
     if (isTest) {
         config.isparta = {
             babel: {
@@ -134,6 +131,7 @@ module.exports = function makeWebpackConfig () {
 
         config.module.preLoaders.push({
             test: /\.js$/,
+            // Skip node_modules, mocks and files that end with '.spec.js'
             exclude: [
                 /node_modules/,
                 /mock-.*\.js/,
